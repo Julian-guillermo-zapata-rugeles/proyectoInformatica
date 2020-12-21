@@ -9,7 +9,7 @@ protected:
     signed short int posY;
     signed short int velInit;
     signed short int angle;
-    float time;
+    float timeElapse;
 
 
 public:

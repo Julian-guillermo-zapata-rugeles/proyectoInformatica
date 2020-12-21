@@ -2,7 +2,7 @@
 
 
 bala::bala(signed short posX, signed short posY, signed short angle, unsigned short velInit, signed short ancho, signed short alto):
-    MovimientoParabolico(posX,posY,angle,velInit)
+    MovimientoParabolico(posX,posY,angle,velInit), MovRU(posX,posY,angle,velInit)
 {
     this->setPos(posX,posY);
     this->ancho=ancho;
@@ -11,11 +11,13 @@ bala::bala(signed short posX, signed short posY, signed short angle, unsigned sh
 
 QRectF bala::boundingRect() const
 {
-    return QRectF(posX,posY,ancho,alto);
+    return QRectF(MovRU::posX,MovRU::posY,ancho,alto);
 }
 
 void bala::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setBrush(Qt::black);
     painter->drawEllipse(boundingRect());
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
 }

@@ -20,7 +20,8 @@ void MovRU::setPosY(signed short value)
 
 void MovRU::moverRU()
 {
-
+    timeElapse += 0.05;
+    posX = velInit*timeElapse;
 }
 
 signed short MovRU::getPosX() const
