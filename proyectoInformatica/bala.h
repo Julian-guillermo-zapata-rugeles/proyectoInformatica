@@ -3,8 +3,9 @@
 #include <QGraphicsTextItem>
 #include <QPainter>
 #include "movimientoparabolico.h"
+#include "movru.h"
 
-class bala : public QGraphicsItem , public MovimientoParabolico
+class bala : public QGraphicsItem , public MovimientoParabolico, public MovRU
 {
 private:
     signed short int ancho;

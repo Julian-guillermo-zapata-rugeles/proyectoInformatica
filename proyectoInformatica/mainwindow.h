@@ -3,6 +3,8 @@
 #include <QMainWindow>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
+#include "bala.h"
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,5 +21,13 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene *escena;
+    bala *disparo;
+    QTimer *tiempo;
+
+    void crearEscena();
+
+private slots:
+    void actualizar();
 };
 #endif // MAINWINDOW_H

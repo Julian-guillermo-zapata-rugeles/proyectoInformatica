@@ -6,10 +6,30 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    crearEscena();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::crearEscena()
+{
+    escena = new QGraphicsScene(0,0,2000,1280);
+    ui->visorGrafico->setScene(escena);
+    disparo = new bala(50,300,1,100,20,20);
+    escena->addItem(disparo);
+    tiempo = new QTimer();
+    tiempo->start(30);
+    connect(tiempo,SIGNAL(timeout()),this,SLOT(actualizar()));
+}
+
+void MainWindow::actualizar()
+{
+    disparo->moverRU();
+    escena->advance();
+    escena->update();
+    disparo->setFocus();
 }
 
