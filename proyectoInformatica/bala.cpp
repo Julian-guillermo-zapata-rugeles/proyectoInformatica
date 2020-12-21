@@ -4,7 +4,9 @@
 bala::bala(signed short posX, signed short posY, signed short angle, unsigned short velInit, signed short ancho, signed short alto):
     MovimientoParabolico(posX,posY,angle,velInit)
 {
-
+    this->setPos(posX,posY);
+    this->ancho=ancho;
+    this->alto=alto;
 }
 
 QRectF bala::boundingRect() const
