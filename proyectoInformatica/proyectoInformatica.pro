@@ -19,12 +19,14 @@ SOURCES += \
     bala.cpp \
     main.cpp \
     mainwindow.cpp \
-    movimientoparabolico.cpp
+    movimientoparabolico.cpp \
+    movru.cpp
 
 HEADERS += \
     bala.h \
     mainwindow.h \
-    movimientoparabolico.h
+    movimientoparabolico.h \
+    movru.h
 
 FORMS += \
     mainwindow.ui
