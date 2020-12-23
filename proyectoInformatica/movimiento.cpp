@@ -1,27 +1,27 @@
-#include "movimientoparabolico.h"
+#include "movimiento.h"
 
 
-signed short MovimientoParabolico::getAngle() const
+signed short Movimiento::getAngle() const
 {
     return angle;
 }
 
-void MovimientoParabolico::setAngle(signed short value)
+void Movimiento::setAngle(signed short value)
 {
     angle = value;
 }
 
-unsigned short MovimientoParabolico::getVelInit() const
+unsigned short Movimiento::getVelInit() const
 {
     return velInit;
 }
 
-void MovimientoParabolico::setVelInit(unsigned short value)
+void Movimiento::setVelInit(unsigned short value)
 {
     velInit = value;
 }
 
-void MovimientoParabolico::mover()
+void Movimiento::moverParabolicamente()
 {
     posX = velInit*timeElapse;
     posY = (0+velY*timeElapse+(0.5*(-9.8*timeElapse*timeElapse)))*-1;
@@ -30,7 +30,7 @@ void MovimientoParabolico::mover()
     std::cout << this-> posY << std::endl;
 }
 
-MovimientoParabolico::MovimientoParabolico(signed short int posX,signed short int posY,signed short int angle, unsigned short int velInit)
+Movimiento::Movimiento(signed short int posX,signed short int posY,signed short int angle, unsigned short int velInit)
 {
     this->posX=posX;
     this->posY=posY;
@@ -43,4 +43,10 @@ MovimientoParabolico::MovimientoParabolico(signed short int posX,signed short in
     std::cout << this->angle << std::endl;
     velX = velInit * cos((angle*3.1416)/180);
     velY = velInit * sin((angle*3.1416)/180);
+}
+
+void Movimiento::moverRectilineamente()
+{
+    timeElapse += 0.05;
+    posX = velInit*timeElapse;
 }

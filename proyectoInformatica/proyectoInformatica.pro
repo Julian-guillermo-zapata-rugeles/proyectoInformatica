@@ -19,15 +19,13 @@ SOURCES += \
     bala.cpp \
     main.cpp \
     mainwindow.cpp \
-    movimientoparabolico.cpp \
-    movru.cpp \
+    movimiento.cpp \
     personaje.cpp
 
 HEADERS += \
     bala.h \
     mainwindow.h \
-    movimientoparabolico.h \
-    movru.h \
+    movimiento.h \
     personaje.h
 
 FORMS += \

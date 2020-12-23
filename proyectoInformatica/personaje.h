@@ -1,17 +1,23 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
-#include "movimientoparabolico.h"
+#include "movimiento.h"
 #include <QGraphicsItem>
 #include <QPixmap>
 #include <QPainter>
+#include <bala.h>
+#include <QVector>
 
-class personaje : public MovimientoParabolico , public QGraphicsItem
+class personaje : public Movimiento , public QGraphicsItem
 {
-protected:
-    unsigned short int ancho , alto ;
+private:
+    signed short int  ancho , alto ;
     signed short int nivelVida;
+    bala *shoot;
+
 public:
-    personaje();
+    bala* crearDisparo();
+    void actualizar();
+    personaje(signed short posX, signed short posY, signed short angle, unsigned short velInit, signed short ancho, signed short alto);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
 };

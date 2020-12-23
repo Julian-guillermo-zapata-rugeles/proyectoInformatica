@@ -5,6 +5,8 @@
 #include <QGraphicsScene>
 #include "bala.h"
 #include <QTimer>
+#include <personaje.h>
+#include <QVector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,6 +26,8 @@ private:
     QGraphicsScene *escena;
     bala *disparo;
     QTimer *tiempo;
+    personaje *juan;
+    QVector <bala *> disparos;
 
     void crearEscena();
 

@@ -1,6 +1,22 @@
 #include "personaje.h"
 
 
+bala* personaje::crearDisparo()
+{
+
+    shoot = new bala(this->posX,this->posY,1,50,10,10);
+    return shoot;
+}
+
+
+
+personaje::personaje(signed short posX, signed short posY, signed short angle, unsigned short velInit, signed short ancho, signed short alto):
+    Movimiento(posX,posY,angle,velInit)
+{
+    this->ancho=ancho;
+    this->alto=alto;
+    this->setPos(posX,posY);
+}
 
 QRectF personaje::boundingRect() const
 {
@@ -9,4 +25,6 @@ QRectF personaje::boundingRect() const
 
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    painter->setBrush(Qt::blue);
+    painter->drawRect(boundingRect());
 }
