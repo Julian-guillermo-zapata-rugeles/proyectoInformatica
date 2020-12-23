@@ -15,7 +15,7 @@ protected:
     signed short int angle;
     unsigned short int velInit;
     signed short int aceleration;
-    unsigned short int timeElapse;
+    float timeElapse;
 
 public:
     void mover();

@@ -18,7 +18,7 @@ void MainWindow::crearEscena()
 {
     escena = new QGraphicsScene(0,0,2000,1280);
     ui->visorGrafico->setScene(escena);
-    disparo = new bala(50,300,1,100,20,20);
+    disparo = new bala(50,300,180,50,20,20);
     escena->addItem(disparo);
     tiempo = new QTimer();
     tiempo->start(30);
@@ -27,7 +27,7 @@ void MainWindow::crearEscena()
 
 void MainWindow::actualizar()
 {
-    disparo->moverRU();
+    disparo->moverParabolicamente();
     escena->advance();
     escena->update();
     disparo->setFocus();
