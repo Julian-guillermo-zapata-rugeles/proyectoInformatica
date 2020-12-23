@@ -13,7 +13,6 @@ QRectF bala::boundingRect() const
 {
     //return QRectF(MovRU::posX,MovRU::posY,ancho,alto);
      return QRectF(posX,posY,ancho,alto);
-
 }
 
 void bala::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
