@@ -20,6 +20,8 @@ public:
     personaje(signed short posX, signed short posY, signed short angle, unsigned short velInit, signed short ancho, signed short alto);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
+
+    void saltar();
 };
 
 #endif // PERSONAJE_H

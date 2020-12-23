@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <personaje.h>
 #include <QVector>
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,6 +29,8 @@ private:
     QTimer *tiempo;
     personaje *juan;
     QVector <bala *> disparos;
+
+    void keyPressEvent(QKeyEvent *evento) override;
 
     void crearEscena();
 

@@ -14,6 +14,34 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *evento)
+{
+    switch(evento->key())
+    {
+    case Qt::Key_Left:
+        break;
+
+    case Qt::Key_Right:
+        break;
+
+    case Qt::Key_Down:
+        break;
+
+    case Qt::Key_W:
+        juan->saltar();
+        break;
+
+    case Qt::Key_Space:
+        disparo = juan->crearDisparo();
+        escena->addItem(disparo);
+        disparos.push_back(disparo);
+        break;
+
+    default:
+        break;
+    }
+}
+
 void MainWindow::crearEscena()
 {
     escena = new QGraphicsScene(0,0,2000,700);
@@ -21,15 +49,13 @@ void MainWindow::crearEscena()
     ui->visorGrafico->setScene(escena);
     //disparo = new bala(50,300,180,50,20,20);
     juan = new personaje(50,100,0,20,20,40);
+    juan->setTransformOriginPoint(juan->boundingRect().center());
     escena->addItem(juan);
     //escena->addItem(disparo);
     tiempo = new QTimer();
     tiempo->start(30);
     connect(tiempo,SIGNAL(timeout()),this,SLOT(actualizar()));
 }
-
-
-
 
 void MainWindow::actualizar()
 {
@@ -45,7 +71,6 @@ void MainWindow::actualizar()
     }
     escena->advance();
     escena->update();
-
-
+    juan->actualizar();
 }
 
