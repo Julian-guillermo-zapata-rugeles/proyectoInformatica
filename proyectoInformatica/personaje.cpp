@@ -4,7 +4,7 @@
 bala * personaje::crearDisparo()
 {
 
-    shoot = new bala(this->posX,this->posY,1,50,130,20);
+    shoot = new bala(this->posX,this->posY,1,50,20,8);
     return  shoot;
 }
 
