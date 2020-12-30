@@ -6,22 +6,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>2000</width>
-    <height>1280</height>
+    <width>1000</width>
+    <height>500</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>500</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Destiny</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGraphicsView" name="visorGrafico">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>80</y>
-      <width>2000</width>
-      <height>1280</height>
-     </rect>
+    <property name="enabled">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
@@ -30,8 +37,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>2000</width>
-     <height>21</height>
+     <width>1000</width>
+     <height>24</height>
     </rect>
    </property>
   </widget>

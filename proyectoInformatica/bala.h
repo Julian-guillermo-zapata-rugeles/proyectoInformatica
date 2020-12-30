@@ -3,13 +3,13 @@
 #include <QGraphicsTextItem>
 #include <QPainter>
 #include "movimiento.h"
-#include "movru.h"
 
 class bala : public QGraphicsItem , public Movimiento
 {
 private:
     signed short int ancho;
     signed short int alto;
+    bool status_add;
 
 public:
     bala(signed short int posX,signed short int posY,signed short int angle, unsigned short int velInit,

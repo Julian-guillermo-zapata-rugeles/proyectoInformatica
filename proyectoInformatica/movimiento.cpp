@@ -21,32 +21,68 @@ void Movimiento::setVelInit(unsigned short value)
     velInit = value;
 }
 
-void Movimiento::moverParabolicamente()
+void Movimiento::setStatus_saltando(bool value)
 {
-    posX = velInit*timeElapse;
-    posY = (velY*timeElapse+(0.5*(-9.8*timeElapse*timeElapse)))*-1;
-    timeElapse=timeElapse+0.05;
-    std::cout << this-> posX << std::endl;
-    std::cout << this-> posY << std::endl;
+    status_saltando = value;
 }
 
-Movimiento::Movimiento(signed short int posX,signed short int posY,signed short int angle, unsigned short int velInit)
+bool Movimiento::getStatus_saltando() const
 {
-    this->posX=posX;
-    this->posY=posY;
+    return status_saltando;
+}
+
+void Movimiento::moverParabolicamente()
+{
+    posX = posX + 1;
+    //posX = posX;
+    //posY=posY+1;
+    posY = posY + (velY*timeElapse+(0.5*(-9.8*timeElapse*timeElapse)))*-1;
+    timeElapse=timeElapse+0.05;
+    std::cout <<" x : " << this-> posX << " / y :" << this-> posY << std::endl;
+}
+
+Movimiento::Movimiento(signed short int posX_,signed short int posY_,signed short int angle, unsigned short int velInit)
+{
+    this->posX=posX_;
+    this->posY=posY_;
     this->velInit=velInit;
     this->angle=angle;
     this->timeElapse=0.1;
-    std::cout << this->posX << std::endl;
-    std::cout << this->posY << std::endl;
-    std::cout << this->velInit << std::endl;
-    std::cout << this->angle << std::endl;
+    this->status_saltando=false;
+    this->limiteInferior=posY;
+
     velX = velInit * cos((angle*3.1416)/180);
     velY = velInit * sin((angle*3.1416)/180);
+
 }
 
 void Movimiento::moverRectilineamente()
 {
-    timeElapse += 0.05;
-    posX = velInit*timeElapse;
+
+    //timeElapse += 0.05;
+    posX = posX + 5;
+}
+
+void Movimiento::moverDerecha()
+{
+    posX=posX+2;
+}
+
+void Movimiento::moverIzquierda()
+{
+    posX=posX-2;
+}
+
+void Movimiento::saltar()
+{
+    if(status_saltando == true && posY<limiteInferior+1){
+        velY = velInit * sin((90*3.1416)/180);
+        posY = posY + (velY*timeElapse+(0.5*(-9.8*timeElapse*timeElapse)))*-1;
+        timeElapse=timeElapse+0.05;
+    }
+    else {
+        status_saltando=false;
+        posY=limiteInferior;
+        timeElapse=0.01;
+    }
 }

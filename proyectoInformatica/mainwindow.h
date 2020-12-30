@@ -21,18 +21,17 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *escena;
-    bala *disparo;
     QTimer *tiempo;
     personaje *juan;
-    QVector <bala *> disparos;
-
+    QGraphicsScene *escena;
+    QVector <bala *>disparos;
+    bala *disparo;
     void keyPressEvent(QKeyEvent *evento) override;
-
     void crearEscena();
+    QSet<Qt::Key> keysPressed;
+
 
 private slots:
     void actualizar();

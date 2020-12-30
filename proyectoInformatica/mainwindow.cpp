@@ -14,41 +14,35 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
-    switch(evento->key())
-    {
-    case Qt::Key_Left:
-        break;
 
-    case Qt::Key_Right:
-        break;
-
-    case Qt::Key_Down:
-        break;
-
-    case Qt::Key_W:
-        juan->saltar();
-        break;
-
-    case Qt::Key_Space:
+    if(evento->key()==Qt::Key_W){
+        juan->setStatus_saltando(true);
+            }
+    if(evento->key()==Qt::Key_A){
+        juan->moverIzquierda();
+            }
+    if(evento->key()==Qt::Key_D){
+        juan->moverDerecha();
+            }
+    if(evento->key()==Qt::Key_Space){
         disparo = juan->crearDisparo();
         escena->addItem(disparo);
         disparos.push_back(disparo);
-        break;
+           }
 
-    default:
-        break;
-    }
 }
 
 void MainWindow::crearEscena()
 {
-    escena = new QGraphicsScene(0,0,2000,700);
-    ui->visorGrafico->resize(escena->width(),escena->height());
+    escena = new QGraphicsScene(0,0,1000,500);
+    //ui->visorGrafico->resize(escena->width(),escena->height());
     ui->visorGrafico->setScene(escena);
     //disparo = new bala(50,300,180,50,20,20);
-    juan = new personaje(50,100,0,20,20,40);
+    juan = new personaje(0,220,90,8,20,20);
     juan->setTransformOriginPoint(juan->boundingRect().center());
     escena->addItem(juan);
     //escena->addItem(disparo);
@@ -57,17 +51,12 @@ void MainWindow::crearEscena()
     connect(tiempo,SIGNAL(timeout()),this,SLOT(actualizar()));
 }
 
+
+
 void MainWindow::actualizar()
 {
-    /*
-    disparo = juan->crearDisparo();
-    escena->addItem(disparo);
-    disparos.push_back(disparo);
-    */
-
-
-    for(auto &it : disparos){
-        it->moverRectilineamente();
+    for(auto &proyectiles : disparos){
+        proyectiles->moverRectilineamente();
     }
     escena->advance();
     escena->update();

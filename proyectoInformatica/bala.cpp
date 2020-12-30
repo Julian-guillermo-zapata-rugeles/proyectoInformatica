@@ -1,10 +1,10 @@
 #include "bala.h"
+#include <iostream>
 
 
-
-bala::bala(signed short posX, signed short posY, signed short angle, unsigned short velInit, signed short ancho, signed short alto):
-    Movimiento(posX,posY,angle,velInit){
-    this->setPos(posX,posY);
+bala::bala(signed short posX_, signed short posY_, signed short angle, unsigned short velInit, signed short ancho, signed short alto):
+    Movimiento(posX_,posY_,angle,velInit){
+    this->setPos(posX_,posY_);
     this->ancho=ancho;
     this->alto=alto;
 }
