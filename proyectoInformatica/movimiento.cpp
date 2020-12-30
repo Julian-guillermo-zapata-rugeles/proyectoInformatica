@@ -41,15 +41,15 @@ void Movimiento::moverParabolicamente()
     std::cout <<" x : " << this-> posX << " / y :" << this-> posY << std::endl;
 }
 
-Movimiento::Movimiento(signed short int posX,signed short int posY,signed short int angle, unsigned short int velInit)
+Movimiento::Movimiento(signed short int posX_,signed short int posY_,signed short int angle, unsigned short int velInit)
 {
-    this->posX=posX;
-    this->posY=posY;
+    this->posX=posX_;
+    this->posY=posY_;
     this->velInit=velInit;
     this->angle=angle;
     this->timeElapse=0.1;
     this->status_saltando=false;
-    this->limiteInferior=101;
+    this->limiteInferior=posY;
 
     velX = velInit * cos((angle*3.1416)/180);
     velY = velInit * sin((angle*3.1416)/180);
@@ -58,20 +58,31 @@ Movimiento::Movimiento(signed short int posX,signed short int posY,signed short 
 
 void Movimiento::moverRectilineamente()
 {
-    timeElapse += 0.05;
-    posX = velInit*timeElapse;
+
+    //timeElapse += 0.05;
+    posX = posX + 5;
+}
+
+void Movimiento::moverDerecha()
+{
+    posX=posX+2;
+}
+
+void Movimiento::moverIzquierda()
+{
+    posX=posX-2;
 }
 
 void Movimiento::saltar()
 {
-    if(status_saltando == true && posY<limiteInferior){
+    if(status_saltando == true && posY<limiteInferior+1){
         velY = velInit * sin((90*3.1416)/180);
         posY = posY + (velY*timeElapse+(0.5*(-9.8*timeElapse*timeElapse)))*-1;
         timeElapse=timeElapse+0.05;
     }
     else {
         status_saltando=false;
-        posY=100;
+        posY=limiteInferior;
         timeElapse=0.01;
     }
 }

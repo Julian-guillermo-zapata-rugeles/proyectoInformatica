@@ -22,6 +22,8 @@ protected:
 public:
     void moverParabolicamente();
     void moverRectilineamente();
+    void moverDerecha();
+    void moverIzquierda();
     void saltar();
     Movimiento(signed short int posX,signed short int posY,signed short int angle, unsigned short int velInit);
 

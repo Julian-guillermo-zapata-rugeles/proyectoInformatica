@@ -1,17 +1,18 @@
 #include "personaje.h"
+#include "mainwindow.h"
 
-
-bala* personaje::crearDisparo()
+bala * personaje::crearDisparo()
 {
 
     shoot = new bala(this->posX,this->posY,1,50,10,10);
-    return shoot;
+    return  shoot;
 }
 
 void personaje::actualizar()
 {
     this->setPos(posX,posY);
     this->saltar();
+
 }
 
 personaje::personaje(signed short posX, signed short posY, signed short angle, unsigned short velInit, signed short ancho, signed short alto):
