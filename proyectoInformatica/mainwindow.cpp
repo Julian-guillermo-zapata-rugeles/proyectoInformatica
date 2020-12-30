@@ -28,7 +28,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         break;
 
     case Qt::Key_W:
-        juan->saltar();
+        juan->setStatus_saltando(true);
         break;
 
     case Qt::Key_Space:

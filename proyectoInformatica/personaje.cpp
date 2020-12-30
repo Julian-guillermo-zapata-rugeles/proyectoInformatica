@@ -11,6 +11,7 @@ bala* personaje::crearDisparo()
 void personaje::actualizar()
 {
     this->setPos(posX,posY);
+    this->saltar();
 }
 
 personaje::personaje(signed short posX, signed short posY, signed short angle, unsigned short velInit, signed short ancho, signed short alto):
@@ -34,7 +35,3 @@ void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     Q_UNUSED(widget);
 }
 
-void personaje::saltar()
-{
-    moverParabolicamente();
-}
