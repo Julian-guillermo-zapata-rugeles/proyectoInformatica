@@ -23,11 +23,22 @@ void Movimiento::setVelInit(unsigned short value)
 
 void Movimiento::moverParabolicamente()
 {
-    posX = velInit*timeElapse;
-    posY = (velY*timeElapse+(0.5*(-9.8*timeElapse*timeElapse)))*-1;
+    //posX = posX + 1;
+    //posX = posX;
+    //posY=posY+1;
+    posY = posY + (velY*timeElapse+(0.5*(-9.8*timeElapse*timeElapse)))*-1;
     timeElapse=timeElapse+0.05;
-    std::cout << this-> posX << std::endl;
-    std::cout << this-> posY << std::endl;
+    std::cout <<" x : " << this-> posX << " / y :" << this-> posY << std::endl;
+
+
+
+    if(posY>100){
+        timeElapse=0.1;
+        velX = velInit * cos((angle*3.1416)/180);
+        velY = velInit * sin((angle*3.1416)/180);
+        posY=100;
+
+    }
 }
 
 Movimiento::Movimiento(signed short int posX,signed short int posY,signed short int angle, unsigned short int velInit)

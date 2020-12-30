@@ -48,7 +48,7 @@ void MainWindow::crearEscena()
     ui->visorGrafico->resize(escena->width(),escena->height());
     ui->visorGrafico->setScene(escena);
     //disparo = new bala(50,300,180,50,20,20);
-    juan = new personaje(50,100,0,20,20,40);
+    juan = new personaje(50,100,90,8,20,20);
     juan->setTransformOriginPoint(juan->boundingRect().center());
     escena->addItem(juan);
     //escena->addItem(disparo);
