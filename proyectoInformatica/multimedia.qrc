@@ -1,2 +1,14 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>sprite_bala/laser.png</file>
+        <file>sprite_bala/bulletplayer.png</file>
+        <file>sprite_bala/bulletG.png</file>
+        <file>sprite_bala/bullet5.png</file>
+        <file>sprite_bala/bullet4.png</file>
+        <file>sprite_bala/bullet3.png</file>
+        <file>sprite_bala/2.png</file>
+        <file>sprite_bala/1.png</file>
+        <file>sprite_bala/0.png</file>
+        <file>sprite_bala/disparo.png</file>
+    </qresource>
+</RCC>

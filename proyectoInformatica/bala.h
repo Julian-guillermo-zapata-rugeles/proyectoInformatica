@@ -3,12 +3,14 @@
 #include <QGraphicsTextItem>
 #include <QPainter>
 #include "movimiento.h"
+#include <QPixmap>
 
 class bala : public QGraphicsItem , public Movimiento
 {
 private:
     signed short int ancho;
     signed short int alto;
+    QPixmap *pixmap; //creamos un Qpixmap
     bool status_add;
 
 public:
