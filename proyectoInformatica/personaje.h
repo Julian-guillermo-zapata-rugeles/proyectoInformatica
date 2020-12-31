@@ -10,14 +10,15 @@
 class personaje : public Movimiento , public QGraphicsItem
 {
 private:
-    signed short int  ancho , alto ;
-    signed short int nivelVida;
+    float  ancho , alto ;
+    float nivelVida;
     bala *shoot;
 
 public:
     bala* crearDisparo();
     void actualizar();
-    personaje(signed short posX, signed short posY, signed short angle, unsigned short velInit, signed short ancho, signed short alto);
+    personaje(float posX, float posY, signed short angle, unsigned short velInit, float ancho, float alto);
+
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
 

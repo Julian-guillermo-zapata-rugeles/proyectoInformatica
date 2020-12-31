@@ -41,7 +41,7 @@ void Movimiento::moverParabolicamente()
     std::cout <<" x : " << this-> posX << " / y :" << this-> posY << std::endl;
 }
 
-Movimiento::Movimiento(signed short int posX_,signed short int posY_,signed short int angle, unsigned short int velInit)
+Movimiento::Movimiento(float posX_, float posY_, signed short int angle, unsigned short int velInit)
 {
     this->posX=posX_;
     this->posY=posY_;

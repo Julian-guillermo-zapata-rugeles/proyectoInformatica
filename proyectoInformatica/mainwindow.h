@@ -8,6 +8,8 @@
 #include <personaje.h>
 #include <QVector>
 #include <QKeyEvent>
+#include "obstaculo.h"
+#include <random>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,6 +22,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void crearPlataformas();
 
 private:
     Ui::MainWindow *ui;
@@ -32,6 +35,7 @@ private:
     void crearEscena();
     QSet<Qt::Key> keysPressed;
 
+    QVector<Obstaculo *> plataformas;
 
 private slots:
     void actualizar();

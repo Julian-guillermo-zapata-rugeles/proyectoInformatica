@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>500</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -30,6 +30,14 @@
     <property name="enabled">
      <bool>true</bool>
     </property>
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>20</y>
+      <width>1000</width>
+      <height>700</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -38,7 +46,7 @@
      <x>0</x>
      <y>0</y>
      <width>1000</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

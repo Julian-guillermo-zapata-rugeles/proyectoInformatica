@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-bala::bala(signed short posX_, signed short posY_, signed short angle, unsigned short velInit, signed short ancho, signed short alto):
+bala::bala(float posX_, float posY_, signed short angle, unsigned short velInit, float ancho, float alto):
     Movimiento(posX_,posY_,angle,velInit){
     this->setPos(posX_,posY_);
     this->ancho=ancho;
