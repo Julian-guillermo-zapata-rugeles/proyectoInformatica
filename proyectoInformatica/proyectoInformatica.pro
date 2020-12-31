@@ -20,12 +20,14 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     movimiento.cpp \
+    obstaculo.cpp \
     personaje.cpp
 
 HEADERS += \
     bala.h \
     mainwindow.h \
     movimiento.h \
+    obstaculo.h \
     personaje.h
 
 FORMS += \
