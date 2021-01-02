@@ -36,12 +36,13 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
 void MainWindow::crearEscena()
 {
-    escena = new QGraphicsScene(0,0,1000,500);
+    escena = new QGraphicsScene(0,0,1000,600);
     ui->visorGrafico->setScene(escena);
     //disparo = new bala(50,300,180,50,20,20);
     juan = new personaje(10,100,90,8,20,20);
     //juan->setTransformOriginPoint(juan->boundingRect().center());
     escena->addItem(juan);
+    escena->setFocusItem(juan);
     //escena->addItem(disparo);
     tiempo = new QTimer();
     tiempo->start(30);
