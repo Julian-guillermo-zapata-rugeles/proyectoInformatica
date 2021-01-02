@@ -14,9 +14,7 @@ private:
     bool status_add;
 
 public:
-    bala(float posX,float posY,signed short int angle, unsigned short int velInit,
-         float ancho,float alto);
-
+    bala(signed short int  posX, signed short int posY, signed short angle, unsigned short velInit, unsigned short int ancho, unsigned short alto);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
 };

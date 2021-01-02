@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-bala::bala(float posX_, float posY_, signed short angle, unsigned short velInit, float ancho, float alto):
+bala::bala(signed short int  posX_, signed short int posY_, signed short angle, unsigned short velInit, unsigned short int ancho, unsigned short alto):
     Movimiento(posX_,posY_,angle,velInit){
     this->setPos(posX_,posY_);
     this->ancho=ancho;
@@ -12,16 +12,12 @@ bala::bala(float posX_, float posY_, signed short angle, unsigned short velInit,
 
 QRectF bala::boundingRect() const
 {
-    //return QRectF(MovRU::posX,MovRU::posY,ancho,alto);
-     return QRectF(posX,posY,ancho,alto);
+     return QRectF(this->posX,this->posY,ancho,alto);
 }
 
 void bala::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    //painter->drawPixmap(ancho,alto,*pixmap,10,10,ancho,alto);
     painter->drawPixmap(posX,posY,*pixmap,0,0,ancho,alto);
-    //painter->setBrush(Qt::black);
-    //painter->drawEllipse(boundingRect());
     Q_UNUSED(option);
     Q_UNUSED(widget);
 }

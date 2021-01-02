@@ -22,7 +22,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void crearPlataformas();
+
 
 private:
     Ui::MainWindow *ui;
@@ -34,7 +34,6 @@ private:
     void keyPressEvent(QKeyEvent *evento) override;
     void crearEscena();
     QSet<Qt::Key> keysPressed;
-
     QVector<Obstaculo *> plataformas;
 
 private slots:

@@ -8,10 +8,10 @@ class Movimiento
 {
 
 protected:
-    float posX;
-    float posY;
-    float velX;
-    float velY;
+    signed short int  posX;
+    signed short int  posY;
+    signed short int  velX;
+    signed short int  velY;
     signed short int angle;
     signed short int limiteInferior;
     bool status_saltando;
@@ -25,7 +25,7 @@ public:
     void moverDerecha();
     void moverIzquierda();
     void saltar();
-    Movimiento(float posX,float posY,signed short int angle, unsigned short int velInit);
+    Movimiento(signed short int posX,signed short int posY,signed short int angle, unsigned short int velInit);
 
     signed short getAngle() const;
     void setAngle(signed short value);

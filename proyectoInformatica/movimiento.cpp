@@ -41,20 +41,7 @@ void Movimiento::moverParabolicamente()
     std::cout <<" x : " << this-> posX << " / y :" << this-> posY << std::endl;
 }
 
-Movimiento::Movimiento(float posX_, float posY_, signed short int angle, unsigned short int velInit)
-{
-    this->posX=posX_;
-    this->posY=posY_;
-    this->velInit=velInit;
-    this->angle=angle;
-    this->timeElapse=0.1;
-    this->status_saltando=false;
-    this->limiteInferior=posY;
 
-    velX = velInit * cos((angle*3.1416)/180);
-    velY = velInit * sin((angle*3.1416)/180);
-
-}
 
 void Movimiento::moverRectilineamente()
 {
@@ -85,4 +72,18 @@ void Movimiento::saltar()
         posY=limiteInferior;
         timeElapse=0.01;
     }
+}
+
+Movimiento::Movimiento(signed short posX, signed short posY, signed short angle, unsigned short velInit)
+{
+    this->posX=posX;
+    this->posY=posY;
+    this->velInit=velInit;
+    this->angle=angle;
+    this->timeElapse=0.1;
+    this->status_saltando=false;
+    this->limiteInferior=posY;
+
+    velX = velInit * cos((angle*3.1416)/180);
+    velY = velInit * sin((angle*3.1416)/180);
 }
