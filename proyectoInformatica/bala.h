@@ -2,21 +2,26 @@
 #define BALA_H
 #include <QGraphicsTextItem>
 #include <QPainter>
-#include "movimiento.h"
+#include "cuerpo.h"
 #include <QPixmap>
 
-class bala : public QGraphicsItem , public Movimiento
+class bala : public QGraphicsItem , public cuerpo
 {
-private:
-    signed short int ancho;
-    signed short int alto;
-    QPixmap *pixmap; //creamos un Qpixmap
-    bool status_add;
 
+private:
+    bool direccion; // false para izquierda // true para derecha
 public:
-    bala(signed short int  posX, signed short int posY, signed short angle, unsigned short velInit, unsigned short int ancho, unsigned short alto);
+    bala(short int posX, short int  posY, short int ancho, short int  alto , bool dir );
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
+
+    //  movimientos del proyectil basicos
+    void adelante();
+    void atras();
+
+    // actualización del objeto
+    void advance(int phase);
 };
 
 #endif // BALA_H
+

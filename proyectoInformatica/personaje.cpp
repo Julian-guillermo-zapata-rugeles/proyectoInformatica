@@ -1,38 +1,55 @@
 #include "personaje.h"
-#include "mainwindow.h"
 
-bala * personaje::crearDisparo()
+personaje::personaje(short x, short y, short w, short h):cuerpo(x,y,w,h)
 {
-    shoot = new bala(this->Movimiento::posX,this->Movimiento::posY,1,50,20,8);
-    std::cout <<"disparo "<<  this->posX << " - "<< this->posY << std::endl;
-    return  shoot;
-}
-
-void personaje::actualizar()
-{
-    this->setPos(Movimiento::posX,Movimiento::posY);
-    this->saltar();
-    //std::cout << "pos X : " << posX<< endl;
-    //std::cout << "pos Y : " << posY<< endl;
-}
-
-personaje::personaje(signed short int posX_, signed short int  posY_, signed short angle, unsigned short velInit, unsigned short int ancho, unsigned short int alto):
-    Movimiento(posX_,posY_,angle,velInit)
-{
-    this->ancho=ancho;
-    this->alto=alto;
+    // inicialización de variables, pero si el constructor de cuerpo.
+    direccion=true;
 }
 
 QRectF personaje::boundingRect() const
 {
-    return QRectF(this->posX,this->posY,ancho,alto);
+    return  QRectF(coordenadaX,coordenadaY,ancho,alto);
 }
 
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::blue);
+    painter->setBrush(Qt::black);
     painter->drawRect(boundingRect());
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
 }
 
+void personaje::saltar(){
+    // esta función modifica el estado saltando , por ende cuando el timeout() llame al advance()
+    // el estado de salto estará true y por tanto el personaje saltará hasta que status_saltando
+    // sea restablecido
+    this->status_saltando=true;
+}
+
+void personaje::adelante()
+{
+    // llamar al método heredado para moverse hacia la derecha
+    direccion=true;
+    this->moverDerecha();
+}
+
+void personaje::atras()
+{
+    // llamar al método heredado para moverse hacia la izquierda
+    direccion=false;
+    this->moverIzquierda();
+}
+
+bala * personaje::disparar()
+{
+    tmp_disparo = new bala(coordenadaX,coordenadaY,10,10,direccion);
+    return  tmp_disparo;
+
+}
+
+void personaje::advance(int phase)
+{
+    // salto requiere que exista un boleano en true para ejecutarlo. para ello
+    // el método salto que está presente en (cuerpo.h) corrobora si el estado del personaje es
+    // status_saltando = true
+
+    salto();
+}

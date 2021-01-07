@@ -1,15 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+
 #include <QMainWindow>
-#include <QGraphicsItem>
+#include <iostream>
 #include <QGraphicsScene>
-#include "bala.h"
 #include <QTimer>
-#include <personaje.h>
-#include <QVector>
+#include "personaje.h"
 #include <QKeyEvent>
-#include "obstaculo.h"
+#include <QVector>
+#include "bala.h"
+#include "asteroides.h"
 #include <random>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,21 +24,23 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    QGraphicsScene *mundo;
+    personaje *personajePrincipal;
+    QTimer *ticks;
+    QTimer *eventos;
+    void keyPressEvent(QKeyEvent *evento) override;
 
+    // vectores de objetos
+    QVector <bala *> proyectiles;
+    QVector <asteroides *> v_asteroides;
+    bala *tmp_proyectil;
+    asteroides *tmp_asteroide;
 
 private:
     Ui::MainWindow *ui;
-    QTimer *tiempo;
-    personaje *juan;
-    QGraphicsScene *escena;
-    QVector <bala *>disparos;
-    bala *disparo;
-    void keyPressEvent(QKeyEvent *evento) override;
-    void crearEscena();
-    QSet<Qt::Key> keysPressed;
-    QVector<Obstaculo *> plataformas;
 
-private slots:
+public slots:
     void actualizar();
+    void generarAsteroides();
 };
 #endif // MAINWINDOW_H

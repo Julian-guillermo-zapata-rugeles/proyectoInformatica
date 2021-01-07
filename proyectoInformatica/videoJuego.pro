@@ -16,18 +16,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    asteroides.cpp \
     bala.cpp \
+    cuerpo.cpp \
     main.cpp \
     mainwindow.cpp \
-    movimiento.cpp \
-    obstaculo.cpp \
+    obstaculos.cpp \
     personaje.cpp
 
 HEADERS += \
+    asteroides.h \
     bala.h \
+    cuerpo.h \
     mainwindow.h \
-    movimiento.h \
-    obstaculo.h \
+    obstaculos.h \
     personaje.h
 
 FORMS += \
@@ -38,5 +40,5 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    multimedia.qrc
+DISTFILES += \
+    videoJuego.pro.user

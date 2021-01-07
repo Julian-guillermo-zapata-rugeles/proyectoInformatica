@@ -6,24 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1120</width>
-    <height>600</height>
+    <width>1100</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Destiny</string>
+   <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGraphicsView" name="visorGrafico">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>1100</width>
-      <height>700</height>
+      <width>1005</width>
+      <height>610</height>
      </rect>
     </property>
    </widget>
@@ -33,7 +30,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1120</width>
+     <width>1100</width>
      <height>24</height>
     </rect>
    </property>

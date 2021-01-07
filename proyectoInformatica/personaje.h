@@ -1,26 +1,31 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
-#include "movimiento.h"
+
 #include <QGraphicsItem>
-#include <QPixmap>
 #include <QPainter>
-#include <bala.h>
+#include "cuerpo.h"
+#include "bala.h"
 #include <QVector>
 
-class personaje :public QGraphicsItem ,  public Movimiento
+class personaje : public cuerpo , public QGraphicsItem
 {
+
 private:
-    unsigned short int  ancho , alto ;
-    short int nivelVida;
-    bala *shoot;
 
 public:
-    bala* crearDisparo();
-    void actualizar();
-    personaje(signed short int posX, signed short int  posY, signed short angle, unsigned short velInit, unsigned short int ancho, unsigned short int alto);
+    personaje(short int x , short int y, short int widht , short int height );
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
+    bala *tmp_disparo;
+    bool direccion;
 
+    // movimientos asociados al personaje (heredó del cuerpo.h)
+    void saltar();
+    void adelante();
+    void atras();
+    bala * disparar();
+    // función advance del personaje
+    void advance(int phase);
 };
 
 #endif // PERSONAJE_H
