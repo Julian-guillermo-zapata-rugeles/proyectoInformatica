@@ -24,6 +24,16 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::actualizar(){
+    for(auto &ast : v_asteroides){
+        if(ast->destruir()){
+            mundo->removeItem(ast);
+            mundo->update();
+            v_asteroides.erase(std::remove(v_asteroides.begin(),v_asteroides.end(),ast),v_asteroides.end());
+            //std::cout << "eliminado" <<std::endl;
+        }
+    }
+
+    //std::cout << "tamaño : " <<v_asteroides.size() << std::endl;
     mundo->advance();
     mundo->update();
 }
@@ -32,10 +42,9 @@ void MainWindow::generarAsteroides()
 {
     srand(time(NULL));
     int aleatorio=1+rand()%1000;
-    int aleatorios_asteroide = 10+rand()%40;
-    tmp_asteroide = new asteroides(personajePrincipal->getCoordenadaX(),-10,aleatorios_asteroide,aleatorios_asteroide);
-    mundo->addItem(tmp_asteroide);
-    v_asteroides.push_back(tmp_asteroide);
+    int a_w = 10+rand()%40;
+    v_asteroides.push_back(new asteroides(aleatorio,-10,a_w,a_w,600));
+    mundo->addItem(v_asteroides.last());
     std::cout << "Asteroide generado en X : "<< aleatorio << std::endl;
     /*
     if(eventos->interval()>1000){
@@ -56,9 +65,8 @@ void MainWindow::keyPressEvent(QKeyEvent *evento){
         personajePrincipal->adelante();
     }
     if(evento->key()==Qt::Key_Space){
-        tmp_proyectil = personajePrincipal->disparar();
-        mundo->addItem(tmp_proyectil);
-        proyectiles.push_back(tmp_proyectil);
+        proyectiles.push_back(personajePrincipal->disparar());
+        mundo->addItem(proyectiles.last());
     }
 }
 

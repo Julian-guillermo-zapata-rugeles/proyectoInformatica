@@ -11,6 +11,8 @@
 #include "bala.h"
 #include "asteroides.h"
 #include <random>
+#include <QGraphicsItem>
+#include <QMediaPlayer>
 
 
 QT_BEGIN_NAMESPACE
@@ -33,8 +35,7 @@ public:
     // vectores de objetos
     QVector <bala *> proyectiles;
     QVector <asteroides *> v_asteroides;
-    bala *tmp_proyectil;
-    asteroides *tmp_asteroide;
+    QMediaPlayer *sonido = new QMediaPlayer;
 
 private:
     Ui::MainWindow *ui;
