@@ -42,3 +42,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     videoJuego.pro.user
+
+RESOURCES += \
+    multimedia.qrc

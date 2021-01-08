@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ticks = new QTimer();
     ticks->start(40);
     eventos = new QTimer();
-    eventos->start(10000);
+    eventos->start(15000);
     connect(ticks,SIGNAL(timeout()),this,SLOT(actualizar()));
     connect(eventos,SIGNAL(timeout()),this,SLOT(generarAsteroides()));
 }
@@ -29,6 +29,8 @@ void MainWindow::actualizar(){
             mundo->removeItem(ast);
             mundo->update();
             v_asteroides.erase(std::remove(v_asteroides.begin(),v_asteroides.end(),ast),v_asteroides.end());
+            sonido->setMedia(QUrl("qrc:/multimedia/explosion1.mp3"));
+            sonido->play();
             //std::cout << "eliminado" <<std::endl;
         }
     }
@@ -42,8 +44,8 @@ void MainWindow::generarAsteroides()
 {
     srand(time(NULL));
     int aleatorio=1+rand()%1000;
-    int a_w = 10+rand()%40;
-    v_asteroides.push_back(new asteroides(aleatorio,-10,a_w,a_w,600));
+    int a_w = 30+rand()%100;
+    v_asteroides.push_back(new asteroides(aleatorio,-1000,a_w,a_w,600));
     mundo->addItem(v_asteroides.last());
     std::cout << "Asteroide generado en X : "<< aleatorio << std::endl;
     /*
@@ -51,6 +53,8 @@ void MainWindow::generarAsteroides()
         eventos->setInterval(eventos->interval()-100);
     }
     */
+    sonido->setMedia(QUrl("qrc:/multimedia/suspenso1.mp3"));
+    sonido->play();
 }
 
 
