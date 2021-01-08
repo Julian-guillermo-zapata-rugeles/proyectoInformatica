@@ -13,7 +13,7 @@ QRectF personaje::boundingRect() const
 
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::black);
+    painter->setBrush(Qt::white);
     painter->drawRect(boundingRect());
 }
 

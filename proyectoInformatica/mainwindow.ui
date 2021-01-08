@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1100</width>
-    <height>700</height>
+    <width>1034</width>
+    <height>655</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,6 +23,9 @@
       <height>610</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/multimedia/fondo2.png);</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -30,7 +33,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1100</width>
+     <width>1034</width>
      <height>24</height>
     </rect>
    </property>

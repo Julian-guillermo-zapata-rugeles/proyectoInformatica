@@ -3,5 +3,6 @@
         <file>multimedia/explosion1.mp3</file>
         <file>multimedia/suspenso1.mp3</file>
         <file>multimedia/fondo.png</file>
+        <file>multimedia/fondo2.png</file>
     </qresource>
 </RCC>

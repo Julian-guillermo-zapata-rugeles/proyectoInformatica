@@ -14,7 +14,7 @@ QRectF asteroides::boundingRect() const
 
 void asteroides::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::red);
+    painter->setBrush(Qt::black);
     painter->drawEllipse(boundingRect());
 }
 
