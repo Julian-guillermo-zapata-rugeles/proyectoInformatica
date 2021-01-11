@@ -23,8 +23,8 @@ public:
  private:
     QGraphicsScene * scene  = new QGraphicsScene();
     personaje * personajePrincipal = new personaje();
-
     QGraphicsView * vista = new QGraphicsView(scene);
+
     // timers
 
     QTimer *ticks = new QTimer();
