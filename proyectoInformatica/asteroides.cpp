@@ -1,31 +1,29 @@
 #include "asteroides.h"
 
-
-asteroides::asteroides(short posX, short posY, short ancho, short alto , short int vdestruccion)
-    :cuerpo(posX,posY,ancho,alto)
+asteroides::asteroides()
 {
-    this->valor_destruccion = vdestruccion;
+    srand(time(0));
+    signed short int dimension = 50+ rand()% 300 ;
+    this->setRect(0,0,dimension,dimension);
+    setPos(1+rand()%1200,-1500);
+    sonido->stop();
+    sonido->setMedia(QUrl("qrc:/multimedia/suspenso1.mp3"));
+    sonido->play();
+    qDebug()<<"asteroide generado ";
+    //QTimer *timer = new QTimer();
+    //connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
+    //timer->start(30);
 }
 
-QRectF asteroides::boundingRect() const
-{
-    return QRectF(coordenadaX,coordenadaY,ancho,alto);
-}
 
-void asteroides::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+bool asteroides::moverAsteroide()
 {
-    painter->setBrush(Qt::black);
-    painter->drawEllipse(boundingRect());
-}
-
-void asteroides::advance(int phase)
-{
-    this->caidaLibre();
-}
-
-bool asteroides::destruir()
-{
-    if(valor_destruccion<coordenadaY){
+    setPos(x(),y()+5);
+    if(pos().y() > 560 ){
+        qDebug() << "asteroide eliminado";
+        sonido->stop();
+        sonido->setMedia(QUrl("qrc:/multimedia/explosion1.mp3"));
+        sonido->play();
         return true;
     }
     else{

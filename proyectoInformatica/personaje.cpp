@@ -1,55 +1,45 @@
 #include "personaje.h"
+#include "proyectil.h"
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QDebug>
 
-personaje::personaje(short x, short y, short w, short h):cuerpo(x,y,w,h)
-{
-    // inicialización de variables, pero si el constructor de cuerpo.
-    direccion=true;
+personaje::personaje(){
+    this->setRect(0,0,30,30);
+    this->setFlag(QGraphicsItem::ItemIsFocusable);
+    this->setFocus();
+    this->setPos(30,560);
+    this->dir = true ;
 }
 
-QRectF personaje::boundingRect() const
+//
+void personaje::keyPressEvent(QKeyEvent *event)
 {
-    return  QRectF(coordenadaX,coordenadaY,ancho,alto);
-}
+    if(event->key() == Qt::Key_A){
+        if(pos().x()>0){
+            setPos(x()-10,y());
+            dir=false;
+        }
+    }
 
-void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    painter->setBrush(Qt::white);
-    painter->drawRect(boundingRect());
-}
+    if(event->key() == Qt::Key_D){
+        if(pos().x()<1300-30){
+        setPos(x()+10,y());
+        dir=true;
+        }
+     }
 
-void personaje::saltar(){
-    // esta función modifica el estado saltando , por ende cuando el timeout() llame al advance()
-    // el estado de salto estará true y por tanto el personaje saltará hasta que status_saltando
-    // sea restablecido
-    this->status_saltando=true;
-}
-
-void personaje::adelante()
-{
-    // llamar al método heredado para moverse hacia la derecha
-    direccion=true;
-    this->moverDerecha();
-}
-
-void personaje::atras()
-{
-    // llamar al método heredado para moverse hacia la izquierda
-    direccion=false;
-    this->moverIzquierda();
-}
-
-bala * personaje::disparar()
-{
-    tmp_disparo = new bala(coordenadaX,coordenadaY,10,10,direccion);
-    return  tmp_disparo;
-
-}
-
-void personaje::advance(int phase)
-{
-    // salto requiere que exista un boleano en true para ejecutarlo. para ello
-    // el método salto que está presente en (cuerpo.h) corrobora si el estado del personaje es
-    // status_saltando = true
-
-    salto();
+    if(event->key() == Qt::Key_W){
+        setPos(x(),y()-10);
+    }
+    if(event->key() == Qt::Key_Space){
+        // disparo desde el personaje
+        proyectil *disparo = new proyectil(dir);
+        qDebug() <<"posicion x "<< this->x();
+        qDebug() <<"posicion y "<< this->y();
+        scene()->addItem(disparo);
+        disparo->setPos(this->x(),this->y());
+        sonido->setMedia(QUrl("qrc:/multimedia/laser1.mp3"));
+        sonido->play();
+    }
 }

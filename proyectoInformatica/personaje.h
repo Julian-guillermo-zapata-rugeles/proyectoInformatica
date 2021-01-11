@@ -1,31 +1,21 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
 
-#include <QGraphicsItem>
-#include <QPainter>
-#include "cuerpo.h"
-#include "bala.h"
-#include <QVector>
+#include <QGraphicsRectItem>
+#include <QKeyEvent>
+#include <QObject>
+#include <QMediaPlayer>
 
-class personaje : public cuerpo , public QGraphicsItem
+class personaje : public QGraphicsRectItem , public QObject
 {
 
 private:
-
+    QMediaPlayer *sonido = new QMediaPlayer();
+    bool dir;
 public:
-    personaje(short int x , short int y, short int widht , short int height );
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
-    bala *tmp_disparo;
-    bool direccion;
+    personaje();
 
-    // movimientos asociados al personaje (heredó del cuerpo.h)
-    void saltar();
-    void adelante();
-    void atras();
-    bala * disparar();
-    // función advance del personaje
-    void advance(int phase);
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // PERSONAJE_H

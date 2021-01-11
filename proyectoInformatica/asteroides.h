@@ -1,20 +1,23 @@
 #ifndef ASTEROIDES_H
 #define ASTEROIDES_H
-#include <QGraphicsItem>
-#include <QPainter>
-#include "cuerpo.h"
 
+#include <QObject>
+#include <QGraphicsRectItem>
+#include <QGraphicsScene>
+#include <QDebug>
+#include <random>
+#include <QMediaPlayer>
+#include <QVector>
 
-class asteroides : public cuerpo , public QGraphicsItem
+class asteroides :public QObject , public QGraphicsRectItem
 {
+    Q_OBJECT
+
 private:
-    signed short int valor_destruccion;
+    QMediaPlayer *sonido = new QMediaPlayer();
 public:
-    asteroides(short int posX, short int  posY, short int ancho, short int  alto , short int vdestruccion);
-    QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
-    void advance(int phase);
-    bool destruir();
+    asteroides();
+    bool moverAsteroide();
 };
 
 #endif // ASTEROIDES_H

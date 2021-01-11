@@ -17,20 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     asteroides.cpp \
-    bala.cpp \
-    cuerpo.cpp \
+    enemigo.cpp \
     main.cpp \
-    mainwindow.cpp \
-    obstaculos.cpp \
-    personaje.cpp
+    movimientos.cpp \
+    mundoterrestre.cpp \
+    personaje.cpp \
+    proyectil.cpp
 
 HEADERS += \
     asteroides.h \
-    bala.h \
-    cuerpo.h \
-    mainwindow.h \
-    obstaculos.h \
-    personaje.h
+    enemigo.h \
+    movimientos.h \
+    mundoterrestre.h \
+    personaje.h \
+    proyectil.h
 
 FORMS += \
     mainwindow.ui
@@ -39,9 +39,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-DISTFILES += \
-    videoJuego.pro.user
 
 RESOURCES += \
     multimedia.qrc
