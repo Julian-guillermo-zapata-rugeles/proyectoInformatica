@@ -20,7 +20,6 @@ mundoTerrestre::mundoTerrestre()
     // iniciador de timers
     generadorAsteroides->start(10000);
     generadorEnemigos->start(5000);
-
     ticks->start(30);
 }
 
@@ -52,10 +51,5 @@ void mundoTerrestre::generador(int tipo)
 
 void mundoTerrestre::ticksManager()
 {
-    // esta slot se encargará de actualizar los objetos que se dispongan aquí
-    /*
-    for(auto& it :v_enemigos){
-        it->moverEnemigo(personajePrincipal->x());
-    }
-    */
+    //
 }

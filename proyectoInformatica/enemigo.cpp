@@ -11,13 +11,14 @@ enemigo::enemigo(qreal lastPosition)
     if(aleatorio%2==0){
         setPos(1300,560);
     }
+
     else{
         setPos(-30 , 560);
     }
 
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(moverEnemigo()));
-    timer->start(50);
+    timer->start(30);
 }
 
 enemigo::~enemigo()
@@ -30,10 +31,10 @@ enemigo::~enemigo()
 void enemigo::moverEnemigo()
 {
     if(last_position < pos().x()){
-        setPos(x()-5,y());
+        setPos(x()-10,y());
     }
     else if(last_position> pos().x()){
-        setPos(x()+5,y());
+        setPos(x()+10,y());
     }
 
 }

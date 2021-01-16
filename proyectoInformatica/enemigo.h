@@ -14,6 +14,7 @@ class enemigo : public QObject , public QGraphicsRectItem
 private:
      QTimer *timer;
      qreal last_position;
+
 public:
     enemigo(qreal lastPosition);
     ~enemigo();
