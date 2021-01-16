@@ -22,6 +22,7 @@ SOURCES += \
     main.cpp \
     movimientos.cpp \
     mundoterrestre.cpp \
+    nubes.cpp \
     personaje.cpp \
     proyectil.cpp
 
@@ -31,6 +32,7 @@ HEADERS += \
     enemigoGigante.h \
     movimientos.h \
     mundoterrestre.h \
+    nubes.h \
     personaje.h \
     proyectil.h
 
