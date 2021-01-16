@@ -2,9 +2,8 @@
 
 asteroides::asteroides()
 {
-    srand(time(0));
-    signed short int dimension = 50+ rand()% 300 ;
-    this->setRect(0,0,dimension,dimension);
+
+    this->setRect(0,0,200,200);
     setPos(1+rand()%1200,-1500);
     sonido->stop();
     sonido->setMedia(QUrl("qrc:/multimedia/suspenso1.mp3"));
