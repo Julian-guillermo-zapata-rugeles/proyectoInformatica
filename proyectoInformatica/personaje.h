@@ -12,6 +12,7 @@ class personaje : public QGraphicsRectItem , public QObject
 private:
     QMediaPlayer *sonido = new QMediaPlayer();
     bool dir;
+    short int disparos_disponibles;
 public:
     personaje();
     void keyPressEvent(QKeyEvent *event);

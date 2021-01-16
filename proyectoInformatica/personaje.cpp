@@ -10,6 +10,7 @@ personaje::personaje(){
     this->setFocus();
     this->setPos(30,560);
     this->dir = true ;
+    this->disparos_disponibles=5;
 }
 
 
@@ -35,13 +36,21 @@ void personaje::keyPressEvent(QKeyEvent *event)
     }
     if(event->key() == Qt::Key_Space){
         // disparo desde el personaje
-        proyectil *disparo = new proyectil(dir);
-        qDebug() <<"posicion x "<< this->x();
-        qDebug() <<"posicion y "<< this->y();
-        scene()->addItem(disparo);
-        disparo->setPos(this->x(),this->y());
-        sonido->setMedia(QUrl("qrc:/multimedia/laser1.mp3"));
-        sonido->play();
+        if(disparos_disponibles>=0){
+            proyectil *disparo = new proyectil(dir);
+            qDebug() <<"posicion x "<< this->x();
+            qDebug() <<"posicion y "<< this->y();
+            scene()->addItem(disparo);
+            disparo->setPos(this->x(),this->y());
+            sonido->setMedia(QUrl("qrc:/multimedia/laser1.mp3"));
+            sonido->play();
+            disparos_disponibles=disparos_disponibles-1;
+        }
+        else{
+            sonido->stop();
+            sonido->setMedia(QUrl("qrc:/multimedia/cargar_arma.mp3"));
+            sonido->play();
+        }
     }
 }
 
