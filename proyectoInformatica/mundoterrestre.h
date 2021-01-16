@@ -14,6 +14,7 @@
 #include <asteroides.h> // propia
 #include <enemigo.h> // propia
 #include <enemigoGigante.h> // propia
+#include <nubes.h> // propia
 
 
 class mundoTerrestre : public QObject , public QGraphicsRectItem
@@ -33,6 +34,7 @@ public:
     QTimer *generadorAsteroides = new QTimer();
     QTimer *generadorEnemigos = new QTimer();
     QTimer *generadorEnemigosGigantes = new QTimer();
+    QTimer *generadorNubes = new QTimer();
 
 
 public slots:

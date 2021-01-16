@@ -6,16 +6,19 @@ mundoTerrestre::mundoTerrestre()
     scene->addItem(personajePrincipal);
 
 
-    // connects
+    // connects MAPPERS
     QSignalMapper *signalMapper = new QSignalMapper();
     connect(generadorAsteroides,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(generadorEnemigos,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(generadorEnemigosGigantes,SIGNAL(timeout()),signalMapper,SLOT(map()));
+    connect(generadorNubes,SIGNAL(timeout()),signalMapper,SLOT(map()));
+
     connect(ticks,SIGNAL(timeout()),this,SLOT(ticksManager()));
 
     signalMapper->setMapping(generadorAsteroides,1);
     signalMapper->setMapping(generadorEnemigos,2);
     signalMapper->setMapping(generadorEnemigosGigantes,3);
+    signalMapper->setMapping(generadorNubes,4);
 
     connect(signalMapper,SIGNAL(mapped(int )),this,SLOT(generador(int)));
 
@@ -42,6 +45,7 @@ void mundoTerrestre::iniciarMundo()
     // iniciador de timers
     generadorAsteroides->start(10000);
     generadorEnemigos->start(5000);
+    generadorNubes->start(8000);
     //generadorEnemigosGigantes->start(40000);
     ticks->start(30);
 
@@ -63,6 +67,9 @@ void mundoTerrestre::generador(int tipo)
     }
     if(tipo==3){
         scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition()));
+    }
+    if(tipo==4){
+        scene->addItem(new nubes());
     }
 
 }
