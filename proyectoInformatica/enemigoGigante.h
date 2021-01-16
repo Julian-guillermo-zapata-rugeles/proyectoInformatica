@@ -11,14 +11,13 @@ class enemigoGigante : public QObject , public QGraphicsRectItem
 {
     Q_OBJECT
 private:
-    //QTimer *timer = new QTimer();
+    QTimer *timer = new QTimer();
+    qreal last_position;
 public:
-    enemigoGigante();
-    void moverEnemigo(float position);
+    enemigoGigante(qreal lastPosition);
 
-/*public slots:
-    void disparar();
-    */
+private slots:
+    void moverEnemigo();
 };
 
 #endif // ENEMIGO_H

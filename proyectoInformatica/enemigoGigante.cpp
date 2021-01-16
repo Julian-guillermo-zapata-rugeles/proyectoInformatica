@@ -1,26 +1,31 @@
 #include "enemigoGigante.h"
 
-enemigoGigante::enemigoGigante()
+enemigoGigante::enemigoGigante(qreal lastPosition)
 {
+
     srand(time(NULL));
     this->setRect(0,0,50,100);
+    this->last_position=lastPosition;
+    this->disparosSoportados=5;
+
     short int aleatorio = 1+rand() %10;
+
     if(aleatorio%2==0){
-        setPos(1300,450);
+        setPos(1300, 560- this->rect().height());
     }
     else{
-        setPos(-30 , 560);
+        setPos(-30 , 560 - this->rect().height());
     }
-    //timer->start(5000);
-    //connect(timer,SIGNAL(timeout()),this,SLOT(disparar()));
+    timer->start(50);
+    connect(timer,SIGNAL(timeout()),this,SLOT(moverEnemigo()));
 }
 
-void enemigoGigante::moverEnemigo(float position)
+void enemigoGigante::moverEnemigo()
 {
-    if(position < pos().x()){
+    if(last_position < pos().x()){
         setPos(x()-3,y());
     }
-    else if(position> pos().x()){
+    else if(last_position> pos().x()){
         setPos(x()+3,y());
     }
 }
