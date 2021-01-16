@@ -6,19 +6,20 @@
 #include <QGraphicsScene>
 #include <proyectil.h>
 #include <random>
+#include <QTimer>
 
 class enemigo : public QObject , public QGraphicsRectItem
 {
     Q_OBJECT
 private:
-    //QTimer *timer = new QTimer();
+     QTimer *timer;
+     qreal last_position;
 public:
-    enemigo();
-    void moverEnemigo(float position);
+    enemigo(qreal lastPosition);
+    ~enemigo();
+private slots:
+    void moverEnemigo();
 
-/*public slots:
-    void disparar();
-    */
 };
 
 #endif // ENEMIGO_H

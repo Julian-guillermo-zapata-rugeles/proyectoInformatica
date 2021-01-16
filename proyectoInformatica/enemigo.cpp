@@ -1,9 +1,12 @@
 #include "enemigo.h"
+#include "personaje.h"
 
-enemigo::enemigo()
+enemigo::enemigo(qreal lastPosition)
 {
     srand(time(NULL));
+    qDebug() << "enemigo generado";
     this->setRect(0,0,30,50);
+    this->last_position=lastPosition;
     short int aleatorio = 1+rand() %10;
     if(aleatorio%2==0){
         setPos(1300,560);
@@ -11,25 +14,26 @@ enemigo::enemigo()
     else{
         setPos(-30 , 560);
     }
-    //timer->start(5000);
-    //connect(timer,SIGNAL(timeout()),this,SLOT(disparar()));
+
+    timer = new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(moverEnemigo()));
+    timer->start(50);
 }
 
-void enemigo::moverEnemigo(float position)
+enemigo::~enemigo()
 {
-    if(position < pos().x()){
-        setPos(x()-10,y());
-    }
-    else if(position> pos().x()){
-        setPos(x()+10,y());
-    }
+    scene()->removeItem(this);
 }
 
-/*
-void enemigo::disparar()
+
+void enemigo::moverEnemigo()
 {
-    proyectil *disparo = new proyectil(false);
-    scene()->addItem(disparo);
-    disparo->setPos(this->x(),this->y());
+    if(last_position < pos().x()){
+        setPos(x()-5,y());
+    }
+    else if(last_position> pos().x()){
+        setPos(x()+5,y());
+    }
+
 }
-*/
+

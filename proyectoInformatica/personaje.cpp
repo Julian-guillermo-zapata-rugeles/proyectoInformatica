@@ -12,6 +12,7 @@ personaje::personaje(){
     this->dir = true ;
 }
 
+
 //
 void personaje::keyPressEvent(QKeyEvent *event)
 {
@@ -43,3 +44,9 @@ void personaje::keyPressEvent(QKeyEvent *event)
         sonido->play();
     }
 }
+
+qreal personaje::getLastPosition()
+{
+    return pos().x();
+}
+

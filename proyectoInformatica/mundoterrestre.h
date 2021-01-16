@@ -26,8 +26,10 @@ public:
 
     QGraphicsView * vista = new QGraphicsView(scene);
     // timers
+
     QTimer *ticks = new QTimer();
     QTimer *generadorAsteroides = new QTimer();
+    QTimer *generadorEnemigos = new QTimer();
 
 
 public slots:

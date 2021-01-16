@@ -9,7 +9,7 @@ asteroides::asteroides()
     sonido->stop();
     sonido->setMedia(QUrl("qrc:/multimedia/suspenso1.mp3"));
     sonido->play();
-    qDebug()<<"asteroide generado ";
+    qDebug()<<"asteroide generado en "<<pos().x() << " " << pos().y() ;
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
     timer->start(30);

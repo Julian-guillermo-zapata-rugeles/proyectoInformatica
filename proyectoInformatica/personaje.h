@@ -14,8 +14,8 @@ private:
     bool dir;
 public:
     personaje();
-
     void keyPressEvent(QKeyEvent *event);
+    qreal getLastPosition();
 };
 
 #endif // PERSONAJE_H

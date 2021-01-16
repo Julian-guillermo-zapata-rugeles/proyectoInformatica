@@ -24,9 +24,23 @@ void proyectil::moverProyectil()
     }
     QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;
     for(int i=0;i< elementosColisionables.size();i++){
+
+        // balas que colisionan con los enemigos
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
-                scene()->removeItem(elementosColisionables[i]);
+                scene()->removeItem(this); // eliminamos la bala
+                delete elementosColisionables[i];
                 delete this;
+                break;
+            }
+
+        // balas que colisionan con los asteroides //
+        if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
+                //scene()->removeItem(elementosColisionables[i]);
+                scene()->removeItem(this);
+                delete elementosColisionables[i];
+                delete this;
+                break;
             }
         }
+
 }
