@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QDebug>
 #include <random>
@@ -10,7 +11,7 @@
 #include <QVector>
 #include <QTimer>
 
-class asteroides :public QObject , public QGraphicsRectItem
+class asteroides :public QObject , public QGraphicsPixmapItem
 {
     Q_OBJECT
 

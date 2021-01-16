@@ -3,7 +3,8 @@
 asteroides::asteroides()
 {
 
-    this->setRect(0,0,200,200);
+    //this->setRect(0,0,200,200);
+    this->setPixmap(QPixmap(":/multimedia/sprite_asteroide.png"));
     setPos(1+rand()%1200,-1500);
     sonido->stop();
     sonido->setMedia(QUrl("qrc:/multimedia/suspenso1.mp3"));
