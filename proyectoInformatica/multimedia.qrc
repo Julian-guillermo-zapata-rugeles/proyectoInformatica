@@ -7,5 +7,6 @@
         <file>multimedia/sprite_asteroide.png</file>
         <file>multimedia/pixmap_asteroide.png</file>
         <file>multimedia/pixmap_disparo_sol.png</file>
+        <file>multimedia/pixmap_asteroide_rojo.png</file>
     </qresource>
 </RCC>
