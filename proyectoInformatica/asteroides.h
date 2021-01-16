@@ -19,6 +19,7 @@ private:
     QMediaPlayer *sonido = new QMediaPlayer();
     QTimer *timer;
     signed short int rotationAngle;
+    void generarAspecto();
 public:
     asteroides();
 

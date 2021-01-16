@@ -1,10 +1,24 @@
 #include "asteroides.h"
 
+void asteroides::generarAspecto()
+{
+    // podriamos establecer varios pixmaps y generar de forma aleatorio estos mismos
+    // para ello bastaria generar un número aleatorio y condicionar la salida.
+    if((0+rand()%10)%2==0){
+        this->setPixmap(QPixmap(":/multimedia/pixmap_asteroide.png"));
+    }
+    else{
+        this->setPixmap(QPixmap(":/multimedia/pixmap_asteroide_rojo.png"));
+    }
+    // fin del condicionamiento
+}
+
 asteroides::asteroides()
 {
 
+    srand(time(NULL));
     //this->setRect(0,0,200,200);
-    this->setPixmap(QPixmap(":/multimedia/pixmap_asteroide.png"));
+    generarAspecto();
     this->setTransformOriginPoint(this->boundingRect().center());
     //setScale();
     setPos(1+rand()%1200,-1500);
