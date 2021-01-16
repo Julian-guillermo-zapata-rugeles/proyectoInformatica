@@ -27,7 +27,6 @@ void proyectil::moverProyectil()
 
         // balas que colisionan con los enemigos
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
-<<<<<<< HEAD
                 scene()->removeItem(this); // eliminamos la bala
                 delete elementosColisionables[i];
                 delete this;
@@ -36,14 +35,13 @@ void proyectil::moverProyectil()
 
         // balas que colisionan con los asteroides //
         // unicamente se eliminan las balas //
+
         if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
                 scene()->removeItem(this);
                 delete this;
                 break;
-=======
                 scene()->removeItem(elementosColisionables[i]);
                 //delete this;
->>>>>>> Se creará un nuevo enemigo con caracteristicas nuevas (se dispondrá una nueva rama)
             }
         }
 
