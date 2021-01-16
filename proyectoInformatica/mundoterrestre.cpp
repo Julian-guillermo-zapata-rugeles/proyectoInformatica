@@ -35,6 +35,8 @@ void mundoTerrestre::iniciarMundo()
     vista->show();
     vista->setFixedSize(1300,600);
     vista->setSceneRect(0,0,1300,600);
+    vista->setStyleSheet("border-image: url(:/multimedia/fondo2.png)");
+
 
 }
 
