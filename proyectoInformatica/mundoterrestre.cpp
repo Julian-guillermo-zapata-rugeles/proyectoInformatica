@@ -34,9 +34,9 @@ void mundoTerrestre::iniciarMundo()
     vista->setSceneRect(0,0,1300,600);
 
     // iniciador de timers
-    generadorAsteroides->start(15000);
+    generadorAsteroides->start(10000);
     generadorEnemigos->start(5000);
-    generadorEnemigosGigantes->start(30000);
+    //generadorEnemigosGigantes->start(40000);
     ticks->start(30);
 
 

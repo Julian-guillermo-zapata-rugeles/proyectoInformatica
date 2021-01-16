@@ -18,6 +18,7 @@ class asteroides :public QObject , public QGraphicsPixmapItem
 private:
     QMediaPlayer *sonido = new QMediaPlayer();
     QTimer *timer;
+    signed short int rotationAngle;
 public:
     asteroides();
 
