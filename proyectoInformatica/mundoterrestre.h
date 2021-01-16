@@ -15,6 +15,7 @@
 #include <enemigo.h> // propia
 #include <enemigoGigante.h> // propia
 #include <nubes.h> // propia
+#include "score.h"
 
 
 class mundoTerrestre : public QObject , public QGraphicsRectItem
@@ -23,10 +24,14 @@ class mundoTerrestre : public QObject , public QGraphicsRectItem
 public:
     mundoTerrestre();
     void iniciarMundo();
+
  private:
     QGraphicsScene * scene  = new QGraphicsScene();
     personaje * personajePrincipal = new personaje();
     QGraphicsView * vista = new QGraphicsView(scene);
+
+    //Puntaje
+    Score *puntaje = new Score;
 
     // timers
 
