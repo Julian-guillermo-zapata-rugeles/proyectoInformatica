@@ -23,6 +23,7 @@ enemigo::enemigo(qreal lastPosition)
 enemigo::~enemigo()
 {
     scene()->removeItem(this);
+    qDebug() << " enemigo eliminado ";
 }
 
 

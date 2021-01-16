@@ -34,10 +34,9 @@ void proyectil::moverProyectil()
             }
 
         // balas que colisionan con los asteroides //
+        // unicamente se eliminan las balas //
         if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
-                //scene()->removeItem(elementosColisionables[i]);
                 scene()->removeItem(this);
-                delete elementosColisionables[i];
                 delete this;
                 break;
             }
