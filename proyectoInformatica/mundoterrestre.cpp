@@ -32,6 +32,10 @@ void mundoTerrestre::iniciarMundo()
     vista->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     vista->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+    //Puntaje
+    puntaje->setPos(1000,40);
+    scene->addItem(puntaje);
+
     //
     // fondo de pantalla se puede mejorar
     // se deshabilitará temporalmente para visualización.

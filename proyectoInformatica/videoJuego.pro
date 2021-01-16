@@ -24,7 +24,8 @@ SOURCES += \
     mundoterrestre.cpp \
     nubes.cpp \
     personaje.cpp \
-    proyectil.cpp
+    proyectil.cpp \
+    score.cpp
 
 HEADERS += \
     asteroides.h \
@@ -34,7 +35,8 @@ HEADERS += \
     mundoterrestre.h \
     nubes.h \
     personaje.h \
-    proyectil.h
+    proyectil.h \
+    score.h
 
 FORMS += \
     mainwindow.ui
