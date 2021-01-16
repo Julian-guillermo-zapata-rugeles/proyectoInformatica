@@ -13,7 +13,7 @@ nubes::nubes()
         setPos(1300, 20 + rand()%200);
         dir = false ;
     }
-    timer->start(100);
+    timer->start(20);
     connect(timer, SIGNAL(timeout()),this,SLOT(moverNubes()));
 }
 
@@ -40,10 +40,10 @@ void nubes::generarAspecto()
 void nubes::moverNubes()
 {
     if(dir==true){
-        setPos(pos().x()+5,pos().y());
+        setPos(pos().x()+1,pos().y());
     }
     else{
-        setPos(pos().x()-5,pos().y());
+        setPos(pos().x()-1,pos().y());
     }
 
     if(pos().x()<-900 || pos().x() > 1500){

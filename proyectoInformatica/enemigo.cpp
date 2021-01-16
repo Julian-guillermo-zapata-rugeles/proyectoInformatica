@@ -30,11 +30,14 @@ enemigo::~enemigo()
 
 void enemigo::moverEnemigo()
 {
-    if(last_position < pos().x()){
+    if(last_position  < pos().x()){
         setPos(x()-1,y());
     }
-    else if(last_position> pos().x()){
+    else if(last_position > pos().x()){
         setPos(x()+1,y());
+    }
+    else{
+        // acción del enemigo //
     }
 
 }
