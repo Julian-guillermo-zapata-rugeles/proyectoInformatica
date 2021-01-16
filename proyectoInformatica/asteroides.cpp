@@ -10,13 +10,13 @@ asteroides::asteroides()
     sonido->setMedia(QUrl("qrc:/multimedia/suspenso1.mp3"));
     sonido->play();
     qDebug()<<"asteroide generado ";
-    //QTimer *timer = new QTimer();
-    //connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
-    //timer->start(30);
+    timer = new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
+    timer->start(30);
 }
 
 
-bool asteroides::moverAsteroide()
+void asteroides::moverAsteroide()
 {
     setPos(x(),y()+5);
     if(pos().y() > 560 ){
@@ -24,9 +24,8 @@ bool asteroides::moverAsteroide()
         sonido->stop();
         sonido->setMedia(QUrl("qrc:/multimedia/explosion1.mp3"));
         sonido->play();
-        return true;
+        scene()->removeItem(this);
+        delete this;
     }
-    else{
-        return false;
-    }
+
 }

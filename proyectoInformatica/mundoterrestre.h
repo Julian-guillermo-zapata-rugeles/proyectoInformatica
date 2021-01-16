@@ -28,10 +28,6 @@ public:
     // timers
     QTimer *ticks = new QTimer();
     QTimer *generadorAsteroides = new QTimer();
-    QTimer *generadorEnemigos = new QTimer();
-    // vectores //
-    QVector <asteroides *> v_asteroides;
-    QVector <enemigo *> v_enemigos;
 
 
 public slots:

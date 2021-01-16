@@ -8,6 +8,7 @@
 #include <random>
 #include <QMediaPlayer>
 #include <QVector>
+#include <QTimer>
 
 class asteroides :public QObject , public QGraphicsRectItem
 {
@@ -15,9 +16,12 @@ class asteroides :public QObject , public QGraphicsRectItem
 
 private:
     QMediaPlayer *sonido = new QMediaPlayer();
+    QTimer *timer;
 public:
     asteroides();
-    bool moverAsteroide();
+
+private slots:
+    void moverAsteroide();
 };
 
 #endif // ASTEROIDES_H
