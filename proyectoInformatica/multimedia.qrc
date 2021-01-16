@@ -6,5 +6,6 @@
         <file>multimedia/laser1.mp3</file>
         <file>multimedia/sprite_asteroide.png</file>
         <file>multimedia/pixmap_asteroide.png</file>
+        <file>multimedia/pixmap_disparo_sol.png</file>
     </qresource>
 </RCC>
