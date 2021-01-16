@@ -4,5 +4,6 @@
         <file>multimedia/fondo2.png</file>
         <file>multimedia/explosion1.mp3</file>
         <file>multimedia/laser1.mp3</file>
+        <file>multimedia/sprite_asteroide.png</file>
     </qresource>
 </RCC>

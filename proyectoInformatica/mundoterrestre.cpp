@@ -20,11 +20,7 @@ mundoTerrestre::mundoTerrestre()
     connect(signalMapper,SIGNAL(mapped(int )),this,SLOT(generador(int)));
 
 
-    // iniciador de timers
-    generadorAsteroides->start(15000);
-    generadorEnemigos->start(5000);
-    generadorEnemigosGigantes->start(30000);
-    ticks->start(30);
+
 }
 
 void mundoTerrestre::iniciarMundo()
@@ -32,10 +28,17 @@ void mundoTerrestre::iniciarMundo()
     vista->setScene(scene);
     vista->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     vista->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    vista->setStyleSheet("border-image: url(:/multimedia/fondo2.png)");
     vista->show();
     vista->setFixedSize(1300,600);
     vista->setSceneRect(0,0,1300,600);
-    vista->setStyleSheet("border-image: url(:/multimedia/fondo2.png)");
+
+    // iniciador de timers
+    generadorAsteroides->start(15000);
+    generadorEnemigos->start(5000);
+    generadorEnemigosGigantes->start(30000);
+    ticks->start(30);
+
 
 
 }
