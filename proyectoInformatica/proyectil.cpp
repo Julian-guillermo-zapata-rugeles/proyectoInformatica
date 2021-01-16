@@ -43,6 +43,16 @@ void proyectil::moverProyectil()
                 scene()->removeItem(elementosColisionables[i]);
                 //delete this;
             }
+
+
+        // personaje gigante siendo impactado por balas //
+        // se debe eliminar la bala y restar un punto del maximo de resistencia del enemigo
+        //
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
+                scene()->removeItem(this);
+                delete this;
+                break;
+            }
         }
 
 }

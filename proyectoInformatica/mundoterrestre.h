@@ -4,14 +4,16 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <personaje.h> // propia
 #include <QKeyEvent>
 #include <QDebug>
 #include <QTimer>
-#include <asteroides.h> // propia
-#include <enemigo.h> // propia
 #include <QVector>
 #include <QSignalMapper>
+
+#include <personaje.h> // propia
+#include <asteroides.h> // propia
+#include <enemigo.h> // propia
+#include <enemigoGigante.h> // propia
 
 
 class mundoTerrestre : public QObject , public QGraphicsRectItem
@@ -30,6 +32,7 @@ public:
     QTimer *ticks = new QTimer();
     QTimer *generadorAsteroides = new QTimer();
     QTimer *generadorEnemigos = new QTimer();
+    QTimer *generadorEnemigosGigantes = new QTimer();
 
 
 public slots:

@@ -9,6 +9,7 @@
 #include <QMediaPlayer>
 #include <QList>
 #include <enemigo.h>
+#include <enemigoGigante.h>
 #include <asteroides.h>
 
 class proyectil : public QObject , public QGraphicsRectItem

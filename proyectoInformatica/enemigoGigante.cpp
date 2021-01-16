@@ -11,22 +11,24 @@ enemigoGigante::enemigoGigante(qreal lastPosition)
     short int aleatorio = 1+rand() %10;
 
     if(aleatorio%2==0){
-        setPos(1300, 560- this->rect().height());
+        setPos(1300, 590- this->rect().height());
     }
     else{
-        setPos(-30 , 560 - this->rect().height());
+        setPos(-30 , 590 - this->rect().height());
     }
-    timer->start(50);
+    timer->start(20);
     connect(timer,SIGNAL(timeout()),this,SLOT(moverEnemigo()));
 }
+
+
 
 void enemigoGigante::moverEnemigo()
 {
     if(last_position < pos().x()){
-        setPos(x()-3,y());
+        setPos(x()-1,y());
     }
     else if(last_position> pos().x()){
-        setPos(x()+3,y());
+        setPos(x()+1,y());
     }
 }
 

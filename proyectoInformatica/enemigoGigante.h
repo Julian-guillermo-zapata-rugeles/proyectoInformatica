@@ -13,6 +13,7 @@ class enemigoGigante : public QObject , public QGraphicsRectItem
 private:
     QTimer *timer = new QTimer();
     qreal last_position;
+    short int disparosSoportados;
 public:
     enemigoGigante(qreal lastPosition);
 
