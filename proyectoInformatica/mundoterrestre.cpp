@@ -28,7 +28,12 @@ void mundoTerrestre::iniciarMundo()
     vista->setScene(scene);
     vista->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     vista->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    // fondo de pantalla se puede mejorar
+    // se deshabilitará temporalmente para visualización.
     vista->setStyleSheet("border-image: url(:/multimedia/fondo2.png)");
+    //
+
     vista->show();
     vista->setFixedSize(1300,600);
     vista->setSceneRect(0,0,1300,600);

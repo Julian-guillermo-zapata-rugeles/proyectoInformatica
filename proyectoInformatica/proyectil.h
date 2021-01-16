@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QDebug>
 #include <QMediaPlayer>
@@ -12,7 +13,7 @@
 #include <enemigoGigante.h>
 #include <asteroides.h>
 
-class proyectil : public QObject , public QGraphicsRectItem
+class proyectil : public QObject , public QGraphicsPixmapItem
 {
     Q_OBJECT
 private:

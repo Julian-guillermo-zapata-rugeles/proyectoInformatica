@@ -2,7 +2,9 @@
 
 proyectil::proyectil(bool dir)
 {
-    this->setRect(0,0,10,10);
+    //this->setRect(0,0,10,10);
+    this->setPixmap(QPixmap(":/multimedia/pixmap_disparo_sol.png"));
+    this->setTransformOriginPoint(this->boundingRect().center());
     this->direccion = dir ;
     QTimer *timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(moverProyectil()));
@@ -17,7 +19,7 @@ void proyectil::moverProyectil()
     else{
         setPos(x()-5,y());
     }
-    if(pos().x()>1300 + rect().width() or pos().x() < 0 ){
+    if(pos().x()>1300 + this->boundingRect().width() or pos().x() < 0 ){
         scene()->removeItem(this);
         delete this;
         qDebug() << "Proyectil eliminado de la pantalla ";
