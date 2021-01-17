@@ -61,6 +61,7 @@ void asteroides::moverAsteroide()
     // capacidad destructiva de los asteroides
     // zona que elimina los objetos que sean impactados
     // en la caida
+    // ZONA DE CHOCQUE ASTEROIDES
     QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;
     for(int i=0;i< elementosColisionables.size();i++){
         // balas que colisionan con los enemigos
