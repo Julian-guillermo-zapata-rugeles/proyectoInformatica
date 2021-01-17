@@ -35,7 +35,7 @@ asteroides::asteroides()
 
 void asteroides::moverAsteroide()
 {
-    setPos(x(),y()+5);
+    setPos(x(),y()+3);
 
     // rotación del asteroide
     // este rotará sobre su eje y dará efecto

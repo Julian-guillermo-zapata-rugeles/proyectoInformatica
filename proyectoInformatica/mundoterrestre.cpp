@@ -2,6 +2,7 @@
 
 mundoTerrestre::mundoTerrestre()
 {
+    srand(time(NULL));
     // creacion y anexo de personajes  //
     scene->addItem(personajePrincipal);
 
@@ -71,6 +72,11 @@ void mundoTerrestre::generador(int tipo)
     }
     if(tipo==3){
         scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition()));
+        // cada vez que se genere un enemigo gigante el timer
+        // cambiará aleatoriamente para generar la sensación de situacione imprevista
+        // y poco rutinarias
+        // julian guillermo z.
+        generadorEnemigosGigantes->setInterval(5000+rand()%25000);
     }
     if(tipo==4){
         scene->addItem(new nubes());
