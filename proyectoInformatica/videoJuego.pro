@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     asteroides.cpp \
+    bonus_municion.cpp \
     enemigo.cpp \
     enemigoGigante.cpp \
     main.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 
 HEADERS += \
     asteroides.h \
+    bonus_municion.h \
     enemigo.h \
     enemigoGigante.h \
     movimientos.h \
