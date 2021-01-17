@@ -35,7 +35,7 @@ asteroides::asteroides()
 
 void asteroides::moverAsteroide()
 {
-    setPos(x(),y()+1);
+    setPos(x(),y()+5);
 
     // rotación del asteroide
     // este rotará sobre su eje y dará efecto
@@ -66,7 +66,10 @@ void asteroides::moverAsteroide()
     for(int i=0;i< elementosColisionables.size();i++){
         // balas que colisionan con los enemigos
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
-                scene()->removeItem(elementosColisionables[i]);
+                delete elementosColisionables[i];
+                break;
+            }
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
                 delete elementosColisionables[i];
                 break;
             }
