@@ -3,11 +3,18 @@
 mundoTerrestre::mundoTerrestre()
 {
     srand(time(NULL));
+
     // creacion y anexo de personajes  //
     scene->addItem(personajePrincipal);
 
 
     // connects MAPPERS
+    // se usará mapper para conectar varios timers a una única función encargada
+    // de la generación de "protagonistas" de la escena.
+    // la idea es que al finalizar cada timer * del generador
+    // se invoque al slot generar (int) con un entero que represente
+    // el condicional que generará.
+
     QSignalMapper *signalMapper = new QSignalMapper();
     connect(generadorAsteroides,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(generadorEnemigos,SIGNAL(timeout()),signalMapper,SLOT(map()));
@@ -62,9 +69,11 @@ void mundoTerrestre::generador(int tipo)
 {
     // 1 para generar asteroides
     // 2 para generar enemigos
-    // 3 para .....
-    //
+    // 3 para generar enemigos Gigantes
+    // 4 para generar nubes
 
+
+    // ****************** GENERACION ASTEROIDES Y EVENTOS ************************ //
     if (tipo==1){
         // esta sección genera asteroides  y bajo ciertas circunstancias
         // desata el evento asteroides sorpresa.
@@ -76,16 +85,16 @@ void mundoTerrestre::generador(int tipo)
         if(sorpresa_asteroide%3==0){
             // al desatarse el evento se genera un sonido de alerta
             // para avisar del evento.
-           sonido->stop();
-           sonido->setMedia(QUrl("qrc:/multimedia/sorpresaAsteroides.mp3"));
-           sonido->play();
+            sonido->stop();
+            sonido->setMedia(QUrl("qrc:/multimedia/sorpresaAsteroides.mp3"));
+            sonido->play();
 
-           qDebug() << "-- evento sorpresa INICIADO -- ";
-           // durante este ciclo generamos aleatoriamente  un numero
-           // que representará la cantidad de asteroides que salndrán
-           for(short int a=0;a< 2+rand()%5;a++){
-               scene->addItem(new asteroides(false));
-           }
+            qDebug() << "-- evento sorpresa INICIADO -- ";
+            // durante este ciclo generamos aleatoriamente  un numero
+            // que representará la cantidad de asteroides que salndrán
+            for(short int a=0;a< 2+rand()%5;a++){
+                scene->addItem(new asteroides(false));
+            }
         }
         else{
             // en caso de ser un numero que no corresponde al %3
@@ -94,10 +103,13 @@ void mundoTerrestre::generador(int tipo)
         }
     }
 
-    //--------------------------------------
+    // ****************** GENERACION ENEMIGO COMÚN ************************ //
+
     if(tipo==2){
         scene->addItem(new enemigo(personajePrincipal->getLastPosition()));
     }
+
+    // ****************** GENERACION ENEMIGO GIGANTE ************************ //
     if(tipo==3){
         scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition()));
         // cada vez que se genere un enemigo gigante el timer
@@ -106,6 +118,8 @@ void mundoTerrestre::generador(int tipo)
         // julian guillermo z.
         generadorEnemigosGigantes->setInterval(5000+rand()%25000);
     }
+
+    // ****************** GENERACION DE NUBES  ************************ //
     if(tipo==4){
         scene->addItem(new nubes());
     }
