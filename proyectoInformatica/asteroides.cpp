@@ -13,18 +13,21 @@ void asteroides::generarAspecto()
     // fin del condicionamiento
 }
 
-asteroides::asteroides()
+asteroides::asteroides(bool sound)
 {
 
-    srand(time(NULL));
     //this->setRect(0,0,200,200);
     generarAspecto();
     this->setTransformOriginPoint(this->boundingRect().center());
     //setScale();
-    setPos(1+rand()%1200,-1500);
-    sonido->stop();
-    sonido->setMedia(QUrl("qrc:/multimedia/suspenso1.mp3"));
-    sonido->play();
+    srand(time(NULL));
+    setPos(1+rand()%1200,(1000+rand()%1700)*-1);
+    // reproducir sonido siempre y cuando se indique
+    if(sound){
+        sonido->stop();
+        sonido->setMedia(QUrl("qrc:/multimedia/suspenso1.mp3"));
+        sonido->play();
+    }
     rotationAngle = 0;
     qDebug()<<"asteroide generado en "<<pos().x() << " " << pos().y() ;
     timer = new QTimer();

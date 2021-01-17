@@ -9,6 +9,7 @@
 #include <QTimer>
 #include <QVector>
 #include <QSignalMapper>
+#include <QMediaPlayer>
 
 #include <personaje.h> // propia
 #include <asteroides.h> // propia
@@ -29,6 +30,7 @@ public:
     QGraphicsScene * scene  = new QGraphicsScene();
     personaje * personajePrincipal = new personaje();
     QGraphicsView * vista = new QGraphicsView(scene);
+    QMediaPlayer *sonido = new QMediaPlayer();
 
     //Puntaje
     Score *puntaje = new Score;

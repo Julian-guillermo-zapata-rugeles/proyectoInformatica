@@ -68,9 +68,14 @@ void mundoTerrestre::generador(int tipo)
     if (tipo==1){
         short int sorpresa_asteroide= 1+rand()%100;
         qDebug() <<"numero sorpresa :"<<sorpresa_asteroide;
-        if(sorpresa_asteroide%5==0){
-           for(short int a=0;a<1+rand()%4;a++){
-               scene->addItem(new asteroides());
+        if(sorpresa_asteroide%2==0){
+           sonido->stop();
+           sonido->setMedia(QUrl("qrc:/multimedia/sorpresaAsteroides.mp3"));
+           sonido->play();
+           qDebug() << "-- evento sorpresa INICIADO -- ";
+           for(short int a=0;a< 2+rand()%5;a++){
+               scene->addItem(new asteroides(false));
+               srand(time(NULL));
            }
         }
         else{

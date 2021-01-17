@@ -23,7 +23,7 @@ private:
     signed short int rotationAngle;
     void generarAspecto();
 public:
-    asteroides();
+    asteroides(bool sound=true);
 
 private slots:
     void moverAsteroide();
