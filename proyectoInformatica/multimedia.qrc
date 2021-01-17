@@ -11,5 +11,6 @@
         <file>multimedia/pixmap_nube_grade.png</file>
         <file>multimedia/cargar_arma.mp3</file>
         <file>multimedia/bonus_balas.png</file>
+        <file>multimedia/suspensoCreciente.mp3</file>
     </qresource>
 </RCC>
