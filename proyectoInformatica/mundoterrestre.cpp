@@ -66,19 +66,31 @@ void mundoTerrestre::generador(int tipo)
     //
 
     if (tipo==1){
+        // esta sección genera asteroides  y bajo ciertas circunstancias
+        // desata el evento asteroides sorpresa.
+        // se genera constantemente un numero aleatorio de 1 a 100
+        // para iniciar el proceso si ese numero %3 == 0
+
         short int sorpresa_asteroide= 1+rand()%100;
         qDebug() <<"numero sorpresa :"<<sorpresa_asteroide;
         if(sorpresa_asteroide%3==0){
+            // al desatarse el evento se genera un sonido de alerta
+            // para avisar del evento.
            sonido->stop();
            sonido->setMedia(QUrl("qrc:/multimedia/sorpresaAsteroides.mp3"));
            sonido->play();
+
            qDebug() << "-- evento sorpresa INICIADO -- ";
+           // durante este ciclo generamos aleatoriamente  un numero
+           // que representará la cantidad de asteroides que salndrán
            for(short int a=0;a< 2+rand()%5;a++){
                scene->addItem(new asteroides(false));
            }
         }
         else{
-        scene->addItem(new asteroides());
+            // en caso de ser un numero que no corresponde al %3
+            // se generará un asteroide común.
+            scene->addItem(new asteroides());
         }
     }
 
