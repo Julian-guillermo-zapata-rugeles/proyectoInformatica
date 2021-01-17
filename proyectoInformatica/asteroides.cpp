@@ -58,4 +58,17 @@ void asteroides::moverAsteroide()
         delete this;
     }
 
+    // capacidad destructiva de los asteroides
+    // zona que elimina los objetos que sean impactados
+    // en la caida
+    QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;
+    for(int i=0;i< elementosColisionables.size();i++){
+        // balas que colisionan con los enemigos
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
+                scene()->removeItem(elementosColisionables[i]);
+                delete elementosColisionables[i];
+                break;
+            }
+    }
+
 }

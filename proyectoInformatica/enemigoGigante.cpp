@@ -7,16 +7,21 @@ enemigoGigante::enemigoGigante(qreal lastPosition)
     this->setRect(0,0,50,100);
     this->last_position=lastPosition;
     this->disparosSoportados=5;
+    sonido->stop();
+    sonido->setMedia(QUrl("qrc:/multimedia/suspensoCreciente.mp3"));
+    sonido->play();
 
     short int aleatorio = 1+rand() %10;
 
     if(aleatorio%2==0){
         setPos(1300, 590- this->rect().height());
+        dir=false;
     }
     else{
-        setPos(-30 , 590 - this->rect().height());
+        setPos(-300 , 590 - this->rect().height());
+        dir=true;
     }
-    timer->start(20);
+    timer->start(10);
     connect(timer,SIGNAL(timeout()),this,SLOT(moverEnemigo()));
 }
 
@@ -33,12 +38,24 @@ enemigoGigante::~enemigoGigante()
 
 void enemigoGigante::moverEnemigo()
 {
+
+    if(dir==true){
+        setPos(pos().x()+5,pos().y());
+    }
+    else{
+        setPos(pos().x()-5,pos().y());
+    }
+    if(pos().x()>1400 || pos().x()<-400){
+        delete this;
+    }
+    /*
     if(last_position < pos().x()){
         setPos(x()-1,y());
     }
     else if(last_position> pos().x()){
         setPos(x()+1,y());
     }
+    */
 }
 
 /*

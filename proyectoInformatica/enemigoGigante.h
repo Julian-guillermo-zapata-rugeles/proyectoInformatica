@@ -7,6 +7,7 @@
 #include <proyectil.h>
 #include <random>
 #include <bonus_municion.h>
+#include <QMediaPlayer>
 
 class enemigoGigante : public QObject , public QGraphicsRectItem
 {
@@ -15,6 +16,8 @@ private:
     QTimer *timer = new QTimer();
     qreal last_position;
     short int disparosSoportados;
+    QMediaPlayer *sonido = new QMediaPlayer();
+    bool dir;
 public:
     enemigoGigante(qreal lastPosition);
     ~enemigoGigante();

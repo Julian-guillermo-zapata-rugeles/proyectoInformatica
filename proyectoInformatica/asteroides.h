@@ -10,6 +10,8 @@
 #include <QMediaPlayer>
 #include <QVector>
 #include <QTimer>
+#include <enemigo.h>
+#include <enemigoGigante.h>
 
 class asteroides :public QObject , public QGraphicsPixmapItem
 {
