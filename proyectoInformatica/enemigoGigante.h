@@ -16,6 +16,7 @@ private:
     short int disparosSoportados;
 public:
     enemigoGigante(qreal lastPosition);
+    ~enemigoGigante();
 
 private slots:
     void moverEnemigo();

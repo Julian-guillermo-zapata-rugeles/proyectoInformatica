@@ -57,9 +57,10 @@ void proyectil::moverProyectil()
         // se debe eliminar la bala y restar un punto del maximo de resistencia del enemigo
         //
         if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
-                scene()->removeItem(this);
-                delete this;
-                break;
+            scene()->removeItem(this); // eliminamos la bala
+            delete elementosColisionables[i]; // eliminamos el enemigo gigante
+            delete this;
+            break;
             }
         }
 

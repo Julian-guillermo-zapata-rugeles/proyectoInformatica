@@ -48,9 +48,9 @@ void mundoTerrestre::iniciarMundo()
 
     // iniciador de timers
     generadorAsteroides->start(10000);
-    generadorEnemigos->start(5000);
+    generadorEnemigos->start(6000);
     generadorNubes->start(8000);
-    //generadorEnemigosGigantes->start(40000);
+    generadorEnemigosGigantes->start(10000);
     ticks->start(30);
 
 

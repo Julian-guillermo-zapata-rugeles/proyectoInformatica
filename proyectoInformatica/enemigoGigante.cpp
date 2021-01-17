@@ -20,6 +20,15 @@ enemigoGigante::enemigoGigante(qreal lastPosition)
     connect(timer,SIGNAL(timeout()),this,SLOT(moverEnemigo()));
 }
 
+enemigoGigante::~enemigoGigante()
+{
+    scene()->removeItem(this);
+    // se pretende agregar aquí el objeto de bonus
+    // para que al crearse este tome las posiciones del enemigo gigante.
+
+    qDebug()<< " personaje gigante eliminado " ;
+}
+
 
 
 void enemigoGigante::moverEnemigo()
