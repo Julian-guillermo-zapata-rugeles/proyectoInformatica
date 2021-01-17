@@ -22,10 +22,10 @@ enemigoGigante::enemigoGigante(qreal lastPosition)
 
 enemigoGigante::~enemigoGigante()
 {
-    scene()->removeItem(this);
     // se pretende agregar aquí el objeto de bonus
     // para que al crearse este tome las posiciones del enemigo gigante.
-
+    scene()->addItem(new bonus_municion(this->pos().x(),this->pos().y()));
+    scene()->removeItem(this);
     qDebug()<< " personaje gigante eliminado " ;
 }
 

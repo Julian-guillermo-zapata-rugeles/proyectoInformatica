@@ -1,8 +1,5 @@
 #include "personaje.h"
-#include "proyectil.h"
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QDebug>
+
 
 personaje::personaje(){
     this->setRect(0,0,30,30);
@@ -52,6 +49,7 @@ void personaje::keyPressEvent(QKeyEvent *event)
             sonido->play();
         }
     }
+    eventHandler();
 }
 
 qreal personaje::getLastPosition()
@@ -59,3 +57,17 @@ qreal personaje::getLastPosition()
     return pos().x();
 }
 
+void personaje::eventHandler()
+{
+    QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;
+    for(int i=0;i< elementosColisionables.size();i++){
+
+        // balas que colisionan con los enemigos
+        if(typeid (*(elementosColisionables[i]))==typeid (bonus_municion)){
+                disparos_disponibles=disparos_disponibles+5;
+                scene()->removeItem(elementosColisionables[i]);
+                delete elementosColisionables[i];
+                break;
+            }
+    }
+}

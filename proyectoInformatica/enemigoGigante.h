@@ -6,6 +6,7 @@
 #include <QGraphicsScene>
 #include <proyectil.h>
 #include <random>
+#include <bonus_municion.h>
 
 class enemigoGigante : public QObject , public QGraphicsRectItem
 {

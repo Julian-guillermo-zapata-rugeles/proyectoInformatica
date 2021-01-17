@@ -11,7 +11,7 @@ class bonus_municion : public QObject , public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    bonus_municion(qreal x, qreal y);
+    bonus_municion(qreal x , qreal y);
     // se puede sobre cargar para tener varios bunus.
 private:
     // contador para la munición //
