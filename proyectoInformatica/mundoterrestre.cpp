@@ -67,6 +67,7 @@ void mundoTerrestre::generador(int tipo)
 
     if (tipo==1){
         short int sorpresa_asteroide= 1+rand()%100;
+        qDebug() <<"numero sorpresa :"<<sorpresa_asteroide;
         if(sorpresa_asteroide%5==0){
            for(short int a=0;a<1+rand()%4;a++){
                scene->addItem(new asteroides());
