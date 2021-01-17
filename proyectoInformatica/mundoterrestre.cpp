@@ -64,9 +64,20 @@ void mundoTerrestre::generador(int tipo)
     // 2 para generar enemigos
     // 3 para .....
     //
+
     if (tipo==1){
+        short int sorpresa_asteroide= 1+rand()%100;
+        if(sorpresa_asteroide%5==0){
+           for(short int a=0;a<1+rand()%4;a++){
+               scene->addItem(new asteroides());
+           }
+        }
+        else{
         scene->addItem(new asteroides());
+        }
     }
+
+    //--------------------------------------
     if(tipo==2){
         scene->addItem(new enemigo(personajePrincipal->getLastPosition()));
     }
