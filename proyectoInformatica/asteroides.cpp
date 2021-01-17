@@ -15,14 +15,15 @@ void asteroides::generarAspecto()
 
 asteroides::asteroides(bool sound)
 {
-
+    long long semilla = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    srand((unsigned int )semilla);
     //this->setRect(0,0,200,200);
     generarAspecto();
     this->setTransformOriginPoint(this->boundingRect().center());
     //setScale();
-    srand(time(NULL));
-    setPos(1+rand()%1200,(1000+rand()%1700)*-1);
+    setPos(1+rand()%1200,-2000 + ((1+rand()%500)*-1));
     // reproducir sonido siempre y cuando se indique
+
     if(sound){
         sonido->stop();
         sonido->setMedia(QUrl("qrc:/multimedia/suspenso1.mp3"));

@@ -12,6 +12,7 @@
 #include <QTimer>
 #include <enemigo.h>
 #include <enemigoGigante.h>
+#include <chrono>
 
 class asteroides :public QObject , public QGraphicsPixmapItem
 {
@@ -22,6 +23,7 @@ private:
     QTimer *timer;
     signed short int rotationAngle;
     void generarAspecto();
+
 public:
     asteroides(bool sound=true);
 
