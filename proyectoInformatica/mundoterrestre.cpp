@@ -43,6 +43,10 @@ void mundoTerrestre::iniciarMundo()
     puntaje->setPos(1000,40);
     scene->addItem(puntaje);
 
+    //tiempo de juego
+    tiempoJuego->setPos(30,40);
+    scene->addItem(tiempoJuego);
+
     short int n = 1+ rand() % 5;
     switch (n) {
     case 1:{
@@ -189,6 +193,7 @@ void mundoTerrestre::ticksPersonaje()
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
             if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
                 qDebug() <<"me alcanzo un enemigo" <<endl;
+                puntaje->increase();
             }
         }
 
