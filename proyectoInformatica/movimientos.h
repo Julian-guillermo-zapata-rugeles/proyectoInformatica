@@ -16,13 +16,18 @@ class movimientos
     float limite_inferior;
     float posY;
     float tiempo;
+    float tmp_sumador;
     bool status_saltando;
+    bool status_gravitatorio;
 
     void saltar();
+    void gravitar();
 public:
     movimientos(float limiteInferior);
     bool getStatus_saltando() const;
     void setStatus_saltando(bool value);
+    bool getStatus_gravitatorio() const;
+    void setStatus_gravitatorio(bool value);
 };
 
 #endif // MOVIMIENTOS_H

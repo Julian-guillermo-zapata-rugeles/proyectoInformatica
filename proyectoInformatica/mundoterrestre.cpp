@@ -44,7 +44,6 @@ void mundoTerrestre::iniciarMundo()
     //Puntaje
     puntaje->setPos(1000,40);
     scene->addItem(puntaje);
-    scene->addItem(new lunaCreciente());
 
     //
     // fondo de pantalla se puede mejorar
@@ -61,7 +60,7 @@ void mundoTerrestre::iniciarMundo()
     generadorEnemigos->start(6000);
     generadorNubes->start(8000);
     generadorEnemigosGigantes->start(10000);
-    generadorDeLuna->start(45000);
+    generadorDeLuna->start(40000);
     ticks->start(30);
 
 
@@ -128,19 +127,29 @@ void mundoTerrestre::generador(int tipo)
     }
     if(tipo==5){
         scene->addItem(new lunaCreciente());
+         personajePrincipal->setStatus_gravitatorio(true);
     }
 }
 
 void mundoTerrestre::ticksPersonaje()
 {
     // este evento handler verificará si el personaje debe saltar
+    bool lunaActiva = false;
+    QList<QGraphicsItem *> it = scene->items();
+    for(int i=0;i< it.size();i++){
+        // balas que colisionan con los enemigos
+        if(typeid (*(it[i]))==typeid (lunaCreciente)){
+            lunaActiva=true;
+            }
+        }
+     if(lunaActiva==true){
+         personajePrincipal->setStatus_gravitatorio(true);
+     }
+     else{
+         personajePrincipal->setStatus_gravitatorio(false);
+     }
+
     personajePrincipal->eventHandler();
 
-    QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;
-    for(int i=0;i< elementosColisionables.size();i++){
-        // balas que colisionan con los enemigos
-        if(typeid (*(elementosColisionables[i]))==typeid (lunaCreciente)){
-            }
-    }
 
 }
