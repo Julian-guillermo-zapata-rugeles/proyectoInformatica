@@ -94,7 +94,7 @@ void mundoTerrestre::generador(int tipo)
             qDebug() << "-- evento sorpresa INICIADO -- ";
             // durante este ciclo generamos aleatoriamente  un numero
             // que representará la cantidad de asteroides que salndrán
-            for(short int a=0;a< 2+rand()%5;a++){
+            for(short int a=0;a< 2+rand()%4;a++){
                 scene->addItem(new asteroides(false));
             }
         }
