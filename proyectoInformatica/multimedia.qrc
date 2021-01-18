@@ -13,5 +13,6 @@
         <file>multimedia/bonus_balas.png</file>
         <file>multimedia/suspensoCreciente.mp3</file>
         <file>multimedia/sorpresaAsteroides.mp3</file>
+        <file>multimedia/pixmap_asteroide_joven.png</file>
     </qresource>
 </RCC>
