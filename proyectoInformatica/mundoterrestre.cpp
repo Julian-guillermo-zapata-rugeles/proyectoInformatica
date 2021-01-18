@@ -60,7 +60,7 @@ void mundoTerrestre::iniciarMundo()
     generadorEnemigos->start(6000);
     generadorNubes->start(8000);
     generadorEnemigosGigantes->start(10000);
-    generadorDeLuna->start(40000);
+    generadorDeLuna->start(60000);
     ticks->start(30);
 
 
