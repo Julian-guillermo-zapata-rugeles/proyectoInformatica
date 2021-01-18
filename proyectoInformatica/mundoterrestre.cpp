@@ -153,13 +153,36 @@ void mundoTerrestre::ticksPersonaje()
             }
         }
      if(lunaActiva==true){
-         personajePrincipal->setStatus_gravitatorio(true);
+         //personajePrincipal->setStatus_gravitatorio(true);
      }
      else{
-         personajePrincipal->setStatus_gravitatorio(false);
+         //personajePrincipal->setStatus_gravitatorio(false);
      }
 
     personajePrincipal->eventHandler();
 
+    //Administracion de colisiones del personaje con los diferentes objetos
+    QList<QGraphicsItem *> elementosColisionables  = scene->items();
 
+    for(int i=0;i< elementosColisionables.size();i++){
+        // balas que colisionan con los enemigos
+
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
+            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
+                qDebug() <<"me alcanzo un enemigo" <<endl;
+            }
+        }
+
+        if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
+            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
+                qDebug() <<"me aplasto un asteroide" <<endl;
+            }
+        }
+
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
+            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
+                qDebug() <<"me alcanzo un saltador" <<endl;
+            }
+        }
+    }
 }

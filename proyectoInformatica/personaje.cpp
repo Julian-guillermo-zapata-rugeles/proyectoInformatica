@@ -9,6 +9,7 @@ personaje::personaje():movimientos(575){
     this->dir = true ;
     this->disparos_disponibles=5;
 
+
 }
 
 
@@ -94,5 +95,21 @@ void personaje::eventHandler()
                 break;
             }
     }
+}
+
+bool personaje::ifcollide()
+{
+    QList<QGraphicsItem *> elementosColisionables  = collidingItems();
+
+    for(int i=0;i< elementosColisionables.size();i++){
+        // balas que colisionan con los enemigos
+        if(elementosColisionables[i]->collidesWithItem(this)){
+            if(typeid (*(elementosColisionables[i]))==typeid (this)){
+                qDebug() <<"entro ..." <<endl;
+                return true;
+            }
+        }
+    }
+    return false;
 }
 

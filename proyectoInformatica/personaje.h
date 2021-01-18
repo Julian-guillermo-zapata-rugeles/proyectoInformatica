@@ -26,6 +26,7 @@ public:
     qreal getLastPosition();
     void eventHandler();
 
+    bool ifcollide();
 };
 
 #endif // PERSONAJE_H
