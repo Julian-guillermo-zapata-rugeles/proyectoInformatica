@@ -6,6 +6,7 @@ movimientos::movimientos(float limiteInferior_ )
     this->velocidadY= 60 * sin((90*3.1416)/180);
     this->tiempo=0;
     status_saltando=false;
+    status_gravitatorio=false;
 }
 
 bool movimientos::getStatus_saltando() const
@@ -17,6 +18,7 @@ void movimientos::setStatus_saltando(bool value)
 {
     status_saltando = value;
 }
+
 
 void movimientos::saltar()
 {

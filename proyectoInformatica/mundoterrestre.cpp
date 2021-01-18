@@ -135,14 +135,12 @@ void mundoTerrestre::ticksPersonaje()
 {
     // este evento handler verificará si el personaje debe saltar
     personajePrincipal->eventHandler();
-    /*
+
     QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;
     for(int i=0;i< elementosColisionables.size();i++){
         // balas que colisionan con los enemigos
-        if(typeid (*(elementosColisionables[i]))==typeid (bonus_municion)){
-                delete elementosColisionables[i];
-                break;
+        if(typeid (*(elementosColisionables[i]))==typeid (lunaCreciente)){
             }
     }
-    */
+
 }
