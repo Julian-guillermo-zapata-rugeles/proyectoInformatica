@@ -15,5 +15,7 @@
         <file>multimedia/sorpresaAsteroides.mp3</file>
         <file>multimedia/pixmap_asteroide_joven.png</file>
         <file>multimedia/lunaCreciente.png</file>
+        <file>multimedia/fondo1.jpg</file>
+        <file>multimedia/fondo3.jpg</file>
     </qresource>
 </RCC>

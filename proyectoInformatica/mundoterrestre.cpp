@@ -48,7 +48,7 @@ void mundoTerrestre::iniciarMundo()
     //
     // fondo de pantalla se puede mejorar
     // se deshabilitará temporalmente para visualización.
-    //vista->setStyleSheet("border-image: url(:/multimedia/fondo2.png)");
+    vista->setStyleSheet("border-image: url(:/multimedia/fondo3.jpg)");
     // IMAGEN DE FONDO DESHABILITADA.
 
     vista->show();
