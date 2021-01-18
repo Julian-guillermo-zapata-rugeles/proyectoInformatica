@@ -20,12 +20,14 @@ mundoTerrestre::mundoTerrestre()
     connect(generadorEnemigos,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(generadorEnemigosGigantes,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(generadorNubes,SIGNAL(timeout()),signalMapper,SLOT(map()));
+    connect(generadorDeLuna,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(ticks,SIGNAL(timeout()),this,SLOT(ticksPersonaje()));
 
     signalMapper->setMapping(generadorAsteroides,1);
     signalMapper->setMapping(generadorEnemigos,2);
     signalMapper->setMapping(generadorEnemigosGigantes,3);
     signalMapper->setMapping(generadorNubes,4);
+    signalMapper->setMapping(generadorDeLuna,5);
 
     connect(signalMapper,SIGNAL(mapped(int )),this,SLOT(generador(int)));
 
@@ -59,6 +61,7 @@ void mundoTerrestre::iniciarMundo()
     generadorEnemigos->start(6000);
     generadorNubes->start(8000);
     generadorEnemigosGigantes->start(10000);
+    generadorDeLuna->start(45000);
     ticks->start(30);
 
 
@@ -123,11 +126,23 @@ void mundoTerrestre::generador(int tipo)
     if(tipo==4){
         scene->addItem(new nubes());
     }
-
+    if(tipo==5){
+        scene->addItem(new lunaCreciente());
+    }
 }
 
 void mundoTerrestre::ticksPersonaje()
 {
     // este evento handler verificará si el personaje debe saltar
     personajePrincipal->eventHandler();
+    /*
+    QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;
+    for(int i=0;i< elementosColisionables.size();i++){
+        // balas que colisionan con los enemigos
+        if(typeid (*(elementosColisionables[i]))==typeid (bonus_municion)){
+                delete elementosColisionables[i];
+                break;
+            }
+    }
+    */
 }

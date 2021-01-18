@@ -3,7 +3,7 @@
 lunaCreciente::lunaCreciente()
 {
     this->setPixmap(QPixmap(":/multimedia/lunaCreciente.png"));
-    this->setPos(-100,0);
+    this->setPos(-100,-100);
     //this->setTransformOriginPoint(this->boundingRect().center());
     this->escalaLunar=0.1;
     this->setScale(escalaLunar);

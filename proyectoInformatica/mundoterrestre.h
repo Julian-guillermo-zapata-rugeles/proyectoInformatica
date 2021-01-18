@@ -43,6 +43,7 @@ public:
     QTimer *generadorEnemigos = new QTimer();
     QTimer *generadorEnemigosGigantes = new QTimer();
     QTimer *generadorNubes = new QTimer();
+    QTimer *generadorDeLuna = new QTimer();
 
 
 public slots:
