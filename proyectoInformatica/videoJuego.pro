@@ -20,6 +20,7 @@ SOURCES += \
     bonus_municion.cpp \
     enemigo.cpp \
     enemigoGigante.cpp \
+    lunacreciente.cpp \
     main.cpp \
     movimientos.cpp \
     mundoterrestre.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     bonus_municion.h \
     enemigo.h \
     enemigoGigante.h \
+    lunacreciente.h \
     movimientos.h \
     mundoterrestre.h \
     nubes.h \
