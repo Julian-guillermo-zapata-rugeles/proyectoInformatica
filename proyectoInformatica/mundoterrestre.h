@@ -46,7 +46,7 @@ public:
 
 public slots:
   void generador(int);
-  void ticksManager();
+  void ticksPersonaje();
 };
 
 #endif // MUNDOTERRESTRE_H

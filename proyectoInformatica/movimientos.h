@@ -1,6 +1,7 @@
 #ifndef MOVIMIENTOS_H
 #define MOVIMIENTOS_H
 #include <math.h>
+#include <QDebug>
 
 /*
 objetivo :
@@ -10,12 +11,18 @@ objetivo :
 */
 class movimientos
 {
-private:
+ protected:
     float velocidadY;
-    bool status_saltando;
     float limite_inferior;
+    float posY;
+    float tiempo;
+    bool status_saltando;
+
+    void saltar();
 public:
-    movimientos();
+    movimientos(float limiteInferior);
+    bool getStatus_saltando() const;
+    void setStatus_saltando(bool value);
 };
 
 #endif // MOVIMIENTOS_H

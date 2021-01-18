@@ -1,17 +1,19 @@
 #include "personaje.h"
 
 
-personaje::personaje(){
+personaje::personaje():movimientos(575){
     this->setRect(0,0,30,30);
     this->setFlag(QGraphicsItem::ItemIsFocusable);
     this->setFocus();
     this->setPos(30,560);
     this->dir = true ;
     this->disparos_disponibles=5;
+
 }
 
 
 //
+
 void personaje::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_A){
@@ -29,7 +31,7 @@ void personaje::keyPressEvent(QKeyEvent *event)
      }
 
     if(event->key() == Qt::Key_W){
-        setPos(x(),y()-10);
+        setStatus_saltando(true);
     }
     if(event->key() == Qt::Key_Space){
         // disparo desde el personaje
@@ -49,7 +51,6 @@ void personaje::keyPressEvent(QKeyEvent *event)
             sonido->play();
         }
     }
-    eventHandler();
 }
 
 qreal personaje::getLastPosition()
@@ -59,9 +60,14 @@ qreal personaje::getLastPosition()
 
 void personaje::eventHandler()
 {
+
+    saltar();
+    if(status_saltando==true){
+        this->setPos(pos().x(),posY);
+    }
+
     QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;
     for(int i=0;i< elementosColisionables.size();i++){
-
         // balas que colisionan con los enemigos
         if(typeid (*(elementosColisionables[i]))==typeid (bonus_municion)){
                 disparos_disponibles=disparos_disponibles+5;
@@ -71,3 +77,4 @@ void personaje::eventHandler()
             }
     }
 }
+

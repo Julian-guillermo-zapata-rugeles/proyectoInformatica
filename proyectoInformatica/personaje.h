@@ -11,8 +11,10 @@
 #include <QDebug>
 #include <proyectil.h>
 #include <bonus_municion.h>
+#include <movimientos.h>
 
-class personaje : public QGraphicsRectItem
+
+class personaje : public QGraphicsRectItem , public movimientos
 {
 private:
     QMediaPlayer *sonido = new QMediaPlayer();
@@ -23,6 +25,7 @@ public:
     void keyPressEvent(QKeyEvent *event);
     qreal getLastPosition();
     void eventHandler();
+
 };
 
 #endif // PERSONAJE_H

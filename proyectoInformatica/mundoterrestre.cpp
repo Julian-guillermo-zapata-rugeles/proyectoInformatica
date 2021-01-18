@@ -20,8 +20,7 @@ mundoTerrestre::mundoTerrestre()
     connect(generadorEnemigos,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(generadorEnemigosGigantes,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(generadorNubes,SIGNAL(timeout()),signalMapper,SLOT(map()));
-
-    connect(ticks,SIGNAL(timeout()),this,SLOT(ticksManager()));
+    connect(ticks,SIGNAL(timeout()),this,SLOT(ticksPersonaje()));
 
     signalMapper->setMapping(generadorAsteroides,1);
     signalMapper->setMapping(generadorEnemigos,2);
@@ -126,7 +125,8 @@ void mundoTerrestre::generador(int tipo)
 
 }
 
-void mundoTerrestre::ticksManager()
+void mundoTerrestre::ticksPersonaje()
 {
-    //
+    // este evento handler verificará si el personaje debe saltar
+    personajePrincipal->eventHandler();
 }
