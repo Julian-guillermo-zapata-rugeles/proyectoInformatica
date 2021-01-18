@@ -8,8 +8,9 @@
 #include <random>
 #include <bonus_municion.h>
 #include <QMediaPlayer>
+#include <movimientos.h>
 
-class enemigoGigante : public QObject , public QGraphicsRectItem
+class enemigoGigante : public QObject , public QGraphicsRectItem , public movimientos
 {
     Q_OBJECT
 private:
@@ -18,8 +19,9 @@ private:
     short int disparosSoportados;
     QMediaPlayer *sonido = new QMediaPlayer();
     bool dir;
+    bool saltando;
 public:
-    enemigoGigante(qreal lastPosition);
+    enemigoGigante(qreal lastPosition , bool saltando = false);
     ~enemigoGigante();
 
 private slots:

@@ -1,15 +1,19 @@
 #include "enemigoGigante.h"
 
-enemigoGigante::enemigoGigante(qreal lastPosition)
+enemigoGigante::enemigoGigante(qreal lastPosition , bool saltando_ ):movimientos(560)
 {
 
     srand(time(NULL));
     this->setRect(0,0,50,100);
     this->last_position=lastPosition;
     this->disparosSoportados=5;
+    this->intervaloSuma=0.1;
+    status_saltando=saltando_;
+    saltando=saltando_;
     sonido->stop();
     sonido->setMedia(QUrl("qrc:/multimedia/suspensoCreciente.mp3"));
     sonido->play();
+
 
     short int aleatorio = 1+rand() %10;
 
@@ -38,12 +42,24 @@ enemigoGigante::~enemigoGigante()
 
 void enemigoGigante::moverEnemigo()
 {
-
+    status_saltando=saltando;
+    saltar();
     if(dir==true){
-        setPos(pos().x()+5,pos().y());
+        if(status_saltando){
+            setPos(pos().x()+5,posY);
+        }
+        else{
+            setPos(pos().x()+5,pos().y());
+        }
+
     }
     else{
-        setPos(pos().x()-5,pos().y());
+        if(status_saltando){
+         setPos(pos().x()-5,posY);
+        }
+        else{
+         setPos(pos().x()-5,pos().y());
+        }
     }
     if(pos().x()>1400 || pos().x()<-400){
         delete this;

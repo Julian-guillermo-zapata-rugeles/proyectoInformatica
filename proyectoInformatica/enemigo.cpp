@@ -1,7 +1,7 @@
 #include "enemigo.h"
 #include "personaje.h"
 
-enemigo::enemigo(qreal lastPosition)
+enemigo::enemigo(qreal lastPosition):movimientos(560)
 {
     srand(time(NULL));
     qDebug() << "enemigo generado";
@@ -31,14 +31,13 @@ enemigo::~enemigo()
 void enemigo::moverEnemigo()
 {
     if(last_position  < pos().x()){
-        setPos(x()-1,y());
+        setPos(x()-1,pos().y());
     }
     else if(last_position > pos().x()){
-        setPos(x()+1,y());
+        setPos(x()+1,pos().y());
     }
     else{
         // acción del enemigo //
     }
-
 }
 

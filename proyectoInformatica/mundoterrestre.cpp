@@ -48,7 +48,7 @@ void mundoTerrestre::iniciarMundo()
     //
     // fondo de pantalla se puede mejorar
     // se deshabilitará temporalmente para visualización.
-    vista->setStyleSheet("border-image: url(:/multimedia/fondo3.jpg)");
+    //vista->setStyleSheet("border-image: url(:/multimedia/fondo3.jpg)");
     // IMAGEN DE FONDO DESHABILITADA.
 
     vista->show();
@@ -113,7 +113,17 @@ void mundoTerrestre::generador(int tipo)
 
     // ****************** GENERACION ENEMIGO GIGANTE ************************ //
     if(tipo==3){
-        scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition()));
+        if((1+rand()%10)%2==0){
+            // los enemigos gigantes tiene diferentes cualidades , una de ellas es saltar
+            // estos pueden desplazarse saltando por lo cual
+            // se generán de forma aleatorio
+            // si el numero al azar es par el enemigo saltará
+            scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition(),true));
+        }
+        else{
+            // de no ser par el enemigo no saltará
+            scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition(),false));
+        }
         // cada vez que se genere un enemigo gigante el timer
         // cambiará aleatoriamente para generar la sensación de situacione imprevista
         // y poco rutinarias

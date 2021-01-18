@@ -7,8 +7,9 @@
 #include <proyectil.h>
 #include <random>
 #include <QTimer>
+#include <movimientos.h>
 
-class enemigo : public QObject , public QGraphicsRectItem
+class enemigo : public QObject , public QGraphicsRectItem , public movimientos
 {
     Q_OBJECT
 private:

@@ -6,6 +6,7 @@ movimientos::movimientos(float limiteInferior_ )
     this->velocidadY= 60 * sin((90*3.1416)/180);
     this->tiempo=0;
     this->tmp_sumador=0;
+    this->intervaloSuma=0.3;
     status_saltando=false;
     status_gravitatorio=false;
 
@@ -32,11 +33,21 @@ void movimientos::setStatus_gravitatorio(bool value)
     status_gravitatorio = value;
 }
 
+float movimientos::getIntervaloSuma() const
+{
+    return intervaloSuma;
+}
+
+void movimientos::setIntervaloSuma(float value)
+{
+    intervaloSuma = value;
+}
+
 void movimientos::saltar()
 {
     if(status_saltando==true){
         posY=limite_inferior - float(0+velocidadY*tiempo+(0.5*(-9.8*tiempo*tiempo)));
-        tiempo=tiempo+0.3;
+        tiempo=tiempo+intervaloSuma;
         qDebug() << "y : "<<posY;
         if(posY>limite_inferior){
             status_saltando=false;
