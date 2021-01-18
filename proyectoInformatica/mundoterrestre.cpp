@@ -31,8 +31,6 @@ mundoTerrestre::mundoTerrestre()
 
     connect(signalMapper,SIGNAL(mapped(int )),this,SLOT(generador(int)));
 
-
-
 }
 
 void mundoTerrestre::iniciarMundo()
@@ -45,6 +43,29 @@ void mundoTerrestre::iniciarMundo()
     puntaje->setPos(1000,40);
     scene->addItem(puntaje);
 
+    short int n = 1+ rand() % 5;
+    switch (n) {
+    case 1:{
+        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 1.jpg)");
+        break;
+    }
+    case 2:{
+        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 2.jpg)");
+        break;
+    }
+    case 3:{
+        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 3.jpg)");
+        break;
+    }
+    case 4:{
+        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 2.jpg)");
+        break;
+    }
+    case 5:{
+        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 1.jpg)");
+        break;
+    }
+    }
     //
     // fondo de pantalla se puede mejorar
     // se deshabilitará temporalmente para visualización.
@@ -62,8 +83,6 @@ void mundoTerrestre::iniciarMundo()
     generadorEnemigosGigantes->start(10000);
     generadorDeLuna->start(60000);
     ticks->start(30);
-
-
 
 }
 
