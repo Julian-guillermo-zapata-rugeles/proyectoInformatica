@@ -42,6 +42,7 @@ void mundoTerrestre::iniciarMundo()
     //Puntaje
     puntaje->setPos(1000,40);
     scene->addItem(puntaje);
+    scene->addItem(new lunaCreciente());
 
     //
     // fondo de pantalla se puede mejorar

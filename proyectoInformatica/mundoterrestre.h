@@ -16,7 +16,8 @@
 #include <enemigo.h> // propia
 #include <enemigoGigante.h> // propia
 #include <nubes.h> // propia
-#include "score.h"
+#include "score.h" //propia
+#include "lunacreciente.h" // propia
 
 
 class mundoTerrestre : public QObject , public QGraphicsRectItem

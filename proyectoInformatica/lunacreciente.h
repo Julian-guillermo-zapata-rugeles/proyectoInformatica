@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <QTimer>
-#include <QGraphicsRectItem>
 #include <QGraphicsScene>
 
 class lunaCreciente : public QObject , public QGraphicsPixmapItem
@@ -13,7 +12,11 @@ class lunaCreciente : public QObject , public QGraphicsPixmapItem
 public:
     lunaCreciente();
 private:
+    qreal escalaLunar ;
     QTimer *timer = new QTimer();
+
+private slots:
+    void crecer();
 };
 
 #endif // LUNACRECIENTE_H
