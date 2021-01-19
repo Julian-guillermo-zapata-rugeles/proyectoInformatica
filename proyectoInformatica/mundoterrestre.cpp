@@ -212,7 +212,7 @@ void mundoTerrestre::ticksPersonaje()
     if(tiempoJuego->getTime() < 6){
         //Generamos un asteroide gigante para terminar el nivel
         short int n=1;
-        scene->addItem(new asteroides(n));
+        //scene->addItem(new asteroides(n));
         generadorAsteroides->stop();
         ticks->stop();
         generadorEnemigos->stop();
