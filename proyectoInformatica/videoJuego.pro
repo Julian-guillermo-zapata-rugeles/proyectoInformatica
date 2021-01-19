@@ -23,6 +23,7 @@ SOURCES += \
     loginwindow.cpp \
     lunacreciente.cpp \
     main.cpp \
+    menuinicio.cpp \
     movimientos.cpp \
     mundoterrestre.cpp \
     nubes.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     enemigoGigante.h \
     loginwindow.h \
     lunacreciente.h \
+    menuinicio.h \
     movimientos.h \
     mundoterrestre.h \
     nubes.h \
@@ -48,7 +50,8 @@ HEADERS += \
 
 FORMS += \
     loginwindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    menuinicio.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
