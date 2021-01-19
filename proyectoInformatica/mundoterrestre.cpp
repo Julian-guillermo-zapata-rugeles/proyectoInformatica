@@ -176,10 +176,10 @@ void mundoTerrestre::ticksPersonaje()
             }
         }
      if(lunaActiva==true){
-         //personajePrincipal->setStatus_gravitatorio(true);
+         personajePrincipal->setStatus_gravitatorio(true);
      }
      else{
-         //personajePrincipal->setStatus_gravitatorio(false);
+         personajePrincipal->setStatus_gravitatorio(false);
      }
 
     personajePrincipal->eventHandler();
