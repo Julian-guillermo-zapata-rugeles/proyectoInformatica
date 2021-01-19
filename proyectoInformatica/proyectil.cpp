@@ -20,10 +20,10 @@ proyectil::proyectil(bool dir)
 void proyectil::moverProyectil()
 {
     if(direccion){
-        setPos(x()+5,y());
+        setPos(x()+7,y());
     }
     else{
-        setPos(x()-5,y());
+        setPos(x()-7,y());
     }
     if(pos().x()>1300 + this->boundingRect().width() or pos().x() < 0 ){
         scene()->removeItem(this);

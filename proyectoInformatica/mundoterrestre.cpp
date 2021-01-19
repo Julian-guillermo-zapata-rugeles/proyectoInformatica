@@ -85,7 +85,7 @@ void mundoTerrestre::iniciarMundo()
     generadorEnemigos->start(6000);
     generadorNubes->start(8000);
     generadorEnemigosGigantes->start(10000);
-    generadorDeLuna->start(60000);
+    generadorDeLuna->start(35000);
     ticks->start(30);
 
 }
@@ -158,9 +158,12 @@ void mundoTerrestre::generador(int tipo)
     if(tipo==4){
         scene->addItem(new nubes());
     }
+
     if(tipo==5){
         scene->addItem(new lunaCreciente());
          personajePrincipal->setStatus_gravitatorio(true);
+         sonido->setMedia(QUrl("qrc:/multimedia/luna.mp3"));
+         sonido->play();
     }
 }
 

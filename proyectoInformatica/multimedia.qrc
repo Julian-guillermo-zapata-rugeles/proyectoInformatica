@@ -1,22 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>multimedia/suspenso1.mp3</file>
-        <file>multimedia/fondo2.png</file>
-        <file>multimedia/explosion1.mp3</file>
-        <file>multimedia/laser1.mp3</file>
-        <file>multimedia/sprite_asteroide.png</file>
-        <file>multimedia/pixmap_asteroide.png</file>
-        <file>multimedia/pixmap_disparo_sol.png</file>
-        <file>multimedia/pixmap_asteroide_rojo.png</file>
-        <file>multimedia/pixmap_nube_grade.png</file>
-        <file>multimedia/cargar_arma.mp3</file>
-        <file>multimedia/bonus_balas.png</file>
-        <file>multimedia/suspensoCreciente.mp3</file>
-        <file>multimedia/sorpresaAsteroides.mp3</file>
-        <file>multimedia/pixmap_asteroide_joven.png</file>
-        <file>multimedia/lunaCreciente.png</file>
-        <file>multimedia/fondo1.jpg</file>
-        <file>multimedia/fondo3.jpg</file>
         <file>multimedia/Backgrounds/BG alien 1.jpg</file>
         <file>multimedia/Backgrounds/BG alien 2.jpg</file>
         <file>multimedia/Backgrounds/BG alien 3.jpg</file>
@@ -30,7 +13,29 @@
         <file>multimedia/Backgrounds/BG space 3.jpg</file>
         <file>multimedia/Backgrounds/BG space 4.jpg</file>
         <file>multimedia/Backgrounds/BG space 5.jpg</file>
+        <file>multimedia/Sonidos/zombie_gruendo.mp3</file>
+        <file>multimedia/bonus_balas.png</file>
+        <file>multimedia/cargar_arma.mp3</file>
         <file>multimedia/Cosmic Blaster.ttf</file>
+        <file>multimedia/explosion1.mp3</file>
+        <file>multimedia/fondo.png</file>
+        <file>multimedia/fondo1.jpg</file>
+        <file>multimedia/fondo2.png</file>
+        <file>multimedia/fondo3.jpg</file>
+        <file>multimedia/laser1.mp3</file>
+        <file>multimedia/lunaCreciente.png</file>
+        <file>multimedia/pixmap_asteroide.png</file>
+        <file>multimedia/pixmap_asteroide_joven.png</file>
+        <file>multimedia/pixmap_asteroide_rojo.png</file>
+        <file>multimedia/pixmap_disparo_sol.png</file>
+        <file>multimedia/pixmap_nube_grade.png</file>
+        <file>multimedia/sorpresaAsteroides.mp3</file>
+        <file>multimedia/sprite_asteroide.png</file>
+        <file>multimedia/suspenso1.mp3</file>
+        <file>multimedia/suspensoCreciente.mp3</file>
         <file>multimedia/treasure-chest1.png</file>
+        <file>multimedia/zombie.mp3</file>
+        <file>multimedia/Sonidos/zombie-demon-spawn.mp3</file>
+        <file>multimedia/luna.mp3</file>
     </qresource>
 </RCC>

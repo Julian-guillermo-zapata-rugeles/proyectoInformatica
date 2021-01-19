@@ -65,7 +65,56 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    multimedia.qrc \
     multimedia.qrc
 
 DISTFILES += \
-    multimedia/treasure-chest1.png
+    multimedia/Backgrounds/BG alien 1.jpg \
+    multimedia/Backgrounds/BG alien 1.jpg \
+    multimedia/Backgrounds/BG alien 2.jpg \
+    multimedia/Backgrounds/BG alien 2.jpg \
+    multimedia/Backgrounds/BG alien 3.jpg \
+    multimedia/Backgrounds/BG alien 3.jpg \
+    multimedia/Backgrounds/BG alien 4.jpg \
+    multimedia/Backgrounds/BG alien 4.jpg \
+    multimedia/Backgrounds/BG alien 5.jpg \
+    multimedia/Backgrounds/BG alien 5.jpg \
+    multimedia/Backgrounds/BG apocalyptic 1.jpg \
+    multimedia/Backgrounds/BG apocalyptic 1.jpg \
+    multimedia/Backgrounds/BG apocalyptic 2.jpg \
+    multimedia/Backgrounds/BG apocalyptic 2.jpg \
+    multimedia/Backgrounds/BG apocalyptic 3.jpg \
+    multimedia/Backgrounds/BG apocalyptic 3.jpg \
+    multimedia/Backgrounds/BG space 1.jpg \
+    multimedia/Backgrounds/BG space 1.jpg \
+    multimedia/Backgrounds/BG space 2.jpg \
+    multimedia/Backgrounds/BG space 2.jpg \
+    multimedia/Backgrounds/BG space 3.jpg \
+    multimedia/Backgrounds/BG space 3.jpg \
+    multimedia/Backgrounds/BG space 4.jpg \
+    multimedia/Backgrounds/BG space 4.jpg \
+    multimedia/Backgrounds/BG space 5.jpg \
+    multimedia/Backgrounds/BG space 5.jpg \
+    multimedia/Cosmic Blaster.ttf \
+    multimedia/Cosmic Blaster.ttf \
+    multimedia/Sonidos/zombie_gruendo.mp3 \
+    multimedia/bonus_balas.png \
+    multimedia/cargar_arma.mp3 \
+    multimedia/explosion1.mp3 \
+    multimedia/fondo.png \
+    multimedia/fondo1.jpg \
+    multimedia/fondo2.png \
+    multimedia/fondo3.jpg \
+    multimedia/laser1.mp3 \
+    multimedia/lunaCreciente.png \
+    multimedia/pixmap_asteroide.png \
+    multimedia/pixmap_asteroide_joven.png \
+    multimedia/pixmap_asteroide_rojo.png \
+    multimedia/pixmap_disparo_sol.png \
+    multimedia/pixmap_nube_grade.png \
+    multimedia/sorpresaAsteroides.mp3 \
+    multimedia/sprite_asteroide.png \
+    multimedia/suspenso1.mp3 \
+    multimedia/suspensoCreciente.mp3 \
+    multimedia/treasure-chest1.png \
+    multimedia/zombie.mp3

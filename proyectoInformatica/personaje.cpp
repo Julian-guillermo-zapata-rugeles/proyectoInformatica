@@ -12,7 +12,7 @@ personaje::personaje():movimientos(575){
     this->setFocus();
     this->setPos(600,560);
     this->dir = true ;
-    this->disparos_disponibles=5;
+    this->disparos_disponibles=10;
 
 
 }
