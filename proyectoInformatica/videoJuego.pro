@@ -20,6 +20,7 @@ SOURCES += \
     bonus_municion.cpp \
     enemigo.cpp \
     enemigoGigante.cpp \
+    gameoverwindow.cpp \
     loginwindow.cpp \
     lunacreciente.cpp \
     main.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     bonus_municion.h \
     enemigo.h \
     enemigoGigante.h \
+    gameoverwindow.h \
     loginwindow.h \
     lunacreciente.h \
     menuinicio.h \
@@ -49,6 +51,7 @@ HEADERS += \
     timeGame.h
 
 FORMS += \
+    gameoverwindow.ui \
     loginwindow.ui \
     mainwindow.ui \
     menuinicio.ui
