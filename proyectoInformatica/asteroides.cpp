@@ -40,6 +40,19 @@ asteroides::asteroides(bool sound)
     timer->start(5);
 }
 
+asteroides::asteroides(short n)
+{
+    setPos(300,-1000);
+    this->setPixmap(QPixmap(":/multimedia/lunaCreciente.png"));
+    this->setTransformOriginPoint(this->boundingRect().center());
+    this->setScale(2);
+    rotationAngle = 0;
+    qDebug()<<"asteroide generado en "<<pos().x() << " " << pos().y() ;
+    timer = new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
+    timer->start(5);
+}
+
 
 void asteroides::moverAsteroide()
 {

@@ -26,6 +26,7 @@ private:
 
 public:
     asteroides(bool sound=true);
+    asteroides(short int n);
 
 private slots:
     void moverAsteroide();

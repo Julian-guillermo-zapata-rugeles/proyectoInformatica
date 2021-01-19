@@ -193,7 +193,6 @@ void mundoTerrestre::ticksPersonaje()
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
             if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
                 qDebug() <<"me alcanzo un enemigo" <<endl;
-                puntaje->increase();
             }
         }
 
@@ -208,5 +207,15 @@ void mundoTerrestre::ticksPersonaje()
                 qDebug() <<"me alcanzo un saltador" <<endl;
             }
         }
+    }
+
+    if(tiempoJuego->getTime() < 6){
+        //Generamos un asteroide gigante para terminar el nivel
+        short int n=1;
+        scene->addItem(new asteroides(n));
+        generadorAsteroides->stop();
+        ticks->stop();
+        generadorEnemigos->stop();
+        generadorEnemigosGigantes->stop();
     }
 }
