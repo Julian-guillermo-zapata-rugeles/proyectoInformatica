@@ -199,6 +199,9 @@ void mundoTerrestre::ticksPersonaje()
         if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
             if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
                 qDebug() <<"me aplasto un asteroide" <<endl;
+                //scene->removeItem(personajePrincipal);
+                //ticks->stop();
+                //delete personajePrincipal;
             }
         }
 

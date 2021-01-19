@@ -20,6 +20,7 @@ SOURCES += \
     bonus_municion.cpp \
     enemigo.cpp \
     enemigoGigante.cpp \
+    loginwindow.cpp \
     lunacreciente.cpp \
     main.cpp \
     movimientos.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     bonus_municion.h \
     enemigo.h \
     enemigoGigante.h \
+    loginwindow.h \
     lunacreciente.h \
     movimientos.h \
     mundoterrestre.h \
@@ -45,6 +47,7 @@ HEADERS += \
     timeGame.h
 
 FORMS += \
+    loginwindow.ui \
     mainwindow.ui
 
 # Default rules for deployment.
