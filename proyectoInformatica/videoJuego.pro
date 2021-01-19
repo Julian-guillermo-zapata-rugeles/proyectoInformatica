@@ -27,7 +27,8 @@ SOURCES += \
     nubes.cpp \
     personaje.cpp \
     proyectil.cpp \
-    score.cpp
+    score.cpp \
+    timeGame.cpp
 
 HEADERS += \
     asteroides.h \
@@ -40,7 +41,8 @@ HEADERS += \
     nubes.h \
     personaje.h \
     proyectil.h \
-    score.h
+    score.h \
+    timeGame.h
 
 FORMS += \
     mainwindow.ui

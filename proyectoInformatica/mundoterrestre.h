@@ -18,7 +18,7 @@
 #include <nubes.h> // propia
 #include "score.h" //propia
 #include "lunacreciente.h" // propia
-
+#include "timeGame.h"
 
 class mundoTerrestre : public QObject , public QGraphicsRectItem
 {
@@ -36,8 +36,10 @@ public:
     //Puntaje
     Score *puntaje = new Score;
 
-    // timers
+    //Tiempo de juego
+    timeGame *tiempoJuego = new timeGame;
 
+    // timers
     QTimer *ticks = new QTimer();
     QTimer *generadorAsteroides = new QTimer();
     QTimer *generadorEnemigos = new QTimer();

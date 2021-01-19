@@ -31,8 +31,6 @@ mundoTerrestre::mundoTerrestre()
 
     connect(signalMapper,SIGNAL(mapped(int )),this,SLOT(generador(int)));
 
-
-
 }
 
 void mundoTerrestre::iniciarMundo()
@@ -45,6 +43,33 @@ void mundoTerrestre::iniciarMundo()
     puntaje->setPos(1000,40);
     scene->addItem(puntaje);
 
+    //tiempo de juego
+    tiempoJuego->setPos(30,40);
+    scene->addItem(tiempoJuego);
+
+    short int n = 1+ rand() % 5;
+    switch (n) {
+    case 1:{
+        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 1.jpg)");
+        break;
+    }
+    case 2:{
+        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 2.jpg)");
+        break;
+    }
+    case 3:{
+        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 3.jpg)");
+        break;
+    }
+    case 4:{
+        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 2.jpg)");
+        break;
+    }
+    case 5:{
+        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 1.jpg)");
+        break;
+    }
+    }
     //
     // fondo de pantalla se puede mejorar
     // se deshabilitará temporalmente para visualización.
@@ -62,8 +87,6 @@ void mundoTerrestre::iniciarMundo()
     generadorEnemigosGigantes->start(10000);
     generadorDeLuna->start(60000);
     ticks->start(30);
-
-
 
 }
 
@@ -153,13 +176,46 @@ void mundoTerrestre::ticksPersonaje()
             }
         }
      if(lunaActiva==true){
-         personajePrincipal->setStatus_gravitatorio(true);
+         //personajePrincipal->setStatus_gravitatorio(true);
      }
      else{
-         personajePrincipal->setStatus_gravitatorio(false);
+         //personajePrincipal->setStatus_gravitatorio(false);
      }
 
     personajePrincipal->eventHandler();
 
+    //Administracion de colisiones del personaje con los diferentes objetos
+    QList<QGraphicsItem *> elementosColisionables  = scene->items();
 
+    for(int i=0;i< elementosColisionables.size();i++){
+        // balas que colisionan con los enemigos
+
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
+            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
+                qDebug() <<"me alcanzo un enemigo" <<endl;
+            }
+        }
+
+        if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
+            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
+                qDebug() <<"me aplasto un asteroide" <<endl;
+            }
+        }
+
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
+            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
+                qDebug() <<"me alcanzo un saltador" <<endl;
+            }
+        }
+    }
+
+    if(tiempoJuego->getTime() < 6){
+        //Generamos un asteroide gigante para terminar el nivel
+        short int n=1;
+        scene->addItem(new asteroides(n));
+        generadorAsteroides->stop();
+        ticks->stop();
+        generadorEnemigos->stop();
+        generadorEnemigosGigantes->stop();
+    }
 }
