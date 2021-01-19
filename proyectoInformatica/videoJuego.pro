@@ -21,6 +21,7 @@ SOURCES += \
     enemigo.cpp \
     enemigoGigante.cpp \
     gameoverwindow.cpp \
+    levelcompletewindow.cpp \
     loginwindow.cpp \
     lunacreciente.cpp \
     main.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     enemigo.h \
     enemigoGigante.h \
     gameoverwindow.h \
+    levelcompletewindow.h \
     loginwindow.h \
     lunacreciente.h \
     menuinicio.h \
@@ -52,6 +54,7 @@ HEADERS += \
 
 FORMS += \
     gameoverwindow.ui \
+    levelcompletewindow.ui \
     loginwindow.ui \
     mainwindow.ui \
     menuinicio.ui
@@ -63,3 +66,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     multimedia.qrc
+
+DISTFILES += \
+    multimedia/treasure-chest1.png

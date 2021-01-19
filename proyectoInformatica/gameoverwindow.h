@@ -1,19 +1,24 @@
 #ifndef GAMEOVERWINDOW_H
 #define GAMEOVERWINDOW_H
 
-#include <QWidget>
+#include <QDialog>
+#include <QProcess>
 
 namespace Ui {
 class GameOverWindow;
 }
 
-class GameOverWindow : public QWidget
+class GameOverWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit GameOverWindow(QWidget *parent = nullptr);
+    explicit GameOverWindow(QWidget *parent = 0);
     ~GameOverWindow();
+
+private slots:
+    void on_yes_clicked();
+    void on_No_clicked();
 
 private:
     Ui::GameOverWindow *ui;
