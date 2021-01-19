@@ -2,6 +2,7 @@
 
 timeGame::timeGame(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
+
     timeCount = 100;
 
     int id = QFontDatabase::addApplicationFont(":/multimedia/Cosmic Blaster.ttf");
