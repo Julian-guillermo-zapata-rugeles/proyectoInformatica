@@ -2,13 +2,19 @@
 
 mundoTerrestre::mundoTerrestre()
 {
+
+    level_complete=false;
+    level=1;
+    tiempo_asterides=12000;
+    tiempo_enemigos=6000;
+    tiempo_enemigos_gigantes=10000;
+    tiempo_nubes=8000;
+    tiempo_luna=30000;
+
     srand(time(NULL));
 
     // creacion y anexo de personajes  //
-    scene->addItem(personajePrincipal);
-
-
-    // connects MAPPERS
+      // connects MAPPERS
     // se usará mapper para conectar varios timers a una única función encargada
     // de la generación de "protagonistas" de la escena.
     // la idea es que al finalizar cada timer * del generador
@@ -35,6 +41,9 @@ mundoTerrestre::mundoTerrestre()
 
 void mundoTerrestre::iniciarMundo()
 {
+
+    scene->addItem(personajePrincipal);
+
     vista->setScene(scene);
     vista->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     vista->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -81,11 +90,11 @@ void mundoTerrestre::iniciarMundo()
     vista->setSceneRect(0,0,1300,600);
 
     // iniciador de timers
-    generadorAsteroides->start(12000);
-    generadorEnemigos->start(6000);
-    generadorNubes->start(8000);
-    generadorEnemigosGigantes->start(10000);
-    generadorDeLuna->start(35000);
+    generadorAsteroides->start(tiempo_asterides);
+    generadorEnemigos->start(tiempo_enemigos);
+    generadorNubes->start(tiempo_nubes);
+    generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
+    generadorDeLuna->start(tiempo_luna);
     ticks->start(30);
 
 }
@@ -161,7 +170,7 @@ void mundoTerrestre::generador(int tipo)
 
     if(tipo==5){
         scene->addItem(new lunaCreciente());
-         personajePrincipal->setStatus_gravitatorio(true);
+         //personajePrincipal->setStatus_gravitatorio(true);
          sonido->setMedia(QUrl("qrc:/multimedia/luna.mp3"));
          sonido->play();
     }
@@ -171,26 +180,16 @@ void mundoTerrestre::ticksPersonaje()
 {
     // este evento handler verificará si el personaje debe saltar
     bool lunaActiva = false;
-    QList<QGraphicsItem *> it = scene->items();
-    for(int i=0;i< it.size();i++){
-        // balas que colisionan con los enemigos
-        if(typeid (*(it[i]))==typeid (lunaCreciente)){
-            lunaActiva=true;
-            }
-        }
-     if(lunaActiva==true){
-         personajePrincipal->setStatus_gravitatorio(true);
-     }
-     else{
-         personajePrincipal->setStatus_gravitatorio(false);
-     }
-
     personajePrincipal->eventHandler();
 
     //Administracion de colisiones del personaje con los diferentes objetos
     QList<QGraphicsItem *> elementosColisionables  = scene->items();
-
     for(int i=0;i< elementosColisionables.size();i++){
+        /*
+        if(typeid (*(elementosColisionables[i]))==typeid (lunaCreciente)){
+            lunaActiva=true;
+        }
+        */
         // balas que colisionan con los enemigos
 
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
@@ -215,13 +214,40 @@ void mundoTerrestre::ticksPersonaje()
         }
     }
 
-    if(tiempoJuego->getTime() < 6){
-        //Generamos un asteroide gigante para terminar el nivel
-        short int n=1;
-        //scene->addItem(new asteroides(n));
+    if(tiempoJuego->getTime() < 10){
+        //ticks->stop();
         generadorAsteroides->stop();
-        ticks->stop();
         generadorEnemigos->stop();
         generadorEnemigosGigantes->stop();
+        generadorNubes->stop();
     }
+    if(tiempoJuego->getTime()==0){
+        this->actualizar_nivel();
+    }
+}
+
+void mundoTerrestre::actualizar_nivel()
+{
+    //sonido->
+    if(level_complete==false){
+        level_complete=true;
+        generadorAsteroides->start(12000);
+        generadorEnemigos->start(6000);
+        generadorNubes->start(8000);
+        generadorEnemigosGigantes->start(10000);
+        generadorDeLuna->start(30000);
+        ticks->start(30);
+    }
+    else{
+        tiempoJuego->setTimeCount(30);
+        ticks->start(30);
+        this->tiempo_asterides=this->tiempo_asterides-500;
+        this->tiempo_enemigos=this->tiempo_enemigos-500;
+        this->tiempo_nubes=this->tiempo_nubes=-100;
+        this->tiempo_enemigos_gigantes=tiempo_enemigos_gigantes-500;
+        qDebug()<<" acabado ";
+         this->iniciarMundo();
+    }
+    tiempoJuego->setLevelworld(tiempoJuego->getLevelworld()+1);
+    tiempoJuego->setTimeCount(tiempoJuego->getTime()+5);
 }

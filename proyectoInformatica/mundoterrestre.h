@@ -39,6 +39,16 @@ public:
     QGraphicsView * vista = new QGraphicsView(scene);
     QMediaPlayer *sonido = new QMediaPlayer();
 
+
+    // Niveles y configuración
+    bool level_complete;
+    short int level;
+    short int tiempo_asterides;
+    short int tiempo_enemigos;
+    short int tiempo_enemigos_gigantes;
+    short int tiempo_nubes;
+    short int tiempo_luna;
+
     /*
        zona de scores y de  QGraphicsText
        aquí estarán los objetos que mostrará información del personaje y sobre el estado de juego
@@ -63,6 +73,7 @@ public:
 public slots:
   void generador(int);
   void ticksPersonaje();
+  void actualizar_nivel();
 };
 
 #endif // MUNDOTERRESTRE_H

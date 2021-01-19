@@ -12,6 +12,8 @@ personaje::personaje():movimientos(575){
     this->setFocus();
     this->setPos(600,560);
     this->dir = true ;
+    this->status_saltando=true;
+    this->status_gravitatorio=false;
     this->disparos_disponibles=10;
 
 
@@ -123,7 +125,7 @@ void personaje::eventHandler()
     */
 
     saltar(); // método heredado de movimiento
-    gravitar(); // método heredado de movimiento
+    //gravitar(); // método heredado de movimiento
 
     // el movimiento parabolico se lleva a cabo con angulo de 90
     // se podrá implementar disparos en otros angulos variando el angulo y velocidad
@@ -132,11 +134,11 @@ void personaje::eventHandler()
     if(status_saltando==true){
         this->setPos(pos().x(),posY);
     }
+    /*
     if(status_gravitatorio==true || status_gravitatorio==false){
         this->setPos(pos().x(),posY);
     }
 
-    /*
     COLISIÓN CON LOS BONUS O BOX
     esta sección verifica si el personaje colisiona con el bonus
     de ser así añade nueva munición  y elimina de la escena y memoria el bonus
