@@ -13,6 +13,18 @@
 #include <enemigo.h>
 #include <enemigoGigante.h>
 #include <chrono>
+/*
+Objetivos :
+    Generar asteroides basado en multiples condiciones
+    -deben ser aleatorio en posición y pixmap (los pixmas actuales son temporales y deben ser modificados)
+        por otros que tengan más paleta de color con la escena.
+    -debe estar sobrecargado para el evento final (cuando el personaje se debe morir si o sí)
+        NOTA : fase experimental del final del juego , 1 nivel.
+            BUGS : se debe corregir la visualización y el punto de choque.
+                   Dimensiones , y aceleración o tiempo de caida además del pixmap.
+
+
+*/
 
 class asteroides :public QObject , public QGraphicsPixmapItem
 {
