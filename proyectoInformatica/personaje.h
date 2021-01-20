@@ -27,6 +27,7 @@ public:
     void eventHandler();
 
     bool ifcollide();
+    short getDisparos_disponibles() const;
 };
 
 #endif // PERSONAJE_H

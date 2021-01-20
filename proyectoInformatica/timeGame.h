@@ -19,9 +19,12 @@ public:
     void setLevelworld(short value);
     short getLevelworld() const;
 
+    void setDisparos(short value);
+
 private:
     short int timeCount;
     short int levelworld;
+    short int disparos;
 
     // QObject interface
 protected:

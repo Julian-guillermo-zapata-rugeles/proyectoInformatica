@@ -1,6 +1,11 @@
 #include "personaje.h"
 
 
+short personaje::getDisparos_disponibles() const
+{
+    return disparos_disponibles;
+}
+
 personaje::personaje():movimientos(575){
     /*
         método contructor

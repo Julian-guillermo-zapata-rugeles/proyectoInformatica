@@ -96,7 +96,7 @@ void mundoTerrestre::iniciarMundo()
     generadorNubes->start(tiempo_nubes);
     generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
     generadorDeLuna->start(tiempo_luna);
-    ticks->start(30);
+    ticks->start(20);
 
 }
 
@@ -182,6 +182,7 @@ void mundoTerrestre::ticksPersonaje()
     // este evento handler verificará si el personaje debe saltar
     //bool lunaActiva = false;
     personajePrincipal->eventHandler();
+    tiempoJuego->setDisparos(personajePrincipal->getDisparos_disponibles());
 
     //Administracion de colisiones del personaje con los diferentes objetos
     QList<QGraphicsItem *> elementosColisionables  = scene->items();
