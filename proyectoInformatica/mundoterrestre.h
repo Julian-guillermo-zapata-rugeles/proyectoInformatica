@@ -43,6 +43,7 @@ public:
     // Niveles y configuración
     bool level_complete;
     short int level;
+    short int level_time ;
     short int tiempo_asterides;
     short int tiempo_enemigos;
     short int tiempo_enemigos_gigantes;

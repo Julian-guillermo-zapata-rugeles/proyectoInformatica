@@ -5,13 +5,29 @@ mundoTerrestre::mundoTerrestre()
 
     level_complete=false;
     level=1;
+    level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
     tiempo_enemigos_gigantes=10000;
     tiempo_nubes=8000;
     tiempo_luna=30000;
 
+    //Puntaje
+    puntaje->setPos(1000,40);
+    scene->addItem(puntaje);
+
+    //tiempo de juego
+    tiempoJuego->setPos(30,40);
+    scene->addItem(tiempoJuego);
+
     srand(time(NULL));
+    scene->addItem(personajePrincipal);
+    vista->setScene(scene);
+    vista->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    vista->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    vista->show();
+    vista->setFixedSize(1300,600);
+    vista->setSceneRect(0,0,1300,600);
 
     // creacion y anexo de personajes  //
       // connects MAPPERS
@@ -42,19 +58,6 @@ mundoTerrestre::mundoTerrestre()
 void mundoTerrestre::iniciarMundo()
 {
 
-    scene->addItem(personajePrincipal);
-
-    vista->setScene(scene);
-    vista->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    vista->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-    //Puntaje
-    puntaje->setPos(1000,40);
-    scene->addItem(puntaje);
-
-    //tiempo de juego
-    tiempoJuego->setPos(30,40);
-    scene->addItem(tiempoJuego);
 
     short int n = 1+ rand() % 5;
     switch (n) {
@@ -85,9 +88,7 @@ void mundoTerrestre::iniciarMundo()
     //vista->setStyleSheet("border-image: url(:/multimedia/fondo3.jpg)");
     // IMAGEN DE FONDO DESHABILITADA.
 
-    vista->show();
-    vista->setFixedSize(1300,600);
-    vista->setSceneRect(0,0,1300,600);
+
 
     // iniciador de timers
     generadorAsteroides->start(tiempo_asterides);
@@ -179,7 +180,7 @@ void mundoTerrestre::generador(int tipo)
 void mundoTerrestre::ticksPersonaje()
 {
     // este evento handler verificará si el personaje debe saltar
-    bool lunaActiva = false;
+    //bool lunaActiva = false;
     personajePrincipal->eventHandler();
 
     //Administracion de colisiones del personaje con los diferentes objetos
@@ -226,8 +227,11 @@ void mundoTerrestre::ticksPersonaje()
     }
 }
 
+
 void mundoTerrestre::actualizar_nivel()
 {
+    qDebug() << "nivel " << level;
+
     //sonido->
     if(level_complete==false){
         level_complete=true;
@@ -236,18 +240,19 @@ void mundoTerrestre::actualizar_nivel()
         generadorNubes->start(8000);
         generadorEnemigosGigantes->start(10000);
         generadorDeLuna->start(30000);
-        ticks->start(30);
+        ticks->start(20);
     }
     else{
-        tiempoJuego->setTimeCount(30);
-        ticks->start(30);
-        this->tiempo_asterides=this->tiempo_asterides-500;
-        this->tiempo_enemigos=this->tiempo_enemigos-500;
-        this->tiempo_nubes=this->tiempo_nubes=-100;
+        generadorAsteroides->start(12000);
+        this->tiempo_enemigos= this->tiempo_enemigos-500;
         this->tiempo_enemigos_gigantes=tiempo_enemigos_gigantes-500;
-        qDebug()<<" acabado ";
-         this->iniciarMundo();
+        generadorEnemigos->start(tiempo_enemigos);
+        generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
+        qDebug()<<" nivel "<< level;
+        this->iniciarMundo();
+        tiempoJuego->setTimeCount(34);
+
     }
-    tiempoJuego->setLevelworld(tiempoJuego->getLevelworld()+1);
-    tiempoJuego->setTimeCount(tiempoJuego->getTime()+5);
+    tiempoJuego->setLevelworld(level);
+    level=level+1;
 }
