@@ -39,5 +39,6 @@
         <file>multimedia/luna.mp3</file>
         <file>multimedia/zombies/zombie_hacha.png</file>
         <file>multimedia/zombies/zombie_hachaGrande.png</file>
+        <file>multimedia/zombies/zombie_hachaGrande_izq.png</file>
     </qresource>
 </RCC>

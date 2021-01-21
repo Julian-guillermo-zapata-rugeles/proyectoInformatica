@@ -17,12 +17,17 @@ class enemigo : public QObject , public QGraphicsRectItem , public movimientos
 {
     Q_OBJECT
 private:
-     QTimer *timer;
-     qreal last_position;
-     QMediaPlayer *sonido = new QMediaPlayer();
-     QPixmap *pixmap_zombie;
-     short int alto , ancho , columnas;
-     void cambiarAnimacion();
+    bool direction; // true Derecha // false izquierda
+    qreal alto , ancho , columnas , last_position;
+    QTimer *timer;
+    QPixmap *pixmap_zombie;
+    QMediaPlayer *sonido = new QMediaPlayer();
+
+    // metodos privados
+
+    void cambiarAnimacion(); // encargado el movimiento del sprite // refresco
+    void asignarCaracteristicas(); // asignar aleatoriamente pixmap y posicion.
+
 public:
     enemigo(qreal lastPosition);
     ~enemigo();
