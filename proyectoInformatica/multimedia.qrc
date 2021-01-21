@@ -37,5 +37,7 @@
         <file>multimedia/zombie.mp3</file>
         <file>multimedia/Sonidos/zombie-demon-spawn.mp3</file>
         <file>multimedia/luna.mp3</file>
+        <file>multimedia/zombies/zombie_hacha.png</file>
+        <file>multimedia/zombies/zombie_hachaGrande.png</file>
     </qresource>
 </RCC>

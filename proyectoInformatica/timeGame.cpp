@@ -3,7 +3,7 @@
 timeGame::timeGame(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
 
-    timeCount = 10;
+    timeCount = 5;
     levelworld = 0 ;
     disparos=0;
 
