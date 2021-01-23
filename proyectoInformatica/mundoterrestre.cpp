@@ -120,14 +120,19 @@ void mundoTerrestre::generador(int tipo)
         if(sorpresa_asteroide%3==0){
             // al desatarse el evento se genera un sonido de alerta
             // para avisar del evento.
-            if(level%5!=0){
+            if(level%5!= 0){
                 sonido->stop();
                 sonido->setMedia(QUrl("qrc:/multimedia/sorpresaAsteroides.mp3"));
                 sonido->play();
-                for(short int a=0;a< 2+rand()%4;a++){
+                for(short int a=0;a< 2+rand()%1;a++){
                     scene->addItem(new asteroides(false));
+
                 }
             }
+            else{
+                qDebug()<<"evento omitido nivel %5";
+            }
+
             qDebug() << "-- evento sorpresa INICIADO -- ";
             // durante este ciclo generamos aleatoriamente  un numero
             // que representará la cantidad de asteroides que salndrán
@@ -180,6 +185,7 @@ void mundoTerrestre::generador(int tipo)
          //personajePrincipal->setStatus_gravitatorio(true);
          sonido->setMedia(QUrl("qrc:/multimedia/luna.mp3"));
          sonido->play();
+         generadorDeLuna->stop(); // luna desactivada one shoot
     }
 }
 
@@ -227,6 +233,9 @@ void mundoTerrestre::ticksPersonaje()
         generadorAsteroides->stop();
         generadorEnemigos->stop();
         generadorEnemigosGigantes->stop();
+        if(tiempoJuego->getTime()==6){
+            generadorDeLuna->start(100);
+        }
         //generadorNubes->stop();
     }
     if(tiempoJuego->getTime()==0){
@@ -248,14 +257,14 @@ void mundoTerrestre::actualizar_nivel()
         generadorEnemigos->start(6000);
         generadorNubes->start(8000);
         generadorEnemigosGigantes->start(10000);
-        generadorDeLuna->start(30000);
+        //generadorDeLuna->start(30000);
         //ticks->start(20);
     }
     else if(level%5==0){
 
         qDebug()<< "nivel asteroides asesinos";
         // este nivel es sobre asteroides , el personaje deberá aguantar la caida de estos
-        generadorNubes->start(8000);
+        //generadorNubes->start(8000);
         generadorAsteroides->start(1000);
         sonido->stop();
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/suspenso_asteroides2.mp3"));

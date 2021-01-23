@@ -5,11 +5,11 @@ void enemigoGigante::asignarCaracteristicas()
     sonido->stop();
     sonido->setMedia(QUrl("qrc:/multimedia/suspensoCreciente.mp3"));
     sonido->play();
-    this->saltando=false;
     short int aleatorio = 1+rand() %10;
     //aleatorio=0;
+
     if(aleatorio%2==0){
-        setPos(1300, 550-this->boundingRect().height());
+        setPos(1300,530);
         this->direction=false;
         this->columnas=0;
         this->alto=150;
@@ -18,7 +18,7 @@ void enemigoGigante::asignarCaracteristicas()
 
     }
     else{
-        setPos(-300 , 550 - this->boundingRect().height());
+        setPos(-300 ,530);
         this->direction=true;
         this->columnas=1700;
         this->alto=150;
@@ -26,7 +26,7 @@ void enemigoGigante::asignarCaracteristicas()
         pixmap_zombie = new QPixmap(":/multimedia/zombieGigante/corredorMiniIzquierda.png");
 
     }
-    this->setScale(0.8);
+    //this->setScale(0.8);
 }
 
 enemigoGigante::enemigoGigante(qreal lastPosition , bool saltando_ ):movimientos(560)
