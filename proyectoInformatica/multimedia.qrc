@@ -45,5 +45,7 @@
         <file>multimedia/zombies/zombie_hacha_izquierda.png</file>
         <file>multimedia/zombieGigante/corredorMini.png</file>
         <file>multimedia/zombieGigante/corredorMiniIzquierda.png</file>
+        <file>multimedia/Sonidos/suspenso_asteroides.mp3</file>
+        <file>multimedia/Sonidos/suspenso_asteroides2.mp3</file>
     </qresource>
 </RCC>

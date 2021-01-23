@@ -15,6 +15,7 @@ void asteroides::generarAspecto()
         this->setPixmap(QPixmap(":/multimedia/pixmap_asteroide_joven.png"));
     }
     // fin del condicionamiento
+    this->setScale(0.5);
 }
 
 asteroides::asteroides(bool sound)
@@ -25,7 +26,7 @@ asteroides::asteroides(bool sound)
     generarAspecto();
     this->setTransformOriginPoint(this->boundingRect().center());
     //setScale();
-    setPos(1+rand()%1200,-2000 + ((1+rand()%500)*-1));
+    setPos(1+rand()%1200,-1800 + ((1+rand()%500)*-1));
     // reproducir sonido siempre y cuando se indique
 
     if(sound){

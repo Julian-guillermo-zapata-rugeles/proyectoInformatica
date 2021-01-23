@@ -4,7 +4,7 @@ mundoTerrestre::mundoTerrestre()
 {
 
     level_complete=false;
-    level=1;
+    level=0;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -91,11 +91,11 @@ void mundoTerrestre::iniciarMundo()
 
 
     // iniciador de timers
-    generadorAsteroides->start(tiempo_asterides);
-    generadorEnemigos->start(tiempo_enemigos);
-    generadorNubes->start(tiempo_nubes);
-    generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
-    generadorDeLuna->start(tiempo_luna);
+    //generadorAsteroides->start(tiempo_asterides);
+    //generadorEnemigos->start(tiempo_enemigos);
+    //generadorNubes->start(tiempo_nubes);
+    //generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
+    //generadorDeLuna->start(tiempo_luna);
     ticks->start(20);
 
 }
@@ -120,21 +120,27 @@ void mundoTerrestre::generador(int tipo)
         if(sorpresa_asteroide%3==0){
             // al desatarse el evento se genera un sonido de alerta
             // para avisar del evento.
-            sonido->stop();
-            sonido->setMedia(QUrl("qrc:/multimedia/sorpresaAsteroides.mp3"));
-            sonido->play();
-
+            if(level%5!=0){
+                sonido->stop();
+                sonido->setMedia(QUrl("qrc:/multimedia/sorpresaAsteroides.mp3"));
+                sonido->play();
+                for(short int a=0;a< 2+rand()%4;a++){
+                    scene->addItem(new asteroides(false));
+                }
+            }
             qDebug() << "-- evento sorpresa INICIADO -- ";
             // durante este ciclo generamos aleatoriamente  un numero
             // que representará la cantidad de asteroides que salndrán
-            for(short int a=0;a< 2+rand()%4;a++){
-                scene->addItem(new asteroides(false));
-            }
         }
         else{
             // en caso de ser un numero que no corresponde al %3
             // se generará un asteroide común.
-            scene->addItem(new asteroides());
+            if(level%5==0){
+                scene->addItem(new asteroides(false));
+            }
+            else{
+                scene->addItem(new asteroides());
+            }
         }
     }
 
@@ -216,12 +222,12 @@ void mundoTerrestre::ticksPersonaje()
         }
     }
 
-    if(tiempoJuego->getTime() < 10){
+    if(tiempoJuego->getTime() < 12){
         //ticks->stop();
         generadorAsteroides->stop();
         generadorEnemigos->stop();
         generadorEnemigosGigantes->stop();
-        generadorNubes->stop();
+        //generadorNubes->stop();
     }
     if(tiempoJuego->getTime()==0){
         this->actualizar_nivel();
@@ -229,19 +235,33 @@ void mundoTerrestre::ticksPersonaje()
 }
 
 
+
+
 void mundoTerrestre::actualizar_nivel()
 {
+    level=level+1;
     qDebug() << "nivel " << level;
-
     //sonido->
-    if(level_complete==false){
+    if(level==1){
         level_complete=true;
-        generadorAsteroides->start(12000);
+        generadorAsteroides->start(8000);
         generadorEnemigos->start(6000);
         generadorNubes->start(8000);
         generadorEnemigosGigantes->start(10000);
         generadorDeLuna->start(30000);
-        ticks->start(20);
+        //ticks->start(20);
+    }
+    else if(level%5==0){
+
+        qDebug()<< "nivel asteroides asesinos";
+        // este nivel es sobre asteroides , el personaje deberá aguantar la caida de estos
+        generadorNubes->start(8000);
+        generadorAsteroides->start(1000);
+        sonido->stop();
+        sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/suspenso_asteroides2.mp3"));
+        this->iniciarMundo();
+        tiempoJuego->setTimeCount(35);
+        sonido->play();
     }
     else{
         generadorAsteroides->start(12000);
@@ -251,9 +271,8 @@ void mundoTerrestre::actualizar_nivel()
         generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
         qDebug()<<" nivel "<< level;
         this->iniciarMundo();
-        tiempoJuego->setTimeCount(34);
+        tiempoJuego->setTimeCount(35);
 
     }
     tiempoJuego->setLevelworld(level);
-    level=level+1;
 }
