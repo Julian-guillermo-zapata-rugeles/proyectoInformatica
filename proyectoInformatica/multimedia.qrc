@@ -40,5 +40,10 @@
         <file>multimedia/zombies/zombie_hacha.png</file>
         <file>multimedia/zombies/zombie_hachaGrande.png</file>
         <file>multimedia/zombies/zombie_hachaGrande_izq.png</file>
+        <file>multimedia/zombieGigante/zombie250x250.png</file>
+        <file>multimedia/zombieGigante/zombie250x250Gigante.png</file>
+        <file>multimedia/zombies/zombie_hacha_izquierda.png</file>
+        <file>multimedia/zombieGigante/corredorMini.png</file>
+        <file>multimedia/zombieGigante/corredorMiniIzquierda.png</file>
     </qresource>
 </RCC>

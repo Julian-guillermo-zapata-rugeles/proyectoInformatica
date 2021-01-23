@@ -9,20 +9,28 @@
 #include <bonus_municion.h>
 #include <QMediaPlayer>
 #include <movimientos.h>
+#include <QPixmap>
+#include <QPainter>
+#include <QGraphicsItem>
 
 class enemigoGigante : public QObject , public QGraphicsRectItem , public movimientos
 {
     Q_OBJECT
 private:
     QTimer *timer = new QTimer();
-    qreal last_position;
-    short int disparosSoportados;
     QMediaPlayer *sonido = new QMediaPlayer();
-    bool dir;
-    bool saltando;
+    qreal last_position , alto , ancho , columnas ;
+    short int disparosSoportados;
+    bool direction , saltando ;
+    QPixmap *pixmap_zombie;
+
+    void cambiarAnimacion(); // encargado el movimiento del sprite // refresco
+    void asignarCaracteristicas(); // asignar aleatoriamente pixmap y posicion.
 public:
     enemigoGigante(qreal lastPosition , bool saltando = false);
     ~enemigoGigante();
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
 
 private slots:
     void moverEnemigo();

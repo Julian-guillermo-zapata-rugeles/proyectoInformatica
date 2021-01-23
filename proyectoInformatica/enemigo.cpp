@@ -5,9 +5,13 @@
 enemigo::enemigo(qreal lastPosition):movimientos(560)
 {
     // constructor
-    this->setRect(0,0,30,50); // establecer dimensiones del personaje 30 x 50
+
+    this->setRect(0,0,30,50);
+    this->setTransformOriginPoint(this->boundingRect().center());
+    // establecer dimensiones del personaje 30 x 50
     qDebug() << "Generacion : Enemigo común ";
     srand(time(NULL));
+    this->setScale(0.7);
 
     // inicialización de atributos
     this->last_position=lastPosition;
@@ -94,15 +98,15 @@ void enemigo::cambiarAnimacion()
     */
 
     if(direction==false){
-        columnas=columnas+145.8;
-        if (columnas>=2185){
+        columnas=columnas+ancho;
+        if (columnas>=1458){
             columnas=0;
         }
     }
     if(direction==true){
-        columnas=columnas-145.8;
+        columnas=columnas-ancho;
         if (columnas<=5){
-            columnas=2185-ancho;
+            columnas=1458-ancho;
         }
     }
      this->update(-ancho/2,-alto/2,ancho,alto);
@@ -125,13 +129,13 @@ void enemigo::asignarCaracteristicas()
     if(aleatorio%2==0){
         //  zombie candidato #1
 
-        this->ancho=145.8;
-        this->alto=150;
+        this->ancho=97.2;
+        this->alto=100;
         this->columnas=0;
         this->direction=false; // el zombie irá hacia la izquierda
 
         setPos(1300,590 - this->rect().height());
-        pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hachaGrande.png");
+        pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha.png");
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/zombie_gruendo.mp3"));
         sonido->play();
 
@@ -139,13 +143,13 @@ void enemigo::asignarCaracteristicas()
 
     else{
         // zombie candidato #2
-        this->ancho=145.8;
-        this->alto=150;
-        this->columnas=2185;
+        this->ancho=97.2;
+        this->alto=100;
+        this->columnas=1458;
         this->direction=true; // el zombie irá hacia la derecha
 
         setPos(-30 , 590 -this->rect().height());
-        pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hachaGrande_izq.png");
+        pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha_izquierda.png");
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/zombie-demon-spawn.mp3"));
         sonido->play();
     }
