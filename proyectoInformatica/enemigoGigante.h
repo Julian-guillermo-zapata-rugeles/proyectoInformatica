@@ -13,7 +13,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 
-class enemigoGigante : public QObject , public QGraphicsRectItem , public movimientos
+class enemigoGigante : public QObject , public QGraphicsRectItem
 {
     Q_OBJECT
 private:
@@ -27,7 +27,7 @@ private:
     void cambiarAnimacion(); // encargado el movimiento del sprite // refresco
     void asignarCaracteristicas(); // asignar aleatoriamente pixmap y posicion.
 public:
-    enemigoGigante(qreal lastPosition , bool saltando = false);
+    enemigoGigante(qreal lastPosition );
     ~enemigoGigante();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );

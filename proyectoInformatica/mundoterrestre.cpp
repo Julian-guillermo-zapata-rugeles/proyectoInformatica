@@ -52,13 +52,12 @@ mundoTerrestre::mundoTerrestre()
     signalMapper->setMapping(generadorDeLuna,5);
 
     connect(signalMapper,SIGNAL(mapped(int )),this,SLOT(generador(int)));
+    sonido->setVolume(50);
 
 }
 
 void mundoTerrestre::iniciarMundo()
 {
-
-
     short int n = 1+ rand() % 5;
     switch (n) {
     case 1:{
@@ -162,11 +161,11 @@ void mundoTerrestre::generador(int tipo)
             // estos pueden desplazarse saltando por lo cual
             // se generán de forma aleatorio
             // si el numero al azar es par el enemigo saltará
-            scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition(),true));
+            scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition()));
         }
         else{
             // de no ser par el enemigo no saltará
-            scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition(),false));
+            scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition()));
         }
         // cada vez que se genere un enemigo gigante el timer
         // cambiará aleatoriamente para generar la sensación de situacione imprevista
