@@ -25,7 +25,7 @@ enemigo::enemigo(qreal lastPosition):movimientos(560)
     // se asignará a travez de argumentos variaciones para este objeto
     // pasados por valor
     asignarCaracteristicas();
-
+    sonido->setVolume(30);
 }
 
 
@@ -51,6 +51,8 @@ QRectF enemigo::boundingRect() const
 void enemigo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawPixmap(-ancho/2,-alto/2,*pixmap_zombie,columnas,0,ancho,alto);
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
 }
 
 

@@ -29,19 +29,18 @@ void enemigoGigante::asignarCaracteristicas()
     //this->setScale(0.8);
 }
 
-enemigoGigante::enemigoGigante(qreal lastPosition , bool saltando_ ):movimientos(560)
+enemigoGigante::enemigoGigante(qreal lastPosition)
 {
 
     srand(time(NULL));
     this->setRect(0,0,50,50);
     this->last_position=lastPosition;
     this->disparosSoportados=5;
-    this->intervaloSuma=0.1; 
-    status_saltando=saltando_;
 
     timer->start(20);
     connect(timer,SIGNAL(timeout()),this,SLOT(moverEnemigo()));
     asignarCaracteristicas();
+    sonido->setVolume(30);
 }
 
 enemigoGigante::~enemigoGigante()
@@ -57,27 +56,11 @@ enemigoGigante::~enemigoGigante()
 
 void enemigoGigante::moverEnemigo()
 {
-    status_saltando=saltando;
-    saltar();
-    if(direction==true){
-        if(status_saltando){
-            setPos(pos().x()+10,posY);
-        }
-        else{
-            setPos(pos().x()+10,pos().y());
-        }
-
+    if(direction == false){
+        setPos(pos().x()-5,pos().y());
     }
-    else{
-        if(status_saltando){
-         setPos(pos().x()-10,posY);
-        }
-        else{
-         setPos(pos().x()-10,pos().y());
-        }
-    }
-    if(pos().x()>1400 || pos().x()<-400){
-        delete this;
+    else {
+        setPos(pos().x()+5,pos().y());
     }
     cambiarAnimacion();
 }
@@ -92,6 +75,8 @@ QRectF enemigoGigante::boundingRect() const
 void enemigoGigante::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawPixmap(-ancho/2,-alto/2,*pixmap_zombie,columnas,0,ancho,alto);
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
 }
 
 

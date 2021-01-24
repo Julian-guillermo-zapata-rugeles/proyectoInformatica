@@ -39,6 +39,7 @@ asteroides::asteroides(bool sound)
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
     timer->start(5);
+    sonido->setVolume(30);
 }
 
 asteroides::asteroides(short n)
@@ -52,6 +53,7 @@ asteroides::asteroides(short n)
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
     timer->start(5);
+    sonido->setVolume(30);
 }
 
 

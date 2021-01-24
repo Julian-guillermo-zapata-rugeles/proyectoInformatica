@@ -21,6 +21,7 @@ personaje::personaje():movimientos(575){
     this->status_gravitatorio=false;
     this->disparos_disponibles=10;
 
+    sonido->setVolume(30);
 
 }
 
