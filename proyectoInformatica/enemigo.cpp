@@ -29,6 +29,7 @@ enemigo::enemigo(qreal lastPosition):movimientos(560)
 
 }
 
+//Constructor encargado de Generar enemigos tipo Ave
 enemigo::enemigo(bool flat):movimientos(560)
 {
     this->ancho = 100;
@@ -39,6 +40,10 @@ enemigo::enemigo(bool flat):movimientos(560)
     timer->start(20);
     connect(timer,SIGNAL(timeout()),this,SLOT(moverAves()));
     this->setRect(0,0,30,30);
+
+    velocidad = 50 + rand() % 100;
+    amplitud =  5 + rand() % 10;
+    birdAppearance();
 }
 
 
@@ -102,7 +107,13 @@ void enemigo::moverAves()
 {
     float dt = 0.02;
     tmp_sumador = tmp_sumador + dt;
-    setPos(x()-80*dt, y()+10*sin(2*3.1415*tmp_sumador/2));
+
+    if(direction == false){
+        setPos(x()-velocidad*dt, y() + amplitud*sin(2*3.1415*tmp_sumador/2));
+    }
+    else{
+        setPos(x()+velocidad*dt, y() + amplitud*sin(2*3.1415*tmp_sumador/2));
+    }
 
     if(pos().x() < -200 || pos().x() > 1400){
         delete this;
@@ -135,8 +146,6 @@ void enemigo::cambiarAnimacion()
      this->update(-ancho/2,-alto/2,ancho,alto);
 
 }
-
-
 
 
 void enemigo::asignarCaracteristicas()
@@ -175,6 +184,19 @@ void enemigo::asignarCaracteristicas()
         pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha_izquierda.png");
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/zombie-demon-spawn.mp3"));
         sonido->play();
+    }
+}
+
+void enemigo::birdAppearance()
+{
+    short int modo = 1+rand() % 2;
+    if(modo == 1){
+        direction = false;
+        setPos(1400,100 - this->rect().height());
+    }
+    else{
+        direction = true;
+        setPos(-100,100 - this->rect().height());
     }
 }
 

@@ -4,7 +4,7 @@ mundoTerrestre::mundoTerrestre()
 {
 
     level_complete=false;
-    level=0;
+    level=3;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -98,8 +98,6 @@ void mundoTerrestre::iniciarMundo()
     //generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
     //generadorDeLuna->start(tiempo_luna);
     ticks->start(20);
-
-    scene->addItem(aveEnemiga);
 }
 
 void mundoTerrestre::createShips()
@@ -227,7 +225,12 @@ void mundoTerrestre::generador(int tipo)
     // ****************** GENERACION ENEMIGO COMÚN ************************ //
 
     if(tipo==2){
-        scene->addItem(new enemigo(personajePrincipal->getLastPosition()));
+        if(level%4 == 0){
+            scene->addItem(new enemigo(true));
+        }
+        else{
+           scene->addItem(new enemigo(personajePrincipal->getLastPosition()));
+        }
     }
 
     // ****************** GENERACION ENEMIGO GIGANTE ************************ //
@@ -303,7 +306,7 @@ void mundoTerrestre::ticksPersonaje()
         }
 
         if(typeid (*(elementosColisionables[i]))==typeid (Planeta)){
-            qDebug() <<" Si existe una nave en el mundo " <<endl;
+            //qDebug() <<" Si existe una nave en el mundo " <<endl;
             if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
                 qDebug() <<"me impacto una nave" <<endl;
             }
@@ -344,6 +347,13 @@ void mundoTerrestre::actualizar_nivel()
     else if(level%3 == 0){
         createShips();
         tiempoJuego->setTimeCount(30);
+        this->iniciarMundo();
+    }
+
+    else if(level%4 == 0){
+        generadorEnemigos->start(2000);
+        tiempoJuego->setTimeCount(60);
+        generadorNubes->start(8000);
         this->iniciarMundo();
     }
 
