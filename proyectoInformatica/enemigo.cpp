@@ -26,6 +26,19 @@ enemigo::enemigo(qreal lastPosition):movimientos(560)
     // pasados por valor
     asignarCaracteristicas();
     sonido->setVolume(30);
+
+}
+
+enemigo::enemigo(bool flat):movimientos(560)
+{
+    this->ancho = 100;
+    this->alto = 100;
+    pixmap_zombie = new QPixmap(":/multimedia/pixmap_asteroide.png");
+    setPos(1300,230 - this->rect().height());
+    timer = new QTimer();
+    timer->start(20);
+    connect(timer,SIGNAL(timeout()),this,SLOT(moverAves()));
+    this->setRect(0,0,30,30);
 }
 
 
@@ -54,7 +67,6 @@ void enemigo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }
-
 
 
 void enemigo::moverEnemigo()
@@ -86,8 +98,12 @@ void enemigo::moverEnemigo()
     cambiarAnimacion(); // FIJA
 }
 
-
-
+void enemigo::moverAves()
+{
+    float dt = 0.02;
+    tmp_sumador = tmp_sumador + dt;
+    setPos(x()-80*dt, y()+10*sin(2*3.1415*tmp_sumador/2));
+}
 
 void enemigo::cambiarAnimacion()
 {

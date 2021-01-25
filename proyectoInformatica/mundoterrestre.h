@@ -19,6 +19,10 @@
 #include "score.h" //propia
 #include "lunacreciente.h" // propia
 #include "timeGame.h"
+#include "planeta.h"
+#include "ship.h"
+
+#define dt 1
 
 class mundoTerrestre : public QObject , public QGraphicsRectItem
 {
@@ -32,6 +36,14 @@ public:
     mundoTerrestre();
     void iniciarMundo();
 
+    //metodos para la naves
+    void createShips();
+    float calculoEscala();
+    QList<float> calculoCentroMasas(QList<Planeta*> planetas);
+    void calculoAceleracion();                                  //calcula la aceleracion de cada cuerpo
+    void inception();
+
+
 
  private:
     QGraphicsScene * scene  = new QGraphicsScene();
@@ -39,6 +51,14 @@ public:
     QGraphicsView * vista = new QGraphicsView(scene);
     QMediaPlayer *sonido = new QMediaPlayer();
 
+    //Naves
+    float s; //escala
+    Planeta *planet;
+    QList<Planeta *> sistema;
+    QList<float> origen;
+
+    //Aves enemigas
+    enemigo *aveEnemiga = new enemigo(true);
 
     // Niveles y configuración
     bool level_complete;
@@ -70,11 +90,16 @@ public:
     QTimer *generadorNubes = new QTimer();
     QTimer *generadorDeLuna = new QTimer();
 
+    //Naves
+    QTimer *generadorNaves = new QTimer();
 
 public slots:
   void generador(int);
   void ticksPersonaje();
   void actualizar_nivel();
+
+  //actualizar las naves
+  void actualizar();
 };
 
 #endif // MUNDOTERRESTRE_H

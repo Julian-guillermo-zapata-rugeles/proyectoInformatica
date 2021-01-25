@@ -30,8 +30,10 @@ SOURCES += \
     mundoterrestre.cpp \
     nubes.cpp \
     personaje.cpp \
+    planeta.cpp \
     proyectil.cpp \
     score.cpp \
+    ship.cpp \
     timeGame.cpp
 
 HEADERS += \
@@ -48,8 +50,10 @@ HEADERS += \
     mundoterrestre.h \
     nubes.h \
     personaje.h \
+    planeta.h \
     proyectil.h \
     score.h \
+    ship.h \
     timeGame.h
 
 FORMS += \
