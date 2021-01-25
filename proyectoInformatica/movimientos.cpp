@@ -9,7 +9,6 @@ movimientos::movimientos(float limiteInferior_ )
     this->intervaloSuma=0.3;
     status_saltando=false;
     status_gravitatorio=false;
-
 }
 
 bool movimientos::getStatus_saltando() const
@@ -42,6 +41,7 @@ void movimientos::setIntervaloSuma(float value)
 {
     intervaloSuma = value;
 }
+
 
 void movimientos::saltar()
 {

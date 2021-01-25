@@ -31,6 +31,7 @@ public:
     void setStatus_gravitatorio(bool value);
     float getIntervaloSuma() const;
     void setIntervaloSuma(float value);
+
 };
 
 #endif // MOVIMIENTOS_H

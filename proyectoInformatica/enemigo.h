@@ -30,11 +30,16 @@ private:
 
 public:
     enemigo(qreal lastPosition);
+    enemigo(bool flat);
+
     ~enemigo();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
+
+
 private slots:
     void moverEnemigo();
+    void moverAves();
 
 
 };

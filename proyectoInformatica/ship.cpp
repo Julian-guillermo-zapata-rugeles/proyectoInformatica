@@ -7,7 +7,8 @@ Ship::Ship(float x,
            float vx,
            float vy,
            float ax,
-           float ay)
+           float ay,
+           bool centro)
     : x(x),
       y(y),
       masa(masa),
@@ -15,12 +16,13 @@ Ship::Ship(float x,
       vx(vx),
       vy(vy),
       ax(ax),
-      ay(ay)
+      ay(ay),
+      centro(centro)
 {
 
 }
 
-void Ship::asignarCuerpo(float x, float y, float Masa, float radio, float vx, float vy, float ax, float ay)
+void Ship::asignarCuerpo(float x, float y, float Masa, float radio, float vx, float vy, float ax, float ay, bool centro)
 {
     this->x = x;
     this->y = y;
@@ -30,6 +32,7 @@ void Ship::asignarCuerpo(float x, float y, float Masa, float radio, float vx, fl
     this->vy = vy;
     this->ax = ax;
     this->ay = ay;
+    this->centro = centro;
 }
 
 float Ship::getX() const
@@ -130,4 +133,25 @@ void Ship::asignarPosicion(float px, float py)
 {
     x += px;
     y += py;
+}
+
+void Ship::asignarMov()
+{
+    x += 0.2;
+    y += 0.2;
+}
+
+bool Ship::getCentro() const
+{
+    return centro;
+}
+
+void Ship::setX(float value)
+{
+    x = value;
+}
+
+void Ship::setY(float value)
+{
+    y = value;
 }

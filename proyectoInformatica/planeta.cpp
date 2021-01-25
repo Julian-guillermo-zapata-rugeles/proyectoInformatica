@@ -1,8 +1,8 @@
 #include "planeta.h"
 
-Planeta::Planeta(float posX, float posY, float masa, float radio, float velX, float velY, float AcX, float AcY)
+Planeta::Planeta(float posX, float posY, float masa, float radio, float velX, float velY, float AcX, float AcY, bool v)
 {
-    planeta = new Ship(posX, posY, masa, radio, velX, velY, AcX, AcY);
+    planeta = new Ship(posX, posY, masa, radio, velX, velY, AcX, AcY, v);
 }
 
 Planeta::~Planeta()
@@ -17,9 +17,14 @@ void Planeta::asignarEscala(float s)
 
 void Planeta::actualizar(float dt)
 {
-    planeta->calcularPosicion(dt);
-    planeta->asignarAceleracion();
-    setPos(planeta->getX()*escala, v_lim - planeta->getY() * escala);
+    if(planeta->getCentro() == true){
+        planeta->asignarMov();
+    }
+    else {
+        planeta->calcularPosicion(dt);
+        planeta->asignarAceleracion();
+        setPos(planeta->getX()*escala, v_lim - planeta->getY() * escala);
+    }
 }
 
 Ship *Planeta::obtenerCuerpo()
@@ -34,7 +39,7 @@ QRectF Planeta::boundingRect() const
 
 void Planeta::paint(QPainter *pintar, const QStyleOptionGraphicsItem *opcion, QWidget *widget)
 {
-    pintar->setBrush(Qt::black);
+    pintar->setBrush(Qt::white);
     pintar->drawEllipse(boundingRect());
     Q_UNUSED(opcion);
     Q_UNUSED(widget);

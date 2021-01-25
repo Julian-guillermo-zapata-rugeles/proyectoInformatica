@@ -54,6 +54,8 @@ mundoTerrestre::mundoTerrestre()
     connect(signalMapper,SIGNAL(mapped(int )),this,SLOT(generador(int)));
     sonido->setVolume(50);
 
+    connect(generadorNaves,SIGNAL(timeout()),this,SLOT(actualizar()));
+    generadorNaves->start(1);
 }
 
 void mundoTerrestre::iniciarMundo()
@@ -97,6 +99,80 @@ void mundoTerrestre::iniciarMundo()
     //generadorDeLuna->start(tiempo_luna);
     ticks->start(20);
 
+    scene->addItem(aveEnemiga);
+}
+
+void mundoTerrestre::createShips()
+{
+    sistema.append(new Planeta(0,-7000,70,120,2));
+    sistema.append(new Planeta(0,0,70000,300,0.2,0));
+    sistema.append(new Planeta(4000,5000,25,100,-1.6,1.2));
+
+    //Calculos
+    origen = calculoCentroMasas(sistema);
+    s = calculoEscala();
+    inception();
+    for(int i=0 ; i<sistema.size() ; i++){
+        sistema.at(i)->asignarEscala(s);
+        scene->addItem(sistema.at(i));
+    }
+}
+
+float mundoTerrestre::calculoEscala()
+{
+    float max =0, dx=0, dy=0;
+
+    for(int i = 0; i<sistema.size(); i++) {
+        dx = origen.at(0) - sistema.at(i)->obtenerCuerpo()->getX();
+        dy = origen.at(1) - sistema.at(i)->obtenerCuerpo()->getY();
+        if(sqrt(dx*dx + dy*dy) > max){
+            max = sqrt(dx*dx + dy*dy);
+        }
+    }
+    max = v_lim/(2*max);
+    return max;
+}
+
+QList<float> mundoTerrestre::calculoCentroMasas(QList<Planeta *> planetas)
+{
+    float Mx=0, My=0, Mt=0;
+    QList<float> punto;
+    for(int i = 0; i<planetas.size(); i++)
+    {
+        Mx += planetas.at(i)->obtenerCuerpo()->getMasa() * planetas.at(i)->obtenerCuerpo()->getY();
+        My += planetas.at(i)->obtenerCuerpo()->getMasa() * planetas.at(i)->obtenerCuerpo()->getX();
+        Mt += planetas.at(i)->obtenerCuerpo()->getMasa();
+    }
+    punto.append(My/Mt);
+    punto.append(Mx/Mt);
+    return punto;
+}
+
+void mundoTerrestre::calculoAceleracion()
+{
+    float ax = 0, ay = 0;
+    int n = sistema.size();
+    for(int i = 0; i<n; i++){
+        for(int j = i+1; j<n; j++){
+            ax= sistema.at(i)->obtenerCuerpo()->calcularAcX(*sistema.at(j)->obtenerCuerpo());
+            ay= sistema.at(i)->obtenerCuerpo()->calcularAcY(*sistema.at(j)->obtenerCuerpo());
+            sistema.at(i)->obtenerCuerpo()->sumarAceleracion(ax,ay);
+
+            ax= sistema.at(j)->obtenerCuerpo()->calcularAcX(*sistema.at(i)->obtenerCuerpo());
+            ay= sistema.at(j)->obtenerCuerpo()->calcularAcY(*sistema.at(i)->obtenerCuerpo());
+            sistema.at(j)->obtenerCuerpo()->sumarAceleracion(ax,ay);
+        }
+    }
+}
+
+void mundoTerrestre::inception()
+{
+    float dx = h_lim/(2*s) - origen.at(0);
+    float dy = v_lim/(2*s) - origen.at(1);
+    for(int i = 0; i<sistema.size(); i++)
+    {
+        sistema.at(i)->obtenerCuerpo()->asignarPosicion(dx,dy);
+    }
 }
 
 void mundoTerrestre::generador(int tipo)
@@ -225,6 +301,13 @@ void mundoTerrestre::ticksPersonaje()
                 qDebug() <<"me alcanzo un saltador" <<endl;
             }
         }
+
+        if(typeid (*(elementosColisionables[i]))==typeid (Planeta)){
+            qDebug() <<" Si existe una nave en el mundo " <<endl;
+            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
+                qDebug() <<"me impacto una nave" <<endl;
+            }
+        }
     }
 
     if(tiempoJuego->getTime() < 12){
@@ -243,8 +326,6 @@ void mundoTerrestre::ticksPersonaje()
 }
 
 
-
-
 void mundoTerrestre::actualizar_nivel()
 {
     level=level+1;
@@ -259,6 +340,13 @@ void mundoTerrestre::actualizar_nivel()
         //generadorDeLuna->start(30000);
         //ticks->start(20);
     }
+
+    else if(level%3 == 0){
+        createShips();
+        tiempoJuego->setTimeCount(30);
+        this->iniciarMundo();
+    }
+
     else if(level%5==0){
 
         qDebug()<< "nivel asteroides asesinos";
@@ -283,4 +371,12 @@ void mundoTerrestre::actualizar_nivel()
 
     }
     tiempoJuego->setLevelworld(level);
+}
+
+void mundoTerrestre::actualizar()
+{
+    calculoAceleracion();   //actualiza las aceleraciones de todos los cuerpos
+    for(int i = 0; i<sistema.size(); i++){
+        sistema.at(i)->actualizar(dt);
+    }
 }

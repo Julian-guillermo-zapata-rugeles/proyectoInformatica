@@ -13,7 +13,17 @@ class Planeta: public QGraphicsItem
 {
 
 public:
-    Planeta(float posX=0, float posY=0,float masa=0,float radio = 0, float velX=0, float velY=0, float AcX=0, float AcY=0);
+    Planeta(float posX=0,
+            float posY=0,
+            float masa=0,
+            float radio = 0,
+            float velX=0,
+            float velY=0,
+            float AcX=0,
+            float AcY=0,
+            bool v=false);
+
+
     ~Planeta();
 
     void asignarEscala(float s);
@@ -22,6 +32,8 @@ public:
 
     QRectF boundingRect() const;    //necesario definirla, devuelve el rectangulo que encierra el objeto
     void paint(QPainter *pintar, const QStyleOptionGraphicsItem *opcion, QWidget *widget); //define como se pintara el objeto
+
+    bool getVerificar() const;
 
 private:
     Ship *planeta;
