@@ -4,7 +4,7 @@ mundoTerrestre::mundoTerrestre()
 {
 
     level_complete=false;
-    level=0;
+    level=3;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -352,7 +352,7 @@ void mundoTerrestre::actualizar_nivel()
 
     else if(level%4 == 0){
         generadorEnemigos->start(2000);
-        tiempoJuego->setTimeCount(60);
+        tiempoJuego->setTimeCount(120);
         generadorNubes->start(8000);
         this->iniciarMundo();
     }
@@ -377,7 +377,7 @@ void mundoTerrestre::actualizar_nivel()
         generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
         qDebug()<<" nivel "<< level;
         this->iniciarMundo();
-        tiempoJuego->setTimeCount(120);
+        tiempoJuego->setTimeCount(20);
 
     }
     tiempoJuego->setLevelworld(level);

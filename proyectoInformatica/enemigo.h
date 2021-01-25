@@ -25,7 +25,7 @@ private:
     QMediaPlayer *sonido = new QMediaPlayer();
 
     float velocidad;
-    short int amplitud;
+    short int amplitud, limite;
 
     // metodos privados
 

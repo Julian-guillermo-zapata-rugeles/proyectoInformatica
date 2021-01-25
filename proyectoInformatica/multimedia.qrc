@@ -56,5 +56,6 @@
         <file>multimedia/personaje/shootSpriteR.png</file>
         <file>multimedia/animaciones/bloodSp.png</file>
         <file>multimedia/zombieGigante/zombDie.png</file>
+        <file>multimedia/aves/flyS.png</file>
     </qresource>
 </RCC>

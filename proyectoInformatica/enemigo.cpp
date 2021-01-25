@@ -32,9 +32,10 @@ enemigo::enemigo(qreal lastPosition):movimientos(560)
 //Constructor encargado de Generar enemigos tipo Ave
 enemigo::enemigo(bool flat):movimientos(560)
 {
-    this->ancho = 100;
-    this->alto = 100;
-    pixmap_zombie = new QPixmap(":/multimedia/pixmap_asteroide.png");
+    this->ancho = 79.6;
+    this->alto = 120;
+    this->limite = 717;
+    pixmap_zombie = new QPixmap(":/multimedia/aves/flyS.png");
     setPos(1400,250 - this->rect().height());
     timer = new QTimer();
     timer->start(20);
@@ -120,6 +121,8 @@ void enemigo::moverAves()
         delete this;
         qDebug() << "Eliminación de ave" <<endl;
     }
+
+    cambiarAnimacion();
 }
 
 void enemigo::cambiarAnimacion()
@@ -133,19 +136,18 @@ void enemigo::cambiarAnimacion()
     */
 
     if(direction==false){
-        columnas=columnas+ancho;
-        if (columnas>=1458){
+        columnas = columnas+ancho;
+        if (columnas>=limite){
             columnas=0;
         }
     }
     if(direction==true){
-        columnas=columnas-ancho;
+        columnas = columnas-ancho;
         if (columnas<=5){
-            columnas=1458-ancho;
+            columnas=limite-ancho;
         }
     }
      this->update(-ancho/2,-alto/2,ancho,alto);
-
 }
 
 
@@ -166,6 +168,7 @@ void enemigo::asignarCaracteristicas()
         this->alto=100;
         this->columnas=0;
         this->direction=false; // el zombie irá hacia la izquierda
+        this->limite = 1458;
 
         setPos(1300,590 - this->rect().height());
         pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha.png");
@@ -179,6 +182,7 @@ void enemigo::asignarCaracteristicas()
         this->ancho=97.2;
         this->alto=100;
         this->columnas=1458;
+        this->limite = 1458;
         this->direction=true; // el zombie irá hacia la derecha
 
         setPos(-30 , 590 -this->rect().height());
