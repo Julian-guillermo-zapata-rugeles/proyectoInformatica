@@ -13,6 +13,8 @@
 #include <enemigo.h>
 #include <enemigoGigante.h>
 #include <chrono>
+#include <animaciones.h>
+
 /*
 Objetivos :
     Generar asteroides basado en multiples condiciones
@@ -39,6 +41,7 @@ private:
 public:
     asteroides(bool sound=true);
     asteroides(short int n);
+    ~asteroides();
 
 private slots:
     void moverAsteroide();

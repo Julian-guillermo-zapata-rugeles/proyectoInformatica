@@ -22,7 +22,7 @@ private:
     QTimer *tiempoVida = new QTimer;
     QPixmap *deadpix;
 
-    float ancho, alto, frame;
+    float ancho, alto, frame, limite;
     bool complete;
 
     // QGraphicsItem interface

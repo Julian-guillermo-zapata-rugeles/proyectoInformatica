@@ -56,6 +56,16 @@ asteroides::asteroides(short n)
     sonido->setVolume(30);
 }
 
+asteroides::~asteroides()
+{
+    scene()->addItem(new Animaciones(pos().x()+50,pos().y(),2));
+    qDebug() << "asteroide eliminado";
+    sonido->stop();
+    sonido->setMedia(QUrl("qrc:/multimedia/explosion1.mp3"));
+    sonido->play();
+    scene()->removeItem(this);
+}
+
 
 void asteroides::moverAsteroide()
 {
@@ -74,11 +84,6 @@ void asteroides::moverAsteroide()
 
 
     if(pos().y() > 560 ){
-        qDebug() << "asteroide eliminado";
-        sonido->stop();
-        sonido->setMedia(QUrl("qrc:/multimedia/explosion1.mp3"));
-        sonido->play();
-        scene()->removeItem(this);
         delete this;
     }
 
