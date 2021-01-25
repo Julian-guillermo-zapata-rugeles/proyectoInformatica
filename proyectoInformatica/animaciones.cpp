@@ -16,10 +16,11 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo)
         this->setScale(0.5);
     }
     if(tipo == 3){
-        deadpix = new QPixmap(":/multimedia/animaciones/xplot.png");
-        this->limite = 600;
-        this->ancho = 100;
-        this->alto = 100;
+        deadpix = new QPixmap(":/multimedia/zombieGigante/zombDie.png");
+        this->limite = 2000;
+        this->ancho = 153.8;
+        this->alto = 118;
+        this->setScale(1.05);
     }
     setPos(posx, posy);
 
@@ -49,7 +50,7 @@ void Animaciones::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 void Animaciones::animar()
 {
     this->update();
-    if(frame <= limite){
+    if(frame < limite){
         frame += ancho;
     }
     else {
