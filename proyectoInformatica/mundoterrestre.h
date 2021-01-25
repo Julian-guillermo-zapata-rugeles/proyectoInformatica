@@ -57,9 +57,6 @@ public:
     QList<Planeta *> sistema;
     QList<float> origen;
 
-    //Aves enemigas
-    enemigo *aveEnemiga = new enemigo(true);
-
     // Niveles y configuración
     bool level_complete;
     short int level;

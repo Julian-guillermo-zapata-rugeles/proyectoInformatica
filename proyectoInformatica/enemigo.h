@@ -23,10 +23,14 @@ private:
     QPixmap *pixmap_zombie;
     QMediaPlayer *sonido = new QMediaPlayer();
 
+    float velocidad;
+    short int amplitud;
+
     // metodos privados
 
     void cambiarAnimacion(); // encargado el movimiento del sprite // refresco
     void asignarCaracteristicas(); // asignar aleatoriamente pixmap y posicion.
+    void birdAppearance();
 
 public:
     enemigo(qreal lastPosition);
@@ -40,7 +44,6 @@ public:
 private slots:
     void moverEnemigo();
     void moverAves();
-
 
 };
 
