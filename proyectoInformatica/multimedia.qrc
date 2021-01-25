@@ -47,5 +47,12 @@
         <file>multimedia/zombieGigante/corredorMiniIzquierda.png</file>
         <file>multimedia/Sonidos/suspenso_asteroides.mp3</file>
         <file>multimedia/Sonidos/suspenso_asteroides2.mp3</file>
+        <file>multimedia/animaciones/bloodsprite.png</file>
+        <file>multimedia/animaciones/hitSprite.png</file>
+        <file>multimedia/animaciones/xplot.png</file>
+        <file>multimedia/personaje/runsprite.png</file>
+        <file>multimedia/personaje/runspritereverse.png</file>
+        <file>multimedia/personaje/shootSprite.png</file>
+        <file>multimedia/personaje/shootSpriteR.png</file>
     </qresource>
 </RCC>
