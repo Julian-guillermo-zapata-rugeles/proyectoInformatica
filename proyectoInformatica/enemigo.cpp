@@ -52,9 +52,10 @@ enemigo::~enemigo()
     // este destructor eliminará automaticamente el personaje de la escena dando así la oportunidad
     // elimar únicamente de la memoria (en caso de eliminar de la escena en otra clase)
     // se advertirá sobre la inexistencia del objeto en pantalla. NO deberia afectar.
-
+    scene()->addItem(new Animaciones(pos().x(),pos().y(),1));
     scene()->removeItem(this);
     qDebug() << "Eliminación : Enemigo común";
+
 }
 
 

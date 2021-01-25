@@ -12,6 +12,7 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QGraphicsItem>
+#include "animaciones.h"
 
 class enemigo : public QObject , public QGraphicsRectItem , public movimientos
 {
