@@ -1,6 +1,6 @@
 #include "animaciones.h"
 
-Animaciones::Animaciones(qreal posx, qreal posy, short tipo)
+Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
 {
     if(tipo == 1){
         deadpix = new QPixmap(":/multimedia/animaciones/bloodSp.png");
@@ -21,6 +21,9 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo)
         this->ancho = 153.8;
         this->alto = 118;
         this->setScale(1.05);
+        if(v == true){
+            setTransform(QTransform(-1, 0, 0, 1, boundingRect().width(), 0));
+        }
     }
     setPos(posx, posy);
 

@@ -47,7 +47,7 @@ enemigoGigante::~enemigoGigante()
 {
     // se pretende agregar aquí el objeto de bonus
     // para que al crearse este tome las posiciones del enemigo gigante.
-    scene()->addItem(new Animaciones(pos().x(),pos().y(),3));
+    scene()->addItem(new Animaciones(pos().x(),pos().y(),3,direction));
     scene()->addItem(new bonus_municion(this->pos().x(),this->pos().y()));
     scene()->removeItem(this);
     qDebug()<< " personaje gigante eliminado " ;

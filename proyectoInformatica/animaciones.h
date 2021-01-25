@@ -13,7 +13,7 @@ class Animaciones : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
-     Animaciones(qreal posx, qreal posy , short int tipo);
+     Animaciones(qreal posx, qreal posy , short int tipo, bool v=false);
     ~Animaciones();
 
 signals:
