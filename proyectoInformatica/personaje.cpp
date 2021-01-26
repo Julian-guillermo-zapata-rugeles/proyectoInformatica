@@ -37,7 +37,7 @@ personaje::personaje():movimientos(575){
     this->fila = 0;
     this->columna = 0;
     sonido->setVolume(30);
-    pixPersonaje = new QPixmap(":/multimedia/personaje/spritesPersonaje.png");
+    pixPersonaje = new QPixmap(":/multimedia/personaje/playerSprite.png");
 }
 
 

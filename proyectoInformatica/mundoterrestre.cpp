@@ -102,9 +102,28 @@ void mundoTerrestre::iniciarMundo()
 
 void mundoTerrestre::createShips()
 {
-    sistema.append(new Planeta(0,-7000,70,120,2));
-    sistema.append(new Planeta(0,0,70000,300,0,0,true));
-    sistema.append(new Planeta(4000,5000,25,100,-1.6,1.2));
+    sistema.append(new Planeta(0,0,50000,200));
+    sistema.append(new Planeta(-5000,0,70,70,0,-2));
+    sistema.append(new Planeta(5000,0,70,70,0,2));
+    sistema.append(new Planeta(0,-5000,70,70,2,0));
+    sistema.append(new Planeta(0,5000,70,70,-2,0));
+    /*
+    short int opcion = 1+rand()%2;
+
+    if(opcion == 1){
+        sistema.append(new Planeta(0,0,70000,300,0,0));
+        sistema.append(new Planeta(4000,5000,25,100,-1.6,1.2));
+        sistema.append(new Planeta(800,350,50000,200));
+    }
+    if (opcion == 2){
+        sistema.append(new Planeta(0,0,50000,200));
+        sistema.append(new Planeta(-5000,0,70,70,0,-2));
+        sistema.append(new Planeta(5000,0,70,70,0,2));
+        sistema.append(new Planeta(0,-5000,70,70,2,0));
+        sistema.append(new Planeta(0,5000,70,70,-2,0));
+
+    }
+    */
 
     //Calculos
     origen = calculoCentroMasas(sistema);

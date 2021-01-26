@@ -7,9 +7,10 @@
 #include <QGraphicsPixmapItem>
 #include "ship.h"
 #include <QDebug>
+#include <fstream>
 
-#define h_lim 1000
-#define v_lim 500
+#define h_lim 1300
+#define v_lim 600
 
 class Planeta: public QGraphicsPixmapItem
 {
@@ -40,6 +41,7 @@ private:
     QPixmap *planet;
     float escala;
 
+    void eleccionPixmap(short int opcion);
 };
 
 #endif // PLANETA_H
