@@ -90,5 +90,6 @@
         <file>multimedia/planets/7.png</file>
         <file>multimedia/planets/8.png</file>
         <file>multimedia/planets/9.png</file>
+        <file>multimedia/personaje/spritesPersonaje.png</file>
     </qresource>
 </RCC>

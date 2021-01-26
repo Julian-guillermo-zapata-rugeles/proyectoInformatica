@@ -12,6 +12,7 @@
 #include <proyectil.h>
 #include <bonus_municion.h>
 #include <movimientos.h>
+#include <QPixmap>
 
 
 class personaje : public QGraphicsRectItem , public movimientos
@@ -20,6 +21,9 @@ private:
     QMediaPlayer *sonido = new QMediaPlayer();
     bool dir;
     short int disparos_disponibles;
+    qreal ancho, alto, fila, columna;
+    QPixmap *pixPersonaje;
+
 public:
     personaje();
     void keyPressEvent(QKeyEvent *event);
@@ -28,6 +32,11 @@ public:
 
     bool ifcollide();
     short getDisparos_disponibles() const;
+
+    // QGraphicsItem interface
+public:
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
 #endif // PERSONAJE_H

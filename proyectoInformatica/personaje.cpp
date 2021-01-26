@@ -6,6 +6,18 @@ short personaje::getDisparos_disponibles() const
     return disparos_disponibles;
 }
 
+QRectF personaje::boundingRect() const
+{
+    return QRectF(-ancho/2,-alto/2,ancho,alto);
+}
+
+void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    painter->drawPixmap(-ancho/2,-alto/2,*pixPersonaje,columna,fila,ancho,alto);
+    Q_UNUSED(option)
+    Q_UNUSED(widget)
+}
+
 personaje::personaje():movimientos(575){
     /*
         método contructor
@@ -20,9 +32,12 @@ personaje::personaje():movimientos(575){
     this->status_saltando=true;
     this->status_gravitatorio=false;
     this->disparos_disponibles=10;
-
+    this->ancho = 130.08;
+    this->alto = 131;
+    this->fila = 0;
+    this->columna = 0;
     sonido->setVolume(30);
-
+    pixPersonaje = new QPixmap(":/multimedia/personaje/spritesPersonaje.png");
 }
 
 
