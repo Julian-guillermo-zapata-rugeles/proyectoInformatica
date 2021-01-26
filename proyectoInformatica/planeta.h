@@ -4,12 +4,14 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 #include "ship.h"
+#include <QDebug>
 
 #define h_lim 1000
 #define v_lim 500
 
-class Planeta: public QGraphicsItem
+class Planeta: public QGraphicsPixmapItem
 {
 
 public:
@@ -20,9 +22,7 @@ public:
             float velX=0,
             float velY=0,
             float AcX=0,
-            float AcY=0,
-            bool v=false);
-
+            float AcY=0);
 
     ~Planeta();
 
@@ -30,14 +30,16 @@ public:
     void actualizar(float dt);
     Ship *obtenerCuerpo();
 
-    QRectF boundingRect() const;    //necesario definirla, devuelve el rectangulo que encierra el objeto
-    void paint(QPainter *pintar, const QStyleOptionGraphicsItem *opcion, QWidget *widget); //define como se pintara el objeto
+    //QRectF boundingRect() const;    //necesario definirla, devuelve el rectangulo que encierra el objeto
+    //void paint(QPainter *pintar, const QStyleOptionGraphicsItem *opcion, QWidget *widget); //define como se pintara el objeto
 
     bool getVerificar() const;
 
 private:
     Ship *planeta;
+    QPixmap *planet;
     float escala;
+
 };
 
 #endif // PLANETA_H

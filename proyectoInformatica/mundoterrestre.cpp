@@ -4,7 +4,7 @@ mundoTerrestre::mundoTerrestre()
 {
 
     level_complete=false;
-    level=3;
+    level=2;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -103,7 +103,7 @@ void mundoTerrestre::iniciarMundo()
 void mundoTerrestre::createShips()
 {
     sistema.append(new Planeta(0,-7000,70,120,2));
-    sistema.append(new Planeta(0,0,70000,300,0.2,0));
+    sistema.append(new Planeta(0,0,70000,300,0,0,true));
     sistema.append(new Planeta(4000,5000,25,100,-1.6,1.2));
 
     //Calculos
@@ -226,7 +226,7 @@ void mundoTerrestre::generador(int tipo)
 
     if(tipo==2){
         if(level%4 == 0){
-            scene->addItem(new enemigo(true));
+            scene->addItem(new Aves());
         }
         else{
            scene->addItem(new enemigo(personajePrincipal->getLastPosition()));
@@ -319,7 +319,7 @@ void mundoTerrestre::ticksPersonaje()
         generadorEnemigos->stop();
         generadorEnemigosGigantes->stop();
         if(tiempoJuego->getTime()==6){
-            generadorDeLuna->start(100);
+            generadorDeLuna->start(1000);
         }
         //generadorNubes->stop();
     }
@@ -351,8 +351,8 @@ void mundoTerrestre::actualizar_nivel()
     }
 
     else if(level%4 == 0){
-        generadorEnemigos->start(2000);
-        tiempoJuego->setTimeCount(120);
+        generadorEnemigos->start(3000);
+        tiempoJuego->setTimeCount(30);
         generadorNubes->start(8000);
         this->iniciarMundo();
     }

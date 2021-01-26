@@ -21,6 +21,7 @@
 #include "timeGame.h"
 #include "planeta.h"
 #include "ship.h"
+#include "aves.h"
 
 #define dt 1
 
@@ -50,6 +51,7 @@ public:
     personaje * personajePrincipal = new personaje();
     QGraphicsView * vista = new QGraphicsView(scene);
     QMediaPlayer *sonido = new QMediaPlayer();
+
 
     //Naves
     float s; //escala

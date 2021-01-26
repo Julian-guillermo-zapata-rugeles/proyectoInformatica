@@ -54,6 +54,7 @@ asteroides::asteroides(short n)
     connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
     timer->start(5);
     sonido->setVolume(30);
+    Q_UNUSED(n);
 }
 
 asteroides::~asteroides()

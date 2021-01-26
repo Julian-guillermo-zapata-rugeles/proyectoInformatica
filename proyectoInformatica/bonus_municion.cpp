@@ -7,6 +7,7 @@ bonus_municion::bonus_municion(qreal x, qreal y)
     timer->start(10000);
     qDebug()<<"caja generada en  "<<pos().x() << " " << pos().y() ;
     connect(timer,SIGNAL(timeout()),this,SLOT(destruirCaja()));
+    Q_UNUSED(y);
 }
 
 void bonus_municion::destruirCaja()

@@ -29,25 +29,6 @@ enemigo::enemigo(qreal lastPosition):movimientos(560)
 
 }
 
-//Constructor encargado de Generar enemigos tipo Ave
-enemigo::enemigo(bool flat):movimientos(560)
-{
-    this->ancho = 79.6;
-    this->alto = 120;
-    this->limite = 717;
-    pixmap_zombie = new QPixmap(":/multimedia/aves/flyS.png");
-    setPos(1400,250 - this->rect().height());
-    timer = new QTimer();
-    timer->start(20);
-    connect(timer,SIGNAL(timeout()),this,SLOT(moverAves()));
-    this->setRect(0,0,30,30);
-
-    velocidad = 50 + rand() % 100;
-    amplitud =  5 + rand() % 10;
-    birdAppearance();
-}
-
-
 enemigo::~enemigo()
 {
     // este destructor eliminará automaticamente el personaje de la escena dando así la oportunidad
@@ -58,9 +39,6 @@ enemigo::~enemigo()
     qDebug() << "Eliminación : Enemigo común";
 
 }
-
-
-
 
 QRectF enemigo::boundingRect() const
 {
@@ -105,26 +83,6 @@ void enemigo::moverEnemigo()
     cambiarAnimacion(); // FIJA
 }
 
-void enemigo::moverAves()
-{
-    float dt = 0.02;
-    tmp_sumador = tmp_sumador + dt;
-
-    if(direction == false){
-        setPos(x()-velocidad*dt, y() + amplitud*sin(2*3.1415*tmp_sumador/2));
-    }
-    else{
-        setPos(x()+velocidad*dt, y() + amplitud*sin(2*3.1415*tmp_sumador/2));
-    }
-
-    if(pos().x() < -200 || pos().x() > 1400){
-        delete this;
-        qDebug() << "Eliminación de ave" <<endl;
-    }
-
-    cambiarAnimacion();
-}
-
 void enemigo::cambiarAnimacion()
 {
     // Este método se encarga de refrescar el personaje mediante el llamado del TIMER
@@ -134,20 +92,27 @@ void enemigo::cambiarAnimacion()
         es necesario que algunas iteraciones se hagan al reveź. por estar razón
         el atributo direction : determinará en qué secuencia se motrará el pixmap.
     */
-
+    columnas = columnas+ancho;
+    if (columnas >= limite){
+        columnas=0;
+    }
+        /*
     if(direction==false){
         columnas = columnas+ancho;
         if (columnas>=limite){
             columnas=0;
         }
     }
+
     if(direction==true){
         columnas = columnas-ancho;
         if (columnas<=5){
             columnas=limite-ancho;
         }
     }
-     this->update(-ancho/2,-alto/2,ancho,alto);
+    */
+    qDebug() << "ancho: "<< -ancho/2 << " alto: " << -alto/2 << " ancho positivo: " << ancho << " alto positivo: " << alto <<endl;
+    this->update(-ancho/2,-alto/2,ancho,alto);
 }
 
 
@@ -187,21 +152,10 @@ void enemigo::asignarCaracteristicas()
 
         setPos(-30 , 590 -this->rect().height());
         pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha_izquierda.png");
+        setTransform(QTransform(-1, 0, 0, 1, boundingRect().width(), 0));
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/zombie-demon-spawn.mp3"));
         sonido->play();
     }
 }
 
-void enemigo::birdAppearance()
-{
-    short int modo = 1+rand() % 2;
-    if(modo == 1){
-        direction = false;
-        setPos(1400,100 - this->rect().height());
-    }
-    else{
-        direction = true;
-        setPos(-100,100 - this->rect().height());
-    }
-}
 
