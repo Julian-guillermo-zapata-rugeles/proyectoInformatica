@@ -86,7 +86,7 @@ personaje::personaje():movimientos(550){
         en principio el personaje cuenta con 5 disparos
         y se ubica en la siguiente dirección.
     */
-    //this->setRect(0,0,50,131);
+    this->setRect(0,0,100,131);
     this->setFlag(QGraphicsItem::ItemIsFocusable);
     this->setFocus();
     this->setPos(600,550);

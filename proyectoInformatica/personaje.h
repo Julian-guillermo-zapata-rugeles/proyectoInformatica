@@ -16,7 +16,7 @@
 #include <string>
 
 
-class personaje : public QGraphicsPixmapItem, public movimientos
+class personaje : public QGraphicsRectItem, public movimientos
 {
 private:
     QMediaPlayer *sonido = new QMediaPlayer();

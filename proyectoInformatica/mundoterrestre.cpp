@@ -4,7 +4,7 @@ mundoTerrestre::mundoTerrestre()
 {
 
     level_complete=false;
-    level=2;
+    level=1;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -314,6 +314,7 @@ void mundoTerrestre::ticksPersonaje()
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
             if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
                 qDebug() <<"me alcanzo un enemigo" <<endl;
+                personajePrincipal->setState("hit");
             }
         }
 

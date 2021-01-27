@@ -22,7 +22,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
         this->alto = 118;
         this->setScale(1.05);
         if(v == true){
-            setTransform(QTransform(-1, 0, 0, 1, boundingRect().width(), 0));
+            setTransform(QTransform(-1, 0, 0, 1, 0, 0));
         }
     }
     if(tipo == 4){

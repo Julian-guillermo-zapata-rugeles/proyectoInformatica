@@ -29,6 +29,7 @@ private:
     short int amplitud, limite;
     unsigned short int temporal=0;
     bool habilidad=false;
+    unsigned short int cambio = 6+rand()%15;
 
     // metodos privados
 

@@ -45,7 +45,6 @@ QRectF enemigo::boundingRect() const
     return QRectF(-ancho/2,-alto/2,ancho,alto);
 }
 
-
 void enemigo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawPixmap(-ancho/2,-alto/2,*pixmap_zombie,columnas,0,ancho,alto);
@@ -69,10 +68,10 @@ void enemigo::moverEnemigo()
     */
 
     if(last_position  < pos().x()){
-        setPos(x()-5,pos().y());
+        setPos(x()-cambio,pos().y());
     }
     else if(last_position > pos().x()){
-        setPos(x()+5,pos().y());
+        setPos(x()+cambio,pos().y());
     }
 
     else{
@@ -81,20 +80,6 @@ void enemigo::moverEnemigo()
     }
 
     cambiarAnimacion(); // FIJA
-
-    /*
-    //Disparos de los enemigos
-    if(habilidad == true){
-        temporal +=60;
-        if(temporal > 4000){
-            proyectil *bullet = new proyectil(direction);
-            bullet->setPixmap(QPixmap(":/multimedia/proyectiles/bulletEnemy.png"));
-            scene()->addItem(bullet);
-            bullet->setPos(pos().x(),pos().y());
-            temporal = 0;
-        }
-    }
-    */
 }
 
 void enemigo::cambiarAnimacion()
@@ -110,22 +95,6 @@ void enemigo::cambiarAnimacion()
     if (columnas >= limite){
         columnas=0;
     }
-        /*
-    if(direction==false){
-        columnas = columnas+ancho;
-        if (columnas>=limite){
-            columnas=0;
-        }
-    }
-
-    if(direction==true){
-        columnas = columnas-ancho;
-        if (columnas<=5){
-            columnas=limite-ancho;
-        }
-    }
-    */
-    //qDebug() << "ancho: "<< -ancho/2 << " alto: " << -alto/2 << " ancho positivo: " << ancho << " alto positivo: " << alto <<endl;
     this->update(-ancho/2,-alto/2,ancho,alto);
 }
 
@@ -151,8 +120,6 @@ void enemigo::asignarCaracteristicas()
         pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha.png");
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/zombie_gruendo.mp3"));
         sonido->play();
-
-
     }
 
     else if(aleatorio == 2){
@@ -230,7 +197,7 @@ void enemigo::asignarCaracteristicas()
     }
     else{
         setPos(-300, 585 -rect().height());
-        setTransform(QTransform(-1, 0, 0, 1, boundingRect().width(), 0));
+        setTransform(QTransform(-1, 0, 0, 1, 0, 0));
     }
 }
 
