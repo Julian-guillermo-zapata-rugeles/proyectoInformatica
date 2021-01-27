@@ -43,11 +43,11 @@ void personaje::setState(std::string estado)
 void personaje::actualizarEstado()
 {
     if(stateSlide == true){
-        if(dir == false){
-            setPos(pos().x()-12,pos().y());
+        if(dir == false && pos().x()-30>0){
+            setPos(pos().x()-30,pos().y());
         }
-        else{
-            setPos(pos().x()+12,pos().y());
+        if(dir == true && pos().x()+30<1300){
+            setPos(pos().x()+30,pos().y());
         }
     }
 
@@ -240,6 +240,7 @@ void personaje::keyPressEvent(QKeyEvent *event)
     if(event->key() == Qt::Key_S){
         stateShoot = true;
         stateSlide = true;
+        columna=655;
         setState("slide");
     }
 }
@@ -322,24 +323,5 @@ void personaje::eventHandler()
             }
 
     }
-}
-
-bool personaje::ifcollide()
-{
-    // ESTA FUNCIÓN ESTÁ DESHABILITADA
-    // NO ESTÁ EN FUNCIONANMIENTO HASTA SOLUCIONAR PROBLEMAS.
-
-    QList<QGraphicsItem *> elementosColisionables  = collidingItems();
-
-    for(int i=0;i< elementosColisionables.size();i++){
-        // balas que colisionan con los enemigos
-        if(elementosColisionables[i]->collidesWithItem(this)){
-            if(typeid (*(elementosColisionables[i]))==typeid (this)){
-                qDebug() <<"entro ..." <<endl;
-                return true;
-            }
-        }
-    }
-    return false;
 }
 
