@@ -248,7 +248,8 @@ qreal personaje::getLastPosition()
             PARA ASÍ GENERAR QUE LO PERSIGAN.
 
      */
-    return pos().x();
+    qreal x=pos().x();
+    return x;
 }
 
 void personaje::eventHandler()

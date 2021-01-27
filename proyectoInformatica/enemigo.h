@@ -13,6 +13,7 @@
 #include <QPainter>
 #include <QGraphicsItem>
 #include "animaciones.h"
+#include "personaje.h"
 
 class enemigo : public QObject , public QGraphicsRectItem , public movimientos
 {
@@ -23,8 +24,7 @@ private:
     QTimer *timer;
     QPixmap *pixmap_zombie;
     QMediaPlayer *sonido = new QMediaPlayer();
-
-    qreal columnas, alto, ancho, last_position;
+    qreal columnas, alto, ancho, *last_position;
     long int velocidad;
     short int amplitud, limite;
     unsigned short int temporal=0;
@@ -38,7 +38,7 @@ private:
 
 
 public:
-    enemigo(qreal lastPosition);
+    enemigo(qreal *lastPosition);
 
     ~enemigo();
     QRectF boundingRect() const;

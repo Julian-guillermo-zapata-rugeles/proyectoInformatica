@@ -68,6 +68,8 @@ public:
     short int tiempo_enemigos_gigantes;
     short int tiempo_nubes;
     short int tiempo_luna;
+    qreal globar_position , *gp;
+
 
     /*
        zona de scores y de  QGraphicsText

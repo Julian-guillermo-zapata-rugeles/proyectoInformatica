@@ -2,7 +2,7 @@
 #include "personaje.h"
 
 
-enemigo::enemigo(qreal lastPosition):movimientos(560)
+enemigo::enemigo(qreal *lastPosition):movimientos(560)
 {
     // constructor
 
@@ -67,11 +67,13 @@ void enemigo::moverEnemigo()
 
     */
 
-    if(last_position  < pos().x()){
+    if(*last_position  < pos().x()){
         setPos(x()-cambio,pos().y());
+        setTransform(QTransform());
     }
-    else if(last_position > pos().x()){
+    else if(*last_position > pos().x()){
         setPos(x()+cambio,pos().y());
+        setTransform(QTransform(-1, 0, 0, 1, 0, 0));
     }
 
     else{
@@ -80,6 +82,7 @@ void enemigo::moverEnemigo()
     }
 
     cambiarAnimacion(); // FIJA
+    qDebug()<< *last_position << "pos at <--";
 }
 
 void enemigo::cambiarAnimacion()
@@ -195,11 +198,11 @@ void enemigo::asignarCaracteristicas()
     }
 
     if(1+rand()%2 == 1){
-        setPos(1320,585 - rect().height());
+        //setPos(1320,585 - rect().height());
     }
     else{
         setPos(-300, 585 -rect().height());
-        setTransform(QTransform(-1, 0, 0, 1, 0, 0));
+        //setTransform(QTransform(-1, 0, 0, 1, 0, 0));
     }
 }
 

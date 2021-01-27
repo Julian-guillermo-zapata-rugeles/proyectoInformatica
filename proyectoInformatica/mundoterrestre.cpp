@@ -23,6 +23,8 @@ mundoTerrestre::mundoTerrestre()
     srand(time(NULL));
     scene->addItem(personajePrincipal);
     vista->setScene(scene);
+    globar_position = personajePrincipal->getLastPosition();
+    gp = &globar_position;
     vista->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     vista->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     vista->show();
@@ -256,7 +258,7 @@ void mundoTerrestre::generador(int tipo)
             }
         }
         else{
-           scene->addItem(new enemigo(personajePrincipal->getLastPosition()));
+           scene->addItem(new enemigo(gp));
         }
     }
 
@@ -296,6 +298,7 @@ void mundoTerrestre::generador(int tipo)
 
 void mundoTerrestre::ticksPersonaje()
 {
+    globar_position=personajePrincipal->getLastPosition();
     // este evento handler verificará si el personaje debe saltar
     //bool lunaActiva = false;
     personajePrincipal->eventHandler();
