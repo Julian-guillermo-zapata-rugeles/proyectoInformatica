@@ -245,7 +245,7 @@ void mundoTerrestre::generador(int tipo)
 
     if(tipo==2){
         if(level%4 == 0){
-            scene->addItem(new Aves());
+            scene->addItem(new Aves(1));
         }
         else{
            scene->addItem(new enemigo(personajePrincipal->getLastPosition()));

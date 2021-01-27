@@ -15,6 +15,7 @@ class Aves: public QObject, public QGraphicsItem
 
 public:
     Aves();
+    Aves(short int op);
     ~Aves();
 
     QRectF boundingRect() const;
@@ -22,6 +23,7 @@ public:
 
 private:
     QTimer *timerAves;
+    QTimer *timerAvesParabolicas;
     QPixmap *AvePix;
 
     qreal columnas, alto, ancho, tmp_sumador;
@@ -34,6 +36,7 @@ private:
 
 public slots:
     void moverAves();
+    void moverAvesParabolicas();
 
 };
 

@@ -92,5 +92,6 @@
         <file>multimedia/planets/9.png</file>
         <file>multimedia/personaje/playerSprite.png</file>
         <file>directoriosPixmap</file>
+        <file>multimedia/aves/aveSenoidal.png</file>
     </qresource>
 </RCC>
