@@ -21,15 +21,15 @@ Aves::Aves(short op)
 {
     this->ancho = 91;
     this->alto = 131;
-    this->limite = 1365;
+    this->limite = 1360;
     this->direction = false;
     AvePix = new QPixmap(":/multimedia/aves/aveSenoidal.png");
-    setPos(1400,850);
+    setPos(1400,1000);
     timerAvesParabolicas = new QTimer();
     timerAvesParabolicas->start(40);
     connect(timerAvesParabolicas,SIGNAL(timeout()),this,SLOT(moverAvesParabolicas()));
 
-    velocidad = 80 + rand() % 120;
+    velocidad = 120 + rand() % 180;
     amplitud =  3 + rand() % 8;
     birdAppearance();
     Q_UNUSED(op);
@@ -106,11 +106,11 @@ void Aves::moverAvesParabolicas()
     tmp_sumador = tmp_sumador + dt;
 
     if(direction == false){
-        setPos(pos().x()-velocidad*dt , amplitud*sin(2*3.1415*tmp_sumador/2)+pos().y());
+        setPos(pos().x()-velocidad*dt , amplitud*sin(3.1415*tmp_sumador/2)+pos().y());
         setPos(pos().x()-0.5,pos().y());
     }
     else{
-        setPos(pos().x()-velocidad*dt , amplitud*sin(2*3.1415*tmp_sumador/2)+pos().y());
+        setPos(pos().x()+velocidad*dt , amplitud*sin(3.1415*tmp_sumador/2)+pos().y());
         setPos(pos().x()+0.5,pos().y());
     }
 

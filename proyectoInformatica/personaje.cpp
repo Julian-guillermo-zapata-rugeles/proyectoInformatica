@@ -103,6 +103,7 @@ void personaje::keyPressEvent(QKeyEvent *event)
             // qDebug() <<"posicion x "<< this->x(); // DEBUG
             // qDebug() <<"posicion y "<< this->y(); // DEBUG
 
+            disparo->setPixmap(QPixmap(":/multimedia/pixmap_disparo_sol.png"));
             scene()->addItem(disparo);
             disparo->setPos(this->x(),this->y());
             // se añade a la escena y se ubica en la posición del personaje

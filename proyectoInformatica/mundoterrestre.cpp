@@ -4,7 +4,7 @@ mundoTerrestre::mundoTerrestre()
 {
 
     level_complete=false;
-    level=2;
+    level=3;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
