@@ -26,6 +26,7 @@ private:
     QPixmap *pixPersonaje;
     bool pressKey=false;
     bool stateShoot=false;
+    bool stateSlide=false;
 
 
 public:

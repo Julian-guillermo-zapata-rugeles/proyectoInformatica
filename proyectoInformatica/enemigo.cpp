@@ -120,6 +120,7 @@ void enemigo::asignarCaracteristicas()
         pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha.png");
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/zombie_gruendo.mp3"));
         sonido->play();
+        this->setScale(1.3);
     }
 
     else if(aleatorio == 2){
@@ -133,6 +134,7 @@ void enemigo::asignarCaracteristicas()
         pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha.png");
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/zombie-demon-spawn.mp3"));
         sonido->play();
+        this->setScale(1.3);
     }
 
     else if(aleatorio == 3){

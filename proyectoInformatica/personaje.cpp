@@ -42,10 +42,21 @@ void personaje::setState(std::string estado)
 
 void personaje::actualizarEstado()
 {
+    if(stateSlide == true){
+        if(dir == false){
+            setPos(pos().x()-12,pos().y());
+        }
+        else{
+            setPos(pos().x()+12,pos().y());
+        }
+    }
+
     columna = columna+ancho;
+
     if (columna > limite){
         columna=0;
         stateShoot = false;
+        stateSlide = false;
     }
     this->update(-ancho/2,-alto/2,ancho,alto);
 }
@@ -128,12 +139,22 @@ void personaje::keyPressEvent(QKeyEvent *event)
             if(status_gravitatorio==false){
                 setPos(x()-10,y());
                 setTransform(QTransform());
-                setState("walk");
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
             }
             else{
                 // bajo efecto de gravedad (avance lateral)
                 setPos(x()-1,y());
-                setState("walk");
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
             }
             // establece la dirección en la que mira el personaje para crear
             // la bala en esa dirección
@@ -147,12 +168,22 @@ void personaje::keyPressEvent(QKeyEvent *event)
             if(status_gravitatorio==false){
                 setPos(x()+10,y());
                 setTransform(QTransform(-1, 0, 0, 1, 0, 0));
-                setState("walk");
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
             }
             else{
                 // bajo efecto de gravedad
                 setPos(x()+1,y());
-                setState("walk");
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
             }
             dir=true;
         }
@@ -191,11 +222,19 @@ void personaje::keyPressEvent(QKeyEvent *event)
             disparos_disponibles=disparos_disponibles-1;
         }
         else{
+            stateShoot = true;
             // sonido disparos normales (con balas)
             sonido->stop();
             sonido->setMedia(QUrl("qrc:/multimedia/cargar_arma.mp3"));
             sonido->play();
+            setState("attack");
         }
+    }
+
+    if(event->key() == Qt::Key_S){
+        stateShoot = true;
+        stateSlide = true;
+        setState("slide");
     }
 }
 
