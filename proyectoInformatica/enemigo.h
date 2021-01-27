@@ -12,29 +12,33 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QGraphicsItem>
+#include "animaciones.h"
 
 class enemigo : public QObject , public QGraphicsRectItem , public movimientos
 {
     Q_OBJECT
 private:
     bool direction; // true Derecha // false izquierda
-    qreal alto , ancho , columnas , last_position;
+    //qreal last_position;
     QTimer *timer;
     QPixmap *pixmap_zombie;
     QMediaPlayer *sonido = new QMediaPlayer();
 
-    float velocidad;
-    short int amplitud;
+    qreal columnas, alto, ancho, last_position;
+    long int velocidad;
+    short int amplitud, limite;
+    unsigned short int temporal=0;
+    bool habilidad=false;
+    unsigned short int cambio = 6+rand()%15;
 
     // metodos privados
 
     void cambiarAnimacion(); // encargado el movimiento del sprite // refresco
     void asignarCaracteristicas(); // asignar aleatoriamente pixmap y posicion.
-    void birdAppearance();
+
 
 public:
     enemigo(qreal lastPosition);
-    enemigo(bool flat);
 
     ~enemigo();
     QRectF boundingRect() const;
@@ -43,7 +47,7 @@ public:
 
 private slots:
     void moverEnemigo();
-    void moverAves();
+
 
 };
 

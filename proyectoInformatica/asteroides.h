@@ -13,6 +13,8 @@
 #include <enemigo.h>
 #include <enemigoGigante.h>
 #include <chrono>
+#include <animaciones.h>
+
 /*
 Objetivos :
     Generar asteroides basado en multiples condiciones
@@ -35,10 +37,13 @@ private:
     QTimer *timer;
     signed short int rotationAngle;
     void generarAspecto();
+    bool fire=false;
 
 public:
     asteroides(bool sound=true);
     asteroides(short int n);
+    asteroides(qreal x, qreal y);
+    ~asteroides();
 
 private slots:
     void moverAsteroide();

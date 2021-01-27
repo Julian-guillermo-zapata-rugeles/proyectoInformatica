@@ -21,6 +21,7 @@
 #include "timeGame.h"
 #include "planeta.h"
 #include "ship.h"
+#include "aves.h"
 
 #define dt 1
 
@@ -50,6 +51,7 @@ public:
     personaje * personajePrincipal = new personaje();
     QGraphicsView * vista = new QGraphicsView(scene);
     QMediaPlayer *sonido = new QMediaPlayer();
+
 
     //Naves
     float s; //escala
@@ -86,6 +88,7 @@ public:
     QTimer *generadorEnemigosGigantes = new QTimer();
     QTimer *generadorNubes = new QTimer();
     QTimer *generadorDeLuna = new QTimer();
+    QTimer *animacionPersonaje = new QTimer();
 
     //Naves
     QTimer *generadorNaves = new QTimer();
@@ -97,6 +100,7 @@ public slots:
 
   //actualizar las naves
   void actualizar();
+  void updateAnimation();
 };
 
 #endif // MUNDOTERRESTRE_H

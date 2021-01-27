@@ -3,7 +3,7 @@
 proyectil::proyectil(bool dir)
 {
     //this->setRect(0,0,10,10);
-    this->setPixmap(QPixmap(":/multimedia/pixmap_disparo_sol.png"));
+    //this->setPixmap(QPixmap(":/multimedia/pixmap_disparo_sol.png"));
     // opacidad :
     //      No hemos definido aún si usaremos opacidad para simular algunas condiciones de iluminación
     //      sin embargo se dejará indicado

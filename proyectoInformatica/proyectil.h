@@ -21,6 +21,7 @@ private:
     // direccion False para izquierda
     bool direccion;
 
+
 public:
     proyectil(bool dir);
 

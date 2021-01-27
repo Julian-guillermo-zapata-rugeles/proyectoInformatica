@@ -4,7 +4,7 @@ mundoTerrestre::mundoTerrestre()
 {
 
     level_complete=false;
-    level=3;
+    level=1;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -44,6 +44,9 @@ mundoTerrestre::mundoTerrestre()
     connect(generadorNubes,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(generadorDeLuna,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(ticks,SIGNAL(timeout()),this,SLOT(ticksPersonaje()));
+
+    animacionPersonaje->start(50);
+    connect(animacionPersonaje, SIGNAL(timeout()),this,SLOT(updateAnimation()));
 
     signalMapper->setMapping(generadorAsteroides,1);
     signalMapper->setMapping(generadorEnemigos,2);
@@ -102,9 +105,28 @@ void mundoTerrestre::iniciarMundo()
 
 void mundoTerrestre::createShips()
 {
-    sistema.append(new Planeta(0,-7000,70,120,2));
-    sistema.append(new Planeta(0,0,70000,300,0.2,0));
-    sistema.append(new Planeta(4000,5000,25,100,-1.6,1.2));
+    sistema.append(new Planeta(0,0,50000,200));
+    sistema.append(new Planeta(-5000,0,70,70,0,-2));
+    sistema.append(new Planeta(5000,0,70,70,0,2));
+    sistema.append(new Planeta(0,-5000,70,70,2,0));
+    sistema.append(new Planeta(0,5000,70,70,-2,0));
+    /*
+    short int opcion = 1+rand()%2;
+
+    if(opcion == 1){
+        sistema.append(new Planeta(0,0,70000,300,0,0));
+        sistema.append(new Planeta(4000,5000,25,100,-1.6,1.2));
+        sistema.append(new Planeta(800,350,50000,200));
+    }
+    if (opcion == 2){
+        sistema.append(new Planeta(0,0,50000,200));
+        sistema.append(new Planeta(-5000,0,70,70,0,-2));
+        sistema.append(new Planeta(5000,0,70,70,0,2));
+        sistema.append(new Planeta(0,-5000,70,70,2,0));
+        sistema.append(new Planeta(0,5000,70,70,-2,0));
+
+    }
+    */
 
     //Calculos
     origen = calculoCentroMasas(sistema);
@@ -226,7 +248,12 @@ void mundoTerrestre::generador(int tipo)
 
     if(tipo==2){
         if(level%4 == 0){
-            scene->addItem(new enemigo(true));
+            if(1+rand()%2 == 1){
+                scene->addItem(new Aves(1));
+            }
+            else{
+                scene->addItem(new Aves());
+            }
         }
         else{
            scene->addItem(new enemigo(personajePrincipal->getLastPosition()));
@@ -287,6 +314,7 @@ void mundoTerrestre::ticksPersonaje()
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
             if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
                 qDebug() <<"me alcanzo un enemigo" <<endl;
+                personajePrincipal->setState("hit");
             }
         }
 
@@ -319,7 +347,7 @@ void mundoTerrestre::ticksPersonaje()
         generadorEnemigos->stop();
         generadorEnemigosGigantes->stop();
         if(tiempoJuego->getTime()==6){
-            generadorDeLuna->start(100);
+            generadorDeLuna->start(1000);
         }
         //generadorNubes->stop();
     }
@@ -337,7 +365,7 @@ void mundoTerrestre::actualizar_nivel()
     if(level==1){
         level_complete=true;
         generadorAsteroides->start(8000);
-        generadorEnemigos->start(6000);
+        generadorEnemigos->start(1000);
         generadorNubes->start(8000);
         generadorEnemigosGigantes->start(10000);
         //generadorDeLuna->start(30000);
@@ -346,13 +374,14 @@ void mundoTerrestre::actualizar_nivel()
 
     else if(level%3 == 0){
         createShips();
-        tiempoJuego->setTimeCount(30);
+        tiempoJuego->setTimeCount(20);
+        generadorEnemigos->start(3000);
         this->iniciarMundo();
     }
 
     else if(level%4 == 0){
-        generadorEnemigos->start(2000);
-        tiempoJuego->setTimeCount(60);
+        generadorEnemigos->start(3000);
+        tiempoJuego->setTimeCount(30);
         generadorNubes->start(8000);
         this->iniciarMundo();
     }
@@ -377,7 +406,7 @@ void mundoTerrestre::actualizar_nivel()
         generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
         qDebug()<<" nivel "<< level;
         this->iniciarMundo();
-        tiempoJuego->setTimeCount(35);
+        tiempoJuego->setTimeCount(60);
 
     }
     tiempoJuego->setLevelworld(level);
@@ -389,4 +418,20 @@ void mundoTerrestre::actualizar()
     for(int i = 0; i<sistema.size(); i++){
         sistema.at(i)->actualizar(dt);
     }
+}
+
+void mundoTerrestre::updateAnimation()
+{
+   personajePrincipal->actualizarEstado();
+
+   if(personajePrincipal->getStatus_saltando() == false &&
+             personajePrincipal->getPressKey() == false &&
+             personajePrincipal->getStateShoot() == false)
+   {
+       personajePrincipal->setState("stand");
+   }
+   else if (personajePrincipal->getPressKey() == true && personajePrincipal->getStateShoot() == false){
+       personajePrincipal->setPressKey(false);
+       //personajePrincipal->setState("stand");
+   }
 }

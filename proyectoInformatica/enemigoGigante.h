@@ -12,6 +12,7 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QGraphicsItem>
+#include "animaciones.h"
 
 class enemigoGigante : public QObject , public QGraphicsRectItem
 {
@@ -26,6 +27,7 @@ private:
 
     void cambiarAnimacion(); // encargado el movimiento del sprite // refresco
     void asignarCaracteristicas(); // asignar aleatoriamente pixmap y posicion.
+
 public:
     enemigoGigante(qreal lastPosition );
     ~enemigoGigante();

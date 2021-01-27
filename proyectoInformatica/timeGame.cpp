@@ -58,4 +58,5 @@ void timeGame::setDisparos(short value)
 void timeGame::timerEvent(QTimerEvent *event)
 {
     decrease();
+    Q_UNUSED(event);
 }

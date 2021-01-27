@@ -54,6 +54,36 @@ asteroides::asteroides(short n)
     connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
     timer->start(5);
     sonido->setVolume(30);
+    Q_UNUSED(n);
+}
+
+asteroides::asteroides(qreal x, qreal y)
+{
+    setPos(x,y);
+    this->setPixmap(QPixmap(":/multimedia/proyectiles/bulletEnemy.png"));
+    this->setTransformOriginPoint(this->boundingRect().center());
+    this->setScale(1);
+    rotationAngle = 0;
+    qDebug()<<"asteroide generado en "<<pos().x() << " " << pos().y() ;
+    timer = new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
+    timer->start(10);
+    fire = true;
+}
+
+asteroides::~asteroides()
+{ 
+    if(fire == true){
+        scene()->addItem(new Animaciones(pos().x()+50,pos().y(),4));
+    }
+    else{
+        scene()->addItem(new Animaciones(pos().x()+50,pos().y(),2));
+        qDebug() << "asteroide eliminado";
+        sonido->stop();
+        sonido->setMedia(QUrl("qrc:/multimedia/explosion1.mp3"));
+        sonido->play();
+    }
+    scene()->removeItem(this);
 }
 
 
@@ -74,11 +104,6 @@ void asteroides::moverAsteroide()
 
 
     if(pos().y() > 560 ){
-        qDebug() << "asteroide eliminado";
-        sonido->stop();
-        sonido->setMedia(QUrl("qrc:/multimedia/explosion1.mp3"));
-        sonido->play();
-        scene()->removeItem(this);
         delete this;
     }
 
