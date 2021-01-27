@@ -16,7 +16,7 @@
 #include <string>
 
 
-class personaje : public QGraphicsRectItem , public movimientos
+class personaje : public QGraphicsPixmapItem, public movimientos
 {
 private:
     QMediaPlayer *sonido = new QMediaPlayer();
@@ -24,6 +24,8 @@ private:
     short int disparos_disponibles;
     qreal ancho, alto, fila, columna, limite=1550;
     QPixmap *pixPersonaje;
+    bool pressKey=false;
+    bool stateShoot=false;
 
 
 public:
@@ -43,6 +45,9 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    bool getPressKey() const;
+    void setPressKey(bool value);
+    bool getStateShoot() const;
 };
 
 #endif // PERSONAJE_H

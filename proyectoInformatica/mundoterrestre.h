@@ -100,6 +100,7 @@ public slots:
 
   //actualizar las naves
   void actualizar();
+  void updateAnimation();
 };
 
 #endif // MUNDOTERRESTRE_H

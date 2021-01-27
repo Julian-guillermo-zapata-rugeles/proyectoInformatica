@@ -4,7 +4,7 @@ mundoTerrestre::mundoTerrestre()
 {
 
     level_complete=false;
-    level=3;
+    level=2;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -44,6 +44,9 @@ mundoTerrestre::mundoTerrestre()
     connect(generadorNubes,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(generadorDeLuna,SIGNAL(timeout()),signalMapper,SLOT(map()));
     connect(ticks,SIGNAL(timeout()),this,SLOT(ticksPersonaje()));
+
+    animacionPersonaje->start(50);
+    connect(animacionPersonaje, SIGNAL(timeout()),this,SLOT(updateAnimation()));
 
     signalMapper->setMapping(generadorAsteroides,1);
     signalMapper->setMapping(generadorEnemigos,2);
@@ -350,8 +353,6 @@ void mundoTerrestre::ticksPersonaje()
     if(tiempoJuego->getTime()==0){
         this->actualizar_nivel();
     }
-
-    personajePrincipal->actualizarEstado();
 }
 
 
@@ -373,7 +374,7 @@ void mundoTerrestre::actualizar_nivel()
     else if(level%3 == 0){
         createShips();
         tiempoJuego->setTimeCount(20);
-        //generadorEnemigos->start(1000);
+        generadorEnemigos->start(3000);
         this->iniciarMundo();
     }
 
@@ -416,4 +417,20 @@ void mundoTerrestre::actualizar()
     for(int i = 0; i<sistema.size(); i++){
         sistema.at(i)->actualizar(dt);
     }
+}
+
+void mundoTerrestre::updateAnimation()
+{
+   personajePrincipal->actualizarEstado();
+
+   if(personajePrincipal->getStatus_saltando() == false &&
+             personajePrincipal->getPressKey() == false &&
+             personajePrincipal->getStateShoot() == false)
+   {
+       personajePrincipal->setState("stand");
+   }
+   else if (personajePrincipal->getPressKey() == true && personajePrincipal->getStateShoot() == false){
+       personajePrincipal->setPressKey(false);
+       //personajePrincipal->setState("stand");
+   }
 }
