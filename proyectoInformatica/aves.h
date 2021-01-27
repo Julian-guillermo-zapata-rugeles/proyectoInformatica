@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <math.h>
+#include "proyectil.h"
 
 class Aves: public QObject, public QGraphicsItem
 {
@@ -29,7 +30,8 @@ private:
     qreal columnas, alto, ancho, tmp_sumador;
     long int velocidad;
     short int amplitud, limite;
-    bool direction;
+    bool direction, dir;
+    unsigned short int temporal=0;
 
     void birdAppearance();
     void cambiarAnimacion();
@@ -37,7 +39,6 @@ private:
 public slots:
     void moverAves();
     void moverAvesParabolicas();
-
 };
 
 #endif // AVES_H

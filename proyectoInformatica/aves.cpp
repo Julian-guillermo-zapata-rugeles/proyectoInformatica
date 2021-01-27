@@ -12,9 +12,12 @@ Aves::Aves()
     timerAves->start(40);
     connect(timerAves,SIGNAL(timeout()),this,SLOT(moverAves()));
 
+
     velocidad = 150;//80 + rand() % 120;
     amplitud =  5 + rand() % 10;
     birdAppearance();
+    this->dir = true;
+
 }
 
 Aves::Aves(short op)
@@ -33,6 +36,7 @@ Aves::Aves(short op)
     amplitud =  3 + rand() % 8;
     birdAppearance();
     Q_UNUSED(op);
+
 }
 
 Aves::~Aves()
@@ -98,6 +102,12 @@ void Aves::moverAves()
         delete this;
     }
     cambiarAnimacion();
+
+    temporal += 40;
+    if(temporal > 3000){
+        scene()->addItem(new asteroides(pos().x(),pos().y()));
+        temporal = 0;
+    }
 }
 
 void Aves::moverAvesParabolicas()

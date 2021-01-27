@@ -81,6 +81,20 @@ void enemigo::moverEnemigo()
     }
 
     cambiarAnimacion(); // FIJA
+
+    /*
+    //Disparos de los enemigos
+    if(habilidad == true){
+        temporal +=60;
+        if(temporal > 4000){
+            proyectil *bullet = new proyectil(direction);
+            bullet->setPixmap(QPixmap(":/multimedia/proyectiles/bulletEnemy.png"));
+            scene()->addItem(bullet);
+            bullet->setPos(pos().x(),pos().y());
+            temporal = 0;
+        }
+    }
+    */
 }
 
 void enemigo::cambiarAnimacion()
@@ -111,7 +125,7 @@ void enemigo::cambiarAnimacion()
         }
     }
     */
-    qDebug() << "ancho: "<< -ancho/2 << " alto: " << -alto/2 << " ancho positivo: " << ancho << " alto positivo: " << alto <<endl;
+    //qDebug() << "ancho: "<< -ancho/2 << " alto: " << -alto/2 << " ancho positivo: " << ancho << " alto positivo: " << alto <<endl;
     this->update(-ancho/2,-alto/2,ancho,alto);
 }
 
@@ -124,25 +138,24 @@ void enemigo::asignarCaracteristicas()
     //        se buscará implementar la aparición de un zoombie en pantalla
     //        sin aparición lateral
 
-    short int aleatorio = 1+rand() %10;
+    short int aleatorio = 1+rand() %7;
 
-    if(aleatorio%2==0){
+    if(aleatorio == 1){
         //  zombie candidato #1
-
         this->ancho=97.2;
         this->alto=100;
         this->columnas=0;
         this->direction=false; // el zombie irá hacia la izquierda
         this->limite = 1458;
 
-        setPos(1300,590 - this->rect().height());
         pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha.png");
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/zombie_gruendo.mp3"));
         sonido->play();
 
+
     }
 
-    else{
+    else if(aleatorio == 2){
         // zombie candidato #2
         this->ancho=97.2;
         this->alto=100;
@@ -150,11 +163,74 @@ void enemigo::asignarCaracteristicas()
         this->limite = 1458;
         this->direction=true; // el zombie irá hacia la derecha
 
-        setPos(-30 , 590 -this->rect().height());
-        pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha_izquierda.png");
-        setTransform(QTransform(-1, 0, 0, 1, boundingRect().width(), 0));
+        pixmap_zombie = new QPixmap(":/multimedia/zombies/zombie_hacha.png");
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/zombie-demon-spawn.mp3"));
         sonido->play();
+    }
+
+    else if(aleatorio == 3){
+        //alien 0 corriendo (mounstro)
+        this->ancho = 169;
+        this->alto = 132;
+        this->columnas = 8450;
+        this->direction = false;
+        this->limite = 1458;
+        pixmap_zombie = new QPixmap(":/multimedia/aliens/Alien0run.png");
+        this->setScale(1.1);
+        habilidad = true;
+    }
+
+    else if(aleatorio == 4){
+        //Alien 1 corriendo (extraterrestre)
+        this->ancho = 232;
+        this->alto = 172;
+        this->columnas = 5809;
+        this->direction = false;
+        this->limite = 5800;
+
+        pixmap_zombie = new QPixmap(":/multimedia/aliens/Alien1run.png");
+        habilidad = true;
+    }
+
+    else if(aleatorio == 5){
+        //Alien 2 saltando (insecto)
+        this->ancho = 177.26;
+        this->alto = 130;
+        this->columnas = 3368;
+        this->direction = false;
+        this->limite = 3360;
+
+        pixmap_zombie = new QPixmap(":/multimedia/aliens/Alien2Jump.png");
+    }
+
+    else if(aleatorio == 6){
+        //Alien 3 corriendo (cucaracha)
+        this->ancho = 252.33;
+        this->alto = 131;
+        this->columnas = 2271;
+        this->direction = false;
+        this->limite = 2260;
+
+        pixmap_zombie = new QPixmap(":/multimedia/aliens/alien3run.png");
+    }
+
+    else if(aleatorio == 7){
+        //Alien 4 saltando (tipo kong estraterrestre)
+        this->ancho = 197;
+        this->alto = 131;
+        this->columnas = 2955;
+        this->direction = false;
+        this->limite = 2955;
+
+        pixmap_zombie = new QPixmap(":/multimedia/aliens/Alien4Jump.png");
+    }
+
+    if(1+rand()%2 == 1){
+        setPos(1320,585 - rect().height());
+    }
+    else{
+        setPos(-300, 585 -rect().height());
+        setTransform(QTransform(-1, 0, 0, 1, boundingRect().width(), 0));
     }
 }
 

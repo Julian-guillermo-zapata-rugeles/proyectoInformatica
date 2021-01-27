@@ -24,9 +24,11 @@ private:
     QPixmap *pixmap_zombie;
     QMediaPlayer *sonido = new QMediaPlayer();
 
-    long int columnas, alto, ancho, last_position;
+    qreal columnas, alto, ancho, last_position;
     long int velocidad;
     short int amplitud, limite;
+    unsigned short int temporal=0;
+    bool habilidad=false;
 
     // metodos privados
 

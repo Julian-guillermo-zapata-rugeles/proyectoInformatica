@@ -93,5 +93,27 @@
         <file>multimedia/personaje/playerSprite.png</file>
         <file>directoriosPixmap</file>
         <file>multimedia/aves/aveSenoidal.png</file>
+        <file>multimedia/proyectiles/balafuego.png</file>
+        <file>multimedia/proyectiles/Blast.png</file>
+        <file>multimedia/proyectiles/Bullet-1.png</file>
+        <file>multimedia/proyectiles/Bullet-1_2.png</file>
+        <file>multimedia/proyectiles/Bullet-2.png</file>
+        <file>multimedia/proyectiles/Bullet-2_2.png</file>
+        <file>multimedia/proyectiles/Bullet-3.png</file>
+        <file>multimedia/proyectiles/Bullet-4.png</file>
+        <file>multimedia/proyectiles/Gem-1.png</file>
+        <file>multimedia/proyectiles/Gem-2.png</file>
+        <file>multimedia/proyectiles/Gem-3.png</file>
+        <file>multimedia/proyectiles/Laser.png</file>
+        <file>multimedia/proyectiles/ROCKET0000.png</file>
+        <file>multimedia/aliens/Alien0run.png</file>
+        <file>multimedia/aliens/Alien1attack.png</file>
+        <file>multimedia/aliens/Alien1run.png</file>
+        <file>multimedia/aliens/Alien2Jump.png</file>
+        <file>multimedia/aliens/Alien3jump.png</file>
+        <file>multimedia/aliens/alien3run.png</file>
+        <file>multimedia/aliens/Alien4Jump.png</file>
+        <file>multimedia/proyectiles/bulletEnemy.png</file>
+        <file>multimedia/animaciones/minixplot.png</file>
     </qresource>
 </RCC>

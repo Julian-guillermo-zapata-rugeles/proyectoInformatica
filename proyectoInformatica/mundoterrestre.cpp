@@ -245,7 +245,12 @@ void mundoTerrestre::generador(int tipo)
 
     if(tipo==2){
         if(level%4 == 0){
-            scene->addItem(new Aves(1));
+            if(1+rand()%2 == 1){
+                scene->addItem(new Aves(1));
+            }
+            else{
+                scene->addItem(new Aves());
+            }
         }
         else{
            scene->addItem(new enemigo(personajePrincipal->getLastPosition()));
@@ -356,7 +361,7 @@ void mundoTerrestre::actualizar_nivel()
     if(level==1){
         level_complete=true;
         generadorAsteroides->start(8000);
-        generadorEnemigos->start(6000);
+        generadorEnemigos->start(1000);
         generadorNubes->start(8000);
         generadorEnemigosGigantes->start(10000);
         //generadorDeLuna->start(30000);
@@ -365,7 +370,8 @@ void mundoTerrestre::actualizar_nivel()
 
     else if(level%3 == 0){
         createShips();
-        tiempoJuego->setTimeCount(30);
+        tiempoJuego->setTimeCount(20);
+        //generadorEnemigos->start(1000);
         this->iniciarMundo();
     }
 
@@ -396,7 +402,7 @@ void mundoTerrestre::actualizar_nivel()
         generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
         qDebug()<<" nivel "<< level;
         this->iniciarMundo();
-        tiempoJuego->setTimeCount(20);
+        tiempoJuego->setTimeCount(60);
 
     }
     tiempoJuego->setLevelworld(level);

@@ -25,6 +25,12 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
             setTransform(QTransform(-1, 0, 0, 1, boundingRect().width(), 0));
         }
     }
+    if(tipo == 4){
+        deadpix = new QPixmap(":/multimedia/animaciones/minixplot.png");
+        this->limite = 335;
+        this->ancho = 47.85;
+        this->alto = 50;
+    }
     setPos(posx, posy);
 
     tiempoVida->start(100);

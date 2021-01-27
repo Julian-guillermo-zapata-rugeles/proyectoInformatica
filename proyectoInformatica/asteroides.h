@@ -37,10 +37,12 @@ private:
     QTimer *timer;
     signed short int rotationAngle;
     void generarAspecto();
+    bool fire=false;
 
 public:
     asteroides(bool sound=true);
     asteroides(short int n);
+    asteroides(qreal x, qreal y);
     ~asteroides();
 
 private slots:
