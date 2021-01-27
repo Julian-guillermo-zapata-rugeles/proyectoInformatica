@@ -88,6 +88,7 @@ public:
     QTimer *generadorEnemigosGigantes = new QTimer();
     QTimer *generadorNubes = new QTimer();
     QTimer *generadorDeLuna = new QTimer();
+    QTimer *animacionPersonaje = new QTimer();
 
     //Naves
     QTimer *generadorNaves = new QTimer();

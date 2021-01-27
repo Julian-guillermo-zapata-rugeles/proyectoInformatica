@@ -350,6 +350,8 @@ void mundoTerrestre::ticksPersonaje()
     if(tiempoJuego->getTime()==0){
         this->actualizar_nivel();
     }
+
+    personajePrincipal->actualizarEstado();
 }
 
 

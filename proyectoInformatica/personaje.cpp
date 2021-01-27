@@ -6,6 +6,49 @@ short personaje::getDisparos_disponibles() const
     return disparos_disponibles;
 }
 
+void personaje::setState(std::string estado)
+{
+    if (estado == "stand"){
+        fila = 0;
+    }
+    else if (estado == "walk") {
+        fila = 131;
+    }
+    else if (estado == "run") {
+       fila =262;
+    }
+    else if (estado == "jump") {
+       fila =393;
+    }
+    else if (estado == "shoot") {
+       fila =524;
+    }
+    else if (estado == "attack") {
+       fila =655;
+    }
+    else if (estado == "slide") {
+       fila =786;
+    }
+    else if (estado == "hit") {
+       fila =917;
+    }
+    else if (estado == "fly") {
+       fila =1048;
+    }
+    else if (estado == "die") {
+       fila =1179;
+    }
+}
+
+void personaje::actualizarEstado()
+{
+    columna = columna+ancho;
+    if (columna > limite){
+        columna=0;
+    }
+    this->update(-ancho/2,-alto/2,ancho,alto);
+}
+
 QRectF personaje::boundingRect() const
 {
     return QRectF(-ancho/2,-alto/2,ancho,alto);
@@ -18,7 +61,7 @@ void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     Q_UNUSED(widget)
 }
 
-personaje::personaje():movimientos(575){
+personaje::personaje():movimientos(550){
     /*
         método contructor
         en principio el personaje cuenta con 5 disparos
@@ -27,7 +70,7 @@ personaje::personaje():movimientos(575){
     this->setRect(0,0,30,30);
     this->setFlag(QGraphicsItem::ItemIsFocusable);
     this->setFocus();
-    this->setPos(600,560);
+    this->setPos(600,550);
     this->dir = true ;
     this->status_saltando=true;
     this->status_gravitatorio=false;
@@ -38,6 +81,8 @@ personaje::personaje():movimientos(575){
     this->columna = 0;
     sonido->setVolume(30);
     pixPersonaje = new QPixmap(":/multimedia/personaje/playerSprite.png");
+    setState("die");
+
 }
 
 
