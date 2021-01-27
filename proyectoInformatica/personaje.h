@@ -30,6 +30,7 @@ private:
     bool pressKey=false;
     bool stateShoot=false;
     bool stateSlide=false;
+    bool stateKatana = false;
 
 
 public:

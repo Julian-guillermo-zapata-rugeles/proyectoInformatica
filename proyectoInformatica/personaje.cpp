@@ -15,28 +15,28 @@ void personaje::setState(std::string estado)
         fila = 131;
     }
     else if (estado == "run") {
-       fila =262;
+        fila =262;
     }
     else if (estado == "jump") {
-       fila =393;
+        fila =393;
     }
     else if (estado == "shoot") {
-       fila =524;
+        fila =524;
     }
     else if (estado == "attack") {
-       fila =655;
+        fila =655;
     }
     else if (estado == "slide") {
-       fila =786;
+        fila =786;
     }
     else if (estado == "hit") {
-       fila =917;
+        fila =917;
     }
     else if (estado == "fly") {
-       fila =1048;
+        fila =1048;
     }
     else if (estado == "die") {
-       fila =1179;
+        fila =1179;
     }
 }
 
@@ -57,6 +57,7 @@ void personaje::actualizarEstado()
         columna=0;
         stateShoot = false;
         stateSlide = false;
+        stateKatana= false;
     }
     this->update(-ancho/2,-alto/2,ancho,alto);
 }
@@ -202,6 +203,8 @@ void personaje::keyPressEvent(QKeyEvent *event)
         setStatus_saltando(true);
         setState("jump");
     }
+
+
     if(event->key() == Qt::Key_Space){
         stateShoot = true;
         columna = 0;
@@ -229,13 +232,14 @@ void personaje::keyPressEvent(QKeyEvent *event)
         }
         else{
             stateShoot = true;
-            // sonido disparos normales (con balas)
+            stateKatana=true;
             sonido->stop();
-            sonido->setMedia(QUrl("qrc:/multimedia/cargar_arma.mp3"));
+            sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/espadaSamurai.mp3"));
             sonido->play();
             setState("attack");
         }
     }
+
 
     if(event->key() == Qt::Key_S){
         stateShoot = true;
@@ -293,34 +297,40 @@ void personaje::eventHandler()
     for(int i=0;i< elementosColisionables.size();i++){
         // balas que colisionan con los enemigos
         if(typeid (*(elementosColisionables[i]))==typeid (bonus_municion)){
-                disparos_disponibles=disparos_disponibles+5;
-                scene()->removeItem(elementosColisionables[i]);
-                delete elementosColisionables[i];
-                break;
-            }
+            disparos_disponibles=disparos_disponibles+5;
+            scene()->removeItem(elementosColisionables[i]);
+            delete elementosColisionables[i];
+            break;
+        }
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
-                vida_disponible=vida_disponible-0.5;
-                break;
+            vida_disponible=vida_disponible-0.1;
+            if(stateKatana){
+                delete elementosColisionables[i];
             }
+            break;
+        }
 
         if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
-            vida_disponible=vida_disponible-1;
-                break;
-            }
+            vida_disponible=vida_disponible-0.5;
+            break;
+        }
         if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
             vida_disponible=0;
-                break;
-            }
+            break;
+        }
 
         if(typeid (*(elementosColisionables[i]))==typeid (Aves)){
-            vida_disponible=vida_disponible-1;
-                break;
+            vida_disponible=vida_disponible-0.5;
+            if(stateKatana){
+                delete elementosColisionables[i];
             }
+            break;
+        }
 
         if(typeid (*(elementosColisionables[i]))==typeid (Planeta)){
-            vida_disponible=vida_disponible-1;
-                break;
-            }
+            vida_disponible=vida_disponible-0.5;
+            break;
+        }
 
     }
 }

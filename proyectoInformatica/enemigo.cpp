@@ -77,6 +77,7 @@ void enemigo::moverEnemigo()
     }
 
     else{
+        setTransform(QTransform());
         // que hacer si ya estoy en el punto  //
         // cambio de pixmap  ... etc  //
     }

@@ -8,6 +8,7 @@
 #include "ship.h"
 #include <QDebug>
 #include <fstream>
+#include <animaciones.h>
 
 #define h_lim 1300
 #define v_lim 600

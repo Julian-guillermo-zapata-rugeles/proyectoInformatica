@@ -4,7 +4,7 @@ mundoTerrestre::mundoTerrestre()
 {
 
     level_complete=false;
-    level=1;
+    level=2;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -110,8 +110,11 @@ void mundoTerrestre::createShips()
     sistema.append(new Planeta(0,0,50000,200));
     sistema.append(new Planeta(-5000,0,70,70,0,-2));
     sistema.append(new Planeta(5000,0,70,70,0,2));
-    sistema.append(new Planeta(0,-5000,70,70,2,0));
+    //sistema.append(new Planeta(0,-5000,70,70,2,0));
     sistema.append(new Planeta(0,5000,70,70,-2,0));
+    /*for(unsigned short int a =0 ; a < 4;a++){
+        sistema.append(new Planeta(1+rand()%10,1+rand()%10,3000+rand()%5000,1+rand()%100));
+    }
     /*
     short int opcion = 1+rand()%2;
 
@@ -314,10 +317,23 @@ void mundoTerrestre::ticksPersonaje()
         if(tiempoJuego->getTime()==6){
             generadorDeLuna->start(1000);
         }
-        //generadorNubes->stop();
-    }
-    if(tiempoJuego->getTime()==0){
-        this->actualizar_nivel();
+        if(level%3==0 && tiempoJuego->getTime()==5){
+
+            for(int i=0 ; i<sistema.size() ; i++){
+                /*sistema.at(i)->asignarEscala(s);*/
+                //scene->addItem(sistema.at(i));
+                scene->addItem(new Animaciones(sistema.at(i)->pos().x(),sistema.at(i)->pos().y(),2));
+                scene->removeItem(sistema.at(i));
+                sistema.removeAt(i);
+
+                //delete sistema.at(i);
+
+            }
+            //generadorNubes->stop();
+        }
+        if(tiempoJuego->getTime()==0){
+            this->actualizar_nivel();
+        }
     }
 }
 

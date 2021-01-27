@@ -116,5 +116,6 @@
         <file>multimedia/proyectiles/bulletEnemy.png</file>
         <file>multimedia/animaciones/minixplot.png</file>
         <file>multimedia/personaje/playerSr.png</file>
+        <file>multimedia/Sonidos/espadaSamurai.mp3</file>
     </qresource>
 </RCC>
