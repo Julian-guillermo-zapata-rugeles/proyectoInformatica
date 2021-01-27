@@ -6,13 +6,14 @@ timeGame::timeGame(QGraphicsItem *parent): QGraphicsTextItem(parent)
     timeCount = 5;
     levelworld = 0 ;
     disparos=0;
+    vidaRestante = 100;
 
 
     int id = QFontDatabase::addApplicationFont(":/multimedia/Cosmic Blaster.ttf");
     QFontDatabase::applicationFontFamilies(id);
     setPlainText(QString("") + QString::number(timeCount));
-    setDefaultTextColor(Qt::black);
-    setFont(QFont("Tiempo",24));
+    setDefaultTextColor(Qt::yellow);
+    setFont(QFont("Tiempo",15));
     startTimer(1000);
 }
 
@@ -21,7 +22,9 @@ void timeGame::decrease()
     if(0 != timeCount){
         timeCount --;
         setPlainText(QString("Resiste : ") + QString::number(timeCount)+"\nNivel : "+ QString::number(levelworld)
-                     +"\nDisparos : "+QString::number(disparos));
+                     +"\nDisparos : "+QString::number(disparos)
+                +"\nVida Restante :"+QString::number(vidaRestante)+"%");
+
     }
 }
 
@@ -53,6 +56,16 @@ short timeGame::getLevelworld() const
 void timeGame::setDisparos(short value)
 {
     disparos = value;
+}
+
+short timeGame::getVidaRestante() const
+{
+    return vidaRestante;
+}
+
+void timeGame::setVidaRestante(short value)
+{
+    vidaRestante = value;
 }
 
 void timeGame::timerEvent(QTimerEvent *event)

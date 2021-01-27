@@ -91,6 +91,11 @@ bool personaje::getStateShoot() const
     return stateShoot;
 }
 
+short personaje::getVida_disponible() const
+{
+    return vida_disponible;
+}
+
 personaje::personaje():movimientos(550){
     /*
         método contructor
@@ -109,6 +114,7 @@ personaje::personaje():movimientos(550){
     this->alto = 131;
     this->fila = 0;
     this->columna = 0;
+    this->vida_disponible=100;
     sonido->setVolume(30);
     pixPersonaje = new QPixmap(":/multimedia/personaje/playerSprite.png");
     setState("stand");
@@ -291,6 +297,30 @@ void personaje::eventHandler()
                 delete elementosColisionables[i];
                 break;
             }
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
+                vida_disponible=vida_disponible-0.5;
+                break;
+            }
+
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
+            vida_disponible=vida_disponible-1;
+                break;
+            }
+        if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
+            vida_disponible=0;
+                break;
+            }
+
+        if(typeid (*(elementosColisionables[i]))==typeid (Aves)){
+            vida_disponible=vida_disponible-1;
+                break;
+            }
+
+        if(typeid (*(elementosColisionables[i]))==typeid (Planeta)){
+            vida_disponible=vida_disponible-1;
+                break;
+            }
+
     }
 }
 

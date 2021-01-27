@@ -32,7 +32,7 @@ mundoTerrestre::mundoTerrestre()
     vista->setSceneRect(0,0,1300,600);
 
     // creacion y anexo de personajes  //
-      // connects MAPPERS
+    // connects MAPPERS
     // se usará mapper para conectar varios timers a una única función encargada
     // de la generación de "protagonistas" de la escena.
     // la idea es que al finalizar cada timer * del generador
@@ -258,7 +258,7 @@ void mundoTerrestre::generador(int tipo)
             }
         }
         else{
-           scene->addItem(new enemigo(gp));
+            scene->addItem(new enemigo(gp));
         }
     }
 
@@ -289,60 +289,22 @@ void mundoTerrestre::generador(int tipo)
 
     if(tipo==5){
         scene->addItem(new lunaCreciente());
-         //personajePrincipal->setStatus_gravitatorio(true);
-         sonido->setMedia(QUrl("qrc:/multimedia/luna.mp3"));
-         sonido->play();
-         generadorDeLuna->stop(); // luna desactivada one shoot
+        //personajePrincipal->setStatus_gravitatorio(true);
+        sonido->setMedia(QUrl("qrc:/multimedia/luna.mp3"));
+        sonido->play();
+        generadorDeLuna->stop(); // luna desactivada one shoot
     }
 }
 
 void mundoTerrestre::ticksPersonaje()
 {
     globar_position=personajePrincipal->getLastPosition();
+    tiempoJuego->setVidaRestante(personajePrincipal->getVida_disponible());
     // este evento handler verificará si el personaje debe saltar
     //bool lunaActiva = false;
     personajePrincipal->eventHandler();
     tiempoJuego->setDisparos(personajePrincipal->getDisparos_disponibles());
 
-    //Administracion de colisiones del personaje con los diferentes objetos
-    QList<QGraphicsItem *> elementosColisionables  = scene->items();
-    for(int i=0;i< elementosColisionables.size();i++){
-        /*
-        if(typeid (*(elementosColisionables[i]))==typeid (lunaCreciente)){
-            lunaActiva=true;
-        }
-        */
-        // balas que colisionan con los enemigos
-
-        if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
-            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
-                qDebug() <<"me alcanzo un enemigo" <<endl;
-                personajePrincipal->setState("hit");
-            }
-        }
-
-        if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
-            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
-                qDebug() <<"me aplasto un asteroide" <<endl;
-                //scene->removeItem(personajePrincipal);
-                //ticks->stop();
-                //delete personajePrincipal;
-            }
-        }
-
-        if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
-            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
-                qDebug() <<"me alcanzo un saltador" <<endl;
-            }
-        }
-
-        if(typeid (*(elementosColisionables[i]))==typeid (Planeta)){
-            //qDebug() <<" Si existe una nave en el mundo " <<endl;
-            if(elementosColisionables[i]->collidesWithItem(personajePrincipal)){
-                qDebug() <<"me impacto una nave" <<endl;
-            }
-        }
-    }
 
     if(tiempoJuego->getTime() < 12){
         //ticks->stop();
@@ -425,16 +387,16 @@ void mundoTerrestre::actualizar()
 
 void mundoTerrestre::updateAnimation()
 {
-   personajePrincipal->actualizarEstado();
+    personajePrincipal->actualizarEstado();
 
-   if(personajePrincipal->getStatus_saltando() == false &&
-             personajePrincipal->getPressKey() == false &&
-             personajePrincipal->getStateShoot() == false)
-   {
-       personajePrincipal->setState("stand");
-   }
-   else if (personajePrincipal->getPressKey() == true && personajePrincipal->getStateShoot() == false){
-       personajePrincipal->setPressKey(false);
-       //personajePrincipal->setState("stand");
-   }
+    if(personajePrincipal->getStatus_saltando() == false &&
+            personajePrincipal->getPressKey() == false &&
+            personajePrincipal->getStateShoot() == false)
+    {
+        personajePrincipal->setState("stand");
+    }
+    else if (personajePrincipal->getPressKey() == true && personajePrincipal->getStateShoot() == false){
+        personajePrincipal->setPressKey(false);
+        //personajePrincipal->setState("stand");
+    }
 }

@@ -198,7 +198,7 @@ void enemigo::asignarCaracteristicas()
     }
 
     if(1+rand()%2 == 1){
-        //setPos(1320,585 - rect().height());
+        setPos(1320,585 - rect().height());
     }
     else{
         setPos(-300, 585 -rect().height());

@@ -14,17 +14,22 @@ public:
     void decrease();
     int getTime();
 
-    short getTimeCount() const;
-    void setTimeCount(short value);
-    void setLevelworld(short value);
-    short getLevelworld() const;
 
+    void setTimeCount(short value);
+    void setVidaRestante(short value);
+    void setLevelworld(short value);
     void setDisparos(short value);
+
+    short getLevelworld() const;
+    short getTimeCount() const;
+    short getVidaRestante() const;
+
 
 private:
     short int timeCount;
     short int levelworld;
     short int disparos;
+    short int vidaRestante;
 
     // QObject interface
 protected:
