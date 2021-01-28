@@ -117,5 +117,6 @@
         <file>multimedia/animaciones/minixplot.png</file>
         <file>multimedia/personaje/playerSr.png</file>
         <file>multimedia/Sonidos/espadaSamurai.mp3</file>
+        <file>multimedia/Backgrounds/Inicio.png</file>
     </qresource>
 </RCC>
