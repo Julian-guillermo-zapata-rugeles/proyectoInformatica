@@ -6,6 +6,9 @@
 #include <QKeyEvent>
 #include <QDebug>
 #include <mundoterrestre.h>
+#include <cliente.h>
+
+bool playing = false;
 
 int main(int argc, char *argv[])
 {
@@ -13,8 +16,10 @@ int main(int argc, char *argv[])
 
     //MenuInicio *inicio = new MenuInicio();
     //inicio->show();
-    mundoTerrestre * primerNivel = new mundoTerrestre();
-    primerNivel->iniciarMundo();
+    cliente cliente_juego;
+    cliente_juego.show();
+    //mundoTerrestre * primerNivel = new mundoTerrestre();
+    //primerNivel->iniciarMundo();
 
     return a.exec();
 }

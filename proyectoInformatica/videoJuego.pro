@@ -20,6 +20,7 @@ SOURCES += \
     asteroides.cpp \
     aves.cpp \
     bonus_municion.cpp \
+    cliente.cpp \
     enemigo.cpp \
     enemigoGigante.cpp \
     gameoverwindow.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     asteroides.h \
     aves.h \
     bonus_municion.h \
+    cliente.h \
     enemigo.h \
     enemigoGigante.h \
     gameoverwindow.h \
@@ -55,6 +57,7 @@ HEADERS += \
     timeGame.h
 
 FORMS += \
+    cliente.ui \
     levelcompletewindow.ui
 
 # Default rules for deployment.
