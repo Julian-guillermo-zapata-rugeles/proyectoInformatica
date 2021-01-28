@@ -5,8 +5,7 @@
 #include <personaje.h> // propia
 #include <QKeyEvent>
 #include <QDebug>
-//#include <mundoterrestre.h>
-#include <menuinicio.h>
+#include <mundoterrestre.h>
 
 int main(int argc, char *argv[])
 {

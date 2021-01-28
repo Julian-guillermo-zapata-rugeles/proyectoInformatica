@@ -25,7 +25,6 @@ SOURCES += \
     gameoverwindow.cpp \
     lunacreciente.cpp \
     main.cpp \
-    menuinicio.cpp \
     movimientos.cpp \
     mundoterrestre.cpp \
     nubes.cpp \
