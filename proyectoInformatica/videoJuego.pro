@@ -23,8 +23,6 @@ SOURCES += \
     enemigo.cpp \
     enemigoGigante.cpp \
     gameoverwindow.cpp \
-    levelcompletewindow.cpp \
-    loginwindow.cpp \
     lunacreciente.cpp \
     main.cpp \
     menuinicio.cpp \
@@ -46,10 +44,7 @@ HEADERS += \
     enemigo.h \
     enemigoGigante.h \
     gameoverwindow.h \
-    levelcompletewindow.h \
-    loginwindow.h \
     lunacreciente.h \
-    menuinicio.h \
     movimientos.h \
     mundoterrestre.h \
     nubes.h \
@@ -61,11 +56,7 @@ HEADERS += \
     timeGame.h
 
 FORMS += \
-    gameoverwindow.ui \
-    levelcompletewindow.ui \
-    loginwindow.ui \
-    mainwindow.ui \
-    menuinicio.ui
+    levelcompletewindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
