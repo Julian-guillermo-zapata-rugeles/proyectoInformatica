@@ -34,7 +34,7 @@ public:
     // y el spawn del enemigos
     // algunas condiciones de gravedad (mas o mensos) y ambientación
 
-    mundoTerrestre();
+    mundoTerrestre(QString userName);
     void iniciarMundo();
 
     //metodos para la naves

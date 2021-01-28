@@ -1,7 +1,13 @@
 #include "mundoterrestre.h"
 
-mundoTerrestre::mundoTerrestre()
+mundoTerrestre::mundoTerrestre(QString userName)
 {
+
+    /*
+    sección de información para el nivel y el usuario en partida
+    */
+    tiempoJuego->setUser_name(userName); // lo recibí desde el cliente principal
+
 
     level_complete=false;
     level=2;

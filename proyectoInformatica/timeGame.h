@@ -24,12 +24,19 @@ public:
     short getTimeCount() const;
     short getVidaRestante() const;
 
+    /* Agregé este nuevo método setter
+        para poner la información del usuario en pantalla y sepa sobre su partida
+        tambien se piensa usar para sacar la información y exportarla a un archivo que  almacenará la información.
+        para su posterior uso
+    */
+    void setUser_name(const QString &value);
 
 private:
     short int timeCount;
     short int levelworld;
     short int disparos;
     short int vidaRestante;
+    QString user_name;
 
     // QObject interface
 protected:

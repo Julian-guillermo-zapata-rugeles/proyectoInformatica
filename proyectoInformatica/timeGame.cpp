@@ -7,6 +7,7 @@ timeGame::timeGame(QGraphicsItem *parent): QGraphicsTextItem(parent)
     levelworld = 0 ;
     disparos=0;
     vidaRestante = 100;
+    QString user_name = "";
 
 
     int id = QFontDatabase::addApplicationFont(":/multimedia/Cosmic Blaster.ttf");
@@ -21,7 +22,11 @@ void timeGame::decrease()
 {
     if(0 != timeCount){
         timeCount --;
-        setPlainText(QString("Resiste : ") + QString::number(timeCount)+"\nNivel : "+ QString::number(levelworld)
+        /*
+        Agregé el usuario al incio
+        este se usará para identificar al jugador durante la partida y posterior almacén de datos
+         */
+        setPlainText("Usuario : "+user_name+QString("\nResiste : ") + QString::number(timeCount)+"\nNivel : "+ QString::number(levelworld)
                      +"\nDisparos : "+QString::number(disparos)
                 +"\nVida Restante :"+QString::number(vidaRestante)+"%");
 
@@ -61,6 +66,11 @@ void timeGame::setDisparos(short value)
 short timeGame::getVidaRestante() const
 {
     return vidaRestante;
+}
+
+void timeGame::setUser_name(const QString &value)
+{
+    user_name = value;
 }
 
 void timeGame::setVidaRestante(short value)

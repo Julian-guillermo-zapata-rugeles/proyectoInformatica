@@ -8,6 +8,7 @@ cliente::cliente(QWidget *parent) :
 {
     ui->setupUi(this);
     hide_elements(true);
+
 }
 
 cliente::~cliente()
@@ -33,13 +34,27 @@ void cliente::hide_elements(bool option)
 void cliente::on_pushButton_clicked()
 {
     //
-    mundoTerrestre *world;
-    world = new mundoTerrestre();
-    this->close();
-    world->iniciarMundo();
+    hide_elements(false); // muestra la barra
+    mode_cliente="wait_for_game";
 }
 
 void cliente::on_pushButton_2_clicked()
 {
     hide_elements(false);
+    mode_cliente="wait_for_load";
+}
+
+
+
+void cliente::on_info_send_clicked()
+{
+    if(mode_cliente=="wait_for_game"){
+        // capturaremos el nombre y haremos comprobaciones
+        QString userRead = ui->info_text->toPlainText();
+        ui->info_text->clear();
+        mundoTerrestre  *mundo;
+        mundo = new mundoTerrestre(userRead);
+        this->close();
+        mundo->iniciarMundo();
+    }
 }
