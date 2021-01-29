@@ -307,6 +307,8 @@ void mundoTerrestre::generador(int tipo)
 
 void mundoTerrestre::ticksPersonaje()
 {
+    scene->advance();
+    scene->update();
     globar_position=personajePrincipal->getLastPosition();
     tiempoJuego->setVidaRestante(personajePrincipal->getVida_disponible());
     // este evento handler verificará si el personaje debe saltar

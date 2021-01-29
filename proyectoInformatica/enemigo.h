@@ -21,7 +21,7 @@ class enemigo : public QObject , public QGraphicsRectItem , public movimientos
 private:
     bool direction; // true Derecha // false izquierda
     //qreal last_position;
-    QTimer *timer;
+    //QTimer *timer;//
     QPixmap *pixmap_zombie;
     QMediaPlayer *sonido = new QMediaPlayer();
     qreal columnas, alto, ancho, *last_position;
@@ -44,11 +44,15 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
 
-
+/*
 private slots:
     void moverEnemigo();
+*/
 
 
+    // QGraphicsItem interface
+public:
+    void advance(int phase);
 };
 
 #endif // ENEMIGO_H

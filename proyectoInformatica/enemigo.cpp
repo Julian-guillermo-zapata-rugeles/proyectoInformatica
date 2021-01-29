@@ -2,24 +2,22 @@
 #include "personaje.h"
 
 
+
+/*   ------------------- CONSTRUCTOR ------------------------ */
 enemigo::enemigo(qreal *lastPosition):movimientos(560)
 {
     // constructor
+    srand(time(NULL));
 
+    // establecer dimensiones del personaje 30 x 50
+    //qDebug() << "Generacion : Enemigo común "; // DEBUG
     this->setRect(0,0,30,50);
     this->setTransformOriginPoint(this->boundingRect().center());
-    // establecer dimensiones del personaje 30 x 50
-    qDebug() << "Generacion : Enemigo común ";
-    srand(time(NULL));
     this->setScale(0.7);
 
     // inicialización de atributos
     this->last_position=lastPosition;
-
-    // inicialización de reloj y slots
-    timer = new QTimer();
-    connect(timer,SIGNAL(timeout()),this,SLOT(moverEnemigo()));
-    timer->start(60);
+    this->velocidad_dezplazamiento=1+rand()%5;
 
     // llamado a metodos para personalizar el objeto creado
     // se asignará a travez de argumentos variaciones para este objeto
@@ -29,6 +27,10 @@ enemigo::enemigo(qreal *lastPosition):movimientos(560)
 
 }
 
+
+
+
+/*   ------------------- DESCONSTRUCTOR ---------------------- */
 enemigo::~enemigo()
 {
     // este destructor eliminará automaticamente el personaje de la escena dando así la oportunidad
@@ -40,11 +42,15 @@ enemigo::~enemigo()
 
 }
 
+
+
+/*   ------------------- BOUNDING RECT  ------------------------ */
 QRectF enemigo::boundingRect() const
 {
     return QRectF(-ancho/2,-alto/2,ancho,alto);
 }
 
+/*   -------------------     QPAINTER   ------------------------ */
 void enemigo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->drawPixmap(-ancho/2,-alto/2,*pixmap_zombie,columnas,0,ancho,alto);
@@ -53,7 +59,10 @@ void enemigo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 }
 
 
-void enemigo::moverEnemigo()
+
+
+/*   ------------------- FUNCION ADVANCE  ------------------------ */
+void enemigo::advance(int phase)
 {
     /*
         Este método está encargado del movimiento del personaje
@@ -68,11 +77,11 @@ void enemigo::moverEnemigo()
     */
 
     if(*last_position  < pos().x()){
-        setPos(x()-cambio,pos().y());
+        setPos(x()-velocidad_dezplazamiento,pos().y());
         setTransform(QTransform());
     }
     else if(*last_position > pos().x()){
-        setPos(x()+cambio,pos().y());
+        setPos(x()+velocidad_dezplazamiento,pos().y());
         setTransform(QTransform(-1, 0, 0, 1, 0, 0));
     }
 
@@ -83,9 +92,14 @@ void enemigo::moverEnemigo()
     }
 
     cambiarAnimacion(); // FIJA
-    qDebug()<< *last_position << "pos at <--";
+    //qDebug()<< *last_position << "pos at <--";
 }
 
+
+
+
+
+/*   ------------------- CAMBIO ANIMACION ------------------------ */
 void enemigo::cambiarAnimacion()
 {
     // Este método se encarga de refrescar el personaje mediante el llamado del TIMER
@@ -103,6 +117,10 @@ void enemigo::cambiarAnimacion()
 }
 
 
+
+
+
+/*   ----------------  CARACTERISTICAS VISUALES --------------------- */
 void enemigo::asignarCaracteristicas()
 {
     // Este método se encarga de asignar caracteristicas al Enemigo
