@@ -60,7 +60,7 @@ public:
     QList<float> origen;
 
     // Niveles y configuración
-    bool level_complete;
+    bool game_pause , *pointer_to_pause;
     short int level;
     short int level_time ;
     short int tiempo_asterides;
@@ -69,6 +69,7 @@ public:
     short int tiempo_nubes;
     short int tiempo_luna;
     qreal globar_position , *gp;
+    const char *fondos[6];
 
 
     /*
@@ -90,19 +91,18 @@ public:
     QTimer *generadorEnemigosGigantes = new QTimer();
     QTimer *generadorNubes = new QTimer();
     QTimer *generadorDeLuna = new QTimer();
-    QTimer *animacionPersonaje = new QTimer();
+
 
     //Naves
     QTimer *generadorNaves = new QTimer();
 
 public slots:
   void generador(int);
-  void ticksPersonaje();
+  void ticksMundo();
   void actualizar_nivel();
 
   //actualizar las naves
   void actualizar();
-  void updateAnimation();
 };
 
 #endif // MUNDOTERRESTRE_H
