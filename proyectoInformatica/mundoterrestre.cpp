@@ -10,7 +10,7 @@ mundoTerrestre::mundoTerrestre(QString userName)
 
 
     level_complete=false;
-    level=4;
+    level=5;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;

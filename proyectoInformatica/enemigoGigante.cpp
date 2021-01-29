@@ -1,33 +1,6 @@
 #include "enemigoGigante.h"
 
-void enemigoGigante::asignarCaracteristicas()
-{
-    sonido->stop();
-    sonido->setMedia(QUrl("qrc:/multimedia/suspensoCreciente.mp3"));
-    sonido->play();
-    short int aleatorio = 1+rand() %10;
-    //aleatorio=0;
 
-    if(aleatorio%2==0){
-        setPos(1300,530);
-        this->direction=false;
-        this->columnas=0;
-        this->alto=150;
-        this->ancho=100;
-        pixmap_zombie = new QPixmap(":/multimedia/zombieGigante/corredorMini.png");
-
-    }
-    else{
-        setPos(-300 ,530);
-        this->direction=true;
-        this->columnas=1700;
-        this->alto=150;
-        this->ancho=100;
-        pixmap_zombie = new QPixmap(":/multimedia/zombieGigante/corredorMiniIzquierda.png");
-
-    }
-    //this->setScale(0.8);
-}
 
 enemigoGigante::enemigoGigante(qreal lastPosition)
 {
@@ -36,11 +9,8 @@ enemigoGigante::enemigoGigante(qreal lastPosition)
     this->setRect(0,0,50,50);
     this->last_position=lastPosition;
     this->disparosSoportados=5;
-
-    timer->start(20);
-    connect(timer,SIGNAL(timeout()),this,SLOT(moverEnemigo()));
-    asignarCaracteristicas();
-    sonido->setVolume(30);
+    generarCaracteristicas();
+    sonido->setVolume(40);
 }
 
 enemigoGigante::~enemigoGigante()
@@ -54,13 +24,13 @@ enemigoGigante::~enemigoGigante()
 }
 
 
-void enemigoGigante::moverEnemigo()
+void enemigoGigante::advance(int phase)
 {
     if(direction == false){
-        setPos(pos().x()-5,pos().y());
+        setPos(pos().x()-15,pos().y());
     }
     else {
-        setPos(pos().x()+5,pos().y());
+        setPos(pos().x()+15,pos().y());
     }
     cambiarAnimacion();
 }
@@ -78,6 +48,9 @@ void enemigoGigante::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }
+
+
+
 
 
 /*
@@ -113,4 +86,34 @@ void enemigoGigante::cambiarAnimacion()
     }
      this->update(-ancho/2,-alto/2,ancho,alto);
 
+}
+
+
+void enemigoGigante::generarCaracteristicas()
+{
+    sonido->stop();
+    sonido->setMedia(QUrl("qrc:/multimedia/suspensoCreciente.mp3"));
+    sonido->play();
+    short int aleatorio = 1+rand() %10;
+    //aleatorio=0;
+
+    if(aleatorio%2==0){
+        setPos(1300,530);
+        this->direction=false;
+        this->columnas=0;
+        this->alto=150;
+        this->ancho=100;
+        pixmap_zombie = new QPixmap(":/multimedia/zombieGigante/corredorMini.png");
+
+    }
+    else{
+        setPos(-300 ,530);
+        this->direction=true;
+        this->columnas=1700;
+        this->alto=150;
+        this->ancho=100;
+        pixmap_zombie = new QPixmap(":/multimedia/zombieGigante/corredorMiniIzquierda.png");
+
+    }
+    //this->setScale(0.8);
 }
