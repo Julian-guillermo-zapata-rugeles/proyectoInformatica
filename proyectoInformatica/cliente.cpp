@@ -2,7 +2,7 @@
 #include "ui_cliente.h"
 #include <mundoterrestre.h>
 #include <QSplashScreen>
-
+#include <QTime>
 
 cliente::cliente(QWidget *parent) :
     QWidget(parent),
@@ -38,12 +38,14 @@ void cliente::on_pushButton_clicked()
     //
     hide_elements(false); // muestra la barra
     mode_cliente="wait_for_game";
+    ui->info_send->setText("Jugar");
 }
 
 void cliente::on_pushButton_2_clicked()
 {
     hide_elements(false);
     mode_cliente="wait_for_load";
+    ui->info_send->setText("Buscar");
 }
 
 

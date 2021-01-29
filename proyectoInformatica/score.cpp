@@ -3,8 +3,6 @@
 Score::Score(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
     score = 0;
-    life = 20;
-    balas = 5;
 
     //dibujar texto
     int id = QFontDatabase::addApplicationFont(":/multimedia/Cosmic Blaster.ttf");
@@ -17,7 +15,13 @@ Score::Score(QGraphicsItem *parent): QGraphicsTextItem(parent)
 void Score::increase()
 {
     score ++;
-    setPlainText(QString("") + QString::number(score*2));
+    setPlainText(QString("") + QString::number(score));
+}
+
+void Score::setScore(int value)
+{
+    score = value;
+    increase();
 }
 
 int Score::getScore()

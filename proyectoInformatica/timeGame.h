@@ -30,6 +30,7 @@ public:
         para su posterior uso
     */
     void setUser_name(const QString &value);
+    void setImpulsos(short value);
 
 private:
     short int timeCount;
@@ -37,6 +38,7 @@ private:
     short int disparos;
     short int vidaRestante;
     QString user_name;
+    short int impulsos=0;
 
     // QObject interface
 protected:

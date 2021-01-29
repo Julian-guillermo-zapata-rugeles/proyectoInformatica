@@ -120,9 +120,27 @@
         <file>multimedia/Backgrounds/Inicio.png</file>
         <file>multimedia/icon.png</file>
         <file>multimedia/splash.png</file>
-        <file>multimedia/next4.png</file>
-        <file>multimedia/next level3.png</file>
-        <file>multimedia/next level.png</file>
+        <file>multimedia/asteroides/1.png</file>
+        <file>multimedia/asteroides/10.png</file>
+        <file>multimedia/asteroides/18.png</file>
+        <file>multimedia/asteroides/18r.png</file>
+        <file>multimedia/asteroides/2.png</file>
+        <file>multimedia/asteroides/3.png</file>
+        <file>multimedia/asteroides/30.png</file>
+        <file>multimedia/asteroides/31.png</file>
+        <file>multimedia/asteroides/4.png</file>
+        <file>multimedia/asteroides/5.png</file>
+        <file>multimedia/asteroides/6.png</file>
+        <file>multimedia/asteroides/7.png</file>
+        <file>multimedia/asteroides/8.png</file>
+        <file>multimedia/asteroides/9.png</file>
+        <file>multimedia/asteroides/meteoro1.png</file>
+        <file>multimedia/asteroides/Recurso 11.png</file>
+        <file>multimedia/asteroides/Recurso 12.png</file>
+        <file>multimedia/asteroides/Recurso 13.png</file>
+        <file>multimedia/asteroides/Recurso 14.png</file>
+        <file>multimedia/asteroides/Recurso 15.png</file>
+        <file>multimedia/asteroides/Recurso 2.png</file>
         <file>multimedia/aves/dieBird1.png</file>
         <file>multimedia/aves/DieBird2.png</file>
     </qresource>

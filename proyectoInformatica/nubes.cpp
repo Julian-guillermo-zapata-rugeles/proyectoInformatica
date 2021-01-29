@@ -4,17 +4,24 @@ nubes::nubes()
 {
     srand(time(NULL));
     generarAspecto();
-    generarAleatoriedad();
-}
 
+    if((0+rand()%10)% 2 ==0 ){
+        setPos(-800,20+rand()% 200);
+        dir = true;
+    }
+    else{
+        setPos(1300, 20 + rand()%200);
+        dir = false ;
+    }
+    timer->start(20);
+    connect(timer, SIGNAL(timeout()),this,SLOT(moverNubes()));
+}
 
 nubes::~nubes()
 {
-    //qDebug() << "nube eliminada (salió de escena) ";
-     scene()->removeItem(this);
+    qDebug() << "nube eliminada (salió de escena) ";
     // otras acciones ...
 }
-
 
 void nubes::generarAspecto()
 {
@@ -30,34 +37,17 @@ void nubes::generarAspecto()
     // fin del condicionamiento
 }
 
-
-
-
-void nubes::generarAleatoriedad()
-{
-    if((0+rand()%10)% 2 ==0 ){
-        setPos(-800,20+rand()% 200);
-        dir = true;
-    }
-    else{
-        setPos(1300, 20 + rand()%200);
-        dir = false ;
-    }
-}
-
-
-
-void nubes::advance(int phase)
+void nubes::moverNubes()
 {
     if(dir==true){
-        setPos(pos().x()+2,pos().y());
+        setPos(pos().x()+1,pos().y());
     }
     else{
-        setPos(pos().x()-2,pos().y());
+        setPos(pos().x()-1,pos().y());
     }
 
     if(pos().x()<-900 || pos().x() > 1500){
+        scene()->removeItem(this);
         delete this;
     }
-    Q_UNUSED(phase);
 }

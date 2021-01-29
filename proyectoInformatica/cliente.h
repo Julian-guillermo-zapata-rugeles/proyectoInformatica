@@ -2,7 +2,6 @@
 #define CLIENTE_H
 
 #include <QWidget>
-#include <QTime>
 
 namespace Ui {
 class cliente;

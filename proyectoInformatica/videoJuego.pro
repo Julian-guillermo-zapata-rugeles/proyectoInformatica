@@ -55,7 +55,8 @@ HEADERS += \
     timeGame.h
 
 FORMS += \
-    cliente.ui
+    cliente.ui \
+    levelcompletewindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

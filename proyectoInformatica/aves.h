@@ -9,6 +9,7 @@
 #include <QGraphicsScene>
 #include <math.h>
 #include "proyectil.h"
+#include "animaciones.h"
 
 class Aves: public QObject, public QGraphicsItem
 {
@@ -23,20 +24,23 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
 
 private:
-
+    QTimer *timerAves;
+    QTimer *timerAvesParabolicas;
     QPixmap *AvePix;
+
     qreal columnas, alto, ancho, tmp_sumador;
     long int velocidad;
     short int amplitud, limite;
-    bool direction,  dir , senoidal ;
+    bool direction, dir;
     unsigned short int temporal=0;
     bool identity=false;
 
     void birdAppearance();
     void cambiarAnimacion();
 
-public:
-    void advance(int phase);
+public slots:
+    void moverAves();
+    void moverAvesParabolicas();
 };
 
 #endif // AVES_H

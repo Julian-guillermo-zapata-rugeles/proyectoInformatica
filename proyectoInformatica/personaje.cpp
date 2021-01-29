@@ -40,6 +40,36 @@ void personaje::setState(std::string estado)
     }
 }
 
+void personaje::actualizarEstado()
+{
+    if(stateSlide == true){
+        if(dir == false && pos().x()-30>0){
+            setPos(pos().x()-30,pos().y());
+        }
+        if(dir == true && pos().x()+30<1300){
+            setPos(pos().x()+30,pos().y());
+        }
+    }
+
+    columna = columna+ancho;
+
+    if (columna > limite){
+        columna=0;
+        stateShoot = false;
+        if(flying == true){
+            impulsos -= 1;
+            qDebug()<< "salte, debo restar"<<endl;
+        }
+        stateSlide = false;
+        stateKatana= false;
+        flying = false;
+    }
+
+    this->update(-ancho/2,-alto/2,ancho,alto);
+
+}
+
+
 QRectF personaje::boundingRect() const
 {
     return QRectF(-ancho/2,-alto/2,ancho,alto);
@@ -74,12 +104,20 @@ short personaje::getVida_disponible() const
     return vida_disponible;
 }
 
-bool personaje::getPointer_pause() const
+short personaje::getImpulsos() const
 {
-    return pointer_pause;
+    return impulsos;
 }
 
+short personaje::getPuntos() const
+{
+    return puntos;
+}
 
+void personaje::setPuntos(short value)
+{
+    puntos = value;
+}
 
 personaje::personaje():movimientos(550){
     /*
@@ -100,12 +138,13 @@ personaje::personaje():movimientos(550){
     this->fila = 0;
     this->columna = 0;
     this->vida_disponible=100;
-    this->pointer_pause=false;
     sonido->setVolume(30);
     pixPersonaje = new QPixmap(":/multimedia/personaje/playerSprite.png");
     setState("stand");
+    this->GlobalPuntos=&puntos;
 
 }
+
 
 // función del keypressEvent
 /*
@@ -116,132 +155,127 @@ personaje::personaje():movimientos(550){
 
 void personaje::keyPressEvent(QKeyEvent *event)
 {
-    if(pointer_pause==false){
-        if(event->key() == Qt::Key_A){
-            pressKey = true;
-            // Condición movimiento izquierda :
-            //      movimiento del personaje hacia la izquierda
-            //       status_gravitatorio :
-            //          si el personaje está en estado de gravedad su movimiento
-            //          lateral se verá impedido (avanza menos)
+    if(event->key() == Qt::Key_A){
+        pressKey = true;
+        // Condición movimiento izquierda :
+        //      movimiento del personaje hacia la izquierda
+        //       status_gravitatorio :
+        //          si el personaje está en estado de gravedad su movimiento
+        //          lateral se verá impedido (avanza menos)
 
-            //      NOTA: se puede simplificar el conjunto de instrucciones para acortar código
-            if(pos().x()>0){
-                // si no existe estado de gravedad el personaje se mueve normalmente
-                if(status_gravitatorio==false){
-                    setPos(x()-10,y());
-                    setTransform(QTransform());
-                    if(disparos_disponibles > 0){
-                        setState("run");
-                    }
-                    else {
-                        setState("walk");
-                    }
+        //      NOTA: se puede simplificar el conjunto de instrucciones para acortar código
+        if(pos().x()>0){
+            // si no existe estado de gravedad el personaje se mueve normalmente
+            if(status_gravitatorio==false){
+                setPos(x()-10,y());
+                setTransform(QTransform());
+                if(disparos_disponibles > 0){
+                    setState("run");
                 }
-                else{
-                    // bajo efecto de gravedad (avance lateral)
-                    setPos(x()-1,y());
-                    if(disparos_disponibles > 0){
-                        setState("run");
-                    }
-                    else {
-                        setState("walk");
-                    }
+                else {
+                    setState("walk");
                 }
-                // establece la dirección en la que mira el personaje para crear
-                // la bala en esa dirección
-                dir=false;
-            }
-        }
-
-        if(event->key() == Qt::Key_D){
-            pressKey = true;
-            if(pos().x()<1300-30){
-                if(status_gravitatorio==false){
-                    setPos(x()+10,y());
-                    setTransform(QTransform(-1, 0, 0, 1, 0, 0));
-                    if(disparos_disponibles > 0){
-                        setState("run");
-                    }
-                    else {
-                        setState("walk");
-                    }
-                }
-                else{
-                    // bajo efecto de gravedad
-                    setPos(x()+1,y());
-                    if(disparos_disponibles > 0){
-                        setState("run");
-                    }
-                    else {
-                        setState("walk");
-                    }
-                }
-                dir=true;
-            }
-        }
-
-        if(event->key() == Qt::Key_W){
-            /*
-            Evento de salto : se establece en verdadero ()
-            */
-            setStatus_saltando(true);
-            setState("jump");
-        }
-
-        if(event->key() == Qt::Key_Space){
-            stateShoot = true;
-            columna = 0;
-            /*
-              este segmento genera un disparo y lo agrega a la escena
-              también se genera un sonido que simula el disparo
-            */
-            if(disparos_disponibles>=0){
-                proyectil *disparo = new proyectil(dir);
-                // qDebug() <<"posicion x "<< this->x(); // DEBUG
-                // qDebug() <<"posicion y "<< this->y(); // DEBUG
-
-                disparo->setPixmap(QPixmap(":/multimedia/pixmap_disparo_sol.png"));
-                scene()->addItem(disparo);
-                setState("shoot");
-                disparo->setPos(this->x()+10,this->y());
-                // se añade a la escena y se ubica en la posición del personaje
-
-                // zona de sonidos y descuento de proyectiles //
-                // sonido de descarga (sin munición)
-                sonido->stop();
-                sonido->setMedia(QUrl("qrc:/multimedia/laser1.mp3"));
-                sonido->play();
-                disparos_disponibles=disparos_disponibles-1;
             }
             else{
-                stateShoot = true;
-                stateKatana=true;
-                sonido->stop();
-                sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/espadaSamurai.mp3"));
-                sonido->play();
-                setState("attack");
+                // bajo efecto de gravedad (avance lateral)
+                setPos(x()-1,y());
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
             }
+            // establece la dirección en la que mira el personaje para crear
+            // la bala en esa dirección
+            dir=false;
         }
+    }
 
-        if(event->key() == Qt::Key_S){
+    if(event->key() == Qt::Key_D){
+        pressKey = true;
+        if(pos().x()<1300-30){
+            if(status_gravitatorio==false){
+                setPos(x()+10,y());
+                setTransform(QTransform(-1, 0, 0, 1, 0, 0));
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
+            }
+            else{
+                // bajo efecto de gravedad
+                setPos(x()+1,y());
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
+            }
+            dir=true;
+        }
+    }
+
+    if(event->key() == Qt::Key_W){
+        /*
+        Evento de salto : se establece en verdadero ()
+        */
+        setStatus_saltando(true);
+        setState("jump");
+    }
+
+
+    if(event->key() == Qt::Key_Space){
+        stateShoot = true;
+        columna = 0;
+        /*
+          este segmento genera un disparo y lo agrega a la escena
+          también se genera un sonido que simula el disparo
+        */
+        if(disparos_disponibles>=0){
+            proyectil *disparo = new proyectil(dir,GlobalPuntos);
+            // qDebug() <<"posicion x "<< this->x(); // DEBUG
+            // qDebug() <<"posicion y "<< this->y(); // DEBUG
+
+            disparo->setPixmap(QPixmap(":/multimedia/pixmap_disparo_sol.png"));
+            scene()->addItem(disparo);
+            setState("shoot");
+            disparo->setPos(this->x()+10,this->y());
+            // se añade a la escena y se ubica en la posición del personaje
+
+            // zona de sonidos y descuento de proyectiles //
+            // sonido de descarga (sin munición)
+            sonido->stop();
+            sonido->setMedia(QUrl("qrc:/multimedia/laser1.mp3"));
+            sonido->play();
+            disparos_disponibles=disparos_disponibles-1;
+        }
+        else{
             stateShoot = true;
-            stateSlide = true;
-            columna=655;
+            stateKatana=true;
+            sonido->stop();
+            sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/espadaSamurai.mp3"));
+            sonido->play();
+            setState("attack");
+        }
+    }
+
+    if(event->key() == Qt::Key_S){
+        stateShoot = true;
+        stateSlide = true;
+        columna=655;
+        if(status_saltando == true){
+            flying = true;
+            setState("fly");
+        }
+        else{
             setState("slide");
         }
     }
-    if(event->key() == Qt::Key_P){
-        if(pointer_pause==false){
-            pointer_pause=true;
-        }
-        else{
-            pointer_pause=false;
-        }
-    }
 }
-
-
 
 qreal personaje::getLastPosition()
 {
@@ -257,7 +291,7 @@ qreal personaje::getLastPosition()
     return x;
 }
 
-void personaje::advance(int phase)
+void personaje::eventHandler()
 {
     /*
     EL EVENTHANDLER del personaje pretende suplir las necesidades de timer
@@ -265,17 +299,6 @@ void personaje::advance(int phase)
     (METODO TEMPORAL POR MOMENTO) mientras buscamos una solución al timer
 
     */
-
-    if(this->getStatus_saltando() == false &&
-            this->getPressKey() == false &&
-            this->getStateShoot() == false)
-    {
-        this->setState("stand");
-    }
-    else if (this->getPressKey() == true && this->getStateShoot() == false){
-        this->setPressKey(false);
-        //this->setState("stand");
-    }
 
     saltar(); // método heredado de movimiento
     //gravitar(); // método heredado de movimiento
@@ -336,27 +359,6 @@ void personaje::advance(int phase)
             vida_disponible=vida_disponible-0.5;
             break;
         }
-
     }
-    if(stateSlide == true){
-        if(dir == false && pos().x()-30>0){
-            setPos(pos().x()-30,pos().y());
-        }
-        if(dir == true && pos().x()+30<1300){
-            setPos(pos().x()+30,pos().y());
-        }
-    }
-
-    // ------------------- cambio de animación ---------------------- //
-    columna = columna+ancho;
-
-    if (columna > limite){
-        columna=0;
-        stateShoot = false;
-        stateSlide = false;
-        stateKatana= false;
-    }
-    this->update(-ancho/2,-alto/2,ancho,alto);
-    Q_UNUSED(phase);
 }
 

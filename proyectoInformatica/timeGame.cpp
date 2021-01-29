@@ -28,7 +28,7 @@ void timeGame::decrease()
          */
         setPlainText("Usuario : "+user_name+QString("\nResiste : ") + QString::number(timeCount)+"\nNivel : "+ QString::number(levelworld)
                      +"\nDisparos : "+QString::number(disparos)
-                +"\nVida Restante :"+QString::number(vidaRestante)+"%");
+                +"\nVida Restante :"+QString::number(vidaRestante)+"%\n"+"Impulsos : "+QString::number(impulsos));
 
     }
 }
@@ -71,6 +71,11 @@ short timeGame::getVidaRestante() const
 void timeGame::setUser_name(const QString &value)
 {
     user_name = value;
+}
+
+void timeGame::setImpulsos(short value)
+{
+    impulsos = value;
 }
 
 void timeGame::setVidaRestante(short value)
