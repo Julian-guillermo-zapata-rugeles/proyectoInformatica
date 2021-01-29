@@ -9,7 +9,6 @@
 #include <random>
 #include <QMediaPlayer>
 #include <QVector>
-#include <QTimer>
 #include <enemigo.h>
 #include <enemigoGigante.h>
 #include <chrono>
@@ -34,19 +33,21 @@ class asteroides :public QObject , public QGraphicsPixmapItem
 
 private:
     QMediaPlayer *sonido = new QMediaPlayer();
-    QTimer *timer;
-    signed short int rotationAngle;
-    void generarAspecto();
+    signed short int rotationAngle , velocidad_caida;
     bool fire=false;
+
+    void generarAspecto();
+    void generarAleatoriedad();
+    void generarSonidos();
 
 public:
     asteroides(bool sound=true);
-    asteroides(short int n);
     asteroides(qreal x, qreal y);
     ~asteroides();
 
-private slots:
-    void moverAsteroide();
+    // QGraphicsItem interface
+public:
+    void advance(int phase);
 };
 
 #endif // ASTEROIDES_H

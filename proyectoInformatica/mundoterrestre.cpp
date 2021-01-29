@@ -10,7 +10,7 @@ mundoTerrestre::mundoTerrestre(QString userName)
 
 
     level_complete=false;
-    level=2;
+    level=4;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -108,7 +108,7 @@ void mundoTerrestre::iniciarMundo()
     //generadorNubes->start(tiempo_nubes);
     //generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
     //generadorDeLuna->start(tiempo_luna);
-    ticks->start(20);
+    ticks->start(50);
 }
 
 void mundoTerrestre::createShips()

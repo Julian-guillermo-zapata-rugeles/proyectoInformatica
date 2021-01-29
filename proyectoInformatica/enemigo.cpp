@@ -17,7 +17,7 @@ enemigo::enemigo(qreal *lastPosition):movimientos(560)
 
     // inicialización de atributos
     this->last_position=lastPosition;
-    this->velocidad_dezplazamiento=1+rand()%5;
+    this->velocidad_dezplazamiento=3+rand()%6;
 
     // llamado a metodos para personalizar el objeto creado
     // se asignará a travez de argumentos variaciones para este objeto
