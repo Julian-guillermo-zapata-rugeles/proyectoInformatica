@@ -36,9 +36,6 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
         this->ancho = 153.8;
         this->alto = 118;
         this->setScale(1.05);
-        if(v == true){
-            setTransform(QTransform(-1, 0, 0, 1, 0, 0));
-        }
     }
 
     if(tipo == 4){
@@ -49,6 +46,30 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
         this->ancho = 47.85;
         this->alto = 50;
     }
+
+    //Animaciones de muertes de las dos Aves
+    if(tipo == 5){
+        // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
+        // con un pixmap grande del mismo tipo de ser necesario
+        deadpix = new QPixmap(":/multimedia/aves/dieBird1.png");
+        this->limite = 13785;
+        this->ancho = 919;
+        this->alto = 912;
+        setScale(0.15);
+        caer = true;
+    }
+
+    if(tipo == 6){
+        // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
+        // con un pixmap grande del mismo tipo de ser necesario
+        deadpix = new QPixmap(":/multimedia/aves/DieBird2.png");
+        this->limite = 2012;
+        this->ancho = 201.2;
+        this->alto = 300;
+        setScale(0.5);
+        caer = true;
+    }
+
     // establecemos la ubicación del sprite (basada en la que recibimos por constructor)
     // que representa el lugar donde muere el enemigo/asteroide/etc
     setPos(posx, posy);
@@ -57,6 +78,13 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     tiempoVida->start(100); // el tiempo de vida será la tasa de refresco de los cuadros
     connect(tiempoVida,SIGNAL(timeout()),this,SLOT(actualizar()));
     //this->setTransformOriginPoint(this->boundingRect().center());
+    if(v == true){
+        setTransform(QTransform(-1, 0, 0, 1, 0, 0));
+    }
+    if(caer == true){
+        ground = ground - posy;
+        caida = ground/(limite/ancho);
+    }
 }
 
 
@@ -97,7 +125,9 @@ void Animaciones::animar()
         la animación puede ser o no prolongada dependiendo al numero de cuadros
         que esta pueda tener
     */
-
+    if(caer == true){
+        setPos(pos().x(),pos().y()+caida);
+    }
     this->update();
     if(frame < limite){
         frame += ancho;

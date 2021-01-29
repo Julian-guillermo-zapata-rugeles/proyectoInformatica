@@ -11,14 +11,14 @@
 mundoTerrestre::mundoTerrestre(QString userName)
 {
     QRect GeometryScreen = QApplication::desktop()->screenGeometry();
-    vista->move(GeometryScreen.width()-vista->width()/3,GeometryScreen.height()-vista->height()/3);
+    vista->move(GeometryScreen.width()-vista->width()/4,GeometryScreen.height()-vista->height()/4);
     /*
     sección de información para el nivel y el usuario en partida
     */
     tiempoJuego->setUser_name(userName); // lo recibí desde el cliente principal
 
 
-    level=5;
+    level=2;
     level_time=10;
     game_pause=false;
     tiempo_asterides=12000;
@@ -84,9 +84,54 @@ mundoTerrestre::mundoTerrestre(QString userName)
 
 void mundoTerrestre::iniciarMundo()
 {
-    for(unsigned short int a=0 ;a<(sizeof(fondos)/sizeof(fondos[0]))-1; a++){
-        if(0+ rand() % (sizeof(fondos)/sizeof(fondos[0]))-1==a){
-            vista->setStyleSheet(fondos[a]);
+    if(level%3 == 0){
+        short int m = 1+rand()%5;
+        switch (m) {
+        case 1:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG space 1.jpg)");
+            break;
+        }
+        case 2:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG space 2.jpg)");
+            break;
+        }
+        case 3:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG space 3.jpg)");
+            break;
+        }
+        case 4:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG space 4.jpg)");
+            break;
+        }
+        case 5:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG space 5.jpg)");
+            break;
+        }
+        }
+    }
+    else{
+        short int n = 1+ rand() % 5;
+        switch (n) {
+        case 1:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 1.jpg)");
+            break;
+        }
+        case 2:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 2.jpg)");
+            break;
+        }
+        case 3:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 3.jpg)");
+            break;
+        }
+        case 4:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 2.jpg)");
+            break;
+        }
+        case 5:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 1.jpg)");
+            break;
+        }
         }
     }
     ticks->start(80);

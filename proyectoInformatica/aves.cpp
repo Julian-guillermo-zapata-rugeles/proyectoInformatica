@@ -29,11 +29,17 @@ Aves::Aves(short op)
     this->birdAppearance();
     this->senoidal=true;
     Q_UNUSED(op);
-
+    identity = true;
 }
 
 Aves::~Aves()
 {
+    if(identity == false){
+        scene()->addItem(new Animaciones(pos().x(),pos().y(),5,direction));
+    }
+    else{
+        scene()->addItem(new Animaciones(pos().x(),pos().y(),6,direction));
+    }
     scene()->removeItem(this);
 }
 

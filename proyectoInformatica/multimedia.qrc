@@ -123,5 +123,7 @@
         <file>multimedia/next4.png</file>
         <file>multimedia/next level3.png</file>
         <file>multimedia/next level.png</file>
+        <file>multimedia/aves/dieBird1.png</file>
+        <file>multimedia/aves/DieBird2.png</file>
     </qresource>
 </RCC>

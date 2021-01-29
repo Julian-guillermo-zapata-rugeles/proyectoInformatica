@@ -19,7 +19,6 @@ la sintaxis para su uso es :
 
 */
 
-
 #include <QObject>
 #include <QTimer>
 #include <QGraphicsItem>
@@ -44,6 +43,9 @@ private:
     // se usará un ancho , alto y frame para renderizar el pixmap
     float ancho, alto, frame, limite;
     bool complete;
+    bool caer=false;
+    short int ground = 550;
+    float caida=0;
 
     // Interfaz para el uso de QgraphicsItem
 public:

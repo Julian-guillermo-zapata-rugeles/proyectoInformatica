@@ -30,6 +30,7 @@ private:
     short int amplitud, limite;
     bool direction,  dir , senoidal ;
     unsigned short int temporal=0;
+    bool identity=false;
 
     void birdAppearance();
     void cambiarAnimacion();
