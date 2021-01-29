@@ -12,6 +12,7 @@
 #include <enemigo.h>
 #include <enemigoGigante.h>
 #include <asteroides.h>
+#include <aves.h>
 
 class proyectil : public QObject , public QGraphicsPixmapItem
 {
@@ -21,12 +22,11 @@ private:
     // direccion False para izquierda
     bool direccion;
 
-
 public:
     proyectil(bool dir);
-
-public slots:
-    void moverProyectil();
+    ~proyectil();
+public:
+    void advance(int phase);
 };
 
 #endif // PROYECTIL_H

@@ -355,7 +355,7 @@ void mundoTerrestre::actualizar_nivel()
         level_complete=true;
         generadorAsteroides->start(8000);
         generadorEnemigos->start(1000);
-        generadorNubes->start(8000);
+        generadorNubes->start(1000);
         generadorEnemigosGigantes->start(10000);
         //generadorDeLuna->start(30000);
         //ticks->start(20);
@@ -371,7 +371,7 @@ void mundoTerrestre::actualizar_nivel()
     else if(level%4 == 0){
         generadorEnemigos->start(3000);
         tiempoJuego->setTimeCount(30);
-        generadorNubes->start(8000);
+        generadorNubes->start(2000);
         this->iniciarMundo();
     }
 
@@ -380,7 +380,7 @@ void mundoTerrestre::actualizar_nivel()
         qDebug()<< "nivel asteroides asesinos";
         // este nivel es sobre asteroides , el personaje deberá aguantar la caida de estos
         //generadorNubes->start(8000);
-        generadorAsteroides->start(1000);
+        generadorAsteroides->start(2000);
         sonido->stop();
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/suspenso_asteroides2.mp3"));
         this->iniciarMundo();

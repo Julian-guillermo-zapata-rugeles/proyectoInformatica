@@ -16,10 +16,13 @@ public:
     ~nubes();
 private:
     bool dir;
-    QTimer *timer = new QTimer();
     void generarAspecto();
-private slots:
-    void moverNubes();
+    void generarAleatoriedad();
+
+
+    // QGraphicsItem interface
+public:
+    void advance(int phase);
 };
 
 #endif // NUBES_H

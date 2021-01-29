@@ -23,22 +23,19 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
 
 private:
-    QTimer *timerAves;
-    QTimer *timerAvesParabolicas;
-    QPixmap *AvePix;
 
+    QPixmap *AvePix;
     qreal columnas, alto, ancho, tmp_sumador;
     long int velocidad;
     short int amplitud, limite;
-    bool direction, dir;
+    bool direction,  dir , senoidal ;
     unsigned short int temporal=0;
 
     void birdAppearance();
     void cambiarAnimacion();
 
-public slots:
-    void moverAves();
-    void moverAvesParabolicas();
+public:
+    void advance(int phase);
 };
 
 #endif // AVES_H

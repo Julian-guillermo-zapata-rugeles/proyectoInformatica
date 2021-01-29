@@ -29,14 +29,16 @@ asteroides::asteroides(qreal x, qreal y)
     this->setPixmap(QPixmap(":/multimedia/proyectiles/bulletEnemy.png"));
     this->setTransformOriginPoint(this->boundingRect().center());
     this->setScale(1.5);
-    rotationAngle = 0;
-    fire = true;
+    this->rotationAngle = 0;
+    this->velocidad_caida=8;
+    this->fire = true;
 }
 
 
 
 
 /*   ------------------- DESTRUCTOR  ----------------------- */
+
 asteroides::~asteroides()
 { 
     if(fire == true){
@@ -44,6 +46,7 @@ asteroides::~asteroides()
     }
     else{
         scene()->addItem(new Animaciones(pos().x()+50,pos().y(),2));
+
         qDebug() << "asteroide eliminado";
         sonido->stop();
         sonido->setMedia(QUrl("qrc:/multimedia/explosion1.mp3"));
