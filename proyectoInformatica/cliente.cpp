@@ -1,6 +1,8 @@
 #include "cliente.h"
 #include "ui_cliente.h"
 #include <mundoterrestre.h>
+#include <QSplashScreen>
+
 
 cliente::cliente(QWidget *parent) :
     QWidget(parent),
@@ -49,12 +51,23 @@ void cliente::on_pushButton_2_clicked()
 void cliente::on_info_send_clicked()
 {
     if(mode_cliente=="wait_for_game"){
+
+        QSplashScreen *splash = new QSplashScreen;
+        splash->setPixmap(QPixmap(":/multimedia/splash.png"));
+        QTimer::singleShot(3000,splash,SLOT(close()));
+        this->close();
+        splash->show();
+
+        QTime dieTime= QTime::currentTime().addSecs(3);
+        while (QTime::currentTime() < dieTime){
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        }
+
         // capturaremos el nombre y haremos comprobaciones
         QString userRead = ui->info_text->toPlainText();
         ui->info_text->clear();
         mundoTerrestre  *mundo;
         mundo = new mundoTerrestre(userRead);
-        this->close();
         mundo->iniciarMundo();
     }
 }

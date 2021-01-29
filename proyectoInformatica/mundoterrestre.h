@@ -69,7 +69,7 @@ public:
     short int tiempo_nubes;
     short int tiempo_luna;
     qreal globar_position , *gp;
-    const char *fondos[6];
+    const char *fondos[5];
 
 
     /*

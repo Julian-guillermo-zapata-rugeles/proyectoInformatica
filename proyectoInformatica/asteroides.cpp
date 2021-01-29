@@ -30,7 +30,7 @@ asteroides::asteroides(qreal x, qreal y)
     this->setTransformOriginPoint(this->boundingRect().center());
     this->setScale(1.5);
     this->rotationAngle = 0;
-    this->velocidad_caida=8;
+    this->velocidad_caida=15;
     this->fire = true;
 }
 
@@ -97,7 +97,7 @@ void asteroides::advance(int phase)
                 break;
             }
     }
-
+    Q_UNUSED(phase);
 }
 
 
@@ -128,7 +128,7 @@ void asteroides::generarAleatoriedad()
     // alta resolución en la generación de semilla.
     long long semilla = std::chrono::high_resolution_clock::now().time_since_epoch().count();
     srand((unsigned int )semilla);
-    this->velocidad_caida=5+rand()%15;
+    this->velocidad_caida=15+rand()%25;
     this->setTransformOriginPoint(this->boundingRect().center());
     setPos(1+rand()%1200,-1800 + ((1+rand()%500)*-1));
 

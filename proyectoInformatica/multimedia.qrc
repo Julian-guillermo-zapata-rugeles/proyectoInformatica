@@ -118,5 +118,10 @@
         <file>multimedia/personaje/playerSr.png</file>
         <file>multimedia/Sonidos/espadaSamurai.mp3</file>
         <file>multimedia/Backgrounds/Inicio.png</file>
+        <file>multimedia/icon.png</file>
+        <file>multimedia/splash.png</file>
+        <file>multimedia/next4.png</file>
+        <file>multimedia/next level3.png</file>
+        <file>multimedia/next level.png</file>
     </qresource>
 </RCC>

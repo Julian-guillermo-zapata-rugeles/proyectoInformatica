@@ -21,24 +21,18 @@ proyectil::~proyectil()
 }
 
 
-
-
-
 void proyectil::advance(int phase)
 {
     if(direccion){
-        setPos(x()+10,y());
+        setPos(x()+25,y());
     }
     else{
-        setPos(x()-10,y());
+        setPos(x()-25,y());
     }
 
     if(pos().x()>1300 + this->boundingRect().width() or pos().x() < 0 ){
         delete this;
     }
-
-
-
 
 
     QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;

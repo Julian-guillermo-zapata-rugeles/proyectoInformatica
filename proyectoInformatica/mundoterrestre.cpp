@@ -1,8 +1,17 @@
 #include "mundoterrestre.h"
+#include <QSplashScreen>
+#include <QTime>
+#include <QDesktopWidget>
+#include <QCoreApplication>
+#include <QStyle>
+#include <QScreen>
+#include <QApplication>
+
 
 mundoTerrestre::mundoTerrestre(QString userName)
 {
-
+    QRect GeometryScreen = QApplication::desktop()->screenGeometry();
+    vista->move(GeometryScreen.width()-vista->width()/3,GeometryScreen.height()-vista->height()/3);
     /*
     sección de información para el nivel y el usuario en partida
     */
@@ -66,7 +75,7 @@ mundoTerrestre::mundoTerrestre(QString userName)
     connect(generadorNaves,SIGNAL(timeout()),this,SLOT(actualizar()));
     generadorNaves->start(1);
 
-    fondos[0]="border-image: url(:/multimedia/Backgrounds/BG apocalyptic 1.jpg";
+    fondos[0]="border-image: url(:/multimedia/Backgrounds/BG apocalyptic 1.jpg)";
     fondos[1]="border-image: url(:/multimedia/Backgrounds/BG apocalyptic 2.jpg)";
     fondos[2]="border-image: url(:/multimedia/Backgrounds/BG apocalyptic 3.jpg)";
     fondos[3]="border-image: url(:/multimedia/Backgrounds/BG alien 2.jpg)";
@@ -75,12 +84,12 @@ mundoTerrestre::mundoTerrestre(QString userName)
 
 void mundoTerrestre::iniciarMundo()
 {
-    for(unsigned short int a=0 ;a<(sizeof(fondos)/sizeof(fondos[0])); a++){
-        if(0+ rand() % (sizeof(fondos)/sizeof(fondos[0])-1)==a){
+    for(unsigned short int a=0 ;a<(sizeof(fondos)/sizeof(fondos[0]))-1; a++){
+        if(0+ rand() % (sizeof(fondos)/sizeof(fondos[0]))-1==a){
             vista->setStyleSheet(fondos[a]);
         }
     }
-    ticks->start(50);
+    ticks->start(80);
 }
 
 
@@ -225,7 +234,26 @@ void mundoTerrestre::ticksMundo()
             }
             //generadorNubes->stop();
         }
+        if(tiempoJuego->getTime() == 3){
+            vista->setStyleSheet("border-image: url(:/multimedia/next level.png)");
+        }
         if(tiempoJuego->getTime()==0){
+
+            /*
+            QSplashScreen *splash = new QSplashScreen;
+            splash->setPixmap(QPixmap(":/multimedia/next level.png"));
+            QTimer::singleShot(3000,splash,SLOT(close()));
+            splash->show();
+
+
+            QTime dieTime= QTime::currentTime().addSecs(3);
+            while (QTime::currentTime() < dieTime){
+                QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+            }
+            */
+            //vista->setGeometry(QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,vista->size()));
+            //personajePrincipal->setFlag(QGraphicsItem::ItemIsFocusable);
+            //personajePrincipal->setFocus();
             this->actualizar_nivel();
         }
     }
@@ -319,7 +347,7 @@ void mundoTerrestre::createShips()
     /*for(unsigned short int a =0 ; a < 4;a++){
         sistema.append(new Planeta(1+rand()%10,1+rand()%10,3000+rand()%5000,1+rand()%100));
     }
-    /*
+
     short int opcion = 1+rand()%2;
 
     if(opcion == 1){

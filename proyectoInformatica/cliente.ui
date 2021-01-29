@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>CLIENTE</string>
+   <string>DESTINY</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(0, 0, 0);</string>
@@ -181,9 +181,6 @@ font: 11pt &quot;Amiri&quot;;</string>
   <zorder>pushButton_3</zorder>
   <zorder>label</zorder>
   <zorder>label_3</zorder>
-  <zorder>info_text</zorder>
-  <zorder>info_send</zorder>
-  <zorder>info_name</zorder>
   <zorder>info_name</zorder>
   <zorder>info_send</zorder>
   <zorder>info_text</zorder>

@@ -17,7 +17,7 @@ enemigo::enemigo(qreal *lastPosition):movimientos(560)
 
     // inicialización de atributos
     this->last_position=lastPosition;
-    this->velocidad_dezplazamiento=3+rand()%6;
+    this->velocidad_dezplazamiento=5+rand()%10;
 
     // llamado a metodos para personalizar el objeto creado
     // se asignará a travez de argumentos variaciones para este objeto
@@ -93,6 +93,7 @@ void enemigo::advance(int phase)
 
     cambiarAnimacion(); // FIJA
     //qDebug()<< *last_position << "pos at <--";
+    Q_UNUSED(phase);
 }
 
 
@@ -207,11 +208,11 @@ void enemigo::asignarCaracteristicas()
 
     else if(aleatorio == 7){
         //Alien 4 saltando (tipo kong estraterrestre)
-        this->ancho = 197;
-        this->alto = 131;
-        this->columnas = 2955;
+        this->ancho = 217;
+        this->alto = 130;
+        this->columnas = 3689;
         this->direction = false;
-        this->limite = 2955;
+        this->limite = 3689;
 
         pixmap_zombie = new QPixmap(":/multimedia/aliens/Alien4Jump.png");
     }

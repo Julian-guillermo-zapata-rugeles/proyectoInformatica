@@ -7,12 +7,15 @@
 #include <QDebug>
 #include <mundoterrestre.h>
 #include <cliente.h>
+#include <QIcon>
 
 bool playing = false;
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    a.setWindowIcon(QIcon(":/multimedia/icon.png"));
 
     //MenuInicio *inicio = new MenuInicio();
     //inicio->show();

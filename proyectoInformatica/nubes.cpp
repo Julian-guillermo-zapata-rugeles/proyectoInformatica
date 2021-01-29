@@ -59,4 +59,5 @@ void nubes::advance(int phase)
     if(pos().x()<-900 || pos().x() > 1500){
         delete this;
     }
+    Q_UNUSED(phase);
 }

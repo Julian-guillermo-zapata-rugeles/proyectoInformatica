@@ -40,8 +40,6 @@ void personaje::setState(std::string estado)
     }
 }
 
-
-
 QRectF personaje::boundingRect() const
 {
     return QRectF(-ancho/2,-alto/2,ancho,alto);
@@ -102,15 +100,12 @@ personaje::personaje():movimientos(550){
     this->fila = 0;
     this->columna = 0;
     this->vida_disponible=100;
-    this->pointer_pause=pointer_pause;
+    this->pointer_pause=false;
     sonido->setVolume(30);
     pixPersonaje = new QPixmap(":/multimedia/personaje/playerSprite.png");
     setState("stand");
 
 }
-
-
-
 
 // función del keypressEvent
 /*
@@ -194,7 +189,6 @@ void personaje::keyPressEvent(QKeyEvent *event)
             setState("jump");
         }
 
-
         if(event->key() == Qt::Key_Space){
             stateShoot = true;
             columna = 0;
@@ -229,7 +223,6 @@ void personaje::keyPressEvent(QKeyEvent *event)
                 setState("attack");
             }
         }
-
 
         if(event->key() == Qt::Key_S){
             stateShoot = true;
@@ -364,5 +357,6 @@ void personaje::advance(int phase)
         stateKatana= false;
     }
     this->update(-ancho/2,-alto/2,ancho,alto);
+    Q_UNUSED(phase);
 }
 

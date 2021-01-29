@@ -33,6 +33,7 @@ void enemigoGigante::advance(int phase)
         setPos(pos().x()+15,pos().y());
     }
     cambiarAnimacion();
+    Q_UNUSED(phase);
 }
 
 

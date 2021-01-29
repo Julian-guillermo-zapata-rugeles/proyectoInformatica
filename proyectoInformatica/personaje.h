@@ -38,7 +38,6 @@ public:
     personaje();
     void keyPressEvent(QKeyEvent *event);
     qreal getLastPosition();
-    void eventHandler();
     short getDisparos_disponibles() const;
     void setState(std::string estado);
     QRectF boundingRect() const;
