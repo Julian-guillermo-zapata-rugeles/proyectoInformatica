@@ -60,9 +60,9 @@ asteroides::asteroides(short n)
 asteroides::asteroides(qreal x, qreal y)
 {
     setPos(x,y);
-    this->setPixmap(QPixmap(":/multimedia/proyectiles/bulletEnemy.png"));
+    this->setPixmap(QPixmap(":/multimedia/proyectiles/balaAve.png"));
     this->setTransformOriginPoint(this->boundingRect().center());
-    this->setScale(1.5);
+    this->setScale(0.5);
     rotationAngle = 0;
     qDebug()<<"asteroide generado en "<<pos().x() << " " << pos().y() ;
     timer = new QTimer();

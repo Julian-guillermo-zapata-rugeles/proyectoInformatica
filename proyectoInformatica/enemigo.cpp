@@ -187,11 +187,11 @@ void enemigo::asignarCaracteristicas()
 
     else if(aleatorio == 7){
         //Alien 4 saltando (tipo kong estraterrestre)
-        this->ancho = 197;
-        this->alto = 131;
-        this->columnas = 2955;
+        this->ancho = 217;
+        this->alto = 130;
+        this->columnas = 3689;
         this->direction = false;
-        this->limite = 2955;
+        this->limite = 3689;
 
         pixmap_zombie = new QPixmap(":/multimedia/aliens/Alien4Jump.png");
     }

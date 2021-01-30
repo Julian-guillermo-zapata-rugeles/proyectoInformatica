@@ -240,7 +240,7 @@ void personaje::keyPressEvent(QKeyEvent *event)
             // qDebug() <<"posicion x "<< this->x(); // DEBUG
             // qDebug() <<"posicion y "<< this->y(); // DEBUG
 
-            disparo->setPixmap(QPixmap(":/multimedia/pixmap_disparo_sol.png"));
+            disparo->setPixmap(QPixmap(":/multimedia/proyectiles/proyectilPersonaje.png"));
             scene()->addItem(disparo);
             setState("shoot");
             disparo->setPos(this->x()+10,this->y());

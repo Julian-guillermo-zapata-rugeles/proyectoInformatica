@@ -10,7 +10,7 @@ mundoTerrestre::mundoTerrestre(QString userName)
 
 
     level_complete=false;
-    level=2;
+    level=1;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -339,6 +339,19 @@ void mundoTerrestre::ticksPersonaje()
 
             }
             //generadorNubes->stop();
+        }
+        if(tiempoJuego->getTime() < 4){
+            //qDebug() << "Entro a mostrar splash del siguiente nivel "<<endl;
+            if((level+1)%2 ==0){
+                qDebug() << "pasare a un nivel par"<<endl;
+                vista->setStyleSheet("border-image: url(:/multimedia/next level.png)");
+            }
+            if((level+1)%3 ==0 || (level+1)%5 ==0 ){
+                vista->setStyleSheet("border-image: url(:/multimedia/nextlevel35.png)");
+            }
+            if((level+1)%4 == 0){
+                vista->setStyleSheet("border-image: url(:/multimedia/nextlevel4.png)");
+            }
         }
         if(tiempoJuego->getTime()==0){
             this->actualizar_nivel();

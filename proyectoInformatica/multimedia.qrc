@@ -143,5 +143,10 @@
         <file>multimedia/asteroides/Recurso 2.png</file>
         <file>multimedia/aves/dieBird1.png</file>
         <file>multimedia/aves/DieBird2.png</file>
+        <file>multimedia/proyectiles/balaAve.png</file>
+        <file>multimedia/next level.png</file>
+        <file>multimedia/nextlevel35.png</file>
+        <file>multimedia/nextlevel4.png</file>
+        <file>multimedia/proyectiles/proyectilPersonaje.png</file>
     </qresource>
 </RCC>
