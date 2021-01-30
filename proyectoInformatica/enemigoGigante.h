@@ -18,7 +18,7 @@ class enemigoGigante : public QObject , public QGraphicsRectItem
 {
     Q_OBJECT
 private:
-
+    QTimer *timer = new QTimer();
     QMediaPlayer *sonido = new QMediaPlayer();
     qreal last_position , alto , ancho , columnas ;
     short int disparosSoportados;
@@ -26,16 +26,16 @@ private:
     QPixmap *pixmap_zombie;
 
     void cambiarAnimacion(); // encargado el movimiento del sprite // refresco
-    void generarCaracteristicas(); // asignar aleatoriamente pixmap y posicion.
+    void asignarCaracteristicas(); // asignar aleatoriamente pixmap y posicion.
 
 public:
     enemigoGigante(qreal lastPosition );
     ~enemigoGigante();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
-    // QGraphicsItem interface
-public:
-    void advance(int phase);
+
+private slots:
+    void moverEnemigo();
 };
 
 #endif // ENEMIGO_H

@@ -31,8 +31,9 @@ private:
     bool stateShoot=false;
     bool stateSlide=false;
     bool stateKatana = false;
-    bool pointer_pause;
-
+    bool flying=false;
+    short int impulsos=3;
+    short int puntos=0, *GlobalPuntos;
 
 public:
     personaje();
@@ -40,18 +41,22 @@ public:
     qreal getLastPosition();
     void eventHandler();
     short getDisparos_disponibles() const;
+
     void setState(std::string estado);
+    void actualizarEstado();
+
+    // QGraphicsItem interface
+public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
     bool getPressKey() const;
     void setPressKey(bool value);
     bool getStateShoot() const;
     short getVida_disponible() const;
-    bool getPointer_pause() const;
-
-    // QGraphicsItem interface
-public:
-    void advance(int phase);
+    short getImpulsos() const;
+    short getPuntos() const;
+    void setPuntos(short value);
 };
 
 #endif // PERSONAJE_H

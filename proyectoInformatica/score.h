@@ -13,8 +13,10 @@ public:
     int getScore();
     void increase();
 
+    void setScore(int value);
+
 private:
-    int score, life, balas;
+    int score;
 };
 
 #endif // SCORE_H
