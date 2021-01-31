@@ -10,7 +10,6 @@ Planeta::Planeta(float posX, float posY, float masa, float radio, float velX, fl
 
 Planeta::~Planeta()
 {
-    delete planeta;
 
 }
 

@@ -101,7 +101,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
         // con un pixmap grande del mismo tipo de ser necesario
         deadpix = new QPixmap(":/multimedia/animaciones/explosionPiso2.png");
         this->limite = 2248;
-        this->ancho = 187.3;
+        this->ancho = 149.86;
         this->alto = 120;
         //setScale(0.5);
         caer = true;

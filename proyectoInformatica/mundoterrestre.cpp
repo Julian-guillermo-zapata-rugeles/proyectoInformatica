@@ -22,7 +22,7 @@ mundoTerrestre::mundoTerrestre(QString userName, short p)
     */
     tiempoJuego->setUser_name(userName); // lo recibí desde el cliente principal
     level_complete=false;
-    level=1;
+    level=2;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -399,14 +399,9 @@ void mundoTerrestre::ticksPersonaje()
         if(level%3==0 && tiempoJuego->getTime()==5){
 
             for(int i=0 ; i<sistema.size() ; i++){
-                /*sistema.at(i)->asignarEscala(s);*/
-                //scene->addItem(sistema.at(i));
                 scene->addItem(new Animaciones(sistema.at(i)->pos().x(),sistema.at(i)->pos().y(),2));
                 scene->removeItem(sistema.at(i));
                 sistema.removeAt(i);
-
-                //delete sistema.at(i);
-
             }
             //generadorNubes->stop();
         }
@@ -424,6 +419,19 @@ void mundoTerrestre::ticksPersonaje()
         }
         if(tiempoJuego->getTime()==0){
             this->actualizar_nivel();
+        }
+    }
+
+    QList<QGraphicsItem *> elementosColisionables  = scene->items() ;
+    for(int i=0;i< elementosColisionables.size();i++){
+        if(typeid (*(elementosColisionables[i]))==typeid (Rocket)){
+            for (short int a=0; a<sistema.size() ; a++ ) {
+                if(elementosColisionables[i]->collidesWithItem(sistema.at(i))){
+                    scene->addItem(new Animaciones(sistema.at(i)->pos().x(),sistema.at(i)->pos().y(),10));
+                    scene->removeItem(sistema.at(i));
+                    sistema.removeAt(i);
+                }
+            }
         }
     }
 }
@@ -490,9 +498,11 @@ void mundoTerrestre::actualizar_nivel()
 
 void mundoTerrestre::actualizar()
 {
-    calculoAceleracion();   //actualiza las aceleraciones de todos los cuerpos
-    for(int i = 0; i<sistema.size(); i++){
-        sistema.at(i)->actualizar(dt);
+    if(sistema.length() != 0){
+        calculoAceleracion();   //actualiza las aceleraciones de todos los cuerpos
+        for(int i = 0; i<sistema.size(); i++){
+            sistema.at(i)->actualizar(dt);
+        }
     }
 }
 

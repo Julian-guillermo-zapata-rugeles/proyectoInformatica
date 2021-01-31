@@ -20,6 +20,7 @@ SOURCES += \
     asteroides.cpp \
     aves.cpp \
     bonus_municion.cpp \
+    bonusrocket.cpp \
     cliente.cpp \
     enemigo.cpp \
     enemigoGigante.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
     personaje.cpp \
     planeta.cpp \
     proyectil.cpp \
+    rocket.cpp \
     score.cpp \
     ship.cpp \
     timeGame.cpp
@@ -41,6 +43,7 @@ HEADERS += \
     asteroides.h \
     aves.h \
     bonus_municion.h \
+    bonusrocket.h \
     cliente.h \
     enemigo.h \
     enemigoGigante.h \
@@ -52,6 +55,7 @@ HEADERS += \
     personaje.h \
     planeta.h \
     proyectil.h \
+    rocket.h \
     score.h \
     ship.h \
     timeGame.h
