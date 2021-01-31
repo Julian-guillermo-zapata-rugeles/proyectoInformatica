@@ -17,6 +17,8 @@
 #include <string>
 #include <aves.h>
 #include <planeta.h>
+#include <rocket.h>
+#include <bonusrocket.h>
 
 
 class personaje : public QGraphicsRectItem, public movimientos

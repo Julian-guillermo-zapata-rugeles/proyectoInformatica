@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <fstream>
 #include <animaciones.h>
+#include <rocket.h>
 
 #define h_lim 1300
 #define v_lim 600

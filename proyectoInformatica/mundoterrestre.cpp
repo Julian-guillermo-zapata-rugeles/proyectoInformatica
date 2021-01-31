@@ -22,7 +22,7 @@ mundoTerrestre::mundoTerrestre(QString userName, short p)
     */
     tiempoJuego->setUser_name(userName); // lo recibí desde el cliente principal
     level_complete=false;
-    level=1;
+    level=2;
     level_time=10;
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
@@ -93,50 +93,77 @@ mundoTerrestre::mundoTerrestre(QString userName, short p)
 
 void mundoTerrestre::iniciarMundo()
 {
-    short int n = 1+ rand() % 5;
-    switch (n) {
-    case 1:{
-        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 1.jpg)");
-        break;
+    if(level%3 == 0){
+        short int m = 1+rand()%5;
+        switch (m) {
+        case 1:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG space 1.jpg)");
+            break;
+        }
+        case 2:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG space 2.jpg)");
+            break;
+        }
+        case 3:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG space 3.jpg)");
+            break;
+        }
+        case 4:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG space 4.jpg)");
+            break;
+        }
+        case 5:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG space 5.jpg)");
+            break;
+        }
+        }
     }
-    case 2:{
-        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 2.jpg)");
-        break;
+    else{
+        short int n = 1+ rand() % 8;
+        switch (n) {
+        case 1:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 1.jpg)");
+            break;
+        }
+        case 2:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 2.jpg)");
+            break;
+        }
+        case 3:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 3.jpg)");
+            break;
+        }
+        case 4:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 2.jpg)");
+            break;
+        }
+        case 5:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 1.jpg)");
+            break;
+        }
+        case 6:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 3.jpg)");
+            break;
+        }
+        case 7:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 4.jpg)");
+            break;
+        }
+        case 8:{
+            vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 5.jpg)");
+            break;
+        }
+        }
     }
-    case 3:{
-        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG apocalyptic 3.jpg)");
-        break;
-    }
-    case 4:{
-        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 2.jpg)");
-        break;
-    }
-    case 5:{
-        vista->setStyleSheet("border-image: url(:/multimedia/Backgrounds/BG alien 1.jpg)");
-        break;
-    }
-    }
-    //
-    // fondo de pantalla se puede mejorar
-    // se deshabilitará temporalmente para visualización.
-    //vista->setStyleSheet("border-image: url(:/multimedia/fondo3.jpg)");
-    // IMAGEN DE FONDO DESHABILITADA.
-
-    // iniciador de timers
-    //generadorAsteroides->start(tiempo_asterides);
-    //generadorEnemigos->start(tiempo_enemigos);
-    //generadorNubes->start(tiempo_nubes);
-    //generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
-    //generadorDeLuna->start(tiempo_luna);
     ticks->start(20);
 }
 
 void mundoTerrestre::createShips()
 {
-    sistema.append(new Planeta(0,0,50000,200));
+    sistema.append(new Planeta(0,0,80000,200));
     sistema.append(new Planeta(-5000,0,70,70,0,-2));
     sistema.append(new Planeta(5000,0,70,70,0,2));
-    //sistema.append(new Planeta(0,-5000,70,70,2,0));
+    sistema.append(new Planeta(0,-5000,70,70,2,0));
     sistema.append(new Planeta(0,5000,70,70,-2,0));
     /*for(unsigned short int a =0 ; a < 4;a++){
         sistema.append(new Planeta(1+rand()%10,1+rand()%10,3000+rand()%5000,1+rand()%100));
@@ -372,14 +399,9 @@ void mundoTerrestre::ticksPersonaje()
         if(level%3==0 && tiempoJuego->getTime()==5){
 
             for(int i=0 ; i<sistema.size() ; i++){
-                /*sistema.at(i)->asignarEscala(s);*/
-                //scene->addItem(sistema.at(i));
                 scene->addItem(new Animaciones(sistema.at(i)->pos().x(),sistema.at(i)->pos().y(),2));
                 scene->removeItem(sistema.at(i));
                 sistema.removeAt(i);
-
-                //delete sistema.at(i);
-
             }
             //generadorNubes->stop();
         }
@@ -397,6 +419,19 @@ void mundoTerrestre::ticksPersonaje()
         }
         if(tiempoJuego->getTime()==0){
             this->actualizar_nivel();
+        }
+    }
+
+    QList<QGraphicsItem *> elementosColisionables  = scene->items() ;
+    for(int i=0;i< elementosColisionables.size();i++){
+        if(typeid (*(elementosColisionables[i]))==typeid (Rocket)){
+            for (short int a=0; a<sistema.size() ; a++ ) {
+                if(elementosColisionables[i]->collidesWithItem(sistema.at(i))){
+                    scene->addItem(new Animaciones(sistema.at(i)->pos().x(),sistema.at(i)->pos().y(),10));
+                    scene->removeItem(sistema.at(i));
+                    sistema.removeAt(i);
+                }
+            }
         }
     }
 }
@@ -463,9 +498,11 @@ void mundoTerrestre::actualizar_nivel()
 
 void mundoTerrestre::actualizar()
 {
-    calculoAceleracion();   //actualiza las aceleraciones de todos los cuerpos
-    for(int i = 0; i<sistema.size(); i++){
-        sistema.at(i)->actualizar(dt);
+    if(sistema.length() != 0){
+        calculoAceleracion();   //actualiza las aceleraciones de todos los cuerpos
+        for(int i = 0; i<sistema.size(); i++){
+            sistema.at(i)->actualizar(dt);
+        }
     }
 }
 

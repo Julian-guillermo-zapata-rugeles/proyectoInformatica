@@ -23,7 +23,7 @@ nubes::~nubes()
 #ifdef DEBUG_NUBES
     qDebug() << "nube eliminada (salió de escena) ";
 #endif
-    // otras acciones ...
+    scene()->removeItem(this);
 }
 
 void nubes::generarAspecto()
@@ -50,7 +50,6 @@ void nubes::moverNubes()
     }
 
     if(pos().x()<-900 || pos().x() > 1500){
-        scene()->removeItem(this);
         delete this;
     }
 }

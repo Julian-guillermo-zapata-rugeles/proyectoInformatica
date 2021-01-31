@@ -15,6 +15,7 @@
 #include <QGraphicsItem>
 #include "animaciones.h"
 #include "personaje.h"
+#include "bonusrocket.h"
 
 class enemigo : public QObject , public QGraphicsRectItem , public movimientos
 {

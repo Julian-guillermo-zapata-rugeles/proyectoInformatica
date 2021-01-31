@@ -131,7 +131,7 @@ personaje::personaje():movimientos(550){
     this-> stateSlide=false;
     this-> stateKatana = false;
     this-> flying=false;
-    this-> puntos=0,
+    this-> puntos=100,
     this->limite = 1550;
     this->impulsos =3;
     this->setRect(0,0,100,131);
@@ -274,6 +274,15 @@ void personaje::teclas(QKeyEvent *event)
         }
         else{
             setState("slide");
+        }
+    }
+    if(event->key() == Qt::Key_F){
+#ifdef DEBUG_PERSONAJE
+        qDebug()<< "Puntaje: "<<puntos<<endl;
+#endif
+        if(puntos > 10){
+            puntos -= 10;
+            scene()->addItem(new Rocket(pos().x(),pos().y()));
         }
     }
 }
@@ -452,6 +461,19 @@ void personaje::eventHandler()
             delete elementosColisionables[i];
             break;
         }
+        //BonusRocket
+        if(typeid (*(elementosColisionables[i]))==typeid (BonusRocket)){
+            delete elementosColisionables[i];
+            puntos += 2;
+            break;
+        }
+        //BonusRocket
+        /*
+        if(typeid (*(elementosColisionables[i]))==typeid (Rocket)){
+            vida_disponible -= 0.8;
+            delete elementosColisionables[i];
+            break;
+        */
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
             vida_disponible=vida_disponible-0.1;
             if(stateKatana){
@@ -462,7 +484,10 @@ void personaje::eventHandler()
 
         if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
             vida_disponible=vida_disponible-0.5;
-            break;
+            if(stateKatana){
+                  delete elementosColisionables[i];
+              }
+              break;
         }
         if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
             vida_disponible-=0.4;

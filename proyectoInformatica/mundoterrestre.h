@@ -25,6 +25,7 @@
 #include "aves.h"
 #include <QMainWindow>
 #include <multiplayer.h>
+#include "rocket.h"
 
 #define dt 1
 

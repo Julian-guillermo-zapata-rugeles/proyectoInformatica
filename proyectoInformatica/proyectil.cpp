@@ -38,7 +38,6 @@ void proyectil::moverProyectil()
 
         // balas que colisionan con los enemigos
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
-                *puntosP = *puntosP+2;
                 scene()->removeItem(this); // eliminamos la bala
                 delete elementosColisionables[i];
                 delete this;
@@ -74,6 +73,5 @@ void proyectil::moverProyectil()
             delete this;
             break;
             }
-
         }
 }

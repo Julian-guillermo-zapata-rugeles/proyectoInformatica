@@ -45,6 +45,7 @@ enemigo::~enemigo()
     // elimar únicamente de la memoria (en caso de eliminar de la escena en otra clase)
     // se advertirá sobre la inexistencia del objeto en pantalla. NO deberia afectar.
     scene()->addItem(new Animaciones(pos().x(),pos().y(),1));
+    scene()->addItem(new BonusRocket(pos().x(),pos().y()));
     scene()->removeItem(this);
 
 #ifdef DEBUG_ENEMIGO
