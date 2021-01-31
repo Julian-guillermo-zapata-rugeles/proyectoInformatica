@@ -7,7 +7,7 @@ movimientos::movimientos(float limiteInferior_ )
     this->tiempo=0;
     this->tmp_sumador=0;
     this->intervaloSuma=0.3;
-    status_saltando=false;
+    status_saltando=true;
     status_gravitatorio=false;
 }
 

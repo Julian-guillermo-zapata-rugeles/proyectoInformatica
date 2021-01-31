@@ -145,9 +145,9 @@ personaje::personaje():movimientos(550){
     this->fila = 0;
     this->columna = 0;
     this->vida_disponible=100;
-    sonido->setVolume(30);
-    pixPersonaje = new QPixmap(":/multimedia/personaje/playerSprite.png");
-    setState("stand");
+    this->sonido->setVolume(30);
+    this->pixPersonaje = new QPixmap(":/multimedia/personaje/playerSprite.png");
+    this->setState("stand");
     this->GlobalPuntos=&puntos;
 }
 
@@ -278,6 +278,7 @@ void personaje::teclas(QKeyEvent *event)
     }
 }
 
+
 void personaje::teclas2(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_J){
@@ -353,7 +354,7 @@ void personaje::teclas2(QKeyEvent *event)
     }
 
 
-    if(event->key() == Qt::Key_Alt){
+    if(event->key() == Qt::Key_B){
         stateShoot = true;
         columna = 0;
         /*
@@ -367,7 +368,6 @@ void personaje::teclas2(QKeyEvent *event)
             setState("shoot");
             disparo->setPos(this->x()+10,this->y());
             // se añade a la escena y se ubica en la posición del personaje
-
             // zona de sonidos y descuento de proyectiles //
             // sonido de descarga (sin munición)
             sonido->stop();

@@ -345,12 +345,18 @@ void mundoTerrestre::ticksPersonaje()
         //qDebug() <<personajePrincipal->getPuntos()<<endl;
     }
     */
+
     tiempoJuego->setImpulsos(Jugadores[0]->getImpulsos());
     globar_position=Jugadores[0]->getLastPosition();
     tiempoJuego->setVidaRestante(Jugadores[0]->getVida_disponible());
+
     // este evento handler verificará si el personaje debe saltar
     //bool lunaActiva = false;
-    Jugadores[0]->eventHandler();
+
+    for (short int i =0; i< Jugadores.size() ; i++) {
+        Jugadores[i]->eventHandler();
+    }
+
     tiempoJuego->setDisparos(Jugadores[0]->getDisparos_disponibles());
     puntaje->setScore(Jugadores[0]->getPuntos());
     //qDebug() <<personajePrincipal->getPuntos()<<endl;
@@ -493,6 +499,7 @@ void mundoTerrestre::updateAnimation()
         else if (Jugadores[i]->getPressKey() == true && Jugadores[i]->getStateShoot() == false)
         {
             Jugadores[i]->setPressKey(false);
+            //Jugadores[i]->setState("stand");
             //personajePrincipal->setState("stand");
         }
     }
