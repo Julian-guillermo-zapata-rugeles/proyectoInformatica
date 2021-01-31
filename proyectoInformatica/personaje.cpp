@@ -462,7 +462,10 @@ void personaje::eventHandler()
 
         if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
             vida_disponible=vida_disponible-0.5;
-            break;
+            if(stateKatana){
+                  delete elementosColisionables[i];
+              }
+              break;
         }
         if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
             vida_disponible-=0.4;

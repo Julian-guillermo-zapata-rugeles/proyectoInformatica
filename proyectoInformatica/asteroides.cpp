@@ -29,7 +29,7 @@ void asteroides::generarAspecto()
         this->ancho = 131;
         this->alto = 201;
         this->frame = 1571;
-        this->limite = 1571;
+        this->limite = 1560;
         meteoros = new QPixmap(":/multimedia/asteroides/M3.png");
         break;
     }
@@ -38,7 +38,7 @@ void asteroides::generarAspecto()
         this->ancho = 74.5;
         this->alto = 100;
         this->frame = 894;
-        this->limite = 894;
+        this->limite = 880;
         meteoros = new QPixmap(":/multimedia/asteroides/m1.png");
         break;
     }
@@ -47,8 +47,8 @@ void asteroides::generarAspecto()
         this->ancho = 75.16;
         this->alto = 100;
         this->frame = 902;
-        this->limite = 902;
-        meteoros = new QPixmap(":/multimedia/asteroides/m1.png");
+        this->limite = 890;
+        meteoros = new QPixmap(":/multimedia/asteroides/m2.png");
         break;
     }
     //Meteoro m3
@@ -56,8 +56,8 @@ void asteroides::generarAspecto()
         this->ancho = 65.16;
         this->alto = 100;
         this->frame = 782;
-        this->limite = 782;
-        meteoros = new QPixmap(":/multimedia/asteroides/m1.png");
+        this->limite = 770;
+        meteoros = new QPixmap(":/multimedia/asteroides/m3.png");
         break;
     }
     case 7:{
@@ -178,10 +178,10 @@ asteroides::asteroides(qreal x, qreal y)
 asteroides::~asteroides()
 { 
     if(fire == true){
-        scene()->addItem(new Animaciones(pos().x()+50,pos().y(),4));
+        scene()->addItem(new Animaciones(pos().x(),pos().y(),4));
     }
     else{
-        scene()->addItem(new Animaciones(pos().x()+50,pos().y(),8));
+        scene()->addItem(new Animaciones(pos().x(),pos().y(),8));
 
 #ifdef DEBUG_ASTEROIDE
     qDebug() << "asteroide eliminado";
@@ -208,6 +208,7 @@ void asteroides::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 
 void asteroides::moverAsteroide()
 {
+    setTransform(QTransform(-1, 0, 0, 1, 0, 0));
     if(animado == true){
         animarMeteoro();
     }
