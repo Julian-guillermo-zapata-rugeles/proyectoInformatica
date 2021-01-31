@@ -1,5 +1,6 @@
 #ifndef ENEMIGO_H
 #define ENEMIGO_H
+//#define DEBUG_ENEMIGO
 
 #include <QObject>
 #include <QGraphicsRectItem>
@@ -23,13 +24,13 @@ private:
     //qreal last_position;
     QTimer *timer;
     QPixmap *pixmap_zombie;
-    QMediaPlayer *sonido = new QMediaPlayer();
+    QMediaPlayer *sonido;
     qreal columnas, alto, ancho, *last_position;
     long int velocidad;
     short int amplitud, limite;
-    unsigned short int temporal=0;
-    bool habilidad=false;
-    unsigned short int cambio = 6+rand()%15;
+    unsigned short int temporal;
+    bool habilidad;
+    unsigned short int cambio;
 
     // metodos privados
 
@@ -47,7 +48,6 @@ public:
 
 private slots:
     void moverEnemigo();
-
 
 };
 

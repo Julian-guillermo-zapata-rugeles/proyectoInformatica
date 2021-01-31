@@ -2,6 +2,7 @@
 
 lunaCreciente::lunaCreciente()
 {
+    timer = new QTimer();
     this->setPixmap(QPixmap(":/multimedia/lunaCreciente.png"));
     this->setPos(-500,-300);
     //this->setTransformOriginPoint(this->boundingRect().center());

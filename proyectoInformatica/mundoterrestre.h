@@ -1,5 +1,6 @@
 #ifndef MUNDOTERRESTRE_H
 #define MUNDOTERRESTRE_H
+#define DEBUG_MUNDOTERRESTRE
 
 #include <QGraphicsItem>
 #include <QGraphicsScene>
@@ -22,6 +23,8 @@
 #include "planeta.h"
 #include "ship.h"
 #include "aves.h"
+#include <QMainWindow>
+#include <multiplayer.h>
 
 #define dt 1
 
@@ -34,8 +37,24 @@ public:
     // y el spawn del enemigos
     // algunas condiciones de gravedad (mas o mensos) y ambientación
 
-    mundoTerrestre(QString userName);
+    mundoTerrestre(QString userName, short int p);
     void iniciarMundo();
+
+ private:
+
+    QList<personaje *> Jugadores;
+    MultiPlayer *players;
+    QGraphicsScene * scene;
+    personaje * personajePrincipal;
+    personaje * personajeSecundario;
+    QGraphicsView * vista;
+    QMediaPlayer *sonido;
+
+    //Naves
+    float s; //escala
+    Planeta *planet;
+    QList<Planeta *> sistema;
+    QList<float> origen;
 
     //metodos para la naves
     void createShips();
@@ -43,21 +62,6 @@ public:
     QList<float> calculoCentroMasas(QList<Planeta*> planetas);
     void calculoAceleracion();                                  //calcula la aceleracion de cada cuerpo
     void inception();
-
-
-
- private:
-    QGraphicsScene * scene  = new QGraphicsScene();
-    personaje * personajePrincipal = new personaje();
-    QGraphicsView * vista = new QGraphicsView(scene);
-    QMediaPlayer *sonido = new QMediaPlayer();
-
-
-    //Naves
-    float s; //escala
-    Planeta *planet;
-    QList<Planeta *> sistema;
-    QList<float> origen;
 
     // Niveles y configuración
     bool level_complete;
@@ -69,6 +73,7 @@ public:
     short int tiempo_nubes;
     short int tiempo_luna;
     qreal globar_position , *gp;
+    qreal global_PositionP2, *gp2;
 
     /*
        zona de scores y de  QGraphicsText
@@ -76,8 +81,6 @@ public:
     */
     Score *puntaje = new Score;
     timeGame *tiempoJuego = new timeGame;
-
-
 
     /* timers para el control de generación
         NOTA : se investigará sí existe una manera más eficiente para controlar la generación.
@@ -102,6 +105,8 @@ public slots:
   //actualizar las naves
   void actualizar();
   void updateAnimation();
+
+
 };
 
 #endif // MUNDOTERRESTRE_H

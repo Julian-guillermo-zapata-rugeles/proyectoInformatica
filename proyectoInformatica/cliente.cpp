@@ -69,7 +69,50 @@ void cliente::on_info_send_clicked()
         QString userRead = ui->info_text->toPlainText();
         ui->info_text->clear();
         mundoTerrestre  *mundo;
-        mundo = new mundoTerrestre(userRead);
+        mundo = new mundoTerrestre(userRead, 1);
         mundo->iniciarMundo();
     }
+}
+
+void cliente::on_multiplayer_clicked()
+{
+    QSplashScreen *splash = new QSplashScreen;
+    splash->setPixmap(QPixmap(":/multimedia/splash.png"));
+    QTimer::singleShot(3000,splash,SLOT(close()));
+    this->close();
+    splash->show();
+
+    QTime dieTime= QTime::currentTime().addSecs(3);
+    while (QTime::currentTime() < dieTime){
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    }
+
+    // capturaremos el nombre y haremos comprobaciones
+    QString userRead = ui->info_text->toPlainText();
+    ui->info_text->clear();
+    mundoTerrestre  *mundo;
+    mundo = new mundoTerrestre(userRead, 2);
+    mundo->iniciarMundo();
+    /*
+    if(mode_cliente =="wait_for_Multiplayer"){
+
+        QSplashScreen *splash = new QSplashScreen;
+        splash->setPixmap(QPixmap(":/multimedia/splash.png"));
+        QTimer::singleShot(3000,splash,SLOT(close()));
+        this->close();
+        splash->show();
+
+        QTime dieTime= QTime::currentTime().addSecs(3);
+        while (QTime::currentTime() < dieTime){
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        }
+
+        // capturaremos el nombre y haremos comprobaciones
+        QString userRead = ui->info_text->toPlainText();
+        ui->info_text->clear();
+        mundoTerrestre  *mundo;
+        mundo = new mundoTerrestre(userRead, 2);
+        mundo->iniciarMundo();
+    }
+    */
 }

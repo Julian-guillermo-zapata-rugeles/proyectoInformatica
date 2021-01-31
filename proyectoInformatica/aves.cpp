@@ -2,6 +2,8 @@
 
 Aves::Aves()
 {
+    this->temporal=0;
+    this->identity=false;
     this->ancho = 79.6;
     this->alto = 120;
     this->limite = 715;
@@ -22,6 +24,8 @@ Aves::Aves()
 
 Aves::Aves(short op)
 {
+    this->temporal=0;
+    identity = true;
     this->ancho = 91;
     this->alto = 131;
     this->limite = 1360;
@@ -35,18 +39,44 @@ Aves::Aves(short op)
     velocidad = 120 + rand() % 180;
     amplitud =  3 + rand() % 8;
     birdAppearance();
-    Q_UNUSED(op);
-    identity = true;
+    Q_UNUSED(op);  
 }
 
 Aves::~Aves()
 {
+    short int num = 1+rand()%4;
+    //explosiones disponibles para aves 7 y 10
     if(identity == false){
-        scene()->addItem(new Animaciones(pos().x(),pos().y(),5,direction));
+        switch (num) {
+        case 1:{
+            scene()->addItem(new Animaciones(pos().x(),pos().y(),10,direction));
+            break;
+        }
+        case 2:{
+            scene()->addItem(new Animaciones(pos().x(),pos().y(),7,direction));
+            break;
+        }
+        default:{
+            scene()->addItem(new Animaciones(pos().x(),pos().y(),5,direction));
+            break;
+        }
+        }
     }
     else{
-        scene()->addItem(new Animaciones(pos().x(),pos().y(),6,direction));
-    }
+        switch (num) {
+        case 1:{
+            scene()->addItem(new Animaciones(pos().x(),pos().y(),10,direction));
+            break;
+        }
+        case 2:{
+            scene()->addItem(new Animaciones(pos().x(),pos().y(),7,direction));
+            break;
+        }
+        default:{
+            scene()->addItem(new Animaciones(pos().x(),pos().y(),6,direction));
+            break;
+        }
+    }}
     scene()->removeItem(this);
 }
 

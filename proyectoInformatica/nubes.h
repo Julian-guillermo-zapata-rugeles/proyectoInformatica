@@ -1,5 +1,6 @@
 #ifndef NUBES_H
 #define NUBES_H
+//#define DEBUG_NUBES
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
@@ -11,13 +12,16 @@
 class nubes : public QObject , public QGraphicsPixmapItem
 {
     Q_OBJECT
+
 public:
     nubes();
     ~nubes();
+
 private:
     bool dir;
-    QTimer *timer = new QTimer();
+    QTimer *timer;
     void generarAspecto();
+
 private slots:
     void moverNubes();
 };

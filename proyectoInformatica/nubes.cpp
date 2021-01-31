@@ -2,6 +2,7 @@
 
 nubes::nubes()
 {
+    timer = new QTimer();
     srand(time(NULL));
     generarAspecto();
 
@@ -19,7 +20,9 @@ nubes::nubes()
 
 nubes::~nubes()
 {
+#ifdef DEBUG_NUBES
     qDebug() << "nube eliminada (salió de escena) ";
+#endif
     // otras acciones ...
 }
 

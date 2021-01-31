@@ -22,6 +22,7 @@ Ship::Ship(float x,
 
 }
 
+/*
 void Ship::asignarCuerpo(float x, float y, float Masa, float radio, float vx, float vy, float ax, float ay, bool centro)
 {
     this->x = x;
@@ -34,6 +35,7 @@ void Ship::asignarCuerpo(float x, float y, float Masa, float radio, float vx, fl
     this->ay = ay;
     this->centro = centro;
 }
+*/
 
 float Ship::getX() const
 {

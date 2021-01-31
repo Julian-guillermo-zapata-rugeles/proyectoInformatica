@@ -31,7 +31,8 @@ void enemigoGigante::asignarCaracteristicas()
 
 enemigoGigante::enemigoGigante(qreal lastPosition)
 {
-
+    timer = new QTimer();
+    sonido = new QMediaPlayer();
     srand(time(NULL));
     this->setRect(0,0,50,50);
     this->last_position=lastPosition;
@@ -50,7 +51,11 @@ enemigoGigante::~enemigoGigante()
     scene()->addItem(new Animaciones(pos().x(),pos().y(),3,direction));
     scene()->addItem(new bonus_municion(this->pos().x(),this->pos().y()));
     scene()->removeItem(this);
+
+#ifdef DEBUG_ENEMIGO_GIGANTE
     qDebug()<< " personaje gigante eliminado " ;
+#endif
+
 }
 
 
@@ -65,12 +70,10 @@ void enemigoGigante::moverEnemigo()
     cambiarAnimacion();
 }
 
-
 QRectF enemigoGigante::boundingRect() const
 {
     return QRectF(-ancho/2,-alto/2,ancho,alto);
 }
-
 
 void enemigoGigante::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
@@ -112,5 +115,4 @@ void enemigoGigante::cambiarAnimacion()
         }
     }
      this->update(-ancho/2,-alto/2,ancho,alto);
-
 }

@@ -32,8 +32,8 @@ private:
     long int velocidad;
     short int amplitud, limite;
     bool direction, dir;
-    unsigned short int temporal=0;
-    bool identity=false;
+    unsigned short int temporal;
+    bool identity;
 
     void birdAppearance();
     void cambiarAnimacion();

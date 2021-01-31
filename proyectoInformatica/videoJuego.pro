@@ -26,6 +26,7 @@ SOURCES += \
     lunacreciente.cpp \
     main.cpp \
     movimientos.cpp \
+    multiplayer.cpp \
     mundoterrestre.cpp \
     nubes.cpp \
     personaje.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     enemigoGigante.h \
     lunacreciente.h \
     movimientos.h \
+    multiplayer.h \
     mundoterrestre.h \
     nubes.h \
     personaje.h \

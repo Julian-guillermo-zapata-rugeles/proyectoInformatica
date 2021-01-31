@@ -2,6 +2,7 @@
 
 bonus_municion::bonus_municion(qreal x, qreal y)
 {
+    timer = new QTimer();
     this->setPos(x,560-this->boundingRect().height());
     this->setPixmap(QPixmap(":/multimedia/bonus_balas.png"));
     timer->start(10000);

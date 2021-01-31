@@ -13,7 +13,7 @@ public:
     lunaCreciente();
 private:
     qreal escalaLunar ;
-    QTimer *timer = new QTimer();
+    QTimer *timer;
 
 private slots:
     void crecer();

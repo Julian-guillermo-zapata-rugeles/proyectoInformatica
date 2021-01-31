@@ -1,5 +1,6 @@
 #ifndef ASTEROIDES_H
 #define ASTEROIDES_H
+//#define DEBUG_ASTEROIDE
 
 #include <QObject>
 #include <QGraphicsRectItem>
@@ -24,8 +25,6 @@ Objetivos :
         NOTA : fase experimental del final del juego , 1 nivel.
             BUGS : se debe corregir la visualización y el punto de choque.
                    Dimensiones , y aceleración o tiempo de caida además del pixmap.
-
-
 */
 
 class asteroides :public QObject , public QGraphicsPixmapItem
@@ -33,11 +32,17 @@ class asteroides :public QObject , public QGraphicsPixmapItem
     Q_OBJECT
 
 private:
-    QMediaPlayer *sonido = new QMediaPlayer();
+    QMediaPlayer *sonido;
     QTimer *timer;
     signed short int rotationAngle;
     void generarAspecto();
-    bool fire=false;
+    bool fire;
+
+    //Animacion de los Meteoros
+    qreal ancho, alto, frame, limite;
+    bool rotar, animado;
+    short int caida;
+    QPixmap *meteoros;
 
 public:
     asteroides(bool sound=true);
@@ -45,8 +50,14 @@ public:
     asteroides(qreal x, qreal y);
     ~asteroides();
 
+    //Animacion de los meteoros
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void animarMeteoro();
+
 private slots:
     void moverAsteroide();
+
 };
 
 #endif // ASTEROIDES_H
