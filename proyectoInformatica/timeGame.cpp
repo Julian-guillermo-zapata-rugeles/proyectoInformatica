@@ -2,13 +2,12 @@
 
 timeGame::timeGame(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
-
-    timeCount = 5;
-    levelworld = 0 ;
-    disparos=0;
-    vidaRestante = 100;
+    this->impulsos = 0;
+    this->timeCount = 5;
+    this->levelworld = 0 ;
+    this->disparos=0;
+    this->vidaRestante = 100;
     QString user_name = "";
-
 
     int id = QFontDatabase::addApplicationFont(":/multimedia/Cosmic Blaster.ttf");
     QFontDatabase::applicationFontFamilies(id);

@@ -16,7 +16,8 @@ public:
 private:
     // contador para la munición //
     // se establecerá cuanto tiempo permanecerá la munición en pantalla antes de autoeliminarse.
-     QTimer *timer = new QTimer();
+     QTimer *timer;
+
 private slots:
      void destruirCaja();
 

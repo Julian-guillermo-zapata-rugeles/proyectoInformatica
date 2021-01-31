@@ -37,15 +37,15 @@ public:
 
 private:
     // tiempo de vida será un periodo de animación.
-    QTimer *tiempoVida = new QTimer;
+    QTimer *tiempoVida;
     QPixmap *deadpix;
 
     // se usará un ancho , alto y frame para renderizar el pixmap
     float ancho, alto, frame, limite;
     bool complete;
-    bool caer=false;
-    short int ground = 550;
-    float caida=0;
+    bool caer;
+    short int ground;
+    float caida;
 
     // Interfaz para el uso de QgraphicsItem
 public:

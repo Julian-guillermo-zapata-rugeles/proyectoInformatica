@@ -1,5 +1,6 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
+#define DEBUG_PERSONAJE
 
 #include <QObject>
 #include <QGraphicsRectItem>
@@ -25,19 +26,21 @@ private:
     bool dir;
     short int disparos_disponibles;
     short int vida_disponible;
-    qreal ancho, alto, fila, columna, limite=1550;
+    qreal ancho, alto, fila, columna, limite;
     QPixmap *pixPersonaje;
-    bool pressKey=false;
-    bool stateShoot=false;
-    bool stateSlide=false;
-    bool stateKatana = false;
-    bool flying=false;
-    short int impulsos=3;
-    short int puntos=0, *GlobalPuntos;
+    bool pressKey;
+    bool stateShoot;
+    bool stateSlide;
+    bool stateKatana;
+    bool flying;
+    short int impulsos;
+    short int puntos, *GlobalPuntos;
 
 public:
     personaje();
-    void keyPressEvent(QKeyEvent *event);
+
+    void teclas(QKeyEvent *event);
+    void teclas2(QKeyEvent *event);
     qreal getLastPosition();
     void eventHandler();
     short getDisparos_disponibles() const;

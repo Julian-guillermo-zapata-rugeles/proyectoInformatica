@@ -14,7 +14,6 @@ public:
     void decrease();
     int getTime();
 
-
     void setTimeCount(short value);
     void setVidaRestante(short value);
     void setLevelworld(short value);
@@ -38,7 +37,7 @@ private:
     short int disparos;
     short int vidaRestante;
     QString user_name;
-    short int impulsos=0;
+    short int impulsos;
 
     // QObject interface
 protected:

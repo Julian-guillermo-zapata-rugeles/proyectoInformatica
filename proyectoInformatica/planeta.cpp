@@ -4,7 +4,6 @@
 Planeta::Planeta(float posX, float posY, float masa, float radio, float velX, float velY, float AcX, float AcY)
 {
     planeta = new Ship(posX, posY, masa, radio, velX, velY, AcX, AcY);
-    //this->setPixmap(QPixmap(":/multimedia/planets/1.png"));
     short int op = 1+rand()%33;
     eleccionPixmap(op);
 }

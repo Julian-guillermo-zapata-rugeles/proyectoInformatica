@@ -29,7 +29,9 @@ void proyectil::moverProyectil()
     if(pos().x()>1300 + this->boundingRect().width() or pos().x() < 0 ){
         scene()->removeItem(this);
         delete this;
+#ifdef DEBUG_PROYECTIL
         qDebug() << "Proyectil eliminado de la pantalla ";
+#endif
     }
     QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;
     for(int i=0;i< elementosColisionables.size();i++){

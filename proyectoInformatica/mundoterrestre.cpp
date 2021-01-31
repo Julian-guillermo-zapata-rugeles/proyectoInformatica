@@ -1,14 +1,26 @@
 #include "mundoterrestre.h"
 
-mundoTerrestre::mundoTerrestre(QString userName)
+mundoTerrestre::mundoTerrestre(QString userName, short p)
 {
+    scene  = new QGraphicsScene();
+    vista = new QGraphicsView(scene);
 
+    for (short int i=0; i<p ; i++ ) {
+        Jugadores.append(new personaje);
+    }
+
+    players = new MultiPlayer();
+    players->setPlayer1(Jugadores[0]);
+    if(p == 2){
+        players->setPlayer2(Jugadores[1]);
+    }
+    scene->addItem(players);
+
+    sonido = new QMediaPlayer();
     /*
     sección de información para el nivel y el usuario en partida
     */
     tiempoJuego->setUser_name(userName); // lo recibí desde el cliente principal
-
-
     level_complete=false;
     level=1;
     level_time=10;
@@ -27,9 +39,18 @@ mundoTerrestre::mundoTerrestre(QString userName)
     scene->addItem(tiempoJuego);
 
     srand(time(NULL));
-    scene->addItem(personajePrincipal);
+    for (short int i =0; i<p ; i++) {
+        scene->addItem(Jugadores[i]);
+    }
+
     vista->setScene(scene);
-    globar_position = personajePrincipal->getLastPosition();
+
+    if(p == 2){
+        global_PositionP2 = Jugadores[1]->getLastPosition();
+        gp2 = &global_PositionP2;
+    }
+    globar_position = Jugadores[0]->getLastPosition();
+
     gp = &globar_position;
 
     vista->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -101,8 +122,6 @@ void mundoTerrestre::iniciarMundo()
     //vista->setStyleSheet("border-image: url(:/multimedia/fondo3.jpg)");
     // IMAGEN DE FONDO DESHABILITADA.
 
-
-
     // iniciador de timers
     //generadorAsteroides->start(tiempo_asterides);
     //generadorEnemigos->start(tiempo_enemigos);
@@ -122,7 +141,7 @@ void mundoTerrestre::createShips()
     /*for(unsigned short int a =0 ; a < 4;a++){
         sistema.append(new Planeta(1+rand()%10,1+rand()%10,3000+rand()%5000,1+rand()%100));
     }
-    /*
+
     short int opcion = 1+rand()%2;
 
     if(opcion == 1){
@@ -214,7 +233,6 @@ void mundoTerrestre::generador(int tipo)
     // 3 para generar enemigos Gigantes
     // 4 para generar nubes
 
-
     // ****************** GENERACION ASTEROIDES Y EVENTOS ************************ //
     if (tipo==1){
         // esta sección genera asteroides  y bajo ciertas circunstancias
@@ -222,8 +240,11 @@ void mundoTerrestre::generador(int tipo)
         // se genera constantemente un numero aleatorio de 1 a 100
         // para iniciar el proceso si ese numero %3 == 0
 
-        short int sorpresa_asteroide= 1+rand()%100;
+        short int sorpresa_asteroide= 1+rand()%10;
+
+#ifdef DEBUG_MUNDOTERRESTRE
         qDebug() <<"numero sorpresa :"<<sorpresa_asteroide;
+#endif
         if(sorpresa_asteroide%3==0){
             // al desatarse el evento se genera un sonido de alerta
             // para avisar del evento.
@@ -237,10 +258,13 @@ void mundoTerrestre::generador(int tipo)
                 }
             }
             else{
-                qDebug()<<"evento omitido nivel %5";
+#ifdef DEBUG_MUNDOTERRESTRE
+        qDebug()<<"evento omitido nivel %5";
+#endif
             }
-
-            qDebug() << "-- evento sorpresa INICIADO -- ";
+#ifdef DEBUG_MUNDOTERRESTRE
+        qDebug() << "-- evento sorpresa INICIADO -- ";
+#endif
             // durante este ciclo generamos aleatoriamente  un numero
             // que representará la cantidad de asteroides que salndrán
         }
@@ -279,11 +303,11 @@ void mundoTerrestre::generador(int tipo)
             // estos pueden desplazarse saltando por lo cual
             // se generán de forma aleatorio
             // si el numero al azar es par el enemigo saltará
-            scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition()));
+            scene->addItem(new enemigoGigante(Jugadores[0]->getLastPosition()));
         }
         else{
             // de no ser par el enemigo no saltará
-            scene->addItem(new enemigoGigante(personajePrincipal->getLastPosition()));
+            scene->addItem(new enemigoGigante(Jugadores[0]->getLastPosition()));
         }
         // cada vez que se genere un enemigo gigante el timer
         // cambiará aleatoriamente para generar la sensación de situacione imprevista
@@ -308,18 +332,31 @@ void mundoTerrestre::generador(int tipo)
 
 void mundoTerrestre::ticksPersonaje()
 {
-    tiempoJuego->setImpulsos(personajePrincipal->getImpulsos());
-    globar_position=personajePrincipal->getLastPosition();
-    tiempoJuego->setVidaRestante(personajePrincipal->getVida_disponible());
+    /*
+    if(Jugadores.length() == 2){
+        tiempoJuego->setImpulsos(Jugadores[1]->getImpulsos());
+        //global_PositionP2=Jugadores[1]->getLastPosition();
+        tiempoJuego->setVidaRestante(Jugadores[0]->getVida_disponible());
+        // este evento handler verificará si el personaje debe saltar
+        //bool lunaActiva = false;
+        Jugadores[0]->eventHandler();
+        tiempoJuego->setDisparos(Jugadores[0]->getDisparos_disponibles());
+        puntaje->setScore(Jugadores[0]->getPuntos());
+        //qDebug() <<personajePrincipal->getPuntos()<<endl;
+    }
+    */
+    tiempoJuego->setImpulsos(Jugadores[0]->getImpulsos());
+    globar_position=Jugadores[0]->getLastPosition();
+    tiempoJuego->setVidaRestante(Jugadores[0]->getVida_disponible());
     // este evento handler verificará si el personaje debe saltar
     //bool lunaActiva = false;
-    personajePrincipal->eventHandler();
-    tiempoJuego->setDisparos(personajePrincipal->getDisparos_disponibles());
-    puntaje->setScore(personajePrincipal->getPuntos());
+    Jugadores[0]->eventHandler();
+    tiempoJuego->setDisparos(Jugadores[0]->getDisparos_disponibles());
+    puntaje->setScore(Jugadores[0]->getPuntos());
     //qDebug() <<personajePrincipal->getPuntos()<<endl;
 
     if(tiempoJuego->getTime() < 12){
-        //ticks->stop();
+        //ticks->stop();ddddd
         generadorAsteroides->stop();
         generadorEnemigos->stop();
         generadorEnemigosGigantes->stop();
@@ -343,7 +380,6 @@ void mundoTerrestre::ticksPersonaje()
         if(tiempoJuego->getTime() < 4){
             //qDebug() << "Entro a mostrar splash del siguiente nivel "<<endl;
             if((level+1)%2 ==0){
-                qDebug() << "pasare a un nivel par"<<endl;
                 vista->setStyleSheet("border-image: url(:/multimedia/next level.png)");
             }
             if((level+1)%3 ==0 || (level+1)%5 ==0 ){
@@ -358,7 +394,6 @@ void mundoTerrestre::ticksPersonaje()
         }
     }
 }
-
 
 void mundoTerrestre::actualizar_nivel()
 {
@@ -390,8 +425,10 @@ void mundoTerrestre::actualizar_nivel()
     }
 
     else if(level%5==0){
+#ifdef DEBUG_MUNDOTERRESTRE
+        qDebug()<< "nivel asteroides asesinos"<<endl;
+#endif
 
-        qDebug()<< "nivel asteroides asesinos";
         // este nivel es sobre asteroides , el personaje deberá aguantar la caida de estos
         //generadorNubes->start(8000);
         generadorAsteroides->start(1000);
@@ -407,7 +444,10 @@ void mundoTerrestre::actualizar_nivel()
         this->tiempo_enemigos_gigantes=tiempo_enemigos_gigantes-500;
         generadorEnemigos->start(tiempo_enemigos);
         generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
+
+#ifdef DEBUG_MUNDOTERRESTRE
         qDebug()<<" nivel "<< level;
+#endif
         this->iniciarMundo();
         tiempoJuego->setTimeCount(60);
 
@@ -425,6 +465,7 @@ void mundoTerrestre::actualizar()
 
 void mundoTerrestre::updateAnimation()
 {
+    /*
     personajePrincipal->actualizarEstado();
 
     if(personajePrincipal->getStatus_saltando() == false &&
@@ -437,4 +478,25 @@ void mundoTerrestre::updateAnimation()
         personajePrincipal->setPressKey(false);
         //personajePrincipal->setState("stand");
     }
+    */
+
+    //MULTIPLAYER
+    for (short int i=0; i<Jugadores.length() ; i++ )
+    {
+        Jugadores[i]->actualizarEstado();
+        if(Jugadores[i]->getStatus_saltando() == false &&
+                Jugadores[i]->getPressKey() == false &&
+                Jugadores[i]->getStateShoot() == false)
+        {
+            Jugadores[i]->setState("stand");
+        }
+        else if (Jugadores[i]->getPressKey() == true && Jugadores[i]->getStateShoot() == false)
+        {
+            Jugadores[i]->setPressKey(false);
+            //personajePrincipal->setState("stand");
+        }
+    }
 }
+
+
+

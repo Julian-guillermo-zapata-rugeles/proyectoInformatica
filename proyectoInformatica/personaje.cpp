@@ -125,9 +125,16 @@ personaje::personaje():movimientos(550){
         en principio el personaje cuenta con 5 disparos
         y se ubica en la siguiente dirección.
     */
+
+    this->pressKey=false;
+    this-> stateShoot=false;
+    this-> stateSlide=false;
+    this-> stateKatana = false;
+    this-> flying=false;
+    this-> puntos=0,
+    this->limite = 1550;
+    this->impulsos =3;
     this->setRect(0,0,100,131);
-    this->setFlag(QGraphicsItem::ItemIsFocusable);
-    this->setFocus();
     this->setPos(600,550);
     this->dir = true ;
     this->status_saltando=true;
@@ -142,9 +149,7 @@ personaje::personaje():movimientos(550){
     pixPersonaje = new QPixmap(":/multimedia/personaje/playerSprite.png");
     setState("stand");
     this->GlobalPuntos=&puntos;
-
 }
-
 
 // función del keypressEvent
 /*
@@ -153,7 +158,7 @@ personaje::personaje():movimientos(550){
 
 */
 
-void personaje::keyPressEvent(QKeyEvent *event)
+void personaje::teclas(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_A){
         pressKey = true;
@@ -237,9 +242,126 @@ void personaje::keyPressEvent(QKeyEvent *event)
         */
         if(disparos_disponibles>=0){
             proyectil *disparo = new proyectil(dir,GlobalPuntos);
-            // qDebug() <<"posicion x "<< this->x(); // DEBUG
-            // qDebug() <<"posicion y "<< this->y(); // DEBUG
+            disparo->setPixmap(QPixmap(":/multimedia/proyectiles/proyectilPersonaje.png"));
+            scene()->addItem(disparo);
+            setState("shoot");
+            disparo->setPos(this->x()+10,this->y());
+            // se añade a la escena y se ubica en la posición del personaje
+            // zona de sonidos y descuento de proyectiles //
+            // sonido de descarga (sin munición)
+            sonido->stop();
+            sonido->setMedia(QUrl("qrc:/multimedia/laser1.mp3"));
+            sonido->play();
+            disparos_disponibles=disparos_disponibles-1;
+        }
+        else{
+            stateShoot = true;
+            stateKatana=true;
+            sonido->stop();
+            sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/espadaSamurai.mp3"));
+            sonido->play();
+            setState("attack");
+        }
+    }
 
+    if(event->key() == Qt::Key_S){
+        stateShoot = true;
+        stateSlide = true;
+        columna=655;
+        if(status_saltando == true){
+            flying = true;
+            setState("fly");
+        }
+        else{
+            setState("slide");
+        }
+    }
+}
+
+void personaje::teclas2(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_J){
+        pressKey = true;
+        // Condición movimiento izquierda :
+        //      movimiento del personaje hacia la izquierda
+        //       status_gravitatorio :
+        //          si el personaje está en estado de gravedad su movimiento
+        //          lateral se verá impedido (avanza menos)
+
+        //      NOTA: se puede simplificar el conjunto de instrucciones para acortar código
+        if(pos().x()>0){
+            // si no existe estado de gravedad el personaje se mueve normalmente
+            if(status_gravitatorio==false){
+                setPos(x()-10,y());
+                setTransform(QTransform());
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
+            }
+            else{
+                // bajo efecto de gravedad (avance lateral)
+                setPos(x()-1,y());
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
+            }
+            // establece la dirección en la que mira el personaje para crear
+            // la bala en esa dirección
+            dir=false;
+        }
+    }
+
+    if(event->key() == Qt::Key_L){
+        pressKey = true;
+        if(pos().x()<1300-30){
+            if(status_gravitatorio==false){
+                setPos(x()+10,y());
+                setTransform(QTransform(-1, 0, 0, 1, 0, 0));
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
+            }
+            else{
+                // bajo efecto de gravedad
+                setPos(x()+1,y());
+                if(disparos_disponibles > 0){
+                    setState("run");
+                }
+                else {
+                    setState("walk");
+                }
+            }
+            dir=true;
+        }
+    }
+
+    if(event->key() == Qt::Key_I){
+        /*
+        Evento de salto : se establece en verdadero ()
+        */
+        setStatus_saltando(true);
+        setState("jump");
+    }
+
+
+    if(event->key() == Qt::Key_Alt){
+        stateShoot = true;
+        columna = 0;
+        /*
+          este segmento genera un disparo y lo agrega a la escena
+          también se genera un sonido que simula el disparo
+        */
+        if(disparos_disponibles>=0){
+            proyectil *disparo = new proyectil(dir,GlobalPuntos);
             disparo->setPixmap(QPixmap(":/multimedia/proyectiles/proyectilPersonaje.png"));
             scene()->addItem(disparo);
             setState("shoot");
@@ -263,7 +385,7 @@ void personaje::keyPressEvent(QKeyEvent *event)
         }
     }
 
-    if(event->key() == Qt::Key_S){
+    if(event->key() == Qt::Key_K){
         stateShoot = true;
         stateSlide = true;
         columna=655;
@@ -343,12 +465,12 @@ void personaje::eventHandler()
             break;
         }
         if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
-            vida_disponible=0;
+            vida_disponible-=0.4;
             break;
         }
 
         if(typeid (*(elementosColisionables[i]))==typeid (Aves)){
-            vida_disponible=vida_disponible-0.5;
+            vida_disponible=vida_disponible-0.3;
             if(stateKatana){
                 delete elementosColisionables[i];
             }
@@ -356,7 +478,7 @@ void personaje::eventHandler()
         }
 
         if(typeid (*(elementosColisionables[i]))==typeid (Planeta)){
-            vida_disponible=vida_disponible-0.5;
+            vida_disponible=vida_disponible-0.4;
             break;
         }
     }

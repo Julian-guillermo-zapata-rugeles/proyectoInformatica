@@ -1,5 +1,6 @@
 #ifndef ENEMIGOGIGANTE_H
 #define ENEMIGOGIGANTE_H
+//#define DEBUG_ENEMIGO_GIGANTE
 
 #include <QObject>
 #include <QGraphicsRectItem>
@@ -18,8 +19,8 @@ class enemigoGigante : public QObject , public QGraphicsRectItem
 {
     Q_OBJECT
 private:
-    QTimer *timer = new QTimer();
-    QMediaPlayer *sonido = new QMediaPlayer();
+    QTimer *timer;
+    QMediaPlayer *sonido;
     qreal last_position , alto , ancho , columnas ;
     short int disparosSoportados;
     bool direction , saltando ;

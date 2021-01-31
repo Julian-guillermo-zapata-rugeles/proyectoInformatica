@@ -48,11 +48,18 @@ void movimientos::saltar()
     if(status_saltando==true){
         posY=limite_inferior - float(0+velocidadY*tiempo+(0.5*(-9.8*tiempo*tiempo)));
         tiempo=tiempo+intervaloSuma;
+
+#ifdef DEBUG_MOVIMIENTOS
         qDebug() << "y : "<<posY;
+#endif
+
         if(posY>limite_inferior){
             status_saltando=false;
             posY=limite_inferior;
-            qDebug() << "status saltando = False ";
+
+#ifdef DEBUG_MOVIMIENTOS
+        qDebug() << "status saltando = False ";
+#endif
             tiempo=0;
         }
     }
@@ -67,7 +74,10 @@ void movimientos::gravitar()
 
     if(status_gravitatorio==false){
         if(posY<limite_inferior-10){
-            qDebug()<<"pos y gravedad :"<< posY << "limite inferior << " << limite_inferior;
+
+#ifdef DEBUG_MOVIMIENTOS
+        qDebug()<<"pos y gravedad :"<< posY << "limite inferior << " << limite_inferior;
+#endif
             posY=posY+5;
             tmp_sumador=0;
         }

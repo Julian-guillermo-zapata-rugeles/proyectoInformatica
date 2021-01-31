@@ -1,5 +1,6 @@
 #ifndef PROYECTIL_H
 #define PROYECTIL_H
+//#define DEBUG_PROYECTIL
 
 #include <QObject>
 #include <QTimer>

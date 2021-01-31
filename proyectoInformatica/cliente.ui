@@ -175,6 +175,25 @@ font: 11pt &quot;Amiri&quot;;</string>
     <string>NOMBRE</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="multiplayer">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>490</y>
+     <width>171</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0,180);
+border-radius:15px;
+color:white;
+font:bold;</string>
+   </property>
+   <property name="text">
+    <string>MULTIPLAYER</string>
+   </property>
+  </widget>
   <zorder>label_2</zorder>
   <zorder>pushButton</zorder>
   <zorder>pushButton_2</zorder>
@@ -184,6 +203,7 @@ font: 11pt &quot;Amiri&quot;;</string>
   <zorder>info_name</zorder>
   <zorder>info_send</zorder>
   <zorder>info_text</zorder>
+  <zorder>multiplayer</zorder>
  </widget>
  <resources/>
  <connections/>

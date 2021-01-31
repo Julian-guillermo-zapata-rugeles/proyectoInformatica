@@ -2,6 +2,10 @@
 
 Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
 {
+    this-> ground = 550;
+    this-> caida=0;
+    tiempoVida = new QTimer;
+    this->caer=false;
     /*
     Constructor :
         en esta sección se usará el tipo de animación que se presentará
@@ -69,11 +73,54 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
         setScale(0.5);
         caer = true;
     }
+    //Explosion en el aire
+    if(tipo == 7){
+        // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
+        // con un pixmap grande del mismo tipo de ser necesario
+        deadpix = new QPixmap(":/multimedia/animaciones/explosionAire.png");
+        this->limite = 1475;
+        this->ancho = 122.9;
+        this->alto = 100;
+        //setScale(0.5);
+        caer = true;
+    }
+    //Explosion enel Piso 1
+    if(tipo == 8){
+        // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
+        // con un pixmap grande del mismo tipo de ser necesario
+        deadpix = new QPixmap(":/multimedia/animaciones/explosionPiso.png");
+        this->limite = 2700;
+        this->ancho = 150;
+        this->alto = 100;
+        //setScale(0.5);
+        caer = true;
+    }
+    //Explosion en el piso 2
+    if(tipo == 9){
+        // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
+        // con un pixmap grande del mismo tipo de ser necesario
+        deadpix = new QPixmap(":/multimedia/animaciones/explosionPiso2.png");
+        this->limite = 2248;
+        this->ancho = 187.3;
+        this->alto = 120;
+        //setScale(0.5);
+        caer = true;
+    }
+    //Explosion Super
+    if(tipo == 10){
+        // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
+        // con un pixmap grande del mismo tipo de ser necesario
+        deadpix = new QPixmap(":/multimedia/animaciones/ExplosionSuper.png");
+        this->limite = 2398;
+        this->ancho = 99.9;
+        this->alto = 100;
+        //setScale(0.5);
+        caer = true;
+    }
 
     // establecemos la ubicación del sprite (basada en la que recibimos por constructor)
     // que representa el lugar donde muere el enemigo/asteroide/etc
     setPos(posx, posy);
-
 
     tiempoVida->start(100); // el tiempo de vida será la tasa de refresco de los cuadros
     connect(tiempoVida,SIGNAL(timeout()),this,SLOT(actualizar()));
@@ -87,8 +134,6 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     }
 }
 
-
-
 Animaciones::~Animaciones()
 {
     /*
@@ -99,14 +144,10 @@ Animaciones::~Animaciones()
     qDebug() << "Animacion terminada "<<endl;
 }
 
-
-
 QRectF Animaciones::boundingRect() const
 {
     return QRectF(-ancho/2,-alto/2,ancho,alto);
 }
-
-
 
 void Animaciones::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
@@ -114,7 +155,6 @@ void Animaciones::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }
-
 
 void Animaciones::animar()
 {

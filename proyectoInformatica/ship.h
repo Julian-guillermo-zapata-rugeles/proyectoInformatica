@@ -20,6 +20,7 @@ public:
          float ay=0,
          bool centro=false);
 
+    /*
     void asignarCuerpo(float x=0,
                        float y=0,
                        float Masa=0,
@@ -29,6 +30,7 @@ public:
                        float ax=0,
                        float ay=0,
                        bool centro=false);
+                       */
 
     float getX() const;
     float getY() const;
@@ -52,7 +54,6 @@ public:
     void asignarPosicion(float px, float py);
 
     void asignarMov();
-
     bool getCentro() const;
 
 private:

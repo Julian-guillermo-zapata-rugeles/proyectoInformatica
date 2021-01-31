@@ -4,12 +4,22 @@
 
 enemigo::enemigo(qreal *lastPosition):movimientos(560)
 {
-    // constructor
+    sonido = new QMediaPlayer();
+    this-> temporal=0;
+    this->habilidad=false;
+    this->cambio = 6+rand()%15;
 
+    // constructor
+    //this->setFlag(QGraphicsItem::ItemIsFocusable);
+    //this->setFocus();
     this->setRect(0,0,30,50);
     this->setTransformOriginPoint(this->boundingRect().center());
     // establecer dimensiones del personaje 30 x 50
+
+#ifdef DEBUG_ENEMIGO
     qDebug() << "Generacion : Enemigo común ";
+#endif
+
     srand(time(NULL));
     this->setScale(0.7);
 
@@ -36,7 +46,10 @@ enemigo::~enemigo()
     // se advertirá sobre la inexistencia del objeto en pantalla. NO deberia afectar.
     scene()->addItem(new Animaciones(pos().x(),pos().y(),1));
     scene()->removeItem(this);
+
+#ifdef DEBUG_ENEMIGO
     qDebug() << "Eliminación : Enemigo común";
+#endif
     //eliminacion del timer
 }
 
@@ -82,7 +95,9 @@ void enemigo::moverEnemigo()
     }
 
     cambiarAnimacion(); // FIJA
+#ifdef DEBUG_ENEMIGO
     qDebug()<< *last_position << "pos at <--";
+#endif
 }
 
 void enemigo::cambiarAnimacion()
