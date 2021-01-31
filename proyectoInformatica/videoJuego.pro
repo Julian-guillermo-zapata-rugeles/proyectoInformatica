@@ -24,6 +24,7 @@ SOURCES += \
     cliente.cpp \
     enemigo.cpp \
     enemigoGigante.cpp \
+    gamesave.cpp \
     lunacreciente.cpp \
     main.cpp \
     movimientos.cpp \
@@ -47,6 +48,7 @@ HEADERS += \
     cliente.h \
     enemigo.h \
     enemigoGigante.h \
+    gamesave.h \
     lunacreciente.h \
     movimientos.h \
     multiplayer.h \
