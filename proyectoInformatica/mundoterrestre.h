@@ -11,20 +11,20 @@
 #include <QVector>
 #include <QSignalMapper>
 #include <QMediaPlayer>
+#include <QMainWindow>
 
-#include <personaje.h> // propia
-#include <asteroides.h> // propia
-#include <enemigo.h> // propia
-#include <enemigoGigante.h> // propia
-#include <nubes.h> // propia
+#include "personaje.h" // propia
+#include "asteroides.h" // propia
+#include "enemigo.h" // propia
+#include "enemigoGigante.h" // propia
+#include "nubes.h" // propia
 #include "score.h" //propia
 #include "lunacreciente.h" // propia
 #include "timeGame.h"
 #include "planeta.h"
 #include "ship.h"
 #include "aves.h"
-#include <QMainWindow>
-#include <multiplayer.h>
+#include "multiplayer.h"
 #include "rocket.h"
 #include "gamesave.h"
 #include "gameover.h"
@@ -34,44 +34,27 @@
 class mundoTerrestre : public QObject , public QGraphicsRectItem , public GameSave
 {
     Q_OBJECT
+
 public:
-    // se estudia la posibilidad de sobrecargar al constructor o generar aleatoriedad en cada mundo
-    // pese a que existe cierto grado se pueden generar multiples niveles modificando los timers
-    // y el spawn del enemigos
-    // algunas condiciones de gravedad (mas o mensos) y ambientación
+    /*
+       ------------------------------------------------------------------------
+                            CONSTRUCTOR DE LA CLASE
+       ------------------------------------------------------------------------
 
+       userName : nombre del jugador o equipo (se usará para guardar la información)
+       p        : cantidad de personajes (multiplayer max 2)
+    */
     mundoTerrestre(QString userName, short int p);
-    void iniciarMundo();
+    void iniciarMundo(); // iniciar el mundo
 
- private:
 
-    QList<personaje *> Jugadores;
-    MultiPlayer *players;
-    QGraphicsScene * scene;
-    personaje * personajePrincipal;
-    personaje * personajeSecundario;
-    QGraphicsView * vista;
-    QMediaPlayer *sonido;
-    std::string nombreUsuario;
-    cliente *nuevoCliente;
-    GameOver *finJuego;
+private:
 
-    //Naves
-    float s; //escala
-    Planeta *planet;
-    QList<Planeta *> sistema;
-    QList<float> origen;
-
-    //metodos para la naves
-    void createShips();
-    float calculoEscala();
-    QList<float> calculoCentroMasas(QList<Planeta*> planetas);
-    void calculoAceleracion();                                  //calcula la aceleracion de cada cuerpo
-    void inception();
-    void guardarInformacion();
-    void finalizarJuego();
-
-    // Niveles y configuración
+    /*
+       ------------------------------------------------------------------------
+                     INICIALIZACIÓN DE ATRIBUTOS PRIVADOS
+       ------------------------------------------------------------------------
+    */
     bool level_complete;
     short int level;
     short int level_time ;
@@ -80,39 +63,78 @@ public:
     short int tiempo_enemigos_gigantes;
     short int tiempo_nubes;
     short int tiempo_luna;
+
+    // segmento del multiplayer //
+
     qreal globar_position , *gp;
     qreal global_PositionP2, *gp2;
 
-    /*
-       zona de scores y de  QGraphicsText
-       aquí estarán los objetos que mostrará información del personaje y sobre el estado de juego
-    */
-    Score *puntaje = new Score;
+    QList<personaje *> Jugadores;
+    MultiPlayer *players;
+    personaje * personajePrincipal;
+    personaje * personajeSecundario;
+
+    // escena y multimedia //
+    QGraphicsScene * scene;
+    QGraphicsView * vista;
+    QMediaPlayer *sonido;
+
+    // usuario y salida //
+    std::string nombreUsuario;
+    cliente *nuevoCliente;
+    GameOver *finJuego;
+    Score *puntaje;
     timeGame *screenInformation;
 
-    /* timers para el control de generación
-        NOTA : se investigará sí existe una manera más eficiente para controlar la generación.
+    // Naves espaciales //
+    float s; //escala
+    Planeta *planet;
+    QList<Planeta *> sistema;
+    QList<float> origen;
+    QList<float> calculoCentroMasas(QList<Planeta*> planetas);
 
-    */
-    QTimer *ticks;
+    // Timers Generadores spaw de enemgigos //
+
+    QTimer *ticksEventosGlobales;
     QTimer *generadorAsteroides;
     QTimer *generadorEnemigos;
     QTimer *generadorEnemigosGigantes;
     QTimer *generadorNubes;
     QTimer *generadorDeLuna;
     QTimer *animacionPersonaje;
-
-    //Naves
     QTimer *generadorNaves;
 
-public slots:
-  void generador(int);
-  void ticksPersonaje();
-  void actualizar_nivel();
+    /*
+       ------------------------------------------------------------------------
+                            INICIALIZACIÓN DE MÉTODOS  PRIVADOS
+       ------------------------------------------------------------------------
+    */
 
-  //actualizar las naves
-  void actualizar();
-  void updateAnimation();
+    //metodos para la naves (plane)
+    void crearPlanetas(); // genración de planetas (4)
+    float calculoEscala(); // calculo escalas
+    void calculoAceleracion();  //calcula la aceleracion de cada cuerpo
+    void inception();
+
+    //métodos del juego  //
+    void guardarInformacion();       // guardar en archivo con nombre userName
+    void finalizarJuego();           // fin del juego llamado a reiniciar
+    void actualizarNivel();          // actualizar un nivel.
+    void comprobadorCambioNivel();   // comprobar si un nivel está proximo a cambiar.
+
+
+private slots:
+    /*
+       ------------------------------------------------------------------------
+                            SLOTS PRIVADOS DE LA CLASE
+       ------------------------------------------------------------------------
+    */
+    void generadorEntidades(int);
+    void capturadorEventosGlobales();
+
+    //actualizar los planetas
+    void actualizar();
+    void updateAnimation();
 
 
 };
