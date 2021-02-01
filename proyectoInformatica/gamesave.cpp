@@ -50,3 +50,10 @@ void GameSave::escribirInformacion(std::string nombreArchivo)
     file.open(nombreArchivo,std::ios::out);
     file << puntaje <<" "<<shoots<<" "<<level;
 }
+
+void GameSave::crearUsuario(std::string nombreArchivo)
+{
+    file.open(nombreArchivo,std::ios::out);
+    file << 0 << " "<< 0<<" "<<0;
+    file.close();
+}

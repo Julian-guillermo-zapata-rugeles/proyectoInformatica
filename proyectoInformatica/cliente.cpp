@@ -57,6 +57,7 @@ void cliente::on_info_send_clicked()
 {
     if(mode_cliente=="wait_for_game"){
 
+        // ----------- INICIO DEL JUEGO EN MODO SIMPLE ------------ //
         QSplashScreen *splash = new QSplashScreen;
         splash->setPixmap(QPixmap(":/multimedia/splash.png"));
         QTimer::singleShot(3000,splash,SLOT(close()));
@@ -70,6 +71,7 @@ void cliente::on_info_send_clicked()
 
         // capturaremos el nombre y haremos comprobaciones
         QString userRead = ui->info_text->toPlainText();
+        crearUsuario(userRead.toStdString()); // ----- > CREACION DE USUARIO EN MODO 0
         ui->info_text->clear();
         mundoTerrestre  *mundo;
         mundo = new mundoTerrestre(userRead, 1);
@@ -101,7 +103,7 @@ void cliente::on_info_send_clicked()
 
             // capturaremos el nombre y haremos comprobaciones
             mundoTerrestre  *mundo;
-            mundo = new mundoTerrestre(QString::fromStdString(user), 1);
+            mundo = new mundoTerrestre(userRead,1);
             mundo->iniciarMundo();
         }
         else{

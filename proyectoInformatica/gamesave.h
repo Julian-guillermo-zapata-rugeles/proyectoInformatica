@@ -18,6 +18,7 @@ public:
     bool confirmarArchivo(std::string);
     bool leerInformacion(std::string nombreArchivo);
     void escribirInformacion(std::string nombreArchivo);
+    void crearUsuario(std::string nombreArchivo);
 };
 
 #endif // GAMESAVE_H
