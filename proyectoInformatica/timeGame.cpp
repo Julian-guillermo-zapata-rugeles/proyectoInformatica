@@ -3,7 +3,7 @@
 timeGame::timeGame(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
     this->impulsos = 0;
-    this->timeCount = 5;
+    this->timeCount = 10;
     this->levelworld = 0 ;
     this->disparos=0;
     this->vidaRestante = 100;

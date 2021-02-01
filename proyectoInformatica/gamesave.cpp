@@ -19,38 +19,30 @@ bool GameSave::confirmarArchivo(std::string nombreArchivo)
 }
 
 
-
 bool GameSave::leerInformacion(std::string nombreArchivo)
 {
     qDebug()<<"buscando el usuario"<<endl;
     file.open(nombreArchivo,std::ios::in);
 
-    if(load==true){
-        short int limit=10;
-        short int out=0;
-        while (!file.eof()){
-            out+=1;
-            file >> puntaje >> shoots >> level >> life_level;
-            if(out>limit){
-                qDebug()<<"limit --"<< endl;
-                break;
-            }
+    short int limit=10;
+    short int out=0;
+    while (!file.eof()){
+        out+=1;
+        file >> puntaje >> shoots >> level >> life_level >>timerAsteroides >>timerEnemigos >>timerGigantes;
+        if(out>limit){
+            qDebug()<<"limit --"<< endl;
+            break;
         }
     }
-    else{
-        return false;
-        file.close();
-        qDebug() << "Usuario no encontrado : "<< endl;
-    }
+
     file.close();
     return false;
-
 }
 
 void GameSave::escribirInformacion(std::string nombreArchivo)
 {
     file.open(nombreArchivo,std::ios::out);
-    file << puntaje <<" "<<shoots<<" "<<level <<" "<<life_level;
+    file << puntaje <<" "<<shoots<<" "<<level <<" "<<life_level<<" "<<timerAsteroides<<" "<<timerEnemigos<<" "<<timerGigantes;
     file.close();
 }
 
@@ -58,6 +50,6 @@ void GameSave::escribirInformacion(std::string nombreArchivo)
 void GameSave::crearUsuario(std::string nombreArchivo)
 {
     file.open(nombreArchivo,std::ios::out);
-    file << 0 << " "<< 0<<" "<<0<<" "<<0;
+    file << 0 << " "<< 10<<" "<<1<<" "<<100<<" "<<8000<<" "<<3000<<" "<<10000;
     file.close();
 }

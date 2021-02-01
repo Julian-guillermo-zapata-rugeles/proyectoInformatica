@@ -158,5 +158,6 @@
         <file>multimedia/asteroides/m1.png</file>
         <file>multimedia/asteroides/m2.png</file>
         <file>multimedia/asteroides/m3.png</file>
+        <file>multimedia/Backgrounds/gameOver.png</file>
     </qresource>
 </RCC>

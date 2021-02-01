@@ -48,13 +48,14 @@ void cliente::on_pushButton_2_clicked()
     hide_elements(false);
     mode_cliente="wait_for_load";
     ui->info_send->setText("Buscar");
-
 }
 
 
 
 void cliente::on_info_send_clicked()
 {
+    if (!(ui->info_text->toPlainText()).isEmpty()) {
+
     if(mode_cliente=="wait_for_game"){
 
         // ----------- INICIO DEL JUEGO EN MODO SIMPLE ------------ //
@@ -111,29 +112,6 @@ void cliente::on_info_send_clicked()
             ui->informacion->setStyleSheet("font-size:18pt; font-weight:600; color:#fce94f;center");
         }
     }
-    ui->info_text->clear();
-}
-
-void cliente::on_multiplayer_clicked()
-{
-    QSplashScreen *splash = new QSplashScreen;
-    splash->setPixmap(QPixmap(":/multimedia/splash.png"));
-    QTimer::singleShot(3000,splash,SLOT(close()));
-    this->close();
-    splash->show();
-
-    QTime dieTime= QTime::currentTime().addSecs(3);
-    while (QTime::currentTime() < dieTime){
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-    }
-
-    // capturaremos el nombre y haremos comprobaciones
-    QString userRead = ui->info_text->toPlainText();
-    ui->info_text->clear();
-    mundoTerrestre  *mundo;
-    mundo = new mundoTerrestre(userRead, 2);
-    mundo->iniciarMundo();
-    /*
     if(mode_cliente =="wait_for_Multiplayer"){
 
         QSplashScreen *splash = new QSplashScreen;
@@ -154,5 +132,18 @@ void cliente::on_multiplayer_clicked()
         mundo = new mundoTerrestre(userRead, 2);
         mundo->iniciarMundo();
     }
-    */
+    }
+    else{
+        ui->informacion->show();
+        ui->informacion->setText("El nombre no debe estar vacio ");
+        ui->informacion->setStyleSheet("font-size:18pt; font-weight:600; color:#fce94f;center");
+    }
+    //ui->info_text->clear();
+}
+
+void cliente::on_multiplayer_clicked()
+{
+    hide_elements(false);
+    mode_cliente="wait_for_Multiplayer";
+    ui->info_send->setText("Equipo");
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>654</width>
-    <height>435</height>
+    <width>728</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,15 +16,15 @@
   <widget class="QPushButton" name="continuar">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>310</y>
+     <x>190</x>
+     <y>400</y>
      <width>171</width>
      <height>81</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">border-radius:15px;
-background-color: rgb(32, 74, 135,200);
+background-color: rgb(32, 74, 135,250);
 color:white;
 font:30px;
 font:bold;</string>
@@ -36,15 +36,15 @@ font:bold;</string>
   <widget class="QPushButton" name="salir">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>310</y>
+     <x>370</x>
+     <y>400</y>
      <width>171</width>
      <height>81</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">border-radius:15px;
-background-color: rgb(32, 74, 135,200);
+background-color: rgb(32, 74, 135,250);
 color:white;
 font:30px;
 font:bold;</string>
@@ -53,6 +53,25 @@ font:bold;</string>
     <string>NO</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>728</width>
+     <height>600</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/multimedia/Backgrounds/gameOver.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>label</zorder>
+  <zorder>continuar</zorder>
+  <zorder>salir</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -75,7 +75,7 @@ public:
     bool level_complete;
     short int level;
     short int level_time ;
-    short int tiempo_asterides;
+    short int tiempo_asteroides;
     short int tiempo_enemigos;
     short int tiempo_enemigos_gigantes;
     short int tiempo_nubes;
@@ -88,22 +88,22 @@ public:
        aquí estarán los objetos que mostrará información del personaje y sobre el estado de juego
     */
     Score *puntaje = new Score;
-    timeGame *tiempoJuego = new timeGame;
+    timeGame *screenInformation;
 
     /* timers para el control de generación
         NOTA : se investigará sí existe una manera más eficiente para controlar la generación.
 
     */
-    QTimer *ticks = new QTimer();
-    QTimer *generadorAsteroides = new QTimer();
-    QTimer *generadorEnemigos = new QTimer();
-    QTimer *generadorEnemigosGigantes = new QTimer();
-    QTimer *generadorNubes = new QTimer();
-    QTimer *generadorDeLuna = new QTimer();
-    QTimer *animacionPersonaje = new QTimer();
+    QTimer *ticks;
+    QTimer *generadorAsteroides;
+    QTimer *generadorEnemigos;
+    QTimer *generadorEnemigosGigantes;
+    QTimer *generadorNubes;
+    QTimer *generadorDeLuna;
+    QTimer *animacionPersonaje;
 
     //Naves
-    QTimer *generadorNaves = new QTimer();
+    QTimer *generadorNaves;
 
 public slots:
   void generador(int);
