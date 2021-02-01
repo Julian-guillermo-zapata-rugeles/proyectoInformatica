@@ -65,6 +65,7 @@ public:
     QList<float> calculoCentroMasas(QList<Planeta*> planetas);
     void calculoAceleracion();                                  //calcula la aceleracion de cada cuerpo
     void inception();
+    void guardarInformacion();
 
     // Niveles y configuración
     bool level_complete;

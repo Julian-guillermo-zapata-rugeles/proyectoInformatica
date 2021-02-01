@@ -25,6 +25,7 @@ mundoTerrestre::mundoTerrestre(QString userName, short p):GameSave()
     level_complete=false;
     level=2;
     level_time=10;
+
     tiempo_asterides=12000;
     tiempo_enemigos=6000;
     tiempo_enemigos_gigantes=10000;
@@ -91,6 +92,12 @@ mundoTerrestre::mundoTerrestre(QString userName, short p):GameSave()
     connect(generadorNaves,SIGNAL(timeout()),this,SLOT(actualizar()));
     generadorNaves->start(1);
 }
+
+
+
+
+
+
 
 void mundoTerrestre::iniciarMundo()
 {
@@ -159,6 +166,13 @@ void mundoTerrestre::iniciarMundo()
     ticks->start(20);
 }
 
+
+
+
+
+
+
+
 void mundoTerrestre::createShips()
 {
     sistema.append(new Planeta(0,0,80000,200));
@@ -166,28 +180,6 @@ void mundoTerrestre::createShips()
     sistema.append(new Planeta(5000,0,70,70,0,2));
     sistema.append(new Planeta(0,-5000,70,70,2,0));
     sistema.append(new Planeta(0,5000,70,70,-2,0));
-    /*for(unsigned short int a =0 ; a < 4;a++){
-        sistema.append(new Planeta(1+rand()%10,1+rand()%10,3000+rand()%5000,1+rand()%100));
-    }
-
-    short int opcion = 1+rand()%2;
-
-    if(opcion == 1){
-        sistema.append(new Planeta(0,0,70000,300,0,0));
-        sistema.append(new Planeta(4000,5000,25,100,-1.6,1.2));
-        sistema.append(new Planeta(800,350,50000,200));
-    }
-    if (opcion == 2){
-        sistema.append(new Planeta(0,0,50000,200));
-        sistema.append(new Planeta(-5000,0,70,70,0,-2));
-        sistema.append(new Planeta(5000,0,70,70,0,2));
-        sistema.append(new Planeta(0,-5000,70,70,2,0));
-        sistema.append(new Planeta(0,5000,70,70,-2,0));
-
-    }
-    */
-
-    //Calculos
     origen = calculoCentroMasas(sistema);
     s = calculoEscala();
     inception();
@@ -196,6 +188,13 @@ void mundoTerrestre::createShips()
         scene->addItem(sistema.at(i));
     }
 }
+
+
+
+
+
+
+
 
 float mundoTerrestre::calculoEscala()
 {
@@ -212,6 +211,14 @@ float mundoTerrestre::calculoEscala()
     return max;
 }
 
+
+
+
+
+
+
+
+
 QList<float> mundoTerrestre::calculoCentroMasas(QList<Planeta *> planetas)
 {
     float Mx=0, My=0, Mt=0;
@@ -226,6 +233,13 @@ QList<float> mundoTerrestre::calculoCentroMasas(QList<Planeta *> planetas)
     punto.append(Mx/Mt);
     return punto;
 }
+
+
+
+
+
+
+
 
 void mundoTerrestre::calculoAceleracion()
 {
@@ -244,6 +258,15 @@ void mundoTerrestre::calculoAceleracion()
     }
 }
 
+
+
+
+
+
+
+
+
+
 void mundoTerrestre::inception()
 {
     float dx = h_lim/(2*s) - origen.at(0);
@@ -253,6 +276,12 @@ void mundoTerrestre::inception()
         sistema.at(i)->obtenerCuerpo()->asignarPosicion(dx,dy);
     }
 }
+
+
+
+
+
+
 
 
 
@@ -272,6 +301,15 @@ void mundoTerrestre::guardarInformacion()
     // llamaré a escribir la información.
     GameSave::escribirInformacion(nombreUsuario);
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -380,6 +418,15 @@ void mundoTerrestre::generador(int tipo)
     }
 }
 
+
+
+
+
+
+
+
+
+
 void mundoTerrestre::ticksPersonaje()
 {
     /*
@@ -461,6 +508,13 @@ void mundoTerrestre::ticksPersonaje()
 
 
 
+
+
+
+
+
+
+
 void mundoTerrestre::actualizar_nivel()
 {
 
@@ -529,6 +583,16 @@ void mundoTerrestre::actualizar_nivel()
 
 }
 
+
+
+
+
+
+
+
+
+
+
 void mundoTerrestre::actualizar()
 {
     if(sistema.length() != 0){
@@ -538,6 +602,13 @@ void mundoTerrestre::actualizar()
         }
     }
 }
+
+
+
+
+
+
+
 
 void mundoTerrestre::updateAnimation()
 {
@@ -574,6 +645,5 @@ void mundoTerrestre::updateAnimation()
         }
     }
 }
-
 
 

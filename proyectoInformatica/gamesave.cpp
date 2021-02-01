@@ -18,10 +18,12 @@ bool GameSave::confirmarArchivo(std::string nombreArchivo)
 
 }
 
+
+
 bool GameSave::leerInformacion(std::string nombreArchivo)
 {
     qDebug()<<"buscando el usuario"<<endl;
-    file.open("data.txt",std::ios::in);
+    file.open(nombreArchivo,std::ios::in);
 
     if(load==true){
         short int limit=10;
@@ -51,6 +53,7 @@ void GameSave::escribirInformacion(std::string nombreArchivo)
     file << puntaje <<" "<<shoots<<" "<<level <<" "<<life_level;
     file.close();
 }
+
 
 void GameSave::crearUsuario(std::string nombreArchivo)
 {
