@@ -27,7 +27,8 @@
 #include <multiplayer.h>
 #include "rocket.h"
 #include "gamesave.h"
-
+#include "gameover.h"
+#include "cliente.h"
 #define dt 1
 
 class mundoTerrestre : public QObject , public QGraphicsRectItem , public GameSave
@@ -52,6 +53,8 @@ public:
     QGraphicsView * vista;
     QMediaPlayer *sonido;
     std::string nombreUsuario;
+    cliente *nuevoCliente;
+    GameOver *finJuego;
 
     //Naves
     float s; //escala
@@ -66,6 +69,7 @@ public:
     void calculoAceleracion();                                  //calcula la aceleracion de cada cuerpo
     void inception();
     void guardarInformacion();
+    void finalizarJuego();
 
     // Niveles y configuración
     bool level_complete;

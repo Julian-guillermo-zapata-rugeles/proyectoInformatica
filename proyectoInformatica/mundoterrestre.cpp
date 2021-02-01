@@ -303,6 +303,28 @@ void mundoTerrestre::guardarInformacion()
 }
 
 
+void mundoTerrestre::finalizarJuego()
+{
+    /*
+    QList<QGraphicsItem *> elementosColisionables  =scene->items();
+    for(int i=0;i< elementosColisionables.size();i++){
+        delete  elementosColisionables[i];
+    }
+    */
+
+    generadorNaves->stop();
+    generadorNubes->stop();
+    generadorDeLuna->stop();
+    generadorEnemigos->stop();
+    generadorAsteroides->stop();
+    generadorEnemigosGigantes->stop();
+    vista->close();
+    //this->hide();
+    finJuego = new GameOver;
+    finJuego->show();
+}
+
+
 
 
 
@@ -429,20 +451,12 @@ void mundoTerrestre::generador(int tipo)
 
 void mundoTerrestre::ticksPersonaje()
 {
-    /*
-    if(Jugadores.length() == 2){
-        tiempoJuego->setImpulsos(Jugadores[1]->getImpulsos());
-        //global_PositionP2=Jugadores[1]->getLastPosition();
-        tiempoJuego->setVidaRestante(Jugadores[0]->getVida_disponible());
-        // este evento handler verificará si el personaje debe saltar
-        //bool lunaActiva = false;
-        Jugadores[0]->eventHandler();
-        tiempoJuego->setDisparos(Jugadores[0]->getDisparos_disponibles());
-        puntaje->setScore(Jugadores[0]->getPuntos());
-        //qDebug() <<personajePrincipal->getPuntos()<<endl;
-    }
-    */
+    if(tiempoJuego->getVidaRestante() ==0){
+        system("notify-send 'SE DEBE ELMINAR'");
+        ticks->stop();
+        finalizarJuego();
 
+    }
     tiempoJuego->setImpulsos(Jugadores[0]->getImpulsos());
     globar_position=Jugadores[0]->getLastPosition();
     tiempoJuego->setVidaRestante(Jugadores[0]->getVida_disponible());
@@ -504,6 +518,7 @@ void mundoTerrestre::ticksPersonaje()
             }
         }
     }
+
 }
 
 
@@ -523,7 +538,7 @@ void mundoTerrestre::actualizar_nivel()
     qDebug() << "nivel " << level;
     //sonido->
     if(level==1){
-        level_complete=true;
+
         generadorAsteroides->start(8000);
         generadorEnemigos->start(1000);
         generadorNubes->start(8000);

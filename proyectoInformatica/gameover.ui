@@ -1,21 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author/>
- <comment/>
- <exportmacro/>
  <class>GameOver</class>
- <widget name="GameOver" class="QWidget">
+ <widget class="QWidget" name="GameOver">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>654</width>
+    <height>435</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QPushButton" name="continuar">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>310</y>
+     <width>171</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:15px;
+background-color: rgb(32, 74, 135,200);
+color:white;
+font:30px;
+font:bold;</string>
+   </property>
+   <property name="text">
+    <string>SI</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="salir">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>310</y>
+     <width>171</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-radius:15px;
+background-color: rgb(32, 74, 135,200);
+color:white;
+font:30px;
+font:bold;</string>
+   </property>
+   <property name="text">
+    <string>NO</string>
+   </property>
+  </widget>
  </widget>
- <pixmapfunction/>
+ <resources/>
  <connections/>
 </ui>
