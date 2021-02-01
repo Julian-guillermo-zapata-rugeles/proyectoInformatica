@@ -2,12 +2,13 @@
 #define CLIENTE_H
 
 #include <QWidget>
+#include "gamesave.h"
 
 namespace Ui {
 class cliente;
 }
 
-class cliente : public QWidget
+class cliente : public QWidget , public GameSave
 {
     Q_OBJECT
 
