@@ -62,6 +62,8 @@ public:
     short getImpulsos() const;
     short getPuntos() const;
     void setPuntos(short value);
+    void setDisparos_disponibles(short value);
+    void setVida_disponible(short value);
 };
 
 #endif // PERSONAJE_H

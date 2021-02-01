@@ -2,6 +2,8 @@
 
 mundoTerrestre::mundoTerrestre(QString userName, short p):GameSave()
 {
+    this->level_complete = false;
+
     scene  = new QGraphicsScene();
     vista = new QGraphicsView(scene);
     for (short int i=0; i<p ; i++ ) {
@@ -18,27 +20,43 @@ mundoTerrestre::mundoTerrestre(QString userName, short p):GameSave()
 
     // VARIABLE QUE GUARDARÁ EL NOMBRE DEL USUARIO PARA ACCEDER A LOS METODOS DE GAMESAVE
     this->nombreUsuario=userName.toStdString();
+    leerInformacion(nombreUsuario);
+    level = GameSave::level;
+    Jugadores[0]->setDisparos_disponibles(GameSave::shoots);
+    Jugadores[0]->setVida_disponible(GameSave::life_level);
+
+
     /*
     sección de información para el nivel y el usuario en partida
     */
-    tiempoJuego->setUser_name(userName); // lo recibí desde el cliente principal
+    screenInformation = new timeGame;
+    screenInformation->setUser_name(userName); // lo recibí desde el cliente principal
     level_complete=false;
-    level=2;
     level_time=10;
 
-    tiempo_asterides=12000;
-    tiempo_enemigos=6000;
-    tiempo_enemigos_gigantes=10000;
+    //Reserva de memoria para QTimers
+    ticks = new QTimer();
+    generadorAsteroides = new QTimer();
+    generadorEnemigos = new QTimer();
+    generadorEnemigosGigantes = new QTimer();
+    generadorNubes = new QTimer();
+    generadorDeLuna = new QTimer();
+    animacionPersonaje = new QTimer();
+    generadorNaves = new QTimer();
+
+    //Asteorides cada 8 segundos, Enemigos cada 3 segundos, Enemigos Gigantes cada 10 seg
+    tiempo_asteroides = GameSave::timerAsteroides;
+    tiempo_enemigos = GameSave::timerEnemigos;
+    tiempo_enemigos_gigantes = GameSave::timerGigantes;
     tiempo_nubes=8000;
-    tiempo_luna=30000;
 
     //Puntaje
     puntaje->setPos(1000,40);
     scene->addItem(puntaje);
 
     //tiempo de juego
-    tiempoJuego->setPos(30,40);
-    scene->addItem(tiempoJuego);
+    screenInformation->setPos(30,40);
+    scene->addItem(screenInformation);
 
     srand(time(NULL));
     for (short int i =0; i<p ; i++) {
@@ -295,8 +313,11 @@ void mundoTerrestre::guardarInformacion()
 
     GameSave::puntaje=puntaje->getScore();
     GameSave::level=level;
-    GameSave::shoots=tiempoJuego->getDisparos();
-    GameSave::life_level = tiempoJuego->getVidaRestante();
+    GameSave::shoots=screenInformation->getDisparos();
+    GameSave::life_level = screenInformation->getVidaRestante();
+    GameSave::timerAsteroides = tiempo_asteroides;
+    GameSave::timerEnemigos = tiempo_enemigos;
+    GameSave::timerGigantes = tiempo_enemigos_gigantes;
 
     // llamaré a escribir la información.
     GameSave::escribirInformacion(nombreUsuario);
@@ -352,9 +373,6 @@ void mundoTerrestre::generador(int tipo)
 
         short int sorpresa_asteroide= 1+rand()%10;
 
-#ifdef DEBUG_MUNDOTERRESTRE
-        qDebug() <<"numero sorpresa :"<<sorpresa_asteroide;
-#endif
         if(sorpresa_asteroide%3==0){
             // al desatarse el evento se genera un sonido de alerta
             // para avisar del evento.
@@ -364,7 +382,6 @@ void mundoTerrestre::generador(int tipo)
                 sonido->play();
                 for(short int a=0;a< 2+rand()%1;a++){
                     scene->addItem(new asteroides(false));
-
                 }
             }
             else{
@@ -451,15 +468,9 @@ void mundoTerrestre::generador(int tipo)
 
 void mundoTerrestre::ticksPersonaje()
 {
-    if(tiempoJuego->getVidaRestante() ==0){
-        system("notify-send 'SE DEBE ELMINAR'");
-        ticks->stop();
-        finalizarJuego();
-
-    }
-    tiempoJuego->setImpulsos(Jugadores[0]->getImpulsos());
+    screenInformation->setImpulsos(Jugadores[0]->getImpulsos());
     globar_position=Jugadores[0]->getLastPosition();
-    tiempoJuego->setVidaRestante(Jugadores[0]->getVida_disponible());
+    screenInformation->setVidaRestante(Jugadores[0]->getVida_disponible());
 
     // este evento handler verificará si el personaje debe saltar
     //bool lunaActiva = false;
@@ -468,19 +479,19 @@ void mundoTerrestre::ticksPersonaje()
         Jugadores[i]->eventHandler();
     }
 
-    tiempoJuego->setDisparos(Jugadores[0]->getDisparos_disponibles());
+    screenInformation->setDisparos(Jugadores[0]->getDisparos_disponibles());
     puntaje->setScore(Jugadores[0]->getPuntos());
     //qDebug() <<personajePrincipal->getPuntos()<<endl;
 
-    if(tiempoJuego->getTime() < 12){
+    if(screenInformation->getTime() < 12){
         //ticks->stop();ddddd
         generadorAsteroides->stop();
         generadorEnemigos->stop();
         generadorEnemigosGigantes->stop();
-        if(tiempoJuego->getTime()==6){
+        if(screenInformation->getTime()==6){
             generadorDeLuna->start(1000);
         }
-        if(level%3==0 && tiempoJuego->getTime()==5){
+        if(level%3==0 && screenInformation->getTime()==5){
 
             for(int i=0 ; i<sistema.size() ; i++){
                 scene->addItem(new Animaciones(sistema.at(i)->pos().x(),sistema.at(i)->pos().y(),2));
@@ -489,7 +500,7 @@ void mundoTerrestre::ticksPersonaje()
             }
             //generadorNubes->stop();
         }
-        if(tiempoJuego->getTime() < 4){
+        if(screenInformation->getTime() < 4){
             //qDebug() << "Entro a mostrar splash del siguiente nivel "<<endl;
             if((level+1)%2 ==0){
                 vista->setStyleSheet("border-image: url(:/multimedia/next level.png)");
@@ -501,24 +512,21 @@ void mundoTerrestre::ticksPersonaje()
                 vista->setStyleSheet("border-image: url(:/multimedia/nextlevel4.png)");
             }
         }
-        if(tiempoJuego->getTime()==0){
+        if(screenInformation->getTime()==0){
+            if(level_complete == false){
+                level_complete = true;
+                this->actualizar_nivel();
+            }
+            else {
+                level=level+1;
+            }
             this->actualizar_nivel();
         }
     }
-
-    QList<QGraphicsItem *> elementosColisionables  = scene->items() ;
-    for(int i=0;i< elementosColisionables.size();i++){
-        if(typeid (*(elementosColisionables[i]))==typeid (Rocket)){
-            for (short int a=0; a<sistema.size() ; a++ ) {
-                if(elementosColisionables[i]->collidesWithItem(sistema.at(i))){
-                    scene->addItem(new Animaciones(sistema.at(i)->pos().x(),sistema.at(i)->pos().y(),10));
-                    scene->removeItem(sistema.at(i));
-                    sistema.removeAt(i);
-                }
-            }
-        }
+    if(screenInformation->getVidaRestante() ==0){
+        ticks->stop();
+        finalizarJuego();
     }
-
 }
 
 
@@ -532,47 +540,34 @@ void mundoTerrestre::ticksPersonaje()
 
 void mundoTerrestre::actualizar_nivel()
 {
-
-
-    level=level+1;
-    qDebug() << "nivel " << level;
-    //sonido->
-    if(level==1){
-
-        generadorAsteroides->start(8000);
-        generadorEnemigos->start(1000);
+    //Asteorides cada 8 segundos, Enemigos cada 3 segundos, Enemigos Gigantes cada 10 seg
+    if(level == 0 || level==1){
+        generadorAsteroides->start(tiempo_asteroides);
+        generadorEnemigos->start(tiempo_enemigos);
         generadorNubes->start(8000);
-        generadorEnemigosGigantes->start(10000);
-        //generadorDeLuna->start(30000);
-        //ticks->start(20);
+        generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
+        this->iniciarMundo();
     }
 
     else if(level%3 == 0){
         createShips();
-        tiempoJuego->setTimeCount(20);
         generadorEnemigos->start(3000);
         this->iniciarMundo();
     }
 
     else if(level%4 == 0){
         generadorEnemigos->start(3000);
-        tiempoJuego->setTimeCount(30);
         generadorNubes->start(8000);
         this->iniciarMundo();
     }
 
     else if(level%5==0){
-#ifdef DEBUG_MUNDOTERRESTRE
-        qDebug()<< "nivel asteroides asesinos"<<endl;
-#endif
-
         // este nivel es sobre asteroides , el personaje deberá aguantar la caida de estos
         //generadorNubes->start(8000);
         generadorAsteroides->start(1000);
         sonido->stop();
         sonido->setMedia(QUrl("qrc:/multimedia/Sonidos/suspenso_asteroides2.mp3"));
         this->iniciarMundo();
-        tiempoJuego->setTimeCount(35);
         sonido->play();
     }
     else{
@@ -581,21 +576,17 @@ void mundoTerrestre::actualizar_nivel()
         this->tiempo_enemigos_gigantes=tiempo_enemigos_gigantes-500;
         generadorEnemigos->start(tiempo_enemigos);
         generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
-
-#ifdef DEBUG_MUNDOTERRESTRE
-        qDebug()<<" nivel "<< level;
-#endif
         this->iniciarMundo();
-        tiempoJuego->setTimeCount(60);
-
     }
-    tiempoJuego->setLevelworld(level);
+    screenInformation->setTimeCount(45);
+    screenInformation->setLevelworld(level);
+
+    tiempo_asteroides-=150;
+    tiempo_enemigos-=30;
+    tiempo_enemigos_gigantes-=150;
 
     // ------ GUARDADO DE INFORMACION ------//
     guardarInformacion();
-
-
-
 }
 
 

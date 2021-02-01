@@ -119,6 +119,16 @@ void personaje::setPuntos(short value)
     puntos = value;
 }
 
+void personaje::setDisparos_disponibles(short value)
+{
+    disparos_disponibles = value;
+}
+
+void personaje::setVida_disponible(short value)
+{
+    vida_disponible = value;
+}
+
 personaje::personaje():movimientos(550){
     /*
         método contructor
@@ -131,7 +141,7 @@ personaje::personaje():movimientos(550){
     this-> stateSlide=false;
     this-> stateKatana = false;
     this-> flying=false;
-    this-> puntos=100,
+    this-> puntos=0,
     this->limite = 1550;
     this->impulsos =3;
     this->setRect(0,0,100,131);

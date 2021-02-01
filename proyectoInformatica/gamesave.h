@@ -11,6 +11,7 @@ protected:
     short int shoots;
     short int level;
     short int life_level;
+    short int timerEnemigos, timerGigantes, timerAsteroides;
     bool load;
     std::fstream file;
 
