@@ -24,6 +24,7 @@ SOURCES += \
     cliente.cpp \
     enemigo.cpp \
     enemigoGigante.cpp \
+    gameover.cpp \
     gamesave.cpp \
     lunacreciente.cpp \
     main.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
     cliente.h \
     enemigo.h \
     enemigoGigante.h \
+    gameover.h \
     gamesave.h \
     lunacreciente.h \
     movimientos.h \
@@ -64,6 +66,7 @@ HEADERS += \
 
 FORMS += \
     cliente.ui \
+    gameover.ui \
     levelcompletewindow.ui
 
 # Default rules for deployment.
