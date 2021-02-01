@@ -10,6 +10,7 @@ protected:
     short int puntaje;
     short int shoots;
     short int level;
+    short int life_level;
     bool load;
     std::fstream file;
 

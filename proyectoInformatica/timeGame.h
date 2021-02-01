@@ -31,6 +31,8 @@ public:
     void setUser_name(const QString &value);
     void setImpulsos(short value);
 
+    short getDisparos() const;
+
 private:
     short int timeCount;
     short int levelworld;

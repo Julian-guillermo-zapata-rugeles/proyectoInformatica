@@ -26,10 +26,11 @@
 #include <QMainWindow>
 #include <multiplayer.h>
 #include "rocket.h"
+#include "gamesave.h"
 
 #define dt 1
 
-class mundoTerrestre : public QObject , public QGraphicsRectItem
+class mundoTerrestre : public QObject , public QGraphicsRectItem , public GameSave
 {
     Q_OBJECT
 public:
@@ -50,6 +51,7 @@ public:
     personaje * personajeSecundario;
     QGraphicsView * vista;
     QMediaPlayer *sonido;
+    std::string nombreUsuario;
 
     //Naves
     float s; //escala

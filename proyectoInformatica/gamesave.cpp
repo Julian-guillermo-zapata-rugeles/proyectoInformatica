@@ -28,7 +28,7 @@ bool GameSave::leerInformacion(std::string nombreArchivo)
         short int out=0;
         while (!file.eof()){
             out+=1;
-            file >> puntaje >> shoots >> level ;
+            file >> puntaje >> shoots >> level >> life_level;
             if(out>limit){
                 qDebug()<<"limit --"<< endl;
                 break;
@@ -48,12 +48,13 @@ bool GameSave::leerInformacion(std::string nombreArchivo)
 void GameSave::escribirInformacion(std::string nombreArchivo)
 {
     file.open(nombreArchivo,std::ios::out);
-    file << puntaje <<" "<<shoots<<" "<<level;
+    file << puntaje <<" "<<shoots<<" "<<level <<" "<<life_level;
+    file.close();
 }
 
 void GameSave::crearUsuario(std::string nombreArchivo)
 {
     file.open(nombreArchivo,std::ios::out);
-    file << 0 << " "<< 0<<" "<<0;
+    file << 0 << " "<< 0<<" "<<0<<" "<<0;
     file.close();
 }

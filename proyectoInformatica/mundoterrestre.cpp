@@ -1,10 +1,9 @@
 #include "mundoterrestre.h"
 
-mundoTerrestre::mundoTerrestre(QString userName, short p)
+mundoTerrestre::mundoTerrestre(QString userName, short p):GameSave()
 {
     scene  = new QGraphicsScene();
     vista = new QGraphicsView(scene);
-
     for (short int i=0; i<p ; i++ ) {
         Jugadores.append(new personaje);
     }
@@ -15,8 +14,10 @@ mundoTerrestre::mundoTerrestre(QString userName, short p)
         players->setPlayer2(Jugadores[1]);
     }
     scene->addItem(players);
-
     sonido = new QMediaPlayer();
+
+    // VARIABLE QUE GUARDARÁ EL NOMBRE DEL USUARIO PARA ACCEDER A LOS METODOS DE GAMESAVE
+    this->nombreUsuario=userName.toStdString();
     /*
     sección de información para el nivel y el usuario en partida
     */
@@ -253,6 +254,28 @@ void mundoTerrestre::inception()
     }
 }
 
+
+
+void mundoTerrestre::guardarInformacion()
+{
+
+    // -----------------------------------------------------------------------------
+    // ZONA PARA LA ESCRITURA DE ARCHIVOS //
+    // file << puntaje <<" "<<shoots<<" "<<level <<" "<<life_level; //
+    // actualizaré las variables para escritura
+
+    GameSave::puntaje=puntaje->getScore();
+    GameSave::level=level;
+    GameSave::shoots=tiempoJuego->getDisparos();
+    GameSave::life_level = tiempoJuego->getVidaRestante();
+
+    // llamaré a escribir la información.
+    GameSave::escribirInformacion(nombreUsuario);
+}
+
+
+
+
 void mundoTerrestre::generador(int tipo)
 {
     // 1 para generar asteroides
@@ -436,8 +459,12 @@ void mundoTerrestre::ticksPersonaje()
     }
 }
 
+
+
 void mundoTerrestre::actualizar_nivel()
 {
+
+
     level=level+1;
     qDebug() << "nivel " << level;
     //sonido->
@@ -494,6 +521,12 @@ void mundoTerrestre::actualizar_nivel()
 
     }
     tiempoJuego->setLevelworld(level);
+
+    // ------ GUARDADO DE INFORMACION ------//
+    guardarInformacion();
+
+
+
 }
 
 void mundoTerrestre::actualizar()

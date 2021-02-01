@@ -77,6 +77,11 @@ void timeGame::setImpulsos(short value)
     impulsos = value;
 }
 
+short timeGame::getDisparos() const
+{
+    return disparos;
+}
+
 void timeGame::setVidaRestante(short value)
 {
     vidaRestante = value;
