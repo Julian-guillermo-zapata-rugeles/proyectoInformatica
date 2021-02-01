@@ -515,6 +515,7 @@ void mundoTerrestre::ticksPersonaje()
         if(screenInformation->getTime()==0){
             if(level_complete == false){
                 level_complete = true;
+                this->actualizar_nivel();
             }
             else {
                 level=level+1;
@@ -540,11 +541,12 @@ void mundoTerrestre::ticksPersonaje()
 void mundoTerrestre::actualizar_nivel()
 {
     //Asteorides cada 8 segundos, Enemigos cada 3 segundos, Enemigos Gigantes cada 10 seg
-    if(level==1){
+    if(level == 0 || level==1){
         generadorAsteroides->start(tiempo_asteroides);
         generadorEnemigos->start(tiempo_enemigos);
         generadorNubes->start(8000);
         generadorEnemigosGigantes->start(tiempo_enemigos_gigantes);
+        this->iniciarMundo();
     }
 
     else if(level%3 == 0){
