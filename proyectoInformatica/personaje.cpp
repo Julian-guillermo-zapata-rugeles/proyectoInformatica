@@ -451,6 +451,9 @@ void personaje::eventHandler()
     if(status_saltando==true){
         this->setPos(pos().x(),posY);
     }
+    else{
+        setPos(pos().x(),520);
+    }
     /*
     if(status_gravitatorio==true || status_gravitatorio==false){
         this->setPos(pos().x(),posY);
@@ -466,7 +469,7 @@ void personaje::eventHandler()
     for(int i=0;i< elementosColisionables.size();i++){
         // balas que colisionan con los enemigos
         if(typeid (*(elementosColisionables[i]))==typeid (bonus_municion)){
-            disparos_disponibles=disparos_disponibles+5;
+            disparos_disponibles=disparos_disponibles+8;
             scene()->removeItem(elementosColisionables[i]);
             delete elementosColisionables[i];
             break;
@@ -493,19 +496,19 @@ void personaje::eventHandler()
         }
 
         if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
-            vida_disponible=vida_disponible-0.5;
+            vida_disponible=vida_disponible-0.2;
             if(stateKatana){
                   delete elementosColisionables[i];
               }
               break;
         }
         if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
-            vida_disponible-=0.4;
+            vida_disponible-=0.04;
             break;
         }
 
         if(typeid (*(elementosColisionables[i]))==typeid (Aves)){
-            vida_disponible=vida_disponible-0.3;
+            vida_disponible=vida_disponible-0.03;
             if(stateKatana){
                 delete elementosColisionables[i];
             }
@@ -513,7 +516,7 @@ void personaje::eventHandler()
         }
 
         if(typeid (*(elementosColisionables[i]))==typeid (Planeta)){
-            vida_disponible=vida_disponible-0.4;
+            vida_disponible=vida_disponible-0.04;
             break;
         }
     }

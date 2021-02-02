@@ -62,10 +62,10 @@ enemigoGigante::~enemigoGigante()
 void enemigoGigante::moverEnemigo()
 {
     if(direction == false){
-        setPos(pos().x()-5,pos().y());
+        setPos(pos().x()-10,pos().y());
     }
     else {
-        setPos(pos().x()+5,pos().y());
+        setPos(pos().x()+10,pos().y());
     }
     cambiarAnimacion();
 }

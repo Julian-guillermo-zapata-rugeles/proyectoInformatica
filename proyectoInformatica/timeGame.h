@@ -3,8 +3,7 @@
 
 #include <QGraphicsTextItem>
 #include <QTimer>
-#include <QFont>
-#include <QFontDatabase>
+
 
 class timeGame: public QGraphicsTextItem
 {

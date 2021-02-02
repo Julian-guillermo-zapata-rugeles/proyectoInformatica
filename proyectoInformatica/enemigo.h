@@ -17,7 +17,7 @@
 #include "personaje.h"
 #include "bonusrocket.h"
 
-class enemigo : public QObject , public QGraphicsRectItem , public movimientos
+class enemigo : public QObject , public QGraphicsRectItem
 {
     Q_OBJECT
 private:

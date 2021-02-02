@@ -159,5 +159,6 @@
         <file>multimedia/asteroides/m2.png</file>
         <file>multimedia/asteroides/m3.png</file>
         <file>multimedia/Backgrounds/gameOver.png</file>
+        <file>multimedia/Fuentes/CHERL.ttf</file>
     </qresource>
 </RCC>

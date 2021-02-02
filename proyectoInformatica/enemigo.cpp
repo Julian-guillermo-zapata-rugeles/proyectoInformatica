@@ -2,7 +2,7 @@
 #include "personaje.h"
 
 
-enemigo::enemigo(qreal *lastPosition):movimientos(560)
+enemigo::enemigo(qreal *lastPosition)
 {
     sonido = new QMediaPlayer();
     this-> temporal=0;
@@ -213,10 +213,10 @@ void enemigo::asignarCaracteristicas()
     }
 
     if(1+rand()%2 == 1){
-        setPos(1320,585 - rect().height());
+        setPos(1320,580 - rect().height());
     }
     else{
-        setPos(-300, 585 -rect().height());
+        setPos(-300, 580 -rect().height());
         //setTransform(QTransform(-1, 0, 0, 1, 0, 0));
     }
 }
