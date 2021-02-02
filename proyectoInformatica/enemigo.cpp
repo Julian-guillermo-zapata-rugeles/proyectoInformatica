@@ -39,6 +39,15 @@ enemigo::enemigo(qreal *lastPosition)
 
 }
 
+
+
+
+
+
+
+
+
+
 enemigo::~enemigo()
 {
     // este destructor eliminará automaticamente el personaje de la escena dando así la oportunidad
@@ -60,6 +69,14 @@ enemigo::~enemigo()
     //eliminacion del timer
 }
 
+
+
+
+
+
+
+
+
 QRectF enemigo::boundingRect() const
 {
     return QRectF(-ancho/2,-alto/2,ancho,alto);
@@ -71,6 +88,16 @@ void enemigo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }
+
+
+
+
+
+
+
+
+
+
 
 void enemigo::moverEnemigo()
 {
@@ -107,6 +134,16 @@ void enemigo::moverEnemigo()
 #endif
 }
 
+
+
+
+
+
+
+
+
+
+
 void enemigo::cambiarAnimacion()
 {
     // Este método se encarga de refrescar el personaje mediante el llamado del TIMER
@@ -122,6 +159,17 @@ void enemigo::cambiarAnimacion()
     }
     this->update(-ancho/2,-alto/2,ancho,alto);
 }
+
+
+
+
+
+
+
+
+
+
+
 
 void enemigo::asignarCaracteristicas()
 {

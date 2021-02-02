@@ -32,20 +32,18 @@ class Animaciones : public QObject, public QGraphicsItem
     Q_OBJECT
 public:
 
-     Animaciones(qreal posx, qreal posy , short int tipo, bool v=false);
+    Animaciones(qreal posx, qreal posy , short int tipo , bool v=false);
     ~Animaciones();
 
 private:
     // tiempo de vida será un periodo de animación.
-    QTimer *tiempoVida;
-    QPixmap *deadpix;
+    QTimer  *duracionAnimacion;
+    QPixmap *pixmapAnimacion;
 
     // se usará un ancho , alto y frame para renderizar el pixmap
-    float ancho, alto, frame, limite;
-    bool complete;
-    bool caer;
-    short int ground;
-    float caida;
+    float ancho, alto, frame, limite , caida ;
+    bool complete , caer ;
+    short int ground ;
 
     // Interfaz para el uso de QgraphicsItem
 public:

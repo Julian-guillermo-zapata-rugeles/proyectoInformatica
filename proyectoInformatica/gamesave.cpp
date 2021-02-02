@@ -5,6 +5,9 @@ GameSave::GameSave()
 
 }
 
+
+
+
 bool GameSave::confirmarArchivo(std::string nombreArchivo)
 {
     file.open(nombreArchivo,std::ios::in);
@@ -17,6 +20,11 @@ bool GameSave::confirmarArchivo(std::string nombreArchivo)
      file.close();
 
 }
+
+
+
+
+
 
 
 bool GameSave::leerInformacion(std::string nombreArchivo)
@@ -39,12 +47,22 @@ bool GameSave::leerInformacion(std::string nombreArchivo)
     return false;
 }
 
+
+
+
+
+
 void GameSave::escribirInformacion(std::string nombreArchivo)
 {
     file.open(nombreArchivo,std::ios::out);
     file << puntaje <<" "<<shoots<<" "<<level <<" "<<life_level<<" "<<timerAsteroides<<" "<<timerEnemigos<<" "<<timerGigantes;
     file.close();
 }
+
+
+
+
+
 
 
 void GameSave::crearUsuario(std::string nombreArchivo)

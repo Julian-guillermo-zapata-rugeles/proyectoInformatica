@@ -32,28 +32,31 @@ class asteroides :public QObject , public QGraphicsRectItem
     Q_OBJECT
 
 private:
+    // ---------- Atributos privados de la clase -------------------
     QMediaPlayer *sonido;
-    QTimer *timer;
-    signed short int rotationAngle;
-    void generarAspecto();
-    bool fire;
-
-    //Animacion de los Meteoros
-    qreal ancho, alto, frame, limite;
-    bool rotar, animado;
-    short int caida;
     QPixmap *meteoros;
+    QTimer *timer;
+
+    signed short int anguloRotacion , factorCaida;
+    bool fuegoAves , cuerpoRotando, animado ;
+    //Animacion de los Meteoros
+    qreal ancho, alto, frame , limite;
+
+    // ---------- Metodos privados de la clase ------------------------
+    void generarAspecto();
+    void animarMeteoro();
 
 public:
-    asteroides(bool sound=true);
-    asteroides(short int n);
-    asteroides(qreal x, qreal y);
+    asteroides(bool sound=true); // defecto
+    asteroides(short int n); // animado
+    asteroides(qreal x, qreal y); // aves (minibombs)
+
     ~asteroides();
 
     //Animacion de los meteoros
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void animarMeteoro();
+
 
 private slots:
     void moverAsteroide();

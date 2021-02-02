@@ -24,21 +24,18 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );
 
 private:
-    QTimer *timerAves;
-    QTimer *timerAvesParabolicas;
-    QPixmap *AvePix;
-
+    //--------------- Atributos privados de la clase -----------------------------//
+    QTimer *temporizadorAves;
+    QPixmap *pixmapAves;
     qreal columnas, alto, ancho, tmp_sumador;
-    long int velocidad;
-    short int amplitud, limite;
-    bool direction, dir;
-    unsigned short int temporal;
-    bool identity;
+    short int velocidad , amplitud, limite , temporal;
+    bool direction, dir , identity;
 
-    void birdAppearance();
+    // ------------    métodos privados de la clase     ---------------------------//
+    void generarDireccion();
     void cambiarAnimacion();
 
-public slots:
+private slots:
     void moverAves();
     void moverAvesParabolicas();
 };

@@ -1,5 +1,11 @@
 #include "aves.h"
 
+
+/*
+--------------------------------------------------------------------------------------------------
+                                CONSTRUCTOR DEFECTO
+
+*/
 Aves::Aves()
 {
     this->temporal=0;
@@ -8,19 +14,28 @@ Aves::Aves()
     this->alto = 120;
     this->limite = 715;
     this->direction = false;
-    AvePix = new QPixmap(":/multimedia/aves/flyS.png");
+    pixmapAves = new QPixmap(":/multimedia/aves/flyS.png");
     setPos(1400,450);
-    timerAves = new QTimer();
-    timerAves->start(40);
-    connect(timerAves,SIGNAL(timeout()),this,SLOT(moverAves()));
+    temporizadorAves = new QTimer();
+    temporizadorAves->start(40);
+    connect(temporizadorAves,SIGNAL(timeout()),this,SLOT(moverAves()));
 
 
     velocidad = 150;//80 + rand() % 120;
     amplitud =  5 + rand() % 10;
-    birdAppearance();
+    generarDireccion();
     this->dir = true;
 
 }
+
+
+
+
+/*
+--------------------------------------------------------------------------------------------------
+                               CONSTRUCTOR SOBRECARGADO
+
+*/
 
 Aves::Aves(short op)
 {
@@ -30,18 +45,28 @@ Aves::Aves(short op)
     this->alto = 131;
     this->limite = 1360;
     this->direction = false;
-    AvePix = new QPixmap(":/multimedia/aves/aveSenoidal.png");
+    pixmapAves = new QPixmap(":/multimedia/aves/aveSenoidal.png");
     setPos(1400,1000);
-    timerAvesParabolicas = new QTimer();
-    timerAvesParabolicas->start(40);
-    connect(timerAvesParabolicas,SIGNAL(timeout()),this,SLOT(moverAvesParabolicas()));
+    temporizadorAves= new QTimer();
+    temporizadorAves->start(40);
+    connect(temporizadorAves,SIGNAL(timeout()),this,SLOT(moverAvesParabolicas()));
 
     velocidad = 120 + rand() % 180;
     amplitud =  3 + rand() % 8;
-    birdAppearance();
-    Q_UNUSED(op);  
+    generarDireccion();
+    Q_UNUSED(op);
 }
 
+
+
+
+
+
+/*
+--------------------------------------------------------------------------------------------------
+                                DESTRUCTOR DE LA CLASE
+
+*/
 Aves::~Aves()
 {
     short int num = 1+rand()%4;
@@ -76,9 +101,17 @@ Aves::~Aves()
             scene()->addItem(new Animaciones(pos().x(),pos().y(),6,direction));
             break;
         }
-    }}
+        }}
     scene()->removeItem(this);
 }
+
+
+
+
+
+
+//-------------------------------------------------------------------------------------------
+                                    //GRÁFICOS
 
 QRectF Aves::boundingRect() const
 {
@@ -87,12 +120,28 @@ QRectF Aves::boundingRect() const
 
 void Aves::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawPixmap(-ancho/2,-alto/2,*AvePix,columnas,0,ancho,alto);
+    painter->drawPixmap(-ancho/2,-alto/2,*pixmapAves,columnas,0,ancho,alto);
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }
+//-------------------------------------------------------------------------------------------
 
-void Aves::birdAppearance()
+
+
+
+
+
+
+
+
+
+/*
+------------------------------------------------------------------------------------------------//
+                                   ALEATORIEDAD
+Alternar de forma aleatoria la ubicación del las aves enemigoas
+
+*/
+void Aves::generarDireccion()
 {
     short int modo = 1+rand() % 2;
     if(modo == 1){
@@ -106,6 +155,21 @@ void Aves::birdAppearance()
     }
 }
 
+
+
+
+
+
+
+
+
+
+/*
+-----------------------------------------------------------------------------------------------//
+                                ANIMACIONES DEL SPRITE
+Alternar sobre los sprites para dar animación a todos los objetos
+
+*/
 void Aves::cambiarAnimacion()
 {
     columnas = columnas+ancho;
@@ -115,6 +179,20 @@ void Aves::cambiarAnimacion()
     this->update(-ancho/2,-alto/2,ancho,alto);
 }
 
+
+
+
+
+
+
+
+
+/*
+-----------------------------------------------------------------------------------------------//
+                                    MOVIMIENTOS
+movimiento :
+
+*/
 void Aves::moverAves()
 {
     float dt = 0.02;
@@ -138,7 +216,7 @@ void Aves::moverAves()
         delete this;
     }
     cambiarAnimacion();
-
+    // ------------------ Segmento para la creación de proyectiles tipo asteroides ------------------------ //
     temporal += 40;
     if(temporal > 3000){
         scene()->addItem(new asteroides(pos().x(),pos().y()));
@@ -146,6 +224,18 @@ void Aves::moverAves()
     }
 }
 
+
+
+
+
+
+
+/*
+----------------------------------------------------------------------------------------------------------//
+                                             MOVIMIENTOS #2
+Movimiento parabolico : dotar de movimiento de tipo parabólico en aves
+
+*/
 void Aves::moverAvesParabolicas()
 {
     float dt = 0.02;

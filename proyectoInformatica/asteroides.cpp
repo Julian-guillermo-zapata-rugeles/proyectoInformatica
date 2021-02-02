@@ -87,11 +87,11 @@ void asteroides::generarAspecto()
 }
     this->setRect(0,0,100,100);
     if(op <= 6){
-        this->rotar=false;
+        this->cuerpoRotando=false;
         this->animado=true;
     }
     else{
-        this->rotar=true;
+        this->cuerpoRotando=true;
         this->animado=false;
         this->setScale(0.5);
     }
@@ -108,9 +108,9 @@ void asteroides::animarMeteoro()
 
 asteroides::asteroides(bool sound)
 {
-    this->caida=1+rand()%5;
+    this->factorCaida=1+rand()%5;
     sonido = new QMediaPlayer();
-    this->fire=false;
+    this->fuegoAves=false;
     long long semilla = std::chrono::high_resolution_clock::now().time_since_epoch().count();
     srand((unsigned int )semilla);
     generarAspecto();
@@ -122,7 +122,7 @@ asteroides::asteroides(bool sound)
         sonido->setMedia(QUrl("qrc:/multimedia/suspenso1.mp3"));
         sonido->play();
     }
-    rotationAngle = 0;
+    anguloRotacion = 0;
 
 #ifdef DEBUG_ASTEROIDE
     qDebug()<<"asteroide generado en "<<pos().x() << " " << pos().y() ;
@@ -136,14 +136,14 @@ asteroides::asteroides(bool sound)
 
 asteroides::asteroides(short n)
 {
-    this->caida=4;
+    this->factorCaida=4;
     sonido = new QMediaPlayer();
-    this->fire=false;
+    this->fuegoAves=false;
     setPos(300,-1000);
     meteoros = new QPixmap(":/multimedia/lunaCreciente.png");
     this->setTransformOriginPoint(this->boundingRect().center());
     this->setScale(2);
-    rotationAngle = 0;
+    anguloRotacion = 0;
 
 #ifdef DEBUG_ASTEROIDE
     qDebug()<<"asteroide generado en "<<pos().x() << " " << pos().y() ;
@@ -158,13 +158,13 @@ asteroides::asteroides(short n)
 
 asteroides::asteroides(qreal x, qreal y)
 {
-    this->caida=4;
+    this->factorCaida=4;
     sonido = new QMediaPlayer();
     setPos(x,y);
     meteoros = new QPixmap(":/multimedia/proyectiles/balaAve.png");
     this->setTransformOriginPoint(this->boundingRect().center());
     this->setScale(0.5);
-    rotationAngle = 0;
+    anguloRotacion = 0;
 
 #ifdef DEBUG_ASTEROIDE
     qDebug()<<"Popo del Ave generado en: "<<pos().x() << " " << pos().y() ;
@@ -173,13 +173,13 @@ asteroides::asteroides(qreal x, qreal y)
     timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
     timer->start(10);
-    this->fire = true;
-    rotar = false;
+    this->fuegoAves = true;
+    cuerpoRotando = false;
 }
 
 asteroides::~asteroides()
 { 
-    if(fire == true){
+    if(fuegoAves == true){
         scene()->addItem(new Animaciones(pos().x(),pos().y(),4));
     }
     else{
@@ -214,18 +214,18 @@ void asteroides::moverAsteroide()
     if(animado == true){
         animarMeteoro();
     }
-    setPos(x(),y()+caida);
+    setPos(x(),y()+factorCaida);
 
     // rotación del asteroide
     // este rotará sobre su eje y dará efecto
     // TESTING
-    if(rotar != false){
-        setRotation(rotationAngle);
-        if(rotationAngle<359){
-            rotationAngle=rotationAngle+2.5;
+    if(cuerpoRotando != false){
+        setRotation(anguloRotacion);
+        if(anguloRotacion<359){
+            anguloRotacion=anguloRotacion+2.5;
         }
         else{
-            rotationAngle=0;
+            anguloRotacion=0;
         }
     }
     if(pos().y() > 560 ){

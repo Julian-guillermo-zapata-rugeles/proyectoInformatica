@@ -29,6 +29,11 @@ void enemigoGigante::asignarCaracteristicas()
     //this->setScale(0.8);
 }
 
+
+
+
+
+
 enemigoGigante::enemigoGigante(qreal lastPosition)
 {
     timer = new QTimer();
@@ -43,6 +48,13 @@ enemigoGigante::enemigoGigante(qreal lastPosition)
     asignarCaracteristicas();
     sonido->setVolume(30);
 }
+
+
+
+
+
+
+
 
 enemigoGigante::~enemigoGigante()
 {
@@ -59,6 +71,11 @@ enemigoGigante::~enemigoGigante()
 }
 
 
+
+
+
+
+
 void enemigoGigante::moverEnemigo()
 {
     if(direction == false){
@@ -69,6 +86,13 @@ void enemigoGigante::moverEnemigo()
     }
     cambiarAnimacion();
 }
+
+
+
+
+
+
+
 
 QRectF enemigoGigante::boundingRect() const
 {
@@ -83,6 +107,12 @@ void enemigoGigante::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 }
 
 
+
+
+
+
+
+
 /*
 void enemigo::disparar()
 {
@@ -91,6 +121,9 @@ void enemigo::disparar()
     disparo->setPos(this->x(),this->y());
 }
 */
+
+
+
 
 void enemigoGigante::cambiarAnimacion()
 {

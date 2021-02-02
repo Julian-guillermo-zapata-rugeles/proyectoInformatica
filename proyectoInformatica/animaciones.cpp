@@ -4,7 +4,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
 {
     this-> ground = 550;
     this-> caida=0;
-    tiempoVida = new QTimer;
+    duracionAnimacion = new QTimer;
     this->caer=false;
     /*
     Constructor :
@@ -15,7 +15,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     */
     if(tipo == 1){
         // Esta animación se usará para la sangre al morir un enemigo
-        deadpix = new QPixmap(":/multimedia/animaciones/bloodSp.png");
+        pixmapAnimacion = new QPixmap(":/multimedia/animaciones/bloodSp.png");
         this->limite = 600;
         this->ancho = 100;
         this->alto = 100;
@@ -23,7 +23,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
 
     if(tipo == 2){
         // Esta animación se usará para la explosión de asteroides o saltos
-        deadpix = new QPixmap(":/multimedia/animaciones/hitSprite.png");
+        pixmapAnimacion = new QPixmap(":/multimedia/animaciones/hitSprite.png");
         this->limite = 6500;
         this->ancho = 500;
         this->alto = 500;
@@ -35,7 +35,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
         // esta recibe además un booleano que representa la dirección
         // para generar la animación muerte en el sentido correcto
 
-        deadpix = new QPixmap(":/multimedia/zombieGigante/zombDie.png");
+        pixmapAnimacion = new QPixmap(":/multimedia/zombieGigante/zombDie.png");
         this->limite = 2000;
         this->ancho = 153.8;
         this->alto = 118;
@@ -45,7 +45,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     if(tipo == 4){
         // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
         // con un pixmap grande del mismo tipo de ser necesario
-        deadpix = new QPixmap(":/multimedia/animaciones/minixplot.png");
+        pixmapAnimacion = new QPixmap(":/multimedia/animaciones/minixplot.png");
         this->limite = 335;
         this->ancho = 47.85;
         this->alto = 50;
@@ -55,7 +55,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     if(tipo == 5){
         // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
         // con un pixmap grande del mismo tipo de ser necesario
-        deadpix = new QPixmap(":/multimedia/aves/dieBird1.png");
+        pixmapAnimacion = new QPixmap(":/multimedia/aves/dieBird1.png");
         this->limite = 13785;
         this->ancho = 919;
         this->alto = 912;
@@ -66,7 +66,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     if(tipo == 6){
         // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
         // con un pixmap grande del mismo tipo de ser necesario
-        deadpix = new QPixmap(":/multimedia/aves/DieBird2.png");
+        pixmapAnimacion = new QPixmap(":/multimedia/aves/DieBird2.png");
         this->limite = 2012;
         this->ancho = 201.2;
         this->alto = 300;
@@ -77,7 +77,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     if(tipo == 7){
         // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
         // con un pixmap grande del mismo tipo de ser necesario
-        deadpix = new QPixmap(":/multimedia/animaciones/explosionAire.png");
+        pixmapAnimacion = new QPixmap(":/multimedia/animaciones/explosionAire.png");
         this->limite = 1475;
         this->ancho = 122.9;
         this->alto = 100;
@@ -88,7 +88,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     if(tipo == 8){
         // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
         // con un pixmap grande del mismo tipo de ser necesario
-        deadpix = new QPixmap(":/multimedia/animaciones/explosionPiso.png");
+        pixmapAnimacion = new QPixmap(":/multimedia/animaciones/explosionPiso.png");
         this->limite = 2700;
         this->ancho = 150;
         this->alto = 100;
@@ -99,7 +99,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     if(tipo == 9){
         // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
         // con un pixmap grande del mismo tipo de ser necesario
-        deadpix = new QPixmap(":/multimedia/animaciones/explosionPiso2.png");
+        pixmapAnimacion = new QPixmap(":/multimedia/animaciones/explosionPiso2.png");
         this->limite = 2248;
         this->ancho = 149.86;
         this->alto = 120;
@@ -110,7 +110,7 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     if(tipo == 10){
         // Este sprite se usará para las explosiones pequeñas , sin embargo se cuenta
         // con un pixmap grande del mismo tipo de ser necesario
-        deadpix = new QPixmap(":/multimedia/animaciones/ExplosionSuper.png");
+        pixmapAnimacion = new QPixmap(":/multimedia/animaciones/ExplosionSuper.png");
         this->limite = 2398;
         this->ancho = 99.9;
         this->alto = 100;
@@ -122,8 +122,8 @@ Animaciones::Animaciones(qreal posx, qreal posy, short tipo, bool v)
     // que representa el lugar donde muere el enemigo/asteroide/etc
     setPos(posx, posy);
 
-    tiempoVida->start(100); // el tiempo de vida será la tasa de refresco de los cuadros
-    connect(tiempoVida,SIGNAL(timeout()),this,SLOT(actualizar()));
+    duracionAnimacion->start(100); // el tiempo de vida será la tasa de refresco de los cuadros
+    connect(duracionAnimacion,SIGNAL(timeout()),this,SLOT(actualizar()));
     //this->setTransformOriginPoint(this->boundingRect().center());
     if(v == true){
         setTransform(QTransform(-1, 0, 0, 1, 0, 0));
@@ -151,7 +151,7 @@ QRectF Animaciones::boundingRect() const
 
 void Animaciones::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawPixmap(-ancho/2,-alto/2,*deadpix,frame,0,ancho,alto);
+    painter->drawPixmap(-ancho/2,-alto/2,*pixmapAnimacion,frame,0,ancho,alto);
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }
