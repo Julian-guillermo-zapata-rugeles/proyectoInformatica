@@ -10,6 +10,10 @@
 #include <random>
 #include <QGraphicsRectItem>
 #include "animaciones.h"
+#include "aves.h"
+#include "asteroides.h"
+#include "enemigo.h"
+#include "enemigoGigante.h"
 
 class Rocket: public QObject, public movimientos, public QGraphicsItem
 {

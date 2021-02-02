@@ -30,7 +30,7 @@ private:
     void asignarCaracteristicas(); // asignar aleatoriamente pixmap y posicion.
 
 public:
-    enemigoGigante(qreal lastPosition );
+    enemigoGigante(qreal lastPosition);
     ~enemigoGigante();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget );

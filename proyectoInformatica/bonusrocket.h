@@ -17,13 +17,13 @@ public:
     BonusRocket(qreal x, qreal y);
     ~BonusRocket();
 
-private:
+protected:
     short int lifeTime;
     QTimer *timeLife;
     QPixmap *pixBonus;
     qreal x,y,opacidad;
 
-private slots:
+protected slots:
     void actualizar();
 
 };

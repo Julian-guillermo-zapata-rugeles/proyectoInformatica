@@ -480,13 +480,14 @@ void personaje::eventHandler()
             puntos += 2;
             break;
         }
-        //BonusRocket
-        /*
-        if(typeid (*(elementosColisionables[i]))==typeid (Rocket)){
-            vida_disponible -= 0.8;
+        //BonusLife
+        if(typeid (*(elementosColisionables[i]))==typeid (BonusLife)){
+            if(vida_disponible+2 <=100){
+                vida_disponible += 2;
+            }
             delete elementosColisionables[i];
             break;
-        */
+        }
         if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
             vida_disponible=vida_disponible-0.1;
             if(stateKatana){
