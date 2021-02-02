@@ -20,6 +20,7 @@ SOURCES += \
     asteroides.cpp \
     aves.cpp \
     bonus_municion.cpp \
+    bonuslife.cpp \
     bonusrocket.cpp \
     cliente.cpp \
     enemigo.cpp \
@@ -45,6 +46,7 @@ HEADERS += \
     asteroides.h \
     aves.h \
     bonus_municion.h \
+    bonuslife.h \
     bonusrocket.h \
     cliente.h \
     enemigo.h \

@@ -1,4 +1,6 @@
 #include "timeGame.h"
+#include <QFont>
+#include <QFontDatabase>
 
 timeGame::timeGame(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
@@ -9,11 +11,11 @@ timeGame::timeGame(QGraphicsItem *parent): QGraphicsTextItem(parent)
     this->vidaRestante = 100;
     QString user_name = "";
 
-    int id = QFontDatabase::addApplicationFont(":/multimedia/Cosmic Blaster.ttf");
+    int id = QFontDatabase::addApplicationFont(":/multimedia/Fuentes/CHERL.ttf");
     QFontDatabase::applicationFontFamilies(id);
     setPlainText(QString("") + QString::number(timeCount));
     setDefaultTextColor(Qt::yellow);
-    setFont(QFont("Tiempo",15));
+    setFont(QFont("CHERL",15));
     startTimer(1000);
 }
 
@@ -28,7 +30,6 @@ void timeGame::decrease()
         setPlainText("Usuario : "+user_name+QString("\nResiste : ") + QString::number(timeCount)+"\nNivel : "+ QString::number(levelworld)
                      +"\nDisparos : "+QString::number(disparos)
                 +"\nVida Restante :"+QString::number(vidaRestante)+"%\n"+"Impulsos : "+QString::number(impulsos));
-
     }
 }
 

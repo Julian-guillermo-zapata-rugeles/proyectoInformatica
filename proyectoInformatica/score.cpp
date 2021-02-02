@@ -8,14 +8,14 @@ Score::Score(QGraphicsItem *parent): QGraphicsTextItem(parent)
     int id = QFontDatabase::addApplicationFont(":/multimedia/Cosmic Blaster.ttf");
     QFontDatabase::applicationFontFamilies(id);
     setPlainText(QString("") + QString::number(score));
-    setDefaultTextColor(Qt::black);
-    setFont(QFont("Puntaje",25));
+    setDefaultTextColor(Qt::yellow);
+    setFont(QFont("Cosmic Blaster",20));
 }
 
 void Score::increase()
 {
     score ++;
-    setPlainText(QString("") + QString::number(score));
+    setPlainText(QString("Puntaje: ") + QString::number(score));
 }
 
 void Score::setScore(int value)

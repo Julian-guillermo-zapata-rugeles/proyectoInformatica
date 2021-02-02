@@ -3,10 +3,10 @@
 movimientos::movimientos(float limiteInferior_ )
 {
     this->limite_inferior=limiteInferior_-15;
-    this->velocidadY= 60 * sin((90*3.1416)/180);
+    this->velocidadY= 70 * sin((90*3.1416)/180);
     this->tiempo=0;
     this->tmp_sumador=0;
-    this->intervaloSuma=0.3;
+    this->intervaloSuma=0.5;
     status_saltando=true;
     status_gravitatorio=false;
 }

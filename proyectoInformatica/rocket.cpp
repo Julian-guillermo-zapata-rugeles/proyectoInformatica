@@ -41,4 +41,39 @@ void Rocket::actualizarR()
     else {
         delete this;
     }
+
+    QList<QGraphicsItem *> elementosColisionables  = collidingItems() ;
+
+    for(int i=0;i< elementosColisionables.size();i++){
+        // balas que colisionan con los enemigos
+        if(typeid (*(elementosColisionables[i]))==typeid (asteroides)){
+            delete elementosColisionables[i];
+            delete this;
+            break;
+        }
+}
+    for(int i=0;i< elementosColisionables.size();i++){
+        // balas que colisionan con los enemigos
+        if(typeid (*(elementosColisionables[i]))==typeid (Aves)){
+            delete elementosColisionables[i];
+            delete this;
+            break;
+        }
+}
+    for(int i=0;i< elementosColisionables.size();i++){
+        // balas que colisionan con los enemigos
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigo)){
+            delete elementosColisionables[i];
+            delete this;
+            break;
+        }
+}
+    for(int i=0;i< elementosColisionables.size();i++){
+        // balas que colisionan con los enemigos
+        if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
+            delete elementosColisionables[i];
+            delete this;
+            break;
+        }
+}
 }

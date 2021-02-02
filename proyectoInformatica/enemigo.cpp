@@ -2,7 +2,7 @@
 #include "personaje.h"
 
 
-enemigo::enemigo(qreal *lastPosition):movimientos(560)
+enemigo::enemigo(qreal *lastPosition)
 {
     sonido = new QMediaPlayer();
     this-> temporal=0;
@@ -45,7 +45,13 @@ enemigo::~enemigo()
     // elimar únicamente de la memoria (en caso de eliminar de la escena en otra clase)
     // se advertirá sobre la inexistencia del objeto en pantalla. NO deberia afectar.
     scene()->addItem(new Animaciones(pos().x(),pos().y(),1));
-    scene()->addItem(new BonusRocket(pos().x(),pos().y()));
+    short int op = 1+rand()%5;
+    if(op == 3){
+        scene()->addItem(new BonusLife(this->pos().x(),this->pos().y()));
+    }
+    else {
+        scene()->addItem(new BonusRocket(pos().x(),pos().y()));
+    }
     scene()->removeItem(this);
 
 #ifdef DEBUG_ENEMIGO
@@ -213,10 +219,10 @@ void enemigo::asignarCaracteristicas()
     }
 
     if(1+rand()%2 == 1){
-        setPos(1320,585 - rect().height());
+        setPos(1320,580 - rect().height());
     }
     else{
-        setPos(-300, 585 -rect().height());
+        setPos(-300, 580 -rect().height());
         //setTransform(QTransform(-1, 0, 0, 1, 0, 0));
     }
 }

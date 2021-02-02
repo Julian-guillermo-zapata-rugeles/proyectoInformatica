@@ -27,7 +27,7 @@ Objetivos :
                    Dimensiones , y aceleración o tiempo de caida además del pixmap.
 */
 
-class asteroides :public QObject , public QGraphicsPixmapItem
+class asteroides :public QObject , public QGraphicsRectItem
 {
     Q_OBJECT
 

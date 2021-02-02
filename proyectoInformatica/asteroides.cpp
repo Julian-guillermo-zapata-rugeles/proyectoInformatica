@@ -85,6 +85,7 @@ void asteroides::generarAspecto()
         break;
     }
 }
+    this->setRect(0,0,100,100);
     if(op <= 6){
         this->rotar=false;
         this->animado=true;
@@ -173,6 +174,7 @@ asteroides::asteroides(qreal x, qreal y)
     connect(timer,SIGNAL(timeout()),this,SLOT(moverAsteroide()));
     timer->start(10);
     this->fire = true;
+    rotar = false;
 }
 
 asteroides::~asteroides()
