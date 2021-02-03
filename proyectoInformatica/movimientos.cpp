@@ -6,7 +6,7 @@ movimientos::movimientos(float limiteInferior_ )
     this->velocidadY= 70 * sin((90*3.1416)/180);
     this->tiempo=0;
     this->tmp_sumador=0;
-    this->intervaloSuma=0.5;
+    this->intervaloSuma=0.8;
     status_saltando=true;
     status_gravitatorio=false;
 }
