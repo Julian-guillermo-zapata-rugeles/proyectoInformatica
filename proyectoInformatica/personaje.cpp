@@ -58,7 +58,7 @@ void personaje::actualizarEstado()
         stateShoot = false;
         if(flying == true){
             impulsos -= 1;
-            qDebug()<< "salte, debo restar"<<endl;
+            //qDebug()<< "salte, debo restar"<<endl;
         }
         stateSlide = false;
         stateKatana= false;
@@ -129,6 +129,11 @@ void personaje::setVida_disponible(short value)
     vida_disponible = value;
 }
 
+void personaje::setImpulsos(short value)
+{
+    impulsos = value;
+}
+
 personaje::personaje():movimientos(550){
     /*
         método contructor
@@ -143,7 +148,7 @@ personaje::personaje():movimientos(550){
     this-> flying=false;
     this-> puntos=0,
     this->limite = 1550;
-    this->impulsos =3;
+    this->impulsos =0;
     this->setRect(0,0,100,131);
     this->setPos(600,550);
     this->dir = true ;
@@ -250,7 +255,7 @@ void personaje::teclas(QKeyEvent *event)
           este segmento genera un disparo y lo agrega a la escena
           también se genera un sonido que simula el disparo
         */
-        if(disparos_disponibles>=0){
+        if(disparos_disponibles>0){
             proyectil *disparo = new proyectil(dir,GlobalPuntos);
             disparo->setPixmap(QPixmap(":/multimedia/proyectiles/proyectilPersonaje.png"));
             scene()->addItem(disparo);
@@ -278,7 +283,7 @@ void personaje::teclas(QKeyEvent *event)
         stateShoot = true;
         stateSlide = true;
         columna=655;
-        if(status_saltando == true){
+        if(status_saltando == true && impulsos > 0){
             flying = true;
             setState("fly");
         }
@@ -380,7 +385,7 @@ void personaje::teclas2(QKeyEvent *event)
           este segmento genera un disparo y lo agrega a la escena
           también se genera un sonido que simula el disparo
         */
-        if(disparos_disponibles>=0){
+        if(disparos_disponibles>0){
             proyectil *disparo = new proyectil(dir,GlobalPuntos);
             disparo->setPixmap(QPixmap(":/multimedia/proyectiles/proyectilPersonaje.png"));
             scene()->addItem(disparo);
