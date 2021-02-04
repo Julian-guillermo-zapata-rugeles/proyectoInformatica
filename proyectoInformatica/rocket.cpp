@@ -68,6 +68,7 @@ void Rocket::actualizarR()
             break;
         }
 }
+/*
     for(int i=0;i< elementosColisionables.size();i++){
         // balas que colisionan con los enemigos
         if(typeid (*(elementosColisionables[i]))==typeid (enemigoGigante)){
@@ -76,4 +77,5 @@ void Rocket::actualizarR()
             break;
         }
 }
+*/
 }

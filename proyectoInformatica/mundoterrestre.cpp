@@ -561,6 +561,10 @@ void mundoTerrestre::comprobadorCambioNivel()
             else {
                 level=level+1;
             }
+            Jugadores[0]->setImpulsos(Jugadores[0]->getImpulsos()+5);
+            if(Jugadores.length() == 2){
+                Jugadores[1]->setImpulsos(Jugadores[1]->getImpulsos()+5);
+            }
             this->actualizarNivel();
         }
     }

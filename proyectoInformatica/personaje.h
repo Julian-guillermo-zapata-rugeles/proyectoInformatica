@@ -59,11 +59,12 @@ public:
     void setPressKey(bool value);
     bool getStateShoot() const;
     short getVida_disponible() const;
-    short getImpulsos() const;
     short getPuntos() const;
     void setPuntos(short value);
     void setDisparos_disponibles(short value);
     void setVida_disponible(short value);
+    void setImpulsos(short value);
+    short getImpulsos() const;
 };
 
 #endif // PERSONAJE_H

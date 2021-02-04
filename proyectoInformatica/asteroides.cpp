@@ -175,6 +175,9 @@ asteroides::asteroides(qreal x, qreal y)
     timer->start(10);
     this->fuegoAves = true;
     cuerpoRotando = false;
+    this->ancho=47;
+    this->alto=43;
+    this->animado = false;
 }
 
 asteroides::~asteroides()
